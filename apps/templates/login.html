@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>SWAP 三泰工作協助平台登入</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/assets/favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/login.css') }}" />
+
+        <script src="{{ url_for('static', filename='./layui.js')          }}"></script>
+        <script src="{{ url_for('static', filename='/js/jquery-3.5.1.js') }}"></script>
+    </head>
+
+    <body id="root" background="{{ url_for('static', filename='/assets/login-background.svg') }}" style="background-size: cover;">
+        <!-- 輸入介面背景 -->
+        <div id="div-form-bg">
+
+            <!-- 登入表單 -->
+            <form class="layui-form" action="javascript:void(0);">
+
+                <!-- 表單標題區 -->
+                <div class="layui-form-item">
+                    <img class="logo"  src="{{ url_for('static', filename='/assets/Logo.png') }}"/>
+                    <div class="title" id="lab-login-input-title">協助平台</div>
+                    <div class="desc"  id="txt-system-version">version: 1.0.0</div>
+                </div>
+
+                <!-- 表單帳號區-->
+                <div class="layui-form-item">
+                    <img id="img-account" src="{{ url_for('static', filename='/assets/account.png') }}" />
+                    <input id="txt-account" name="account" type="text" placeholder="帳 號 : 電子郵件 " value="" hover class="layui-input"/>
+                </div>
+
+                <!-- 表單密碼區-->
+                <div class="layui-form-item">
+                    <img id="img-password" src="{{ url_for('static', filename='/assets/pwd.png') }}" />
+                    <input id="txt-password" name="password" type="password" placeholder="密 碼 : ****** " value="" hover class="layui-input"/>
+                </div>
+
+                {% if MODE == "home" %}
+                <!-- 一般登入送出按鈕區-->
+                <div class="layui-form-item">
+                    <button id="btn-submit" class="pear-btn pear-btn-success login" lay-submit lay-filter="login">登 入</button>
+                </div>
+                {% else %}
+                <!-- 指定登入送出按鈕區-->
+                <div class="layui-form-item">
+                    <button id="btn-submit2" class="pear-btn pear-btn-success login" lay-submit lay-filter="login">登 入</button>
+                </div>
+                {% endif %}
+
+            </form>
+
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="dialog-msg"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 程式區 -->
+        <script>
+
+            var txtMessage     = document.getElementById("txt-message");
+            var txtAccount     = document.getElementById("txt-account");
+            var txtPassword    = document.getElementById("txt-password");
+            var resultAccount  = "";
+            var resultPassword = "";
+            var modal          = document.getElementById("myModal");
+            var span           = document.getElementsByClassName("close")[0];
+
+            window.onload = initPage;
+            
+            // 取得一般頁面登入狀態
+            async function getLoginStatus(strAccount, strPWD) {
+                var uri = "http://{{ DOMAIN_PATH }}/page/v0/login/";
+                var objParam = { 
+                    "account"  : strAccount,
+                    "password" : strPWD,
+                };
+                let jsonParam = JSON.stringify(objParam);
+                console.log(jsonParam);
+                const res = await fetch(uri, {
+                    method:'POST',
+                    body: jsonParam,
+                    headers: {
+                        'Content-Type' : 'application/json; charset=utf-8'
+                    }
+                });
+                return await res.json();
+            }
+
+
+            // 取得指定頁面登入狀態
+            async function getLoginStatus2(strAccount, strPWD) {
+                var uri = "http://{{ DOMAIN_PATH }}/page/v0/login/{{ MODE }}/{{ PROJECT_NO }}/";
+                
+                var objParam = { 
+                    "account"  : strAccount,
+                    "password" : strPWD,
+                };
+                let jsonParam = JSON.stringify(objParam);
+                console.log(jsonParam);
+                const res = await fetch(uri, {
+                    method:'POST',
+                    body: jsonParam,
+                    headers: {
+                        'Content-Type' : 'application/json; charset=utf-8'
+                    }
+                });
+                return await res.json();
+            }
+
+           
+
+
+
+            function initPage() {
+                if( '{{ MODE }}' == 'home' ) {
+                    var btnSubmit   = document.getElementById("btn-submit");
+                    // 一般頁
+                    btnSubmit.addEventListener('click', function(e) {
+                        console.log('一般登入按鈕按下');
+                        //resultAccount = window.btoa(txtAccount.value);
+                        resultAccount = txtAccount.value;
+                        console.log(resultAccount);
+                        //resultPassword = window.btoa(txtPassword.value);
+                        resultPassword = txtPassword.value;
+                        console.log(resultPassword);
+                        // 處理LoginFun
+                        processLogin();
+                    });
+                } else  {
+                    var btnSubmit2 = document.getElementById("btn-submit2");
+                    // 指定頁
+                    btnSubmit2.addEventListener('click', function(e) {
+                        console.log('指定登入按鈕按下');
+                        //resultAccount = window.btoa(txtAccount.value);
+                        resultAccount = txtAccount.value;
+                        console.log(resultAccount);
+                        //resultPassword = window.btoa(txtPassword.value);
+                        resultPassword = txtPassword.value;
+                        console.log(resultPassword);
+                        // 處理LoginFun
+                        processLogin2();
+                    });
+                } 
+            }
+
+            // 一般登入處理
+            function processLogin() {
+                //console.log('-----processLogin:-----');
+                var promiseLogin = getLoginStatus(resultAccount, resultPassword);
+                promiseLogin.then( function(response) {
+                    //console.log('-----promiseLogin.then result:-----');
+                    //console.log('response: ', response);
+                    //console.log(response['result']);
+                    if(response['result'] == 'ok') {
+                        //console.log(response['msg']);
+                        //location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_technology_form/');
+                        location.replace('http://{{ DOMAIN_PATH }}/page/v0/project_list/');
+                    }
+                    if(response['result'] == 'fail') {
+                        //console.log(response['msg']);
+                        //$("#txt-message").text(response['data']['msg']);
+                        //$('#exampleModal').modal('show');
+                        //layer.msg(response['data']['msg']);
+                        document.getElementById("dialog-msg").innerHTML = "錯誤訊息:<br/>" + response['msg'];
+                        modal.style.display = "block";
+                    }
+                });
+            }
+
+
+            // 指定登入處理
+            function processLogin2() {
+                console.log('-----processLogin2:-----');
+                var promiseLogin = getLoginStatus2(resultAccount, resultPassword);
+                promiseLogin.then( function(response) {
+                    console.log('-----promiseLogin2.then result:-----');
+                    console.log('response: ', response);
+                    console.log(response['result']);
+                    if(response['result'] == 'ok') {
+                        //console.log(response['msg']);
+                        console.log(response['data']['mode']);
+
+                        switch(response['data']['mode']) {
+
+                            // 新產品技術評估指派頁面
+                            case 'new_technology_task':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_technology_task/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 新產品技術評估回報頁面
+                            case 'new_technology_feedback':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_technology_feedback/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 新產品技術評估檢視頁面
+                            case 'new_technology_display':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_technology_display/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 新開案結果頁面
+                            case 'new_technology_result':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_technology_result/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                             // 新產品技術評估檢視頁面
+                             case 'new_technology_review':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_technology_review/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 新開案簽核頁面
+                            case 'new_project_approve':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_project_approve/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 新開案指派頁面
+                            case 'new_project_task':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_project_task/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 新開案回報頁面
+                            case 'new_project_feedback':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_project_feedback/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 新開案結果頁面
+                            case 'new_project_result':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_project_result/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 新開案檢視頁面
+                            case 'new_project_display':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_project_display/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 新開案檢視頁面
+                            case 'new_project_review':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/new_project_review/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // Layout指派頁面
+                            case 'layout_task':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/layout_task/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // Layout檢視頁面
+                            case 'layout_display':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/layout_display/?project_no={{ PROJECT_NO }}&form_no={{ FORM_NO}}');
+                                break;
+
+                            // Layout結果頁面
+                            case 'layout_result':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/layout_result/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // PCB打樣指派頁面
+                            case 'pcb_task':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/pcb_task/?project_no={{ PROJECT_NO }}');
+                                break;
+                            
+                            // PCB打樣檢視頁面
+                            case 'pcb_display':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/pcb_display/?project_no={{ PROJECT_NO }}&form_no={{ FORM_NO }}');
+                                break;
+
+                            // PCB打樣結果頁面
+                            case 'pcb_result':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/pcb_result/?project_no={{ PROJECT_NO }}');
+                                break;
+
+                            // 專案進度圖表
+                            case 'flow_dashboard':
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/flow_dashboard/');
+                                break;
+                        }
+                    }
+                    if(response['result'] == 'fail') {
+                        console.log(response['msg']);
+                        //$("#txt-message").text(response['data']['msg']);
+                        //$('#exampleModal').modal('show');
+                        //layer.msg(response['data']['msg']);
+                        document.getElementById("dialog-msg").innerHTML = "錯誤訊息:<br/>" + response['msg'];
+                        modal.style.display = "block";
+                    }
+                });
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+        </script>
+
+        <!-- 版權聲明 -->
+        <footer>
+            <div id="txt-copyright"><b>©1986-2023 SUNIX Group.All Rights Reserved.</b></div>
+        </footer>
+
+    </body>
+
+</html>

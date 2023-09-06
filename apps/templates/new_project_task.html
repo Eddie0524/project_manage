@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        
+        {% include 'common/header.html' %}
+        <title>新產品技術評估指派任務</title>
+    
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/new_project_task.css') }}" />
+    
+        <script src="{{ url_for('static', filename='/js/dom-to-image.js') }}"></script>
+
+    </head>
+
+    <body>
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 傳送過來的表單(唯讀) -->
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <div id="id-table-bg">
+                <div id="form-title-text"><b>新產品開發指派單</b></div>
+
+
+           <!-- 表單 -->
+           <table id="id-table-form">
+
+            <!-- 表單標題 -->
+            <thead id="table-head">
+                <tr>
+                    <th colspan="3" rowspan="1" id="lab-apply-date"  class="cls-c3-r1">申請日期</th>
+                    <th colspan="3" rowspan="1" id="txt-apply-date"  class="cls-c3-r1">{{NEW_PROJECT_MODEL['apply_date']}}</th>
+                    <th colspan="3" rowspan="1" id="lab-project-no"  class="cls-c3-r1">專案代號</th> 
+                    <th colspan="5" rowspan="1" id="txt-project-no"  class="cls-c5-r1">{{NEW_PROJECT_MODEL['project_no']}}</th>
+                    <th colspan="2" rowspan="1" id="lab-form-no"     class="cls-c2-r1">單號</th>
+                    <th colspan="4" rowspan="1" id="txt-form-no"     class="cls-c4-r1">{{NEW_PROJECT_MODEL['form_no']}}</th>
+                </tr>
+            </thead>
+
+            <!-- 表單內容 ☐ ☑ -->
+            <tbody id="table-body">
+                <tr>
+                    <th colspan="3"  rowspan="1" id="lab-form-class" class="cls-c3-r1">BU</th>
+                    <th colspan="1"  rowspan="1" id="box-form-io"    class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['bu'] == IO %} 
+                        <input type="checkbox" id="check-form-io" name="check-form-io" value="IO" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-form-io" name="check-form-io" value="IO">
+                        {% endif %}
+                    </th>
+                    <th colspan="2"  rowspan="1" id="lab-form-io"    class="cls-c2-r1">I/O</th>
+                    <th colspan="1"  rowspan="1" id="box-form-iot"   class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['bu'] == IOT %} 
+                        <input type="checkbox" id="check-form-iot" name="check-form-iot" value="IOT" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-form-iot" name="check-form-iot" value="IOT">
+                        {% endif %}
+                    </th>
+                    <th colspan="2"  rowspan="1" id="lab-form-iot"   class="cls-c2-r1">IoT</th>
+                    <th colspan="1"  rowspan="1" id="box-form-it"    class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['bu'] == IT %} 
+                        <input type="checkbox" id="check-form-it" name="check-form-it" value="IT" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-form-it" name="check-form-it" value="IT">
+                        {% endif %}
+                    </th>
+                    <th colspan="2"  rowspan="1" id="lab-form-it"    class="cls-c10-r1">IT</th>
+                    <th colspan="3"  rowspan="1" id="lab-new-tech-project-no"    class="cls-c3-r1">評估案代號</th>
+                    <th colspan="5"  rowspan="1" id="txt-new-tech-project-no"    class="cls-c4-r1">{{NEW_PROJECT_MODEL['new_tech_project_no']}}
+                </tr>
+
+                  <!-- 產品判別 預估量產日期 -->
+                  <tr>
+                    <th colspan="5"  rowspan="1" id="lab-product-check"  class="cls-c3-r1">產品判別✱</th>
+                    <th colspan="5"  rowspan="1" id="txt-product-check"  class="cls-c2-r1">
+                        <select id="select-product-check">
+                            <option value="中性">中性</option>
+                            <option value="OEM/ODM">OEM/ODM</option>
+                            <option value="SUNIX標準品">SUNIX標準品</option>
+                        </select>
+                    </th>
+                    <th colspan="5"  rowspan="1" id="lab-product-check"  class="cls-c3-r1">產品預計上市日期</th>
+                    <th colspan="5"  rowspan="1" id="txt-product-check"  class="cls-c2-r1">{{NEW_PROJECT_MODEL['first_product_date']}}
+                        
+                    </th>
+                    
+                </tr>
+
+
+                  <!-- 產品 -->
+                  <tr>
+                    <th colspan="3"  rowspan="1" id="lab-product"         class="cls-c3-r1">產品</th>
+                    <th colspan="3"  rowspan="1" id="lab-product-type-no" class="cls-c3-r1">產品型號✱</th>
+                    <th colspan="14" rowspan="1" id="txt-product-type-no" class="cls-c9-r1">{{NEW_PROJECT_MODEL['product_no']}}
+                        <!-- <input type="text" id="input-product-type-no" value="{{NEW_PROJECT_MODEL['product_no']}}"> -->
+                    </th>
+                  
+                </tr>
+
+                <!-- 產品規格-->
+                <tr>
+                    <th colspan="3"  rowspan="4" id="title-product-spec"  class="cls-c3-r4">產品規格</th>
+                    <th colspan="3"  rowspan="1" id="lab-product-name"    class="cls-c3-r1">產品名稱✱</th>
+                    <th colspan="14" rowspan="1" id="txt-product-name"    class="cls-c14-r1">{{NEW_PROJECT_MODEL['product_name']}}
+                        <!-- <input type="text" id="input-product-name" value="{{NEW_PROJECT_MODEL['spec_describe']}}"> -->
+                    </th>
+                </tr>
+
+                <tr>
+                    <!--<th colspan="3"  rowspan="1" id="title-product-spec"  class="cls-c3-r1">產品規格</th>-->
+                    <th colspan="3"  rowspan="1" id="lab-product-series"  class="cls-c3-r1">產品系列</th>
+                    <th colspan="14" rowspan="1" id="txt-product-series"  class="cls-c14-r1">{{NEW_PROJECT_MODEL['product_series']}}
+                        <!-- <input type="text" id="input-product-series" value="{{NEW_PROJECT_MODEL['product_series']}}"> -->
+                    </th>
+                </tr>
+
+                <tr>
+                    <!--<th colspan="3"  rowspan="1" id="title-product-spec"      class="cls-c3-r1">產品規格</th>-->
+                    <th colspan="3"  rowspan="1" id="lab-product-discription" class="cls-c3-r1">規格說明✱</th>
+                    <th colspan="14" rowspan="1" id="txt-product-discription" class="cls-c14-r1">{{NEW_PROJECT_MODEL['spec_describe']}}
+                        <!-- <input type="text" id="input-product-discription" value="{{NEW_PROJECT_MODEL['spec_describe']}}"> -->
+                    </th>
+                </tr>
+
+                <tr>
+                    <!--<th colspan="3"  rowspan="1" id="title-product-spec"    class="cls-c3-r1">產品規格</th>-->
+                    <th colspan="3"  rowspan="1" id="lab-product-certified" class="cls-c3-r1">認證✱</th>
+                    <th colspan="14" rowspan="1" id="txt-product-certified" class="cls-c14-r1">{{NEW_PROJECT_MODEL['product_certified']}}
+                        <!-- <input type="text" id="input-product-certified" value="{{NEW_PROJECT_MODEL['product_certified']}}"> -->
+                    </th>
+                </tr>
+
+               <!-- 目標市場 -->
+               <tr>
+                <th colspan="3"  rowspan="1" id="lab-targeted-market" class="cls-c3-r1">目標市場</th>
+                <th colspan="17" rowspan="1" id="txt-targeted-market" class="cls-c17-r1">{{NEW_PROJECT_MODEL['target_markting']}}
+                    <!-- <textarea id="input-targeted-market" name="input-targeted-market" rows="3" cols="40" required>{{NEW_PROJECT_MODEL['target_markting']}}</textarea> -->
+                </th>
+            </tr>
+
+               <!-- 銷售預估 -->
+               <tr>
+                <th colspan="3"  rowspan="3" id="title-sales-estimate" class="cls-c3-r3">銷售預估</th>
+                <th colspan="4"  rowspan="1" id="lab-sale-price"       class="cls-c4-r1">預估銷售價</th>
+                <th colspan="4"  rowspan="1" id="txt-sale-price"       class="cls-c4-r1">{{NEW_PROJECT_MODEL['estimate_price']}}
+                    <!-- <input type="text" id="input-sale-price" value="{{NEW_PROJECT_MODEL['estimate_price']}}"> -->
+                </th>
+                <th colspan="4"  rowspan="1" id="lab-annual-count" class="cls-c4-r1">預估年銷數量</th>
+                <th colspan="5"  rowspan="1" id="txt-annual-count" class="cls-c5-r1">{{NEW_PROJECT_MODEL['estimate_pcs']}}
+                    <!-- <input type="text" id="input-annual-count" value="{{NEW_PROJECT_MODEL['estimate_pcs']}}"> -->
+                </th>
+            </tr>
+
+            <tr>
+                <!-- <th colspan="3"  rowspan="1" id="title-sales-estimate"   class="cls-c3-r1">銷售預估</th> -->
+                <th colspan="4"  rowspan="1" id="lab-annual-performance" class="cls-c4-r1">預估年銷業績</th>
+                <th colspan="4"  rowspan="1" id="txt-annual-performance" class="cls-c4-r1">{{NEW_PROJECT_MODEL['estimate_sale_performance_year']}}
+                    <!-- <input type="text" id="input-annual-performance" value="{{NEW_PROJECT_MODEL['estimate_sale_performance_year']}}"> -->
+                </th>
+                <th colspan="4"  rowspan="1" id="lab-profit" class="cls-c4-r1">預估毛利率</th>
+                <th colspan="2"  rowspan="1" id="txt-profit" class="cls-c2-r1">{{NEW_PROJECT_MODEL['estimate_profit_margin']}}
+                    <!-- <input type="text" id="input-profit" value="{{NEW_PROJECT_MODEL['estimate_profit_margin']}}"> -->
+                </th>
+                <th colspan="3"  rowspan="1" id="unit-profit" class="cls-c3-r1">%</th>
+            </tr>
+
+            <tr>
+                <th colspan="4"  rowspan="1" id="lab-is-replace"       class="cls-c4-r1">是否有取代舊有產品</th>
+                <th colspan="1"  rowspan="1" id="box-replace-none"     class="cls-c1-r1">
+                    {% if NEW_PROJECT_MODEL['replace_product_flag']['replace-none'] == true %} 
+                    <input type="checkbox" id="check-replace-none" name="check-replace-none" value="無" checked>
+                    {% else %}
+                    <input type="checkbox" id="check-replace-none" name="check-replace-none" value="無">
+                    {% endif %}
+                </th>
+                <th colspan="1"  rowspan="1" id="lab-replace-none" class="cls-c1-r1">無</th>
+                <th colspan="1"  rowspan="1" id="box-replace-yes" class="cls-c1-r1">
+                    {% if NEW_PROJECT_MODEL['replace_product_flag']['replace-yes'] == true %} 
+                    <input type="checkbox" id="check-replace-yes" name="check-replace-yes" value="有" checked>
+                    {% else %}
+                    <input type="checkbox" id="check-replace-none" name="check-replace-none" value="無" >
+                    {% endif %}
+                </th>
+                <th colspan="1"  rowspan="1" id="lab-replace-yes" class="cls-c1-r1">有</th>
+                <th colspan="4"  rowspan="1" id="txt-replace-type-no" class="cls-c4-r1">產品型號為:</th>
+                <th colspan="5"  rowspan="1" id="txt-replace-type-no" class="cls-c5-r1">{{NEW_PROJECT_MODEL['replace_product']}}
+                    <!-- <input type="text" id="input-replace-type-no" value="{{NEW_PROJECT_MODEL['replace_product']}}"> -->
+                </th>
+            </tr>
+
+
+                  <!-- 專利評估 -->
+                  <tr>
+                    <th colspan="3"  rowspan="1" id="lab-patent-evaluation" class="cls-c3-r1">專利評估</th>
+                    <th colspan="17" rowspan="1" id="txt-patent-evaluation" class="cls-c17-r1">{{NEW_PROJECT_MODEL['patent_evaluate']}}
+                        <!-- <textarea id="input-patent-evaluation" name="input-patent-evaluation" rows="3" cols="40" required>{{NEW_PROJECT_MODEL['patent_evaluate']}}</textarea> -->
+                    </th>
+                </tr>
+
+                <!-- 競爭狀況 -->
+                <tr>
+                    <th colspan="3"  rowspan="1" id="title-compete"       class="cls-c3-r1">競爭狀況</th>
+                    <th colspan="1"  rowspan="1" id="box-compete" class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['compete_status']['compete'] == true %} 
+                        <input type="checkbox" id="check-compete" name="check-compete" value="yes" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-compete" name="check-compete" value="yes">
+                        {% endif %}
+                    </th>
+                    <th colspan="1"  rowspan="1" id="lab-compete" class="cls-c1-r1">有</th>
+                    <th colspan="15" rowspan="1" id="empty-compete" class="cls-c15-r1"></th>
+                </tr>
+
+                 <!-- 研發單位評估 -->
+                 <tr>
+                    <th colspan="3"  rowspan="9" id="title-rd-evaluation" class="cls-c3-r9">研發單位評估</th>
+                    <th colspan="4"  rowspan="1" id="lab-ee-develop-time" class="cls-c4-r1">電子開發部</th>
+                    <th colspan="3"  rowspan="1" id="txt-ee-develop-time" class="cls-c3-r1">
+                        <input type="text" id="input-ee-develop-time" value="{{NEW_PROJECT_MODEL['work_hour_ee']}}">
+                    </th>
+                    <th colspan="4"  rowspan="1" id="lab-ee-develop-cost" class="cls-c4-r1">所需工時小時,開發成本</th>
+                    <th colspan="3"  rowspan="1" id="txt-ee-develop-cost" class="cls-c3-r1">
+                        <input type="text" id="input-ee-develop-cost" value="{{NEW_PROJECT_MODEL['cost_ee']}}">
+                    </th>
+                    <th colspan="3"  rowspan="1" id="unit-ee-develop-cost" class="cls-c3-r1">元</th>
+                </tr>
+
+                <tr>
+                    <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"     class="cls-c3-r1">研發單位評估</th> -->
+                    <th colspan="4"  rowspan="1" id="lab-ee-develop-schedule" class="cls-c4-r1">預定開發時程</th>
+                    <th colspan="1"  rowspan="1" id="lab-ee-develop-from"     class="cls-c1-r1">自</th>
+                    <th colspan="4"  rowspan="1" id="txt-ee-develop-from"     class="cls-c4-r1">
+                        <input type="date" id="input-ee-develop-from" value="{{NEW_PROJECT_MODEL['start_date_ee']}}">
+                    </th>
+                    <th colspan="1"  rowspan="1" id="lab-ee-develop-to"       class="cls-c1-r1">至</th>
+                    <th colspan="4"  rowspan="1" id="txt-ee-develop-to"       class="cls-c4-r1">
+                        <input type="date" id="input-ee-develop-to" value="{{NEW_PROJECT_MODEL['end_date_ee']}}">
+                    </th>
+                    <th colspan="3"  rowspan="1" id="unit-ee-develop-to"      class="cls-c3-r1">完成</th>
+                </tr>
+
+                <tr>
+                    <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"  class="cls-c3-r1">研發單位評估</th> -->
+                    <th colspan="4"  rowspan="1" id="lab-mec-develop-time" class="cls-c4-r1">機構開發部</th>
+                    <th colspan="3"  rowspan="1" id="txt-mec-develop-time" class="cls-c3-r1">
+                        <input type="text" id="input-mec-develop-time" value="{{NEW_PROJECT_MODEL['work_hour_me']}}">
+                    </th>
+                    <th colspan="4"  rowspan="1" id="lab-mec-develop-cost" class="cls-c4-r1">所需工時小時,開發成本</th>
+                    <th colspan="3"  rowspan="1" id="txt-mec-develop-cost" class="cls-c3-r1">
+                        <input type="text" id="input-mec-develop-cost" value="{{NEW_PROJECT_MODEL['cost_me']}}">
+                    </th>
+                    <th colspan="3"  rowspan="1" id="unit-mec-develop-cost" class="cls-c3-r1">元</th>
+                </tr>
+
+                <tr>
+                    <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"      class="cls-c3-r1">研發單位評估</th> -->
+                    <th colspan="4"  rowspan="1" id="lab-mec-develop-schedule" class="cls-c4-r1">預定開發時程</th>
+                    <th colspan="1"  rowspan="1" id="lab-mec-develop-from"     class="cls-c1-r1">自</th>
+                    <th colspan="4"  rowspan="1" id="txt-mec-develop-from"     class="cls-c4-r1">
+                        <input type="date" id="input-mec-develop-from" value="{{NEW_PROJECT_MODEL['end_date_me']}}">
+                    </th>
+                    <th colspan="1"  rowspan="1" id="lab-mec-develop-to" class="cls-c1-r1">至</th>
+                    <th colspan="4"  rowspan="1" id="txt-mec-develop-to" class="cls-c4-r1">
+                        <input type="date" id="input-mec-develop-to" value="{{NEW_PROJECT_MODEL['end_date_me']}}">
+                    </th>
+                    <th colspan="3"  rowspan="1" id="unit-mec-develop-to" class="cls-c3-r1">完成</th>
+                </tr>
+
+                <tr>
+                    <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"   class="cls-c3-r1">研發單位評估</th> -->
+                    <th colspan="4"  rowspan="1" id="lab-soft-develop-time" class="cls-c4-r1">軟體開發部</th>
+                    <th colspan="3"  rowspan="1" id="txt-soft-develop-time" class="cls-c3-r1">
+                        <input type="text" id="input-soft-develop-time" value="{{NEW_PROJECT_MODEL['work_hour_sw']}}">
+                    </th>
+                    <th colspan="4"  rowspan="1" id="lab-soft-develop-cost" class="cls-c4-r1">所需工時小時,開發成本</th>
+                    <th colspan="3"  rowspan="1" id="txt-soft-develop-cost" class="cls-c3-r1">
+                        <input type="text" id="input-soft-develop-cost" value="{{NEW_PROJECT_MODEL['cost_sw']}}">
+                    </th>
+                    <th colspan="3"  rowspan="1" id="unit-soft-develop-cost" class="cls-c3-r1">元</th>
+                </tr>
+
+                <tr>
+                    <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"       class="cls-c3-r1">研發單位評估</th> -->
+                    <th colspan="4"  rowspan="1" id="lab-soft-develop-schedule" class="cls-c4-r1">預定開發時程</th>
+                    <th colspan="1"  rowspan="1" id="lab-soft-develop-from"     class="cls-c1-r1">自</th>
+                    <th colspan="4"  rowspan="1" id="txt-soft-develop-from"     class="cls-c3-r1">
+                        <input type="date" id="input-soft-develop-from" value="{{NEW_PROJECT_MODEL['start_date_sw']}}">
+                    </th>
+                    <th colspan="1"  rowspan="1" id="lab-soft-develop-to" class="cls-c1-r1">至</th>
+                    <th colspan="4"  rowspan="1" id="txt-soft-develop-to" class="cls-c4-r1">
+                        <input type="date" id="input-soft-develop-to" value="{{NEW_PROJECT_MODEL['end_date_sw']}}">
+                    </th>
+                    <th colspan="3"  rowspan="1" id="unit-soft-develop-to" class="cls-c1-r1">完成</th>
+                </tr>
+
+                <tr>
+                    <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"     class="cls-c3-r1">研發單位評估</th> -->
+                    <th colspan="4"  rowspan="1" id="lab-verify-develop-time" class="cls-c4-r1">設計驗證部</th>
+                    <th colspan="3"  rowspan="1" id="lab-verify-develop-time" class="cls-c3-r1">
+                        <input type="text" id="input-verify-develop-time" value="{{NEW_PROJECT_MODEL['work_hour_ds']}}">   
+                    </th>
+                    <th colspan="4"  rowspan="1" id="lab-verify-develop-cost" class="cls-c4-r1">所需工時小時,開發成本</th>
+                    <th colspan="3"  rowspan="1" id="txt-verify-develop-cost" class="cls-c3-r1">
+                        <input type="text" id="input-verify-develop-cost" value="{{NEW_PROJECT_MODEL['cost_ds']}}">
+                    </th>
+                    <th colspan="3"  rowspan="1" id="unit-verify-develop-cost" class="cls-c3-r1">元</th>
+                </tr>
+
+                <tr>
+                    <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"         class="cls-c3-r1">研發單位評估</th> -->
+                    <th colspan="4"  rowspan="1" id="lab-verify-develop-schedule" class="cls-c4-r1">預定開發時程</th>
+                    <th colspan="1"  rowspan="1" id="lab-verify-develop-from"     class="cls-c1-r1">自</th>
+                    <th colspan="4"  rowspan="1" id="txt-verify-develop-from"     class="cls-c3-r1">
+                        <input type="date" id="input-verify-develop-from" value="{{NEW_PROJECT_MODEL['start_date_ds']}}">
+                    </th>
+                    <th colspan="1"  rowspan="1" id="lab-verify-develop-to" class="cls-c1-r1">至</th>
+                    <th colspan="4"  rowspan="1" id="txt-verify-develop-to" class="cls-c4-r1">
+                        <input type="date" id="input-verify-develop-to" value="{{NEW_PROJECT_MODEL['end_date_ds']}}">
+                    </th>
+                    <th colspan="3"  rowspan="1" id="unit-verify-develop-to" class="cls-c1-r1">完成</th>
+                </tr>
+
+                <tr>
+                    <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation" class="cls-c3-r1">研發單位評估</th> -->
+                    <th colspan="4"  rowspan="1" id="lab-develop-unit" class="cls-c4-r1">開發單位</th>
+                    <th colspan="1"  rowspan="1" id="box-unit-taipei"  class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['develop_unit']['taipei'] == true %} 
+                        <input type="checkbox" id="check-unit-taipei" name="check-unit-taipei" value="台北" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-unit-taipei" name="check-unit-taipei" value="台北">
+                        {% endif %}
+                    </th>
+                    <th colspan="2"  rowspan="1" id="lab-unit-taipei"   class="cls-c2-r1">台北</th>
+                    <th colspan="1"  rowspan="1" id="box-unit-shanghai" class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['develop_unit']['shanghai'] == true %} 
+                        <input type="checkbox" id="check-unit-shanghai" name="check-unit-shanghai" value="上海" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-unit-shanghai" name="check-unit-shanghai" value="上海">
+                        {% endif %}
+                    </th>
+                    <th colspan="2"  rowspan="1" id="lab-unit-shanghai" class="cls-c2-r1">上海</th>
+                    <th colspan="1"  rowspan="1" id="box-unit-kunshan"  class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['develop_unit']['kunshan'] == true %} 
+                        <input type="checkbox" id="check-unit-kunshan" name="check-unit-kunshan" value="昆山" checked>   
+                        {% else %}
+                        <input type="checkbox" id="check-unit-kunshan" name="check-unit-kunshan" value="昆山">
+                        {% endif %}
+                    </th>
+                    <th colspan="6"  rowspan="1" id="lab-unit-kunshan" class="cls-c6-r1">昆山</th>
+                </tr>
+
+                <!-- 生產單位評估 -->
+                <tr>
+                    <th colspan="3"  rowspan="1" id="title-product-evaluation" class="cls-c3-r1">生產單位評估</th>
+                    <th colspan="4"  rowspan="1" id="lab-product-area"         class="cls-c4-r1">投產地</th>
+                    <th colspan="1"  rowspan="1" id="box-area-xindian"         class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['place_of_production']['xindian'] == true %}                                
+                        <input type="checkbox" id="check-area-xindian" name="check-area-xindian" value="新店廠" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-area-xindian" name="check-area-xindian" value="新店廠">
+                        {% endif %}
+                    </th>
+                    <th colspan="2"  rowspan="1" id="lab-area-xindian" class="cls-c2-r1">新店廠</th>
+                    <th colspan="1"  rowspan="1" id="box-area-kunshan" class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['place_of_production']['kunshan'] == true %}                                
+                        <input type="checkbox" id="check-area-kunshan" name="check-area-kunshan" value="昆山廠" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-area-kunshan" name="check-area-kunshan" value="昆山廠">
+                        {% endif %}
+                    </th>
+                    <th colspan="2"  rowspan="1" id="lab-area-kunshan" class="cls-c2-r1">昆山廠</th>
+                    <th colspan="1"  rowspan="1" id="box-area-both"    class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['place_of_production']['area-both'] == true %}
+                        <input type="checkbox" id="check-area-both" name="check-area-both" value="兩地皆投" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-area-both" name="check-area-both" value="兩地皆投">
+                        {% endif %}                             
+                    </th>
+                    <th colspan="2"  rowspan="1" id="lab-area-both"  class="cls-c2-r1">兩地皆投</th>
+                    <th colspan="1"  rowspan="1" id="box-area-other" class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['place_of_production']['area-other'] == true %}
+                        <input type="checkbox" id="check-area-other" name="check-area-other" value="其他" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-area-other" name="check-area-other" value="其他">
+                        {% endif %}
+                       
+                    </th>
+                    <th colspan="3"  rowspan="1" id="lab-area-other" class="cls-c3-r1">其他</th>
+                </tr>
+
+                <!-- 業務單位評估 -->
+                 <tr>
+                    <th colspan="3"  rowspan="1" id="title-business-evaluation" class="cls-c3-r1">業務單位評估</th>
+                    <th colspan="4"  rowspan="1" id="lab-test-product"          class="cls-c4-r1">第一批試產數量:</th>
+                    <th colspan="3"  rowspan="1" id="txt-test-product"   class="cls-c3-r1">
+                        <input type="text" id="input-test-product" value="{{NEW_PROJECT_MODEL['product_count_first']}}">
+                    </th>
+                    <th colspan="1"  rowspan="1" id="unit-test-product"  class="cls-c1-r1"></th>
+                    <th colspan="9"  rowspan="1" id="empty-test-product" class="cls-c9-r1"></th>
+                </tr>
+
+                <!-- 行銷單位評估 -->
+                <tr>
+                    <th colspan="3"  rowspan="1" id="title-marketing-evaluation"  class="cls-c3-r1">行銷單位評估</th>
+                    <th colspan="1"  rowspan="1" id="box-old-package" class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['markting_evaluate']['old-package'] == true %}
+                        <input type="checkbox" id="check-old-package" name="check-old-package" value="沿用舊包裝" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-old-package" name="check-old-package" value="沿用舊包裝">
+                        {% endif %}
+                    </th>
+                    <th colspan="3"  rowspan="1" id="lab-old-package" class="cls-c3-r1">沿用舊包裝</th>
+                    <th colspan="1"  rowspan="1" id="box-new-package" class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['markting_evaluate']['new-package'] == true %}
+                        <input type="checkbox" id="check-new-package" name="check-new-package" value="新設計包裝" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-new-package" name="check-new-package" value="新設計包裝">
+                        {% endif %}
+                    </th>
+                    <th colspan="3"  rowspan="1" id="lab-new-package" class="cls-c3-r1">新設計包裝</th>
+                    <th colspan="1"  rowspan="1" id="box-self-package" class="cls-c1-r1">
+                        {% if NEW_PROJECT_MODEL['markting_evaluate']['self-package'] == true %}
+                        <input type="checkbox" id="check-self-package" name="check-self-package" value="OEM產品客戶自有包裝" checked>
+                        {% else %}
+                        <input type="checkbox" id="check-self-package" name="check-self-package" value="OEM產品客戶自有包裝">
+                        {% endif %}
+                    </th>
+                    <th colspan="8"  rowspan="1" id="lab-self-package" class="cls-c8-r1">OEM產品客戶自有包裝</th>
+                </tr>
+
+                <tr>
+                    <th colspan="3" rowspan="1" id="lab-attach-file"   class="cls-c3-r1">附加檔案</th>
+                     <th colspan="17" rowspan="1" id="file-list" class="cls-c17-r1">
+                         <div id="myUL">
+                        </div> 
+                    <th>  
+                </tr> 
+
+                <!-- 簽核欄位 -->
+                <!-- <tr>
+                    <th colspan="3"  rowspan="1" id="lab-manager"     class="cls-c3-r1">總經裡室</th>
+                    <th colspan="3"  rowspan="1" id="txt-manager"     class="cls-c3-r1"></th>
+                    <th colspan="3"  rowspan="1" id="lab-leader"      class="cls-c3-r1">單位主管</th>
+                    <th colspan="3"  rowspan="1" id="txt-leader"      class="cls-c3-r1"></th>
+                    <th colspan="3"  rowspan="1" id="lab-applicant"   class="cls-c3-r1">申請人</th>
+                    <th colspan="5"  rowspan="1" id="txt-applicant"   class="cls-c5-r1">{{NEW_PROJECT_MODEL['member_cname']}}</th>
+
+                </tr> -->
+
+                <th colspan="16" rowspan="1" id="lab-symbol" class="cls-c16-r1">
+                    <div id="txt-symbol">✱ 為必填欄位</div>
+                </th>
+                <th colspan="2" rowspan="1" id="lab-agree-button" class="cls-c2-r1-h2">
+                    <button id="btn-agree" class="layui-btn layui-btn-normal" title="指派">
+                        <i class="layui-icon layui-icon-ok"></i>指派
+                    </button>
+                </th>
+                <th colspan="2" rowspan="1" id="lab-reject-button" class="cls-c2-r1-h2">
+                    <button id="btn-reject" class="layui-btn layui-btn-danger" title="退回">
+                        <i class="layui-icon layui-icon-close"></i>退回
+                    </button>
+                </th>
+
+
+
+
+                <tr>
+                    <td colspan="1" class="c-base" id="c-1"></td>
+                    <td colspan="1" class="c-base" id="c-2"></td>
+                    <td colspan="1" class="c-base" id="c-3"></td>
+                    <td colspan="1" class="c-base" id="c-4"></td>
+                    <td colspan="1" class="c-base" id="c-5"></td>
+                    <td colspan="1" class="c-base" id="c-6"></td>
+                    <td colspan="1" class="c-base" id="c-7"></td>
+                    <td colspan="1" class="c-base" id="c-8"></td>
+                    <td colspan="1" class="c-base" id="c-9"></td>
+                    <td colspan="1" class="c-base" id="c-10"></td>
+
+                    <td colspan="1" class="c-base" id="c-11"></td>
+                    <td colspan="1" class="c-base" id="c-12"></td>
+                    <td colspan="1" class="c-base" id="c-13"></td>
+                    <td colspan="1" class="c-base" id="c-14"></td>
+                    <td colspan="1" class="c-base" id="c-15"></td>
+                    <td colspan="1" class="c-base" id="c-16"></td>
+                    <td colspan="1" class="c-base" id="c-17"></td>
+                    <td colspan="1" class="c-base" id="c-18"></td>
+                    <td colspan="1" class="c-base" id="c-19"></td>
+                    <td colspan="1" class="c-base" id="c-20"></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+
+        <!-- 彈出指派任務視窗 -->
+        <template id="task-template">
+
+            <div id="task-window-bg">
+
+                <table id="task-win-table">
+
+                    <tbody id="task-table-body">
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-no" class="tab-c2-r1">專案案號</th>
+                            <th colspan="3" rowspan="1" id="txt-project-no" class="tab-c3-r1">
+                                {{NEW_PROJECT_MODEL['project_no']}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-name" class="tab-c2-r1">產品名稱</th>
+                            <th colspan="3" rowspan="1" id="txt-project-name" class="tab-c3-r1">
+                                {{NEW_PROJECT_MODEL['product_no']}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-assign" class="tab-c2-r1">指派人員</th>
+                            <th colspan="2" rowspan="1" id="txt-assign" class="tab-c2-r1">
+                                <select id="select-assign">
+                                    <option></option>
+                                </select>
+                            </th>
+                            <th colspan="1" rowspan="1" id="txt-assign" class="tab-c1-r1">
+                                <!-- <button id="btn-add" class="layui-btn" title="加入" onclick="newElement();"> -->
+                                <button id="btn-add" class="layui-btn" title="加入">
+                                    <i class="layui-icon layui-icon-addition"></i>加入
+                                </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="5" rowspan="1" id="txt-list" class="tab-c5-r1">
+                                <div id="member-ul"></div>
+                                <!--
+                                <ul id="myUL"></ul>
+                                -->
+                            </th>
+                        </tr>
+                        <!-- 預估RD 專案開始時間 -->
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-start" class="tab-c2-r1">預計執行開始時間</th>
+                            <th colspan="3" rowspan="1" id="txt-project-start" class="tab-c3-r1">
+                                <input type="date" id="input-project-start" value="">
+                            </th>
+                        </tr>
+                    
+                        <!-- 預估RD 專案結束時間 -->
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-end" class="tab-c2-r1">預計執行完畢時間</th>
+                            <th colspan="3" rowspan="1" id="txt-project-end" class="tab-c3-r1">
+                                <input type="date" id="input-project-end" value="">
+                            </th>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+
+
+        <!--退回指派填寫原因編輯畫面-->
+        <template id="taskback-template-edit">
+            <div id="edit-winodow-bg">
+                <div id="edit-window-item-1">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" id="lab-taskback"> {{USER}}，您是否確定要退回指派？ </label>
+                    </div>  
+                </div>
+
+                <div id="edit-window-item-2">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" id="lab-taskback-reason"> 退回原因: </label>
+                    </div>  
+                    <select id="select-taskback-reason" >
+                        <option>開案資訊不足</option>
+                        <option>申請單資訊修正</option>
+                    </select>
+                </div>
+
+                <!-- <div id="edit-window-item-3">
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" id="lab-taskback-memo"> 說明: </label>
+                        <input type="text" id="input-taskback-memo" value="">
+                    </div>  
+                </div> -->
+            </div>
+        </template>
+
+
+        <!-- 程式區 -->
+        <script>
+
+
+            var selectNameList = []
+            //產生表單底部的簽核欄位
+            generate_table_row();
+            generate_sign_data_row();
+
+
+            async function getMemberFun() {
+                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/get/member/by_organize/";
+                let objParam = { organize: "硬體設計部" };
+                console.log(objParam);
+                let jsonParam = JSON.stringify(objParam);
+                console.log(jsonParam);
+                const res = await fetch(uri, {
+                    method  : 'post',
+                    body    : jsonParam,
+                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+
+
+
+
+
+            var selectNameList = [];
+            var memberMap = new Map();
+            var mailMap   = new Map();
+            var groupMap  = new Map();
+
+
+
+            //顯示產品判別
+            $('#select-product-check').val("{{NEW_PROJECT_MODEL['product-check']}}");
+
+            //顯示部門分類
+            if("{{NEW_PROJECT_MODEL['bu']}}" == 'IO') {
+                $('#check-form-io').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['bu']}}" == 'IOT') {
+                $('#check-form-iot').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['bu']}}" == 'IT') {
+                $('#check-form-it').prop('checked',true);
+            }
+
+            //是否有取代舊有產品
+            if("{{NEW_PROJECT_MODEL['replace_product_flag']}}" == '有') {
+                $('#check-replace-yes').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['replace_product_flag']}}" ==  '無') {
+                $('#check-replace-none').prop('checked',true);
+            }
+
+
+            //投產地
+            if("{{NEW_PROJECT_MODEL['place_of_production']}}" == $('#check-area-xindian').val()) {
+                $('#check-area-xindian').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['place_of_production']}}" == $('#check-area-kunshan').val()) {
+                $('#check-area-kunshan').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['place_of_production']}}" == $('#check-area-both').val()) {
+                $('#check-area-both').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['place_of_production']}}" == $('#check-area-other').val()) {
+                $('#check-area-other').prop('checked',true);
+            }
+
+            //開發單位
+            if("{{NEW_PROJECT_MODEL['develop_unit']}}" == $('#check-unit-taipei').val()) {
+                $('#check-unit-taipei').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['develop_unit']}}" == $('#check-unit-shanghai').val()) {
+                $('#check-unit-shanghai').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['develop_unit']}}" == $('#check-unit-kunshan').val()) {
+                $('#check-unit-kunshan').prop('checked',true);
+            }
+
+            //競爭狀況
+            if("{{NEW_PROJECT_MODEL['compete_status']}}" == $('#check-compete').val()) {
+                $('#check-compete').prop('checked',true);
+            }
+
+            //行銷單位評估
+            if("{{NEW_PROJECT_MODEL['markting_evaluate']}}" == $('#check-old-package').val()) {
+                $('#check-old-package').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['markting_evaluate']}}" == $('#check-new-package').val()) {
+                $('#check-new-package').prop('checked',true);
+            } else if("{{NEW_PROJECT_MODEL['markting_evaluate']}}" == $('#check-self-package').val()) {
+                $('#check-self-package').prop('checked',true);
+            }
+
+              //顯示產品判別
+            $('#select-product-check').val("{{NEW_PROJECT_MODEL['product_check']}}");
+
+
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+                // 警告
+                if (mode == 0) {
+                    btn1.css({ "background-color": "#ff0066", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#ffe6f0", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 詢問
+                if (mode == 1) {
+                    btn1.css({ "background-color": "#1E9FFF", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#e6f4ff", "border-color": "#555555", "font-size": "18px" });
+                }
+            }
+
+
+
+            layui.use(['form', 'layer', 'jquery', 'table'], function () {
+                var layer   = layui.layer;
+                var laypage = layui.laypage;
+                var table   = layui.table;
+                var $       = layui.jquery;
+                var form    = layui.form;
+
+                /*
+                // 按下登出按鈕
+                $("#landscape").click(function () {
+                    //alert("Handler for .click() called.");
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-molv', //layui-layer-rim
+                        resize: true,
+                        shadeClose: false,
+                        shade: [0.7, '#000'],
+                        closeBtn: 2,
+                        offset: 'auto',
+                        anim: 5,
+                        area: ['400px', '280px'],
+                        title: ['警告', 'font-size:24px;background-color:#ff0066;'],
+                        btn: ['登出', '取消'],
+                        content: '<div style="padding: 15px; font-size: 22px; font-weight: bold;">{{ USER }}，您是否確定要登出系統？<br><br><div id="view-txt-msg"></div></div>',
+                        success: function (layero, index) {
+                            addIconforBtn(0);
+                        },
+                        yes: function (index, layero) {
+                            async function logoutStatus() {
+                                let uri = "http://{{ DOMAIN_PATH }}/page/v0/logout/";
+                                let objParam = {};
+                                let jsonParam = JSON.stringify(objParam);
+                                const res = await fetch(uri, {
+                                    method: 'post',
+                                    body: jsonParam,
+                                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                });
+                                return await res.json();
+                            }
+                            let promiseLogout = logoutStatus();
+                            promiseLogout.then((response) => {
+                                console.log(response);
+                                layer.close(index);
+                                if (response['result'] == 'ok') {
+                                    location.replace('http://{{ DOMAIN_PATH }}/page/v0/login/');
+                                }
+                            });
+                        }
+                    });
+
+                });
+                */
+               
+               
+
+                // 按下表單(同意)按紐
+                $("#btn-agree").click(function () {
+
+                    layer.open({
+                        type       : 1,
+                        skin       : 'layui-layer-molv', //layui-layer-rim
+                        resize     : true,
+                        shadeClose : false,
+                        shade      : [0.7, '#000'],
+                        closeBtn   : 2,
+                        offset     : 'auto',
+                        anim       : 5,
+                        area       : ['600px', '500px'],
+                        title      : ['指派任務', 'font-size:24px;background-color:#1E9FFF;'],
+                        btn        : ['指派', '取消'],
+                        content    : $('#task-template').html(),
+                        success: function (layero, index) {
+                            addIconforBtn(1);
+
+
+                            let promiseGetMember = getMemberFun();
+                            promiseGetMember.then((response) => {
+                                console.log(response);
+                                var strPersonOptions = '';
+                                strPersonOptions += '<option disabled selected value="">請選擇一個人員</option>';
+                                for (var i = 0; i < response['data']['msg'].length; i++) {
+    
+                                    memberMap.set(response['data']['msg'][i]['mail'],  response['data']['msg'][i]['cname'] );
+                                    mailMap.set(  response['data']['msg'][i]['cname'], response['data']['msg'][i]['mail'] );
+                                    groupMap.set( response['data']['msg'][i]['cname'], response['data']['msg'][i]['group'] );
+    
+                                    strPersonOptions += '<option value="' + response['data']['msg'][i]['mail'] + '">' + response['data']['msg'][i]['cname'] + '</option>';
+                                }
+                                document.getElementById("select-assign").innerHTML = strPersonOptions;
+                            });
+                            console.log(selectNameList);
+
+                            // 按下增加人員按鈕
+                            document.querySelector("#btn-add").addEventListener('click', function(ev) {
+                                var sel_member_name = $("#select-assign").val();
+                                //alert(sel_member_name);
+                                console.log(sel_member_name);
+                                console.log(memberMap.get(sel_member_name));
+
+                                if (selectNameList.includes(memberMap.get(sel_member_name))) {
+                                    console.log('目標字串在原始字串中');
+                                    layer.msg('該名人員重複了');
+                                } else {
+                                    newMemberElement(memberMap.get(sel_member_name));
+                                }
+                            });
+
+                          
+                        },
+                        yes: function (index, layero) {
+
+                            /////////////////// 取得指派人員數量資訊
+                            //var selectPersonList = document.getElementById('myUL');
+                            //var selectListItems  = selectPersonList.getElementsByTagName('li');
+                            //var personList = [];
+                            //var memberList = [];
+                            //console.log(selectListItems.length);
+
+                            //未選擇指派人員 則提示
+                            //if( selectListItems.length <1) {
+                            //    layer.msg('無法送出訊息,請選擇一個人員加入名單!');
+                            //    layer.close();
+                            //    return;
+                            //}
+
+                            /////////////////// 取得執行開始及結束時間
+                            var select_startDate = document.getElementById('input-project-start').value;
+                            var select_enddate   = document.getElementById('input-project-end'  ).value;
+                            //console.log(select_startDate)
+                            if(select_startDate.length == 0) {
+                                layer.msg('請選擇預計執行開始時間!');
+                                layer.close();
+                                return;
+                            }
+                            if(select_enddate.length == 0) {
+                                layer.msg('請選擇預計執行結束時間!');
+                                layer.close();
+                                return;
+                            }
+
+
+                            /////////////////// 取得指派人員數量資訊
+                            var selectPersonList = document.getElementById('member-ul');
+                            //var selectListItems  = selectPersonList.getElementsByTagName('li');
+                            var selectListItems = document.getElementsByClassName('list-member-item');
+                            console.log(selectListItems);
+
+                            var memberList = [];
+                            console.log(selectListItems.length);
+
+                            if( selectListItems.length <1) {
+                                layer.msg('無法送出訊息,請選擇一個人員加入名單!');
+                                layer.close();
+                            }
+
+
+                            //寫入post_new_project_form_log
+                            async function post_new_project_form_log() {
+                                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_project_form/log/"
+                                let objParam = {
+                                    "form_no"         : "{{NEW_PROJECT_MODEL['form_no']}}",
+                                    "bu"              : "{{NEW_PROJECT_MODEL['bu']}}",
+                                    "project_no"      : "{{NEW_PROJECT_MODEL['project_no']}}",
+                                    "product_name"    : "{{NEW_PROJECT_MODEL['product_name']}}",
+                                    "product_no"      : "{{NEW_PROJECT_MODEL['product_no']}}",
+                                    "role"            : 'hw',
+                                    "pm_approve_flag" : true,
+                                    "pm_back_reason"  : "",
+                                    "pm_back_memo"    : "",
+                                    "hw_approve_flag" : true,
+                                    "hw_back_reason"  : "",
+                                    "hw_back_memo"    : "",
+                                    "member_cname"    : "{{NEW_PROJECT_MODEL['member_cname']}}",
+                                    "apply_date"      : "{{NEW_PROJECT_MODEL['apply_date']}}",
+                                };
+                            
+                                let jsonParam = JSON.stringify(objParam); 
+                                const res = await fetch(uri, {
+                                    method  : 'post',
+                                    body    : jsonParam,
+                                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                                });
+                                return await res.json();
+                            }
+                            let promise_post = post_new_project_form_log();
+                            promise_post.then((response) => {
+                                        console.log(response);
+                                        //layer.close(index);
+                            });
+                           
+
+                            for (var i = 0; i < selectListItems.length; i++) {
+                                var itemValue  = (selectListItems[i].innerText);
+                                var strCName = itemValue.substring(0,3);
+                                console.log('----------------------');
+                                console.log(strCName);
+                                console.log(mailMap.get(strCName));
+                                var memberObj = new Object(); 
+                                memberObj['cName']                  = strCName;
+                                memberObj['mail']                   = mailMap.get(strCName);
+                                memberObj['group']                  = groupMap.get(strCName);
+                                memberObj['callback']               = false;
+                                memberObj['task']                   = groupMap.get(strCName) == "ee" ? "Pre-Work" : "產品造型規劃";
+                                memberObj['mile_stone']             = groupMap.get(strCName) == "ee" ? "Spec. Review" : "需求評估/分析";
+                                memberObj['status']                 = "待辦中";
+                                memberObj['actual_date']            = "";
+                                memberObj['reason']                 = "";
+                                memberObj['memo']                   = "";
+                                memberObj['form_type']              = "pm開案單";
+                                memberObj['expected_start_date']    = $("#input-project-start").val();
+                                memberObj['expected_end_date']      = $("#input-project-end").val();
+                                memberObj['form_no']                = "{{NEW_PROJECT_MODEL['form_no']}}";
+                                memberList.push(memberObj);
+                            }
+                            //console.log(memberList);
+
+
+                           
+                           
+                            function get_bu()
+                            {
+                                var bu ;
+                                if ("{{NEW_PROJECT_MODEL['bu']}}" == "IOT" )
+                                {
+                                    bu = "IOT";
+                                }
+                                else if ("{{NEW_PROJECT_MODEL['bu']}}" == "IO" )
+                                {
+                                    bu = "IO";
+                                }
+                                else if ("{{NEW_PROJECT_MODEL['bu']}}" == "IT" )
+                                {
+                                    bu = "IT";
+                                }
+                                return bu;
+                            }
+
+                            //寫入new_project_task
+                            async function post_new_project_task() {
+
+                                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_project_task/";
+                                let objParam = {
+                                    "form_no"              : "{{NEW_PROJECT_MODEL['form_no']}}",
+                                    "project_no"           : "{{NEW_PROJECT_MODEL['project_no']}}",
+                                    "project_name"         : "{{NEW_PROJECT_MODEL['project_name']}}",
+                                    "product_name"         : "{{NEW_PROJECT_MODEL['product_name']}}",
+                                    "product_no"           : "{{NEW_PROJECT_MODEL['product_no']}}",
+                                    "bu"                   : get_bu(),
+                                    "member_list"          : memberList,        
+                                    "expected_start_date"  : $("#input-project-start").val(),
+                                    "expected_finish_date" : $("#input-project-end").val(),
+                                    "status"               : "待辦中",
+                                    "task"                 : "Pre-Work",
+                                    "mile_stone"           : "Spec. Review",
+                                    "actual_date"          : "",
+                                    "reason"               : "",
+                                    "memo"                 : "", 
+                                    "actual_date"          : "",
+                                    "back_reason"          : "",
+                                    "back_memo"            : "",                                  
+                                };
+                                let jsonParam = JSON.stringify(objParam);
+                                console.log(jsonParam);
+                                const res = await fetch(uri, {
+                                    method  : 'post',
+                                    body    : jsonParam,
+                                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                                });
+                                return await res.json();
+
+                            } 
+
+
+
+                            let objParam = {
+                                "project_no"           : "{{NEW_PROJECT_MODEL['project_no']}}",
+                                "member_list"          : memberList, 
+                            };
+
+                            let p1 = update_new_project_form_memberlist(objParam);
+                            p1.then((response) => {
+
+                            }); //update_new_project_form_memberlist
+
+
+
+
+
+                            let promise_new_project_task = post_new_project_task();
+                            promise_new_project_task.then((response) => {
+
+                            }); //promise_new_project_task
+
+                            insert_form_flow(true);
+
+                            // 發給多人
+                            promiseList = [];
+                            for( var m = 0; m < memberList.length; m++ ) {
+                                console.log("發mail");
+                                console.log(memberList[m]['mail']);
+
+                                async function send_assign_mail() {
+                                    let url = "http://{{ DOMAIN_PATH }}/api/v0/send/new_project_task/";
+                                    let objParam = {
+                                        "product_no"    : "{{NEW_PROJECT_MODEL['product_no']}}",
+                                        "project_no"    : "{{NEW_PROJECT_MODEL['project_no']}}",
+                                        "product_name"  : "{{NEW_PROJECT_MODEL['product_name']}}",
+                                        "sender"        : "{{ ACCOUNT }}",
+                                        "receiver"      : memberList[m]['mail'],
+                                        "project_start" : $("#input-project-start").val(),
+                                        "project_end"   : $("#input-project-end").val()
+                                    };
+                                    let jsonParam = JSON.stringify(objParam);
+                                    const res = await fetch(url, {
+                                        method  : 'POST',
+                                        body    : jsonParam,
+                                        headers : { 'Content-Type': 'application/json charset = utf-8' }
+                                    });
+                                    return await res.json();
+                                }
+                                var promise_send_assign_mail = send_assign_mail();
+                                promiseList.push(promise_send_assign_mail);
+                            }
+
+                            Promise.all(promiseList).then(value => {
+                                console.log(value);
+                                layer.msg("指派作業完成");
+                                page_to_form_list();
+                            });
+
+
+                        }
+                    });
+                });
+
+
+                function sleep(ms) {
+                    return new Promise(resolve => setTimeout(resolve, ms));
+                }
+
+                //切畫面至project_list
+                async function page_to_form_list() {
+                    await sleep(1000);
+                    location.replace('http://{{ DOMAIN_PATH }}/page/v0/form_list/');
+                    //window.location.href = 'http://{{ DOMAIN_PATH }}/page/v0/new_technology_review/';
+                };
+
+
+                // 按下退回按鈕
+                $("#btn-reject").click(function () {
+
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-molv', //layui-layer-rim
+                        resize: true,
+                        shadeClose: false,
+                        shade: [0.7, '#000'],
+                        closeBtn: 2,
+                        offset: 'auto',
+                        anim: 5,
+                        area: ['600px', '400px'],
+                        title: ['詢問', 'font-size:24px;background-color:#ff0066;'],
+                        btn: ['退回', '取消'],
+                        content: $('#taskback-template-edit').html(),//'<div style="padding: 15px; font-size: 22px; font-weight: bold;">{{ USER }}，您是否確定要退回指派？<br><br><div id="view-txt-msg"></div></div>',
+                        success: function (layero, index) {
+                            addIconforBtn(0);
+                        },
+                        yes: function (index, layero) {
+
+                            async function post_new_project_form_log() {
+                                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_project_form/log/";
+                                let objParam = {
+                                    "form_no"         : "{{NEW_PROJECT_MODEL['form_no']}}",
+                                    "bu"              : "{{NEW_PROJECT_MODEL['bu']}}",
+                                    "project_no"      : "{{NEW_PROJECT_MODEL['project_no']}}",
+                                    "product_name"    : "{{NEW_PROJECT_MODEL['product_name']}}",
+                                    "product_no"      : "{{NEW_PROJECT_MODEL['product_no']}}",
+                                    "role"            : 'hw',
+                                    "pm_approve_flag" : false,
+                                    "pm_back_reason"  : "",
+                                    "pm_back_memo"    : "",
+                                    "hw_approve_flag" : false,
+                                    "hw_back_reason"  : $('#select-taskback-reason').val(),
+                                    "hw_back_memo"    : $('#input-taskback-memo').val(),
+                                    "member_cname"    : "{{NEW_PROJECT_MODEL['member_cname']}}",
+                                    "apply_date"      : "{{NEW_PROJECT_MODEL['apply_date']}}",
+                                };
+                
+                                let jsonParam = JSON.stringify(objParam); 
+                                const res = await fetch(uri, {
+                                    method: 'post',
+                                    body: jsonParam,
+                                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                });
+                                return await res.json();
+                            }
+                            let promise_post = post_new_project_form_log();
+                            promise_post.then((response) => {
+                                console.log(response);
+                                layer.close(index);
+
+                                if (response['result'] == 'ok') {
+
+                                }
+                            });
+
+
+                            insert_form_flow(false);
+
+                            //發送退回mail
+                            async function send_reject_mail() {
+                                //let uri = "http://{{ DOMAIN_PATH }}/page/v0/logout/";
+                                let uri = "http://{{ DOMAIN_PATH }}/api/v0/send/new_project/reject/"
+                                let objParam = {
+                                    "project_no"    : "{{NEW_PROJECT_MODEL['project_no']}}",
+                                    "product_no"    : "{{NEW_PROJECT_MODEL['product_no']}}",
+                                    "reject_reason" : $("#select-taskback-reason").val(),
+                                    "reject_memo"   : $('#input-taskback-memo').val(),
+                                    "sender"        : "{{ ACCOUNT }}",
+                                    "receiver"      : "{{RECEIVER}}",
+                                    "cc"            : "{{RECEIVER}}",
+                                };
+                                let jsonParam = JSON.stringify(objParam);
+                                console.log(jsonParam)
+                                const res = await fetch(uri, {
+                                    method  : 'post',
+                                    body    : jsonParam,
+                                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                                });
+                                return await res.json();
+                            }
+                            let promisePost = send_reject_mail();
+                            promisePost.then((response) => {
+                                console.log(response);
+
+                                layer.close(index);
+                                if (response['result'] == 'ok') {
+                                    //alert(response)//location.replace('http://{{ DOMAIN_PATH }}/page/v0/login/');
+                                }
+                            });
+                        }
+                    });
+                });
+
+
+            });
+
+
+            function newMemberElement(strMemberCName) {
+                var li = document.createElement("div");
+                li.className = "list-member-item";
+                li.id = strMemberCName;
+                if(strMemberCName != null) {
+                    // 文字
+                    var divobj = document.createElement("div");
+                    divobj.className = "text-member";
+                    var t = document.createTextNode(strMemberCName);
+                    //t.id = strMemberCName;
+                    divobj.appendChild(t);
+                    li.appendChild(divobj);
+                    // 刪除按鈕
+                    var btn3 = document.createElement("button");
+                    btn3.className = "cls-delete-btn-member";
+        
+                    var bt3 = document.createTextNode("刪除");
+                    btn3.appendChild(bt3);
+                    li.appendChild(btn3);
+                    btn3.onclick = function() {
+                        var div = this.parentElement;
+                        div.remove();
+                        //console.log(this.parentElement.id);
+                        var itemToRemove = this.parentElement.id;
+                        var index = selectNameList.indexOf(itemToRemove);
+                        if (index !== -1) {
+                            selectNameList.splice(index, 1);
+                        }
+                    }
+                    document.getElementById("member-ul").appendChild(li);
+                    selectNameList.push(strMemberCName);
+                }
+
+            }
+
+            //寫入表單流程紀錄
+            async function insert_form_flow(status) {
+                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/form_flow/";
+                let objParam = {
+                    "form_no"    : "{{NEW_PROJECT_MODEL['form_no']}}",
+                    "project_no" : "{{NEW_PROJECT_MODEL['project_no']}}",
+                    "type"       : "new_project",
+                    "fs_code"    : "fsprog103",
+                    "action"     : "指派",
+                    "status"     : status?"指派":"退回",
+                    "memo"       : status ?  "" :  $("#select-taskback-reason").val() ,
+                    "user"       : "{{ USER_CNAME }}"
+                };
+                let jsonParam = JSON.stringify(objParam);
+                const res = await fetch(uri, {
+                    method  : 'post',
+                    body    : jsonParam,
+                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+
+
+            //簽核流程title
+            function generate_table_row() {
+                        
+                var table_body = document.getElementById('table-body');
+                var table_row = document.createElement('tr');
+
+                // 表頭的內容（表頭列名）
+                var headers = [
+                    {name :'簽核人員', colSpan : 6},
+                    {name :'簽核時間', colSpan : 6},
+                    {name :'簽核意見', colSpan : 8} 
+                ];
+                    
+
+                // 動態生成表頭（th）元素並加入到表頭行
+                for (var i = 0; i < headers.length; i++) {
+                    var th = document.createElement('th');
+                    th.textContent = headers[i].name;
+                    th.setAttribute('colspan', headers[i].colSpan) ;
+                    th.className = "cls-c6-r1-h1";  
+                    table_row.appendChild(th);                
+                }
+                table_body.appendChild(table_row);
+
+            } //generate_table_row
+
+
+            //簽核流程資料
+            function generate_sign_data_row() {
+                        
+                var table_body = document.getElementById('table-body');
+                        
+                Promise.all([get_form_flow()]).then((response)=> {
+                    console.log(response)
+                    if(response[0]['result'] == 'ok') {
+
+                        for(let i = 0 ; i<response[0]['data'].length ; i++) {
+                            var tr = document.createElement('tr');
+                            var th = document.createElement('th');
+                            context = [
+                                {'key': response[0]['data'][i]['user'] , colSpan : 6},
+                                {'key': response[0]['data'][i]['inserted_at'], colSpan : 6},
+                                {'key': response[0]['data'][i]['status'] + " : " + response[0]['data'][i]['memo'], colSpan : 8}
+                            ]
+
+                            // 動態生成表頭（th）元素並加入到表頭行
+                            for (var j = 0; j < context.length; j++) {
+                                 var th = document.createElement('th');
+                                th.textContent = context[j].key;
+                                th.setAttribute('colspan', context[j].colSpan) ;
+                                th.className = "cls-c6-r1-h2";  
+                                tr.appendChild(th);
+                            }
+                            table_body.appendChild(tr);
+                        }
+                    }
+                });
+            } //generate_sign_data_row
+
+
+            async function get_form_flow() {
+                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/form_flow/?form_no=" + "{{NEW_PROJECT_MODEL['form_no']}}";
+                const res = await fetch(uri, {
+                    method  : 'get',                    
+                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }  //get_form_flow
+
+
+
+            //顯示已上傳的檔案
+            function testElement(strFileName) {
+
+                    var li = document.createElement("div");
+                    li.className = "list-file-item";
+                    li.id = strFileName;
+                    if(strFileName != null) {
+                        // 文字
+                        var divobj = document.createElement("a");
+                        divobj.className = "text-filename";
+                        strsplit = strFileName.split('/')                                            
+                        //console.log(strsplit[strsplit.length-1])  
+                        var t = document.createTextNode(strsplit[strsplit.length-1]);                                            
+                        divobj.href = strFileName;
+                        divobj.target = "_blank";                                            
+                        
+                        divobj.appendChild(t);
+                        li.appendChild(divobj);
+                        document.getElementById("myUL").appendChild(li);
+                        selectNameList.push(strFileName);
+                    }
+
+            }//testElement
+
+
+            get_upload_file().then((response)=>
+            {
+                    console.log(response)
+                    var file_list = response['data'];
+
+                    if(file_list.length != 0)
+                    {
+                        console.log(file_list.length )
+                        for(let i = 0 ; i<file_list.length; i++)
+                        {
+                            testElement(file_list[i]);
+                        }
+                    }
+                  
+
+            });
+
+
+
+            //取得專案已上傳的檔案
+            async function get_upload_file() {
+
+                    let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/find/upload_file/?project_no=" + "{{NEW_PROJECT_MODEL['project_no']}}";                      
+                    const res = await fetch(uri, {
+                    method: 'get',                       
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                    });
+                    return await res.json();
+
+            } //get_upload_file
+
+
+             //寫入new_project_task
+             async function update_new_project_form_memberlist(objParam) {
+
+                    let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_project_form/update_memberlist/";                  
+                    let jsonParam = JSON.stringify(objParam);
+                    console.log(jsonParam);
+                    const res = await fetch(uri, {
+                        method  : 'post',
+                        body    : jsonParam,
+                        headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                    });
+                    return await res.json();
+
+                    } 
+
+
+        </script>
+
+
+    </body>
+
+</html>

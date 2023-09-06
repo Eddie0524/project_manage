@@ -1,0 +1,396 @@
+[
+    {
+        "type": "ee",
+        "form_type" : "評估單",
+        "index": 1,
+        "task": "Pre-Work",
+        "milestone": [
+            "Spec. Review",
+            "Design Organization",
+            "Pre-BOM Review"
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "pm開案單",
+        "index": 2,
+        "task": "Hardware Design",
+        "milestone": [           
+            "MCU Design",
+            "Schematic Design"
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+
+    },
+    {
+        "type": "ee",
+        "form_type" : "layout",
+        "index": 3,
+        "task": "Hardware Design",
+        "milestone": [           
+            "Layout"
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+
+    },
+    {
+        "type": "ee",
+        "form_type" : "pcb",
+        "index": 4,
+        "task": "PCB Production",
+        "milestone": [           
+            "PCB Fabrication",
+            "PCB Assembly"
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+
+    },
+    {
+        "type": "ee",
+        "form_type" : "pcb",
+        "index": 5,
+        "task": "PCB Verification",
+        "milestone": [ 
+            "HW Verif",
+            "Function Verfication",
+            "EMI TEST",
+            "ESD TEST",
+            "Conduction Test",
+            "Hi-POT Test",
+            "Surge  Test",
+            "Final Check List"
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "pcb",
+        "index": 6,
+        "task": "SW Design",
+        "milestone": [
+            "MP Tool",
+            "Production Verification"
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",           
+            "已完成"
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "試產單",
+        "index": 7,
+        "task": "Trial Production",
+        "milestone": [
+            "試產備料",
+            "試產執行",
+            "試產測試"
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "技轉單",
+        "index": 8,
+        "task": "技轉文件",
+        "milestone": [
+            "RBOM/新零件承認書-電子"
+           
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "內部開案單",
+        "index": 9,       
+        "task": "Hardware Design",
+        "milestone": [
+            "MCU Design",
+            "Schematic Design"   
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "me",
+        "form_type" : "評估單",
+        "index": 1,
+        "task": "產品造型規劃",
+        "milestone": [
+            "需求評估/分析",
+            "概念規劃/設計",
+            "雛型定案"
+           
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "me",
+        "form_type" : "評估單",
+        "index": 2,
+        "task": "MOCKUP",
+        "milestone": [
+            "拆件設計",
+            "PCBA 尺寸限制圖",
+            "結構設計",
+            "估價、發包、驗收"
+           
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },  
+    {
+        "type": "me",
+        "form_type" : "pm開案單",
+        "index": 3,       
+        "task": "產品造型規劃",
+        "milestone": [
+            "需求評估/分析",
+            "概念規劃/設計",
+            "雛型定案"
+           
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "me",
+        "form_type" : "pm開案單",
+        "index": 4,       
+        "task": "MOCKUP",
+        "milestone": [
+            "拆件設計",
+            "PCBA 尺寸限制圖",
+            "結構設計",
+            "估價、發包、驗收"
+           
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "me",
+        "form_type" : "pm開案單",
+        "index": 5,       
+        "task": "模具開發",
+        "milestone": [
+            "拆件設計",
+            "PCBA 尺寸限制圖",
+            "結構設計",
+            "估價、發包、驗收"
+           
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {   
+        "type": "me",
+        "form_type" : "技轉單",
+        "index": "6",        
+        "task": "技轉文件",
+        "milestone": [
+            "SOP/新零件承認書-機構"
+           
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+
+    {
+        "type": "ld",
+        "form_type" : "內部開案單",
+        "index": 1,       
+        "task": "架構規劃",
+        "milestone": [
+            "資料研讀",
+            "整體架構、測試方法、規格訂定"   
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "內部開案單",
+        "index": 2,       
+        "task": "數位電路設計",
+        "milestone": [
+            "模組設計",
+            "系統整合",
+            "時序、資源優化"
+
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "內部開案單",
+        "index": 3,       
+        "task": "Simulation",
+        "milestone": [
+            "Coverage",
+            "UVM"
+           
+
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "內部開案單",
+        "index": 3,       
+        "task": "Prototype",
+        "milestone": [
+            "Schematic Design"  
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "layout申請單",
+        "index": 4,       
+        "task": "Prototype",
+        "milestone": [
+            "Layout"  
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "pcb申請單",
+        "index": 5,       
+        "task": "Prototype",
+        "milestone": [
+            "PCB Fabrication",
+            "PCB Assembly" 
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "pcb申請單",
+        "index": 6,       
+        "task": "FPGA Test",
+        "milestone": [
+            "硬體測試",
+            "訊號完整、溫度測試" 
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "pcb申請單",
+        "index": 7,       
+        "task": "FW Release",
+        "milestone": [
+            "BIN檔、ROM檔"
+           
+        ],
+        "status": [
+            "進行中",
+            "暫停",
+            "指定結案",
+            "已完成"
+        ]
+    }
+]

@@ -1,0 +1,464 @@
+#root {
+    position:absolute;
+    margin: 0; padding: 0; border: 0;
+    width: calc(100% - 24px);  
+    height: 90%;
+    background-color: rgb(0,0,0);
+    min-width: 700px;
+}
+
+
+
+/*********************************************/
+/* 內容群組區背景 */
+#div-content-group {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    top:70px; left:300px;
+    background-color: white;/* #12b553;*/
+    width:calc(100% - 300px); height:auto;
+  }
+
+
+
+/* 功能選單欄位 */
+#div-function-bar {
+    position: fixed;
+    margin: 0px; padding: 0px;
+    top: 70px; left: 300px;
+    width:calc(100% - 300px); height:70px;
+    background-color: rgb(40, 40, 40); 
+}
+
+
+#lab-product-no {
+    position: absolute;
+    width:120px; height:40px;
+    top: 15px; left: 15px;
+    margin-top:0px; padding-top:0px;
+    font-size:24px; font-weight:bold;
+    text-align:left;
+    color:rgb(220, 220, 220);
+}
+#product {
+    position: absolute;
+    margin: 0px; padding: 0px;
+    width:350px; height:36px;
+    top: 15px; left: 130px;
+    font-size:22px;
+}
+
+/* 產品狀態 */
+#lab-product-status {
+    position: absolute;
+    width:120px; height:40px;
+    top: 15px; left: 510px;
+    margin-top:0px; padding-top:0px;
+    font-size:24px; font-weight:bold;
+    text-align:left;
+    color:rgb(220, 220, 220);
+}
+
+#circle-status-red{
+    position: absolute;
+    width:  40px; height: 40px;
+    top: 15px; left: 600px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: red;
+}
+#circle-status-orange{
+    position: absolute;
+    width:  40px; height: 40px;
+    top: 15px; left: 660px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: orange;
+}
+#circle-status-yellow{
+    position: absolute;
+    width:  40px; height: 40px;
+    top: 15px; left: 720px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: yellow;
+}
+#circle-status-green{
+    position: absolute;
+    width:  40px; height: 40px;
+    top: 15px; left: 780px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: green;
+}
+#circle-status-blue{
+    position: absolute;
+    width:  40px; height: 40px;
+    top: 15px; left: 840px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: blue;
+}
+#circle-status-Purple{
+    position: absolute;
+    width:  40px; height: 40px;
+    top: 15px; left: 900px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: purple;
+}
+
+
+
+#btn_search {
+    position: absolute;
+    margin: 0px; padding: 0px;
+    width:120px; height:40px;
+    top: 10px; right: 20px;
+    font-size:22px;
+    color: white;
+    border-radius: 6px;
+    border-color: white;
+    background-color: rgb(51, 102, 153);
+    cursor: pointer;
+}
+
+
+
+/*******************************************/
+/* 下方主要內容區 */
+#div-main-content {
+    top: 0px; left: 0px;
+    width: calc(100% - 300px); 
+    height:auto;
+    margin-left: 300px;
+    margin-top: 140px;
+    padding: 0px;
+    display:flex;
+    flex-wrap:no-wrap;
+    flex-direction:row;
+    justify-content:center;
+    /*justify-content: start;*/
+    /*justify-content: space-between;*/
+    align-content:space-evenly;
+    background-color: rgb(0, 0, 0);
+}
+
+
+
+
+/********************************/
+/* 統計圖型(圓餅圖) */
+#div-pie-chart-bg {
+    margin:10px; padding:0px;
+    border:4px;
+    border-radius:12px; border-style:solid;
+    border-color:rgb(255, 255, 255);
+    width:550px; height:750px; /*650   750*/
+    background-color: rgb(0,0,0);
+    display:flex;
+    flex-wrap:nowrap;
+    flex-direction:column;
+}
+
+/**/
+#draw-project-txt {
+    width: 500px; height: 150px; /*600 150*/
+    top: 0px; left: 0px;
+    margin-top:50px;
+    margin-left: 0px;
+    padding:0px;
+    background-color:rgb(0,0,0);
+}
+
+
+#txt-project-count {
+    width: 500px; height: 90px; /*600 90*/
+    top: 20px; left: 0px;
+    font-size: 60px; 
+    font-weight: bold;  
+    text-align: center;
+    color: #ffffff;
+}
+
+
+#lab-project-count {
+    width: 500px; height: 40px; /*600 40*/
+    top: 0px; left: 0px;
+    font-size: 26px; 
+    font-weight: bold;  
+    text-align: center;
+    color: #e6e6e6;
+}
+
+
+/* 畫圓餅圖區域*/
+#draw-pie-graphic {
+    width:500px; height:600px;  /*600 600*/
+    top:0px; left:0px;
+    margin-top:50px;
+    margin-left: 0px;
+    padding:0px;
+    background-color:rgb(0,0,0);
+}
+
+
+
+
+/*********************************/
+/* 流程圖(過程) */
+#div-flow-chart-bg {
+    margin:10px; padding:0px;
+    border:4px;
+    border-radius:12px; border-style:solid;
+    border-color:rgb(0, 0, 0);
+    width:1150px; height:750px; /* 1150 750*/
+    background-color: rgb(0,0,0);
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
+    align-items: center;
+    justify-content: flex-start; 
+}
+
+
+/**/
+#pre-work-bg {
+    width:240px; height:320px; /*250 320*/
+    margin:0px; padding:0px;
+    border:4px;
+    border-radius:12px; border-style:solid;
+    border-color:rgb(255, 255, 255);
+    background-color: rgb(51,91,116);
+}
+/**/
+#lab-pre-work {
+    width: 240px; height: 50px; /*250 50*/
+    margin: 20px auto;
+    font-size: 40px; 
+    font-weight: bold;  
+    text-align: center;
+    color: white;
+}
+
+/**/
+#item-pre-work-bg {
+    width: 230px; height: 180px; /*230 180*/
+    margin: 60px auto;
+    background-color: rgb(28, 30, 31);
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:column;
+}
+
+
+/**/
+#img-arrow-1 {
+    width: 60px; height: 80px;
+    margin:0px; padding: 10px;
+}
+
+
+
+/**/
+#hardware-design-bg {
+    width:240px; height:320px; /*250 320*/
+    margin:0px; padding:0px;
+    border:4px;
+    border-radius:12px; border-style:solid;
+    border-color:rgb(255, 255, 255);
+    background-color: rgb(51,91,116);
+}
+/**/
+#lab-hardware-design {
+    width: 240px; height: 50px; /*250 50*/
+    margin: 20px auto;
+    font-size: 40px; 
+    font-weight: bold;  
+    text-align: center;
+    color: white;
+}
+/**/
+#item-hardware-design-bg {  /*230 180*/
+    width: 230px; height: 180px;
+    margin: 60px auto;
+    background-color: rgb(28, 30, 31);
+}
+
+/**/
+#img-arrow-2 {
+    width: 60px; height: 80px; /* 100 */
+    margin:0px; padding:10px;
+}
+
+/**/
+#pcb-verification-bg {
+    width:240px; height:320px;  /*250 320*/
+    margin:0px; padding:0px;
+    border:4px;
+    border-radius:12px; border-style:solid;
+    border-color:rgb(255, 255, 255);
+    background-color: rgb(51,91,116);
+}
+/**/
+#lab-pcb-verification {
+    width: 240px; height: 50px; /*250 50*/
+    margin: 20px auto;
+    font-size: 40px; 
+    font-weight: bold;  
+    text-align: center;
+    color: white;
+}
+/**/
+#item-pcb-verification-bg {
+    width: 230px; height: 180px;  /*230 180*/
+    margin: 60px auto;
+    background-color: rgb(28, 30, 31);
+}
+
+
+/**/
+#img-arrow-3 {
+    width: 60px; height: 80px;
+    margin:0px; padding:10px;
+}
+
+
+/**/
+#mass-production-bg {
+    width:240px; height:320px;  /*250 320*/
+    margin:0px; padding:0px;
+    border:4px;
+    border-radius:12px; border-style:solid;
+    border-color:rgb(255, 255, 255);
+    background-color: rgb(51,91,116);
+}
+/**/
+#lab-mass-production {
+    width: 240; height: 50px; /*250 50*/
+    margin: 20px auto;
+    font-size: 40px; 
+    font-weight: bold;  
+    text-align: center;
+    color: white;
+}
+/**/
+#item-mass-production-bg {  /*230 180*/
+    width: 230px; height: 180px;
+    margin: 60px auto;
+    background-color: rgb(28, 30, 31);
+}
+
+
+/**/
+#img-arrow-4 {
+    width: 60px; height: 80px;
+    margin:0px; padding:10px;
+}
+
+
+/**/
+#technology-transfer-bg {
+    width:240px; height:320px; /*250 320*/
+    margin:0px; padding:0px;
+    border:4px;
+    border-radius:12px; border-style:solid;
+    border-color:rgb(255, 255, 255);
+    background-color: rgb(51,91,116);
+}
+/**/
+#lab-technology-transfer {
+    width: 250px; height: 50px; /*250 50*/
+    margin: 20px auto;
+    font-size: 40px; 
+    font-weight: bold;  
+    text-align: center;
+    color: white;
+}
+/**/
+#item-technology-transfer-bg {
+    width: 230px; height: 180px; /*230*/
+    margin: 60px auto;
+    background-color: rgb(28, 30, 31);
+}
+
+
+/**************************/
+/* 狀態顯示細部內容*/
+.cls-pre-work-item {
+    width: 230px; height: 60px; /*230 60*/
+    margin: 0px; padding: 0px;
+    background-color: rgb(28, 30, 31);
+    border: 1px solid rgb(57, 139, 179);
+    /*align-items:stretch;*/
+    display:flex;
+    flex-wrap:nowrap;
+    flex-direction:row;
+}
+
+.cls-status-red {
+    width:  34px; height: 34px;
+    margin: 10px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: red;
+}
+.cls-status-orange {
+    width:  34px; height: 34px;
+    margin: 10px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: orange;
+}
+.cls-status-yellow {
+    width:  34px; height: 34px;
+    margin: 10px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: yellow;
+}
+.cls-status-green {
+    width:  34px; height: 34px;
+    margin: 10px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: green;
+}
+.cls-status-blue {
+    width:  34px; height: 34px;
+    margin: 10px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: blue;
+}
+.cls-status-purple {
+    width:  34px; height: 34px;
+    margin: 10px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: purple;
+}
+
+.cls-item-msg {
+    width:  190px; height:40px;
+    margin-top: 10px;
+    margin-right: 5px;
+    background-color: rgb(28, 30, 31);
+}
+
+.cls-lab-item-name {
+    width:  170px; height: 20px;
+    margin-top: 0px;
+    font-size: 12px; 
+    color: white;
+}
+
+.cls-txt-item-name {
+    width:  170px; height: 20px;
+    margin-top: 0px;
+    font-size: 12px; 
+    color: white;
+}
+
+
+

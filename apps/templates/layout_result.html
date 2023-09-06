@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Layout打樣結果單</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/assets/favicon.ico') }}">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/layout_result.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/layui.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/font-awesome.min.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/file-check.css') }}" />
+
+        <script src="{{ url_for('static', filename='./layui.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/jquery-3.5.1.js') }}"></script>
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <div id="id-table-bg">
+                <div id="form-title-text"><b>Layout申請工程規格聯絡單</b></div>
+
+                <!-- 表單 -->
+                <table id="id-table-form">
+
+                    <!-- 表單標題 -->
+                    <thead id="table-head">
+
+                        <tr>
+                            
+                            <th colspan="3"  rowspan="1" id="lab-apply-person" class="cls-c3-r1">申請人</th>
+                            <th colspan="2"  rowspan="1" id="txt-apply-person" class="cls-c4-r1">{{LAYOUT_FORM_MODEL['member_cname']}}</th>
+                            <th colspan="2"  rowspan="1" id="lab-apply-dept"   class="cls-c3-r1">申請部門</th>
+                            <th colspan="4"  rowspan="1" id="txt-apply-dept"   class="cls-c4-r1">{{LAYOUT_FORM_MODEL['department']}}
+
+                            <th colspan="2"  rowspan="1" id="lab-apply-date" class="cls-c3-r1">申請日期</th>
+                            <th colspan="3"  rowspan="1" id="txt-apply-date" class="cls-c3-r1">{{LAYOUT_FORM_MODEL['apply_date']}}</th>
+                            <th colspan="2" rowspan="1" id="lab-form-no"   class="cls-c3-r1">表單編號</th>
+                            <th colspan="3" rowspan="1" id="txt-form-no"   class="cls-c5-r1">{{LAYOUT_FORM_MODEL['form_no']}}</th>
+
+                        </tr>
+
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="lab-product-no"  class="cls-c3-r1">產品型號</th>
+                            <th colspan="2"  rowspan="1" id="txt-product-no"  class="cls-c4-r1">{{LAYOUT_FORM_MODEL['product_no']}}</th>
+                            <th colspan="3" rowspan="1" id="lab-project-no"   class="cls-c3-r1">專案代號</th>
+                            <th colspan="5" rowspan="1" id="txt-project-no"   class="cls-c5-r1">{{LAYOUT_FORM_MODEL['project_no']}}</th>
+                            <th colspan="1"  rowspan="1" id="lab-form-class" class="cls-c3-r1">BU</th>
+                            <th colspan="1"  rowspan="1" id="box-form-io"    class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['bu'] == "IO" %}
+                                <input type="checkbox" id="check-form-io" name="check-form-io" value="IO" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-form-io" name="check-form-io" value="IO">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-form-io"    class="cls-c2-r1">I/O</th>
+                            <th colspan="1"  rowspan="1" id="box-form-iot"   class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['bu'] == "IOT" %}
+                                <input type="checkbox" id="check-form-iot" name="check-form-iot" value="IOT" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-form-iot" name="check-form-iot" value="IOT" >
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-form-iot"   class="cls-c2-r1">IoT</th>
+                            <th colspan="1"  rowspan="1" id="box-form-it"    class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['bu'] == "IT" %}
+                                <input type="checkbox" id="check-form-it" name="check-form-it" value="IT" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-form-it" name="check-form-it" value="IT" >
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-form-it"    class="cls-c10-r1">IT</th>
+                        </tr>
+
+                    </thead>
+
+                    <!-- 表單內容 ☐ ☑ -->
+                    <tbody id="table-body">
+                      
+
+                        <!-- 產品型號-->
+                        <tr>
+                            <th colspan="3" rowspan="1" id="lab-pcb-name"  class="cls-c3-r1">PCB NAME</th>
+                            <th colspan="4" rowspan="1" id="txt-pcb-name"  class="cls-c9-r1">{{LAYOUT_FORM_MODEL['pcb_name']}}
+                               
+                            <!-- <th colspan="1"  rowspan="1" id="lab-final"   class="cls-c1-r1">完成</th> -->
+                            <th colspan="3"  rowspan="1" id="lab-version" class="cls-c2-r1">{{LAYOUT_FORM_MODEL['version_mode']}}
+                                <!--
+                                <select id="sel-version">
+                                    <option value="大改版">大改版</option>
+                                    <option value="小改版">小改版</option>
+                                </select>
+                                -->
+                            </th>
+                            <th colspan="2"  rowspan="1" id="txt-version"     class="cls-c2-r1">{{LAYOUT_FORM_MODEL['version']}}</th>
+
+                            <th colspan="1"  rowspan="1" id="box-new-product" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['product_apply']['new_apply'] == true %}
+                                <input type="checkbox" id="check-new-product" name="check-new-product" value="NEW" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-new-product" name="check-new-product" value="NEW">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-new-product" class="cls-c3-r1">新產品申請</th>
+                            <th colspan="1"  rowspan="1" id="box-old-product" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['product_apply']['origin_modify'] == true %}
+                                <input type="checkbox" id="check-old-product" name="check-old-product" value="OLD" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-old-product" name="check-old-product" value="OLD">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-old-product" class="cls-c3-r1">舊有產品修改</th>
+                        </tr>
+
+                        <!-- 文字輸入內容 -->
+                        <tr>
+                            <th colspan="20"  rowspan="1" id="txt-memo"  class="cls-c20-r1">
+                                <textarea id="form-memo" name="txt-memo" rows="3" cols="40" required disabled>{{LAYOUT_FORM_MODEL['product_describe']}}</textarea>
+                            </th>
+                        </tr>
+
+                        <!-- 板材規格 -->
+                        <tr>
+                            <th colspan="3"  rowspan="6" id="lab-mat-spec"   class="cls-c3-r6">板材規格</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_2Layer']['checked'] == true %}
+                                <input type="checkbox" id="check-mat-2-layer" name="check-mat-2-layer" value="2 LayerFR-4" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-2-layer" name="check-mat-2-layer" value="2 LayerFR-4">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-mat-2-layer" class="cls-c3-r1">2 Layer FR-4</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-06-mm" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_2Layer']['0.6mm'] == true %}
+                                <input type="checkbox" id="check-mat-2-layer-06-mm" name="check-mat-2-layer-06-mm" value="0.6mm" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-2-layer-06-mm" name="check-mat-2-layer-06-mm" value="0.6mm">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-2-layer-06-mm" class="cls-c2-r1">0.6 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-10-mm" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_2Layer']['1.0mm'] == true %}
+                                <input type="checkbox" id="check-mat-2-layer-10-mm" name="check-mat-2-layer-10-mm" value="1.0mm" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-2-layer-10-mm" name="check-mat-2-layer-10-mm" value="1.0mm">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-2-layer-10-mm" class="cls-c2-r1">1.0 mm</th>
+
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-16-mm" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_2Layer']['1.6mm'] == true %}
+                                <input type="checkbox" id="check-mat-2-layer-16-mm" name="check-mat-2-layer-16-mm" value="1.6mm" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-2-layer-16-mm" name="check-mat-2-layer-16-mm" value="1.6mm">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-2-layer-16-mm" class="cls-c2-r1">1.6 mm</th>
+
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-1-1" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_2Layer']['1-1'] == true %}
+                                <input type="checkbox" id="check-mat-2-layer-1-1" name="check-mat-2-layer-1-1" value="1/1" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-2-layer-1-1" name="check-mat-2-layer-1-1" value="1/1">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-mat-2-layer-1-1" class="cls-c1-r1">1/1 </th>
+
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-h-h" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_2Layer']['h-h'] == true %}
+                                <input type="checkbox" id="check-mat-2-layer-h-h" name="check-mat-2-layer-h-h" value="H/H" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-2-layer-h-h" name="check-mat-2-layer-h-h" value="H/H">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-mat-2-layer-h-h" class="cls-c1-r1">H/H </th>
+                        </tr>
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-mat-spec"   class="cls-c3-r1">板材規格</th> -->
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_4Layer']['checked'] == true %}
+                                <input type="checkbox" id="check-mat-4-layer" name="check-mat-4-layer" value="4 LayerFR-4" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-4-layer" name="check-mat-4-layer" value="4 LayerFR-4">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-mat-4-layer" class="cls-c3-r1">4 Layer FR-4</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-06-mm" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_4Layer']['0.6mm'] == true %}
+                                <input type="checkbox" id="check-mat-4-layer-06-mm" name="check-mat-4-layer-06-mm" value="0.6mm" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-4-layer-06-mm" name="check-mat-4-layer-06-mm" value="0.6mm">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-4-layer" class="cls-c2-r1">0.6 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-10-mm" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_4Layer']['1.0mm'] == true %}
+                                <input type="checkbox" id="check-mat-4-layer-10-mm" name="check-mat-4-layer-10-mm" value="1.0mm" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-4-layer-10-mm" name="check-mat-4-layer-10-mm" value="1.0mm">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-4-layer-10-mm" class="cls-c2-r1">1.0 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-16-mm" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_4Layer']['1.6mm'] == true %}
+                                <input type="checkbox" id="check-mat-4-layer-16-mm" name="check-mat-4-layer-16-mm" value="1.6mm" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-4-layer-16-mm" name="check-mat-4-layer-16-mm" value="1.6mm">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-4-layer-16-mm" class="cls-c2-r1">1.6 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-1111" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_4Layer']['1-1-1-1'] == true %}
+                                <input type="checkbox" id="check-mat-4-layer-1111" name="check-mat-4-layer-1111" value="1/1/1/1" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-4-layer-1111" name="check-mat-4-layer-1111" value="1/1/1/1">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-mat-4-layer-1111" class="cls-c1-r1">1/1/1/1</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-h11h" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_4Layer']['h-1-1-h'] == true %}
+                                <input type="checkbox" id="check-mat-4-layer-h11h" name="check-mat-4-layer-h11h" value="H/1/1/H" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-4-layer-h11h" name="check-mat-4-layer-h11h" value="H/1/1/H">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-mat-4-layer-h11h" class="cls-c1-r1">H/1/1/H </th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-mat-spec"   class="cls-c3-r1">板材規格</th> -->
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_6Layer']['checked'] == true %}
+                                <input type="checkbox" id="check-mat-6-layer" name="check-mat-6-layer" value="6 LayerFR-4" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-6-layer" name="check-mat-6-layer" value="6 LayerFR-4">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-mat-6-layer" class="cls-c3-r1">6 Layer FR-4</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer-10-mm" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_6Layer']['1.0mm'] == true %}
+                                <input type="checkbox" id="check-mat-6-layer-10-mm" name="check-mat-6-layer-10-mm" value="1.0mm" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-6-layer-10-mm" name="check-mat-6-layer-10-mm" value="1.0mm">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-6-layer-10-mm" class="cls-c2-r1">1.0 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer-16-mm" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_6Layer']['1.6mm'] == true %}
+                                <input type="checkbox" id="check-mat-6-layer-16-mm" name="check-mat-6-layer-16-mm" value="1.6mm" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-6-layer-16-mm" name="check-mat-6-layer-16-mm" value="1.6mm">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-6-layer-16-mm" class="cls-c2-r1">1.6 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer-111111" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_6Layer']['1-1-1-1-1-1'] == true %}
+                                <input type="checkbox" id="check-mat-6-layer-111111" name="check-mat-6-layer-111111" value="1/1/1/1/1/1" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-6-layer-111111" name="check-mat-6-layer-111111" value="1/1/1/1/1/1">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-6-layer-111111" class="cls-c2-r1">1/1/1/1/1/1</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer-h1111h" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_6Layer']['h-1-1-1-1-h'] == true %}
+                                <input type="checkbox" id="check-mat-6-layer-h1111h" name="check-mat-6-layer-h1111h" value="H/1/1/1/1/H" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-6-layer-h1111h" name="check-mat-6-layer-h1111h" value="H/1/1/1/1/H">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-mat-6-layer-h1111h" class="cls-c3-r1">H/1/1/1/1/H </th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-mat-spec"   class="cls-c3-r1">板材規格</th> -->
+                            <th colspan="1"  rowspan="1" id="box-mat-other" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['spec_other'] == true %}
+                                <input type="checkbox" id="check-mat-other" name="check-mat-other" value="其他(特殊要求)" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-mat-other" name="check-mat-other" value="其他(特殊要求)">
+                                {% endif %}
+                            </th>
+                            <th colspan="16" rowspan="1" id="lab-mat-other" class="cls-c16-r1">其他(特殊要求)</th>
+                        </tr>
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-mat-spec"  class="cls-c3-r1">板材規格</th> -->
+                            <th colspan="3"  rowspan="1" id="lab-avert"     class="cls-c3-r1">阻抗需求: ( </th>
+                            <th colspan="2"  rowspan="1" id="txt-avert"     class="cls-c2-r1">{{LAYOUT_FORM_MODEL['impedance_require']}}
+                                <!-- <input type="text" id="input-avert" name="input-avert" value="{{LAYOUT_FORM_MODEL['impedance_require']}}"> -->
+                            </th>
+                            <th colspan="2"  rowspan="1" id="unt-avert"     class="cls-c2-r1"> ) 歐姆</th>
+
+                            <th colspan="3"  rowspan="1" id="lab-deviation" class="cls-c3-r1">誤差+/-</th>
+
+                            <th colspan="1"  rowspan="1" id="box-deviation-5" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['impedance_diff']['deviation-5'] == true %}
+                                <input type="checkbox" id="check-deviation-5" name="check-deviation-5" value="5%" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-deviation-5" name="check-deviation-5" value="5%" >
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-deviation-5" class="cls-c1-r1">5%</th>
+
+                            <th colspan="1"  rowspan="1" id="box-deviation-10" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['impedance_diff']['deviation-10'] == true %}
+                                <input type="checkbox" id="check-deviation-10" name="check-deviation-10" value="10%" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-deviation-10" name="check-deviation-10" value="10%" >
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-deviation-10" class="cls-c1-r1">10%</th>
+
+                            <th colspan="1"  rowspan="1" id="box-deviation-null" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['impedance_diff']['deviation-10'] == true %}
+                                <input type="checkbox" id="check-deviation-null" name="check-deviation-null" value="無需求" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-deviation-null" name="check-deviation-null" value="無需求">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-deviation-null" class="cls-c2-r1">無需求</th>
+                        </tr>
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-mat-spec"   class="cls-c3-r1">板材規格</th> -->
+                            <th colspan="17"  rowspan="1" id="lab-mat-memo"   class="cls-c17-r1">
+                                <textarea id="mat-memo" name="txt-mat-memo" rows="3" cols="40" required></textarea>
+                            </th>
+                        </tr>
+
+                        <!-- 產品要求 -->
+                        <tr>
+                            <th colspan="3"  rowspan="5" id="lab-product-request"  class="cls-c3-r5">產品要求</th>
+                            <th colspan="3"  rowspan="1" id="lab-request-pic"      class="cls-c3-r1">成型尺寸圖 : </th> 
+                            <th colspan="1"  rowspan="1" id="box-request-null"     class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['dimensional_drawing']['request-null'] == true %}
+                                <input type="checkbox" id="check-request-null" name="check-request-null" value="無，依A/W製作" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-request-null" name="check-request-null" value="無，依A/W製作">
+                                {% endif %}
+                            </th>
+                            <th colspan="3" rowspan="1" id="lab-request-null"  class="cls-c3-r1">無,依A/W製作</th>
+                            <th colspan="1" rowspan="1" id="box-request-file"  class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['dimensional_drawing']['request-file'] == true %}
+                                <input type="checkbox" id="check-request-file" name="check-request-file" value="附於資料檔案內" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-request-file" name="check-request-file" value="附於資料檔案內">
+                                {% endif %}
+                            </th>
+                            <th colspan="9" rowspan="1" id="lab-request-file"  class="cls-c9-r1">附於資料檔案內</th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-product-request"  class="cls-c3-r1">產品要求</th>-->
+                            <th colspan="3"  rowspan="1" id="lab-request-logo"     class="cls-c3-r1">Logo需求:</th>
+                            <th colspan="1"  rowspan="1" id="box-request-ce"       class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['logo_require']['request-ce'] == true %}
+                                <input type="checkbox" id="check-request-ce" name="check-request-ce" value="CE" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-request-ce" name="check-request-ce" value="CE">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-request-ce"       class="cls-c1-r1">CE</th>
+
+                            <th colspan="1"  rowspan="1" id="box-request-fcc"      class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['logo_require']['request-fcc'] == true %}
+                                <input type="checkbox" id="check-request-fcc" name="check-request-fcc" value="FCC" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-request-fcc" name="check-request-fcc" value="FCC">
+                                {% endif %}
+                            </th>
+                            <th colspan="1" rowspan="1" id="lab-request-fcc"       class="cls-c1-r1">FCC</th>
+
+
+                            <th colspan="1"  rowspan="1" id="box-request-weee"     class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['logo_require']['request-weee'] == true %}
+                                <input type="checkbox" id="check-request-weee" name="check-request-weee" value="WEEE" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-request-weee" name="check-request-weee" value="WEEE">
+                                {% endif %}
+                            </th>
+                            <th colspan="1" rowspan="1" id="lab-request-weee"      class="cls-c1-r1">WEEE</th>
+
+                            <th colspan="1"  rowspan="1" id="box-request-bsmi"     class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['logo_require']['request-bsmi'] == true %}
+                                <input type="checkbox" id="check-request-bsmi" name="check-request-bsmi" value="BSMI" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-request-bsmi" name="check-request-bsmi" value="BSMI">
+                                {% endif %}
+                            </th>
+                            <th colspan="1" rowspan="1" id="lab-request-bsmi"      class="cls-c1-r1">BSMI</th>
+
+                            <th colspan="1"  rowspan="1" id="box-request-vcci"     class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['logo_require']['request-vcci'] == true %}
+                                <input type="checkbox" id="check-request-vcci" name="check-request-vcci" value="VCCI" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-request-vcci" name="check-request-vcci" value="VCCI">
+                                {% endif %}
+                            </th>
+                            <th colspan="1" rowspan="1" id="lab-request-vcci"      class="cls-c1-r1">VCCI</th>
+
+                            <th colspan="1"  rowspan="1" id="box-request-machine"   class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['logo_require']['request-machine'] == true %}
+                                <input type="checkbox" id="check-request-machine" name="check-request-machine" value="機種文字及版本" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-request-machine" name="check-request-machine" value="機種文字及版本">
+                                {% endif %}
+
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-request-machine"   class="cls-c3-r1">機種文字及版本</th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-product-request"  class="cls-c3-r1">產品要求</th> -->
+                            <th colspan="1"  rowspan="1" id="box-request-other"       class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['logo_memo']['request-other'] == true %}
+                                <input type="checkbox" id="check-request-other" name="check-request-other" value="request-other" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-request-other" name="check-request-other" value="request-other">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-request-other" class="cls-c1-r1">其他:</th>
+                            <th colspan="15"  rowspan="1" id="txt-request-other" class="cls-c15-r1">
+                                <input type="text" id="input-request-other" name="input-request-other" value="">
+                            </th>
+                        </tr>
+
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-product-request"   class="cls-c3-r1">產品要求</th>-->
+
+                            <th colspan="2"  rowspan="1" id="lab-component"         class="cls-c2-r1">零件擺放:</th>
+                            <th colspan="1"  rowspan="1" id="box-component-single"  class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['component']['single'] == true %}
+                                <input type="checkbox" id="check-component-single" name="check-component-single" value="單面" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-component-single" name="check-component-single" value="單面">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-component-single"  class="cls-c1-r1">單面</th>
+
+                            <th colspan="1"  rowspan="1" id="box-component-double"  class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['component']['double'] == true %}
+                                <input type="checkbox" id="check-component-double" name="check-component-double" value="雙面" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-component-double" name="check-component-double" value="雙面">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-component-double"  class="cls-c1-r1">雙面</th>
+
+                            <th colspan="3"  rowspan="1" id="lab-word"              class="cls-c3-r1">文    字:</th>
+                            <th colspan="1"  rowspan="1" id="box-word-single"       class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['font']['word-single'] == true %}
+                                <input type="checkbox" id="check-word-single" name="check-word-single" value="單面" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-word-single" name="check-word-single" value="單面">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-word-single"       class="cls-c1-r1">單面</th>
+
+                            <th colspan="1"  rowspan="1" id="box-word-double"       class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['font']['word-double'] == true %}
+                                <input type="checkbox" id="check-word-double" name="check-word-double" value="雙面" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-word-double" name="check-word-double" value="雙面">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-word-double"       class="cls-c1-r1">雙面</th>
+                            <th colspan="4"  rowspan="1" id="empty-word"            class="cls-c4-r1"></th>
+                        </tr>
+
+                       
+                        <tr>
+                           <!-- <th colspan="3"  rowspan="1" id="lab-product-request" class="cls-c3-r1">產品要求</th> -->
+                            <th colspan="3"  rowspan="1" id="lab-golden-finger"   class="cls-c3-r1">金手指規範:</th>
+                            <th colspan="1"  rowspan="1" id="box-pci-spec"       class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['goldfinger']['pci-spec'] == true %}
+                                <input type="checkbox" id="check-pci-spec" name="check-pci-spec" value="PCI規範" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-pci-spec" name="check-pci-spec" value="PCI規範">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-pci-spec"       class="cls-c1-r1">PCI規範</th>
+
+                            <th colspan="1"  rowspan="1" id="box-pci-express" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['goldfinger']['pci-express'] == true %}
+                                <input type="checkbox" id="check-pci-express" name="check-pci-express" value="PCI-Express規範" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-pci-express" name="check-pci-express" value="PCI-Express規範">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-pci-express" class="cls-c3-r1">PCI-Express規範</th>
+
+                            <th colspan="1"  rowspan="1" id="box-same-mec" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['goldfinger']['same-mec'] == true %}
+                                <input type="checkbox" id="check-same-mec" name="check-same-mec" value="同機構" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-same-mec" name="check-same-mec" value="同機構">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-same-mec"    class="cls-c1-r1">同機構</th>
+
+                            <th colspan="1"  rowspan="1" id="box-sunix-custom" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['goldfinger']['sunix-custom'] == true %}
+                                <input type="checkbox" id="check-sunix-custom" name="check-golden-finger-custom" value="sunix自定" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-sunix-custom" name="check-golden-finger-custom" value="sunix自定">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-sunix-custom" class="cls-c2-r1">sunix自定</th>
+
+                            <th colspan="1"  rowspan="1" id="box-same-style" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['goldfinger']['same-style'] == true %}
+                                <input type="checkbox" id="check-same-style" name="check-same-style" value="同前版樣式" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-same-style" name="check-same-style" value="同前版樣式">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-same-style" class="cls-c2-r1">同前版樣式</th>
+                        </tr>
+
+                        
+
+                        <!-- 提供文檔 -->
+                        <tr>
+                            <th colspan="3"  rowspan="2" id="lab-document"       class="cls-c3-r2">提供文檔</th>
+                            <th colspan="1"  rowspan="1" id="box-document-tenet" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['file']['document-tenet'] == true %}
+                                <input type="checkbox" id="check-document-tenet" name="check-document-tenet" value="原理圖" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-document-tenet" name="check-document-tenet" value="原理圖">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-document-tenet" class="cls-c2-r1">原理圖</th>
+                            <th colspan="1"  rowspan="1" id="box-document-indicate" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['file']['document-indicate'] == true %}
+                                <input type="checkbox" id="check-document-indicate" name="check-document-indicate" value="修改注明文檔" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-document-indicate" name="check-document-indicate" value="修改注明文檔">
+                                {% endif %}
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-document-indicate" class="cls-c4-r1">修改注明文檔</th>
+                            <th colspan="1"  rowspan="1" id="box-document-spec" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['file']['document-spec'] == true %}
+                                <input type="checkbox" id="check-document-spec" name="check-document-spec" value="各 IC Spec" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-document-spec" name="check-document-spec" value="各 IC Spec">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-document-spec" class="cls-c3-r1">各 IC Spec</th>
+                            <th colspan="1"  rowspan="1" id="box-document-c" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['file']['document-c'] == true %}
+                                <input type="checkbox" id="check-document-c" name="check-document-c" value="C 件擺放圖" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-document-c" name="check-document-c" value="C 件擺放圖">
+                                {% endif %}
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-document-c" class="cls-c4-r1">C 件擺放圖</th>
+                        </tr>
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-document"       class="cls-c3-r1">提供文檔</th> -->
+                            <th colspan="1"  rowspan="1" id="box-document-drawing" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['file']['document-drawing'] == true %}
+                                <input type="checkbox" id="check-document-drawing" name="check-document-drawing" value="機構圖" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-document-drawing" name="check-document-drawing" value="機構圖">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-document-drawing" class="cls-c2-r1">機構圖</th>
+                            <th colspan="1"  rowspan="1" id="box-document-size" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['file']['document-size'] == true %}
+                                <input type="checkbox" id="check-document-size" name="check-document-size" value="各元件的封裝尺寸" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-document-size" name="check-document-size" value="各元件的封裝尺寸">
+                                {% endif %}
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-document-size" class="cls-c4-r1">各元件的封裝尺寸</th>
+                            <th colspan="1"  rowspan="1" id="box-document-rule" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['file']['document-rule'] == true %}
+                                <input type="checkbox" id="check-document-rule" name="check-document-rule" value="線規則文檔" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-document-rule" name="check-document-rule" value="線規則文檔">
+                                {% endif %}
+                            </th>
+                            <th colspan="8"  rowspan="1" id="lab-document-rule" class="cls-c8-r1">線規則文檔</th>
+                        </tr>
+
+                        <!-- Gerber需求-->
+                        <tr>
+                            <th colspan="3"  rowspan="2" id="lab-gerber-request"   class="cls-c3-r2">Gerber需求</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-1-board" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['gerber']['1-board'] == true %}
+                                <input type="checkbox" id="check-gerber-1-board" name="check-gerber-1-board" value="單板" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-gerber-1-board" name="check-gerber-1-board" value="單板">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-gerber-1-board" class="cls-c2-r1">單板</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-2-board" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['gerber']['2-board'] == true %}
+                                <input type="checkbox" id="check-gerber-2-board" name="check-gerber-2-board" value="2連板" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-gerber-2-board" name="check-gerber-2-board" value="2連板">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-gerber-2-board" class="cls-c2-r1">2連板</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-4-board" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['gerber']['4-board'] == true %}
+                                <input type="checkbox" id="check-gerber-4-board" name="check-gerber-4-board" value="4連板" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-gerber-4-board" name="check-gerber-4-board" value="4連板">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-gerber-4-board" class="cls-c2-r1">4連板</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-same" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['gerber']['same'] == true %}
+                                <input type="checkbox" id="check-gerber-same" name="check-gerber-same" value="同機構" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-gerber-same" name="check-gerber-same" value="同機構">
+                                {% endif %}
+                            </th>
+                            <th colspan="7"  rowspan="1" id="lab-gerber-same" class="cls-c7-r1">同機構</th>
+                        </tr>
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-gerber-request"    class="cls-c3-r1">Gerber需求</th> -->
+                            <th colspan="3"  rowspan="1" id="lab-workt-file-format" class="cls-c3-r1">工作檔格式:</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-pcb"        class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['work_file_format']['pcb'] == true %}
+                                <input type="checkbox" id="check-gerber-pcb" name="check-gerber-pcb" value="gerber-pcb" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-gerber-pcb" name="check-gerber-pcb" value="gerber-pcb">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-gerber-pcb"        class="cls-c1-r1">*.PCB</th>
+
+                            <th colspan="1"  rowspan="1" id="box-gerber-brd"        class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['work_file_format']['brd'] == true %}
+                                <input type="checkbox" id="check-gerber-brd" name="check-gerber-brd" value="gerber-brd" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-gerber-brd" name="check-gerber-brd" value="gerber-brd">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-gerber-brd"        class="cls-c2-r1">*.BRD</th>
+
+                            <th colspan="3"  rowspan="1" id="lab-gerber-format"     class="cls-c3-r1">Gerber格式:</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-274x" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['gerber_format']['274x'] == true %}
+                                <input type="checkbox" id="check-gerber-274x" name="check-gerber-274x" value="gerber-274x" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-gerber-274x" name="check-gerber-274x" value="gerber-274x">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-gerber-274x" class="cls-c1-r1">*.274X</th>
+
+                            <th colspan="1"  rowspan="1" id="box-gerber-274d" class="cls-c1-r1">
+                                {% if LAYOUT_FORM_MODEL['gerber_format']['274d'] == true %}
+                                <input type="checkbox" id="check-gerber-274d" name="check-gerber-274d" value="gerber-274d" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-gerber-274d" name="check-gerber-274d" value="gerber-274d">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-gerber-274d" class="cls-c3-r1">*.274D</th>
+                        </tr>
+
+                        <!-- 進度需求 -->
+                        <tr>
+                            <th colspan="3"  rowspan="2" id="lab-request-process" class="cls-c3-r2">進度需求</th>
+                            <th colspan="4"  rowspan="1" id="lab-info-date"       class="cls-c4-r1">提供完整資料的日期:</th>
+                            <th colspan="3"  rowspan="1" id="txt-info-date"       class="cls-c3-r1">{{LAYOUT_FORM_MODEL['fulldata_date']}}
+                                <!-- <input type="date" id="input-info-date" value="{{LAYOUT_FORM_MODEL['fulldata_date']}}"> -->
+                            </th>
+                            <th colspan="10"  rowspan="1" id="empty-info-date"    class="cls-c10-r1"></th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-request-process"  class="cls-c3-r1">進度需求</th>-->
+                            <th colspan="4"  rowspan="1" id="lab-gerber-date"      class="cls-c4-r1">GERBER需求的日期:</th>
+                            <th colspan="3"  rowspan="1" id="txt-gerber-date"      class="cls-c3-r1">{{LAYOUT_FORM_MODEL['gerber_date']}}
+                                <!-- <input type="date" id="input-gerber-date" value="{{LAYOUT_FORM_MODEL['gerber_date']}}"> -->
+                            </th>
+                            <th colspan="10"  rowspan="1" id="empty-gerber-date"   class="cls-c10-r1"></th>
+                        </tr>
+
+
+                        <!-- 檔案複查列表 -->
+                        <tr>
+                            <th colspan="3"   rowspan="1" id="title-attach-file" class="cls-c3-r1">檔案列表</th>
+                            <th colspan="17" rowspan="1" id="file-list" class="cls-c17-r1">
+                                <div id="myUL">
+                                </div>
+                            <th>
+                        </tr>
+
+                        <!-- 簽核欄位 -->
+                        <tr>
+
+                          
+                            <th colspan="14"  rowspan="1" id="txt-applicant" class="cls-c3-r1"></th>
+                            <th colspan="6"  rowspan="1" id="title-product" class="cls-c8-r1">
+                                <button id="btn-submit" class="layui-btn layui-btn-normal" title="送出資料">
+                                    <i class="layui-icon layui-icon-email"></i>同意
+                                </button>
+                                <button id="btn-reject" class="layui-btn layui-btn-danger" title="退回資料">
+                                    <i class="layui-icon layui-icon-email"></i>退回
+                                </button>
+                           
+                               
+                            </th>
+
+                        </tr>
+
+                        <!-- 輔助-->
+                        <tr>
+                            <td colspan="1" class="c-base" id="c-1"></td>
+                            <td colspan="1" class="c-base" id="c-2"></td>
+                            <td colspan="1" class="c-base" id="c-3"></td>
+                            <td colspan="1" class="c-base" id="c-4"></td>
+                            <td colspan="1" class="c-base" id="c-5"></td>
+                            <td colspan="1" class="c-base" id="c-6"></td>
+                            <td colspan="1" class="c-base" id="c-7"></td>
+                            <td colspan="1" class="c-base" id="c-8"></td>
+                            <td colspan="1" class="c-base" id="c-9"></td>
+                            <td colspan="1" class="c-base" id="c-10"></td>
+
+                            <td colspan="1" class="c-base" id="c-11"></td>
+                            <td colspan="1" class="c-base" id="c-12"></td>
+                            <td colspan="1" class="c-base" id="c-13"></td>
+                            <td colspan="1" class="c-base" id="c-14"></td>
+                            <td colspan="1" class="c-base" id="c-15"></td>
+                            <td colspan="1" class="c-base" id="c-16"></td>
+                            <td colspan="1" class="c-base" id="c-17"></td>
+                            <td colspan="1" class="c-base" id="c-18"></td>
+                            <td colspan="1" class="c-base" id="c-19"></td>
+                            <td colspan="1" class="c-base" id="c-20"></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <div id="footer"></div>
+
+            </div>
+
+        </div>
+
+        <!--退回填寫原因編輯畫面-->
+        <template id="taskback-template-edit">
+            <div id="edit-winodow-bg">
+                <div id="edit-window-item-1">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" id="lab-taskback"> {{USER}}，您是否確定要退回指派？ </label>
+                    </div>
+                </div>
+                <div id="edit-window-item-2">
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" id="lab-taskback-reason"> 退回原因: </label>
+                    </div>
+                    <select id="select-taskback-reason" >
+                        <option>申請單資訊修正</option>
+                    </select>
+                </div>
+                <!-- <div id="edit-window-item-3">
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" id="lab-taskback-memo"> 說明: </label>
+                        <input type="text" id="input-taskback-memo" value="" >
+                    </div>
+                </div> -->
+            </div>
+        </template>
+
+
+
+        <!-- 彈出指派任務視窗 -->
+        <template id="task-template">
+            <div id="task-window-bg">
+                <table id="task-win-table">
+                    <tbody id="task-table-body">
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-no" class="tab-c2-r1">專案案號</th>
+                            <th colspan="3" rowspan="1" id="txt-project-no" class="tab-c3-r1">
+                                {{LAYOUT_FORM_MODEL['project_no']}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-name" class="tab-c2-r1">產品名稱</th>
+                            <th colspan="3" rowspan="1" id="txt-project-name" class="tab-c3-r1">
+                                {{LAYOUT_FORM_MODEL['product_no']}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-assign" class="tab-c2-r1">指派人員</th>
+                            <th colspan="2" rowspan="1" id="txt-assign" class="tab-c2-r1">
+                                <select id="select-assign">
+                                    <option></option>
+                                </select>
+                            </th>
+                            <th colspan="1" rowspan="1" id="txt-assign" class="tab-c1-r1">
+                                <!-- <button id="btn-add" class="layui-btn" title="加入" onclick="newElement();"> -->
+                                <button id="btn-add" class="layui-btn" title="加入">
+                                    <i class="layui-icon layui-icon-addition"></i>加入
+                                </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="5" rowspan="1" id="txt-list" class="tab-c5-r1">
+                                <div id="member-ul"></div>
+                                <!--
+                                <ul id="myUL"></ul>
+                                -->
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-start" class="tab-c2-r1">預計執行開始時間</th>
+                            <th colspan="3" rowspan="1" id="txt-project-start" class="tab-c3-r1">
+                                <input type="date" id="input-project-start" value="">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-end" class="tab-c2-r1">預計執行完畢時間</th>
+                            <th colspan="3" rowspan="1" id="txt-project-end" class="tab-c3-r1">
+                                <input type="date" id="input-project-end" value="">
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+
+        <!--退回指派填寫原因編輯畫面-->
+        <template id="taskback-template-edit">
+            <div id="edit-winodow-bg">
+                <div id="edit-window-item-1">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" id="lab-taskback"> {{USER}}，您是否確定要退回指派？ </label>
+                    </div>  
+                </div>
+
+                <div id="edit-window-item-2">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" id="lab-taskback-reason"> 退回原因: </label>
+                    </div>  
+                    <select id="select-taskback-reason" >
+                        <option>申請單資訊修正</option>
+                    </select>
+                </div>
+
+                <!-- <div id="edit-window-item-3">
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" id="lab-taskback-memo"> 說明: </label>
+                        <input type="text" id="input-taskback-memo" value="">
+                    </div>  
+                </div> -->
+            </div>
+        </template>
+
+
+
+
+        <script>
+
+            console.log("{{LAYOUT_FORM_MODEL['form_no']}}")
+            //產生表單底部的簽核欄位
+            generate_table_row();
+            generate_sign_data_row();
+
+
+            //status=1 是給被指派人員查看內容 不須顯示同意及退回
+            if("{{BUTTON_STATUS}}" == '1') {
+                document.getElementById('btn-submit').style.display="none";
+                document.getElementById('btn-reject').style.display="none";
+            }
+
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+                // 警告
+                if (mode == 0) {
+                    btn1.css({ "background-color": "#ff0066", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#ffe6f0", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 詢問
+                if (mode == 1) {
+                    btn1.css({ "background-color": "#1E9FFF", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#e6f4ff", "border-color": "#555555", "font-size": "18px" });
+                }
+            }
+
+
+
+
+            layui.use(['form', 'layer', 'jquery', 'table'], function () {
+                var layer   = layui.layer;
+                var laypage = layui.laypage;
+                var table   = layui.table;
+                var $       = layui.jquery;
+                var form    = layui.form;
+            });
+
+
+            //取得員工名單
+            async function getMemberFun() {
+                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/get/member/by_organize/";
+                let objParam = { organize: "硬體設計部" };
+                //console.log(objParam);
+                let jsonParam = JSON.stringify(objParam);
+                //console.log(jsonParam);
+                const res = await fetch(uri, {
+                    method  : 'post',
+                    body    : jsonParam,
+                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                    }
+                );
+                return await res.json();
+            }
+
+            var memberMap = new Map();
+            var mailMap   = new Map();
+            var groupMap  = new Map();
+            var selectNameList = [];
+
+
+
+            // 按下同意按鈕
+            $("#btn-submit").click(function () {
+                //alert("Handler for .click() called.");
+                layer.open({
+                    type       : 1,
+                    skin       : 'layui-layer-molv', //layui-layer-rim
+                    resize     : true,
+                    shadeClose : false,
+                    shade      : [0.7, '#000'],
+                    closeBtn   : 2,
+                    offset     : 'auto',
+                    anim       : 5,
+                    area       : ['600px', '500px'],
+                    title      : ['請指派 Layout 人員', 'font-size:24px;background-color:#1E9FFF;'],
+                    btn        : ['確定', '取消'],
+                    content    : $('#task-template').html(),//'<div style="padding: 15px; font-size: 22px; font-weight: bold;">{{ USER }}，您是否同意表單申請？<br><br><div id="view-txt-msg"></div></div>',
+                    success: function (layero, index) {
+
+                        addIconforBtn(1);
+                        agree_flag = true;
+
+                        let promiseGetMember = getMemberFun();
+                        promiseGetMember.then((response) => {
+                            console.log(response);
+                            var strPersonOptions = '';
+                            strPersonOptions += '<option disabled selected value="">請選擇一個人員</option>';
+                            for (var i = 0; i < response['data']['msg'].length; i++) {
+
+                                memberMap.set(response['data']['msg'][i]['mail'],  response['data']['msg'][i]['cname'] );
+                                mailMap.set(  response['data']['msg'][i]['cname'], response['data']['msg'][i]['mail'] );
+                                groupMap.set( response['data']['msg'][i]['cname'], response['data']['msg'][i]['group'] );
+
+                                strPersonOptions += '<option value="' + response['data']['msg'][i]['mail'] + '">' + response['data']['msg'][i]['cname'] + '</option>';
+                            }
+                            document.getElementById("select-assign").innerHTML = strPersonOptions;
+                        });
+                        console.log(selectNameList);
+
+                        // 按下增加人員按鈕
+                        document.querySelector("#btn-add").addEventListener('click', function(ev) {
+                            var sel_member_name = $("#select-assign").val();
+                            //alert(sel_member_name);
+                            console.log(sel_member_name);
+                            console.log(memberMap.get(sel_member_name));
+
+                            if (selectNameList.includes(memberMap.get(sel_member_name))) {
+                                console.log('目標字串在原始字串中');
+                                layer.msg('該名人員重複了');
+                            } else {
+                                newMemberElement(memberMap.get(sel_member_name));
+                            }
+                        });
+
+                    },
+                    yes: function (index, layero) {
+
+
+                       
+
+                        /////////////////// 取得執行開始及結束時間
+                        var select_startDate = document.getElementById('input-project-start').value;
+                        var select_enddate   = document.getElementById('input-project-end').value;
+                        //console.log(select_startDate)
+                        if(select_startDate.length == 0) {
+                            layer.msg('請選擇預計執行開始時間!');
+                            layer.close();
+                            return;
+                        }
+                        if(select_enddate.length == 0) {
+                            layer.msg('請選擇預計執行結束時間!');
+                            layer.close();
+                            return;
+                        }
+
+                        /////////////////// 取得指派人員數量資訊
+                        var selectPersonList = document.getElementById('member-ul');
+                        //var selectListItems  = selectPersonList.getElementsByTagName('li');
+                        var selectListItems = document.getElementsByClassName('list-member-item');
+                        console.log(selectListItems);
+
+                        var memberList = [];
+                        console.log(selectListItems.length);
+
+                        if( selectListItems.length <1) {
+                            layer.msg('無法送出訊息,請選擇一個人員加入名單!');
+                            layer.close();
+                        }
+
+
+                        for (var i = 0; i < selectListItems.length; i++) {
+                            var itemValue  = (selectListItems[i].innerText);
+                            var strCName = itemValue.substring(0,3);
+                            console.log('----------------------');
+                            console.log(strCName);
+                            console.log(mailMap.get(strCName));
+                            var memberObj = new Object(); 
+                            memberObj['cName']               = strCName;
+                            memberObj['mail']                = mailMap.get(strCName);
+                            memberObj['group']               = groupMap.get(strCName);
+                            memberObj['callback']            = false;
+                            memberObj['task']                = "Hardware Design";
+                            memberObj['mile_stone']          = "Layout";
+                            memberObj['status']              = "待辦中";
+                            memberObj['actual_date']         = "";
+                            memberObj['reason']              = "";
+                            memberObj['memo']                = "";
+                            memberObj['form_type']           = "layout申請單";
+                            memberObj['expected_start_date'] = $("#input-project-start").val();
+                            memberObj['expected_end_date']   = $("#input-project-end").val();
+                            memberObj['form_no']             = "{{LAYOUT_FORM_MODEL['form_no']}}";
+                            
+                            memberList.push(memberObj);
+                        }
+                        console.log(memberList);
+
+                        // 發給多人
+                        promiseList = [];
+                        for( var m = 0; m < memberList.length; m++ ) {
+                            async function send_assign_mail() {
+                                let url = "http://{{ DOMAIN_PATH }}/api/v0/send/new_project_task/layout/";
+                                let objParam = {
+                                    "project_no"    : "{{LAYOUT_FORM_MODEL['project_no']}}",
+                                    "form_no"       : "{{LAYOUT_FORM_MODEL['form_no']}}",
+                                    "product_no"    : "{{LAYOUT_FORM_MODEL['product_no']}}",
+                                    "sender"        : "{{ ACCOUNT }}",
+                                    "receiver"      : memberList[m]['mail'],
+                                    "project_start" : $("#input-project-start").val(),
+                                    "project_end"   : $("#input-project-end").val()
+                                };
+                                let jsonParam = JSON.stringify(objParam);
+                                const res = await fetch(url, {
+                                    method  : 'POST',
+                                    body    : jsonParam,
+                                    headers : { 'Content-Type': 'application/json charset = utf-8' }
+                                });
+                                return await res.json();
+                            }
+                            var promise_send_assign_mail = send_assign_mail();
+                            promiseList.push(promise_send_assign_mail);
+                        }
+
+                        let p1 = post_layout_result(true);
+                        //let p2 = send_layout_result_mail();
+                        console.log(memberList)
+                        let p3 = update_new_project_task_memberlist(memberList);
+                        let p4 = insert_form_flow(true);
+
+                        Promise.all([p1,p3,p4,promiseList]).then((response)=>{
+                            layer.msg('表單回覆完成');
+                            layer.close(index);
+                            page_to_project_list();
+                        });
+
+                    }
+                });
+            
+            }); //btn-submit
+
+            // 按下退回按鈕
+            $("#btn-reject").click(function () {
+                //alert("Handler for .click() called.");
+                layer.open({
+                    type       : 1,
+                    skin       : 'layui-layer-molv', //layui-layer-rim
+                    resize     : true,
+                    shadeClose : false,
+                    shade      : [0.7, '#000'],
+                    closeBtn   : 2,
+                    offset     : 'auto',
+                    anim       : 5,
+                    area       : ['600px', '400px'],
+                    title      : ['詢問', 'font-size:24px;background-color:#ff0066;'],
+                    btn        : ['確定', '取消'],
+                    content    : $('#taskback-template-edit').html(),
+                    success: function (layero, index) {
+                        addIconforBtn(1);
+                    },
+                    yes: function (index, layero) {
+
+                        let p1 = post_layout_result(false);
+                        let p2 = insert_form_flow(false);
+                        let p3 = send_layout_result_mail();
+
+                        Promise.all([p1,p2,p3]).then((response)=>{
+                            layer.msg('表單回覆完成');
+                            page_to_form_list();
+                        });
+                       
+                    }
+                });
+            
+            }); //btn-reject
+
+
+            //寫入new_project_task
+            async function update_new_project_task_memberlist(memberList) {
+
+                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_project_task/update_memberlist/"
+                let objParam = {
+                    "project_no": "{{LAYOUT_FORM_MODEL['project_no']}}",
+                    "member_list": memberList,
+                };
+                let jsonParam = JSON.stringify(objParam);
+                console.log(jsonParam);
+                const res = await fetch(uri, {
+                    method  : 'post',
+                    body    : jsonParam,
+                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            } 
+
+
+            //寫入layout result
+            async function post_layout_result(agree_flag) {
+                let url = "http://{{DOMAIN_PATH}}/api/v0/db/layout_result/";
+                let param = {
+                    "project_no"      : $('#txt-project-no').text().trimEnd(),
+                    "form_no"         : $('#txt-form-no').text().trimEnd(),
+                    "product_no"      : $('#txt-product-no').text().trimEnd(),
+                    "pcb_name"        : $('#txt-pcb-name').text().trimEnd(),
+                    "hw_approve_flag" : agree_flag,       
+                    "hw_back_reason"  : agree_flag ? "":$("#select-taskback-reason").val() ,
+                    "hw_back_memo"    : agree_flag ? "":"",
+                    "apply_date"      : $('#txt-apply-date').text(),
+                    "member_cname"    : "{{USER_CNAME}}"
+                }
+                let jsonParam = JSON.stringify(param);
+                const res = await fetch(url,{
+                    method  : 'post',
+                    body    : jsonParam,
+                    headers : {'Content-Type':'application/json; charset=utf-8'}
+                });
+                return await res.json();
+
+            }
+
+            //發送layout退回mail
+            async function send_layout_result_mail(agree_flag) {
+
+                let url = "http://{{DOMAIN_PATH}}/api/v0/send/layout_result/reject/";
+                let objParam = {
+                    "project_no"    : "{{LAYOUT_FORM_MODEL['project_no']}}",
+                    "product_no"    : "{{LAYOUT_FORM_MODEL['product_no']}}",
+                    "form_no"       : "{{LAYOUT_FORM_MODEL['form_no']}}",
+                    "reason"        : $("#select-taskback-reason").val(),
+                    "sender"        : "{{ ACCOUNT }}",
+                    "receiver"      : "{{RECEIVER}}",
+                    "cc"            : "{{RECEIVER}}",
+                } 
+                let jsonParam = JSON.stringify(objParam);
+                const res = await fetch(url,{
+                    method  : 'post',
+                    body    : jsonParam,
+                    headers : {'Content-Type':'application/json; charset=utf-8'}
+                });
+                return await res.json();
+            }
+
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            //切畫面至form_list
+            async function page_to_form_list() {
+                await sleep(2000);
+                location.replace('http://{{ DOMAIN_PATH }}/page/v0/form_list/');
+                //window.location.href = 'http://{{ DOMAIN_PATH }}/page/v0/new_technology_review/';
+            };
+
+
+            function newMemberElement(strMemberCName) {
+                var li = document.createElement("div");
+                li.className = "list-member-item";
+                li.id = strMemberCName;
+                if(strMemberCName != null) {
+                    // 文字
+                    var divobj = document.createElement("div");
+                    divobj.className = "text-member";
+                    var t = document.createTextNode(strMemberCName);
+                    //t.id = strMemberCName;
+                    divobj.appendChild(t);
+                    li.appendChild(divobj);
+                    // 刪除按鈕
+                    var btn3 = document.createElement("button");
+                    btn3.className = "cls-delete-btn-member";
+                    
+                    var bt3 = document.createTextNode("刪除");
+                    btn3.appendChild(bt3);
+                    li.appendChild(btn3);
+                    btn3.onclick = function() {
+                        var div = this.parentElement;
+                        div.remove();
+                        //console.log(this.parentElement.id);
+                        var itemToRemove = this.parentElement.id;
+                        var index = selectNameList.indexOf(itemToRemove);
+                        if (index !== -1) {
+                            selectNameList.splice(index, 1);
+                        }
+                    }
+                    document.getElementById("member-ul").appendChild(li);
+                    selectNameList.push(strMemberCName);
+                }
+
+            }
+
+
+            /*
+            var list = document.querySelector('ul');
+            var selectNameList = [];
+            function newElement() {
+                var li = document.createElement("li");
+                //var inputValue = document.getElementById("myInput").value;
+                //var t = document.createTextNode(inputValue);
+                var inputValue = $("#select-assign").val();
+                //alert(inputValue);
+                if ( inputValue != null) {
+                    var t = document.createTextNode( memberMap.get(inputValue));
+                    //比對字串是否重複
+                    //var originalString = $("#select-assign").text();
+                    //var targetString = t;
+                    //console.log(selectNameList);
+                    if (selectNameList.includes(memberMap.get(inputValue))) {
+                        console.log('目標字串在原始字串中');
+                        layer.msg('該名人員重複了');
+                    } else {
+                        console.log('目標字串不在原始字串中');
+                        li.appendChild(t);
+                        document.getElementById("myUL").appendChild(li);
+                        //document.getElementById("select-assign").value = "";
+                        var span = document.createElement("SPAN");
+                        var txt  = document.createTextNode("\u00D7");
+                        span.className = "close";
+                        span.appendChild(txt);
+                        li.appendChild(span);
+                        for (i = 0; i < close.length; i++) {
+                            close[i].onclick = function() {
+                                var div = this.parentElement;
+                                //div.style.display = "none";
+                                div.remove();
+                                if (document.getElementById('myUL').getElementsByTagName('li').length < 1) {
+                                    var selectElement = document.getElementById('select-assign');
+                                    selectElement.selectedIndex = 0; // 將索引設定為預設選項的索引
+                                    selectNameList = [];
+                                }
+                            }
+                        }
+                        selectNameList.push(memberMap.get(inputValue));
+                    }
+                }
+            }
+            */
+
+
+            async function insert_form_flow(status) {                       
+
+                       let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/form_flow/"
+                       let objParam = {
+                           "form_no"           : $("#txt-form-no").text(),
+                           "project_no"        : $("#txt-project-no").text().trimEnd(),
+                           "type"              : "layout",
+                           "fs_code"           : "fslayg102",
+                           "action"            : "簽核",
+                           "status"            : status?"核准":"退回",
+                            "memo"              : status ?  "" :  $("#select-taskback-reason").val(),
+                           "user"              : "{{ USER_CNAME }}"
+                       };
+
+                       
+                let jsonParam = JSON.stringify(objParam);
+                      
+                const res = await fetch(uri, {
+                    method  : 'post',
+                    body    : jsonParam,
+                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+
+
+            //簽核流程title
+            function generate_table_row() {
+                        
+                        var table_body = document.getElementById('table-body');
+
+                        var table_row = document.createElement('tr');
+
+                        // 表頭的內容（表頭列名）
+                        var headers = [
+                            {name :'簽核人員', colSpan : 6},
+                            {name :'簽核時間', colSpan : 6},
+                            {name :'簽核意見', colSpan : 8} 
+                        ];
+                    
+
+                        // 動態生成表頭（th）元素並加入到表頭行
+                        for (var i = 0; i < headers.length; i++) {
+                            var th = document.createElement('th');
+                            th.textContent = headers[i].name;
+                            th.setAttribute('colspan', headers[i].colSpan) ;
+                            th.className = "cls-c6-r1-h1";  
+                            table_row.appendChild(th);                
+                        }
+                        table_body.appendChild(table_row);
+
+
+            } //generate_table_row
+
+            //簽核流程資料
+            function generate_sign_data_row() {
+                        
+                var table_body = document.getElementById('table-body');
+                        
+                Promise.all([get_form_flow()]).then((response)=> {
+                    console.log(response)
+                    if(response[0]['result'] == 'ok') {
+
+                        for(let i = 0 ; i<response[0]['data'].length ; i++) {
+                            var tr = document.createElement('tr');
+                            var th = document.createElement('th');
+                                    
+                            context = [
+                                {'key': response[0]['data'][i]['user'] , colSpan : 6},
+                                {'key': response[0]['data'][i]['inserted_at'], colSpan : 6},
+                                {'key': response[0]['data'][i]['status'] + " : " + response[0]['data'][i]['memo'], colSpan : 8}
+                            ]
+
+                            // 動態生成表頭（th）元素並加入到表頭行
+                            for (var j = 0; j < context.length; j++) {
+                                var th = document.createElement('th');
+                                th.textContent = context[j].key;
+                                th.setAttribute('colspan', context[j].colSpan) ;
+                                th.className = "cls-c6-r1-h2";  
+                                tr.appendChild(th);                
+                            }
+                            table_body.appendChild(tr);
+                        }
+                    }
+                });
+            } //generate_sign_data_row
+
+            async function get_form_flow() {
+                                
+                let url = "http://{{ DOMAIN_PATH }}/api/v0/db/form_flow/?form_no=" + "{{LAYOUT_FORM_MODEL['form_no']}}";
+                console.log(url)        
+                const res = await fetch(url, {
+                    method  : 'get',
+                    headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }  //get_form_flow
+
+
+             //顯示已上傳的檔案
+             function testElement(strFileName) {
+
+                        var li = document.createElement("div");
+                        li.className = "list-file-item";
+                        li.id = strFileName;
+                        if(strFileName != null) {
+                            // 文字
+                            var divobj = document.createElement("a");
+                            divobj.className = "text-filename";
+                            strsplit = strFileName.split('/')                                            
+                            //console.log(strsplit[strsplit.length-1])  
+                            var t = document.createTextNode(strsplit[strsplit.length-1]);                                            
+                            divobj.href = strFileName;
+                            divobj.target = "_blank";                                            
+                            
+                            divobj.appendChild(t);
+                            li.appendChild(divobj);
+                            document.getElementById("myUL").appendChild(li);
+                            selectNameList.push(strFileName);
+                        }
+
+            }//testElement
+
+
+                get_upload_file().then((response)=>
+                {
+
+                       
+                        var file_list = response['data'];
+
+                        if(file_list.length != 0)
+                        {
+                            console.log(file_list.length )
+                            for(let i = 0 ; i<file_list.length; i++)
+                            {
+                                testElement(file_list[i]);
+                            }
+                        }
+                });
+
+
+
+                //取得專案已上傳的檔案
+                async function get_upload_file() {
+
+                        let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/find/upload_file/?project_no=" + "{{LAYOUT_FORM_MODEL['project_no']}}";                      
+                        const res = await fetch(uri, {
+                        method: 'get',                       
+                        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        });
+                        return await res.json();
+
+                } //get_upload_file
+
+
+        </script>
+
+    </body>
+
+</html>

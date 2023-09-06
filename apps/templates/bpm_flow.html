@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+       
+        {% include 'common/header.html' %}
+        <title>流程編輯引擎</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/bpm_flow.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+        <script src="{{ url_for('static', filename='/js/dom-to-image.js') }}"></script>
+
+    </head>
+
+
+    <body>
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+
+        <!--
+        <button id="btn-save">save</button>
+        <div id="canvas"></div>
+        
+        <script src="{{ url_for('static', filename='/js/bpm_flow.js') }}"></script>
+        -->
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+
+            {% include './bpm_flow_ui.html' %}
+
+        </div>
+
+
+    </body>
+
+</html>

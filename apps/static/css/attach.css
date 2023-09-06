@@ -1,0 +1,357 @@
+#root {
+    position:absolute;
+    margin: 0; padding: 0; border: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FAFAFA
+}
+
+
+/*******************************************/
+/* 內容群組區背景 */
+#div-content-group {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    top:70px; left:300px;
+    background-color: white;/* #12b553;*/
+    width:calc(100% - 300px); height:auto;
+}
+
+#function-bar {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    background-color: rgb(95, 160, 190);
+    width:100%; height:50px;
+}
+
+#id-table-bg {
+    width:800px; height: auto;
+    margin: 0px auto;
+    background-color: rgb(255, 255, 255);
+}
+
+#form-title-text {
+    /*position: absolute;*/
+    width:800px; height: 50px;
+    /*top: 50px; left: 0px;*/
+    margin: 70px auto; padding: 0px; border: 0px;
+    font-size: 24px; 
+    font-weight: bold;  
+    text-align: center;
+    color: #000000;
+}
+
+
+/**********************************/
+/* 資料編輯內容區 */
+#table-data-info {
+    position: absolute;
+    margin: 100px auto; padding: 0px; border: 0px;
+    top: 0px; left:0px;
+    background-color: #FAFAFA;
+    width:100%; height: auto;
+}
+
+.layui-none {
+    visibility: hidden;
+}
+
+.layui-laypage-btn {
+    color: #FAFAFA;
+}
+
+.layui-none {
+    visibility: hidden;
+}
+
+.layui-laypage .layui-laypage-btn {
+    color: #FAFAFA;
+    background-color: rgb(95, 160, 190) !important; 
+}
+
+
+
+/* 分页组件页数按钮的默认颜色 */
+.layui-laypage a {
+    color: #666; /* 设置默认按钮文字颜色 */
+    background-color: #f2f2f2; /* 设置默认按钮背景颜色 */
+  }
+  
+  /* 分页组件页数按钮的激活状态（当前页）的颜色 */
+.layui-laypage .layui-laypage-em {
+    background-color: rgb(95, 160, 190) !important; /* 设置激活状态按钮背景颜色 */
+    color: #fff; /* 设置激活状态按钮文字颜色 */
+}
+
+
+/*******************************************/
+/* 彈出新增視窗 */
+#add-window-bg {
+    margin:15px auto; 
+    left:15px; 
+    width:580px; height:auto; 
+    /*background-color:#381111;*/
+}
+
+/* 彈出新增視窗-表格 */
+#add-win-table {
+    margin:10px auto; padding:0px;
+    width:500px; height:auto;
+    border: 1px;
+}
+
+
+#add-lab-attach-code {
+    width:200px; height:30px;
+    text-align:center;
+}
+#add-input-attach-code {
+    width:300px; height:50px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+}
+
+#add-lab-attach-cname {
+    width:200px; height:30px;
+    text-align:center;
+}
+#add-input-attach-cname {
+    width:300px; height:50px;
+    text-align:left;
+    padding-left: 5px;
+    border: 0px;
+}
+
+#add-lab-attach-ename {
+    width:200px; height:30px;
+    text-align:center;
+}
+#add-input-attach-ename {
+    width:300px; height:50px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+}
+
+
+#add-lab-attach-link {
+    width:200px; height:30px;
+    text-align:center;
+}
+#add-input-attach-link {
+    width:300px; height:50px;
+    min-width:300px;
+    max-width:300px;
+    min-height:50px;
+    max-height:90px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+
+#add-lab-attach-file {
+    width:200px; height:30px;
+    text-align:center;
+}
+#add-input-attach-file {
+    width:300px; height:50px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+}
+
+
+#add-lab-enable {
+    width:200px; height:30px;
+    text-align:center;
+}
+#add-sel-enable {
+    width:88px; height:50px;
+    text-align:left;
+    padding-left: 10px;
+    border: 0px;
+}
+
+
+#add-lab-memo {
+    width:200px; height:30px;
+    text-align:center;
+}
+#add-input-memo {
+    width:300px; height:50px;
+    min-width:300px;
+    max-width:300px;
+    min-height:50px;
+    max-height:90px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+
+
+/*******************************************/
+/* 彈出新增視窗 */
+#edit-window-bg {
+    margin:15px auto; 
+    left:15px; 
+    width:580px; height:auto; 
+    /*background-color:#381111;*/
+}
+
+/* 彈出新增視窗-表格 */
+#edit-win-table {
+    margin:10px auto; padding:0px;
+    width:500px; height:auto;
+    border: 1px;
+}
+
+
+#edit-lab-attach-code {
+    width:200px; height:30px;
+    text-align:center;
+}
+#edit-input-attach-code {
+    width:300px; height:50px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+}
+
+#edit-lab-attach-cname {
+    width:200px; height:30px;
+    text-align:center;
+}
+#edit-input-attach-cname {
+    width:300px; height:50px;
+    text-align:left;
+    padding-left: 5px;
+    border: 0px;
+}
+
+#edit-lab-attach-ename {
+    width:200px; height:30px;
+    text-align:center;
+}
+#edit-input-attach-ename {
+    width:300px; height:50px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+}
+
+
+
+#edit-lab-attach-link {
+    width:200px; height:30px;
+    text-align:center;
+}
+#edit-input-attach-link {
+    width:300px; height:50px;
+    min-width:300px;
+    max-width:300px;
+    min-height:50px;
+    max-height:90px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+
+#edit-lab-attach-file {
+    width:200px; height:30px;
+    text-align:center;
+}
+#edit-input-attach-file {
+    width:300px; height:50px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+}
+
+
+
+
+#edit-lab-enable {
+    width:200px; height:30px;
+    text-align:center;
+}
+#edit-sel-enable {
+    width:88px; height:50px;
+    text-align:left;
+    padding-left: 10px;
+    border: 0px;
+}
+
+
+#edit-lab-memo {
+    width:200px; height:30px;
+    text-align:center;
+}
+#edit-input-memo {
+    width:300px; height:50px;
+    min-width:300px;
+    max-width:300px;
+    min-height:50px;
+    max-height:90px;
+    text-align:left;
+    border: 0px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+
+
+/******************************/
+/* 基本欄位 */
+/*
+.c-base {
+    width:100px; height:0px;
+    background-color: rgb(255, 255, 255);
+    border: 0px solid rgb(255, 255, 255);
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+*/
+
+.cls-c1-r1 {
+    width:100px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c1-r1-w2 {
+    width:150px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c2-r1 {
+    width:200px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c3-r1 {
+    width:300px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}

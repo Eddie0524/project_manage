@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        {% include 'common/header.html' %}
+        <title>各單據申請列表</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/form_list.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <!-- 資料編輯內容區 -->
+            <div id="table-data-info">
+                <div id="form-title-text">
+                    <b>各單據申請列表</b>
+                </div>
+                <!-- 資料表格 -->
+                <table class="layui-hide" id="demo" lay-filter="test"></table>
+            </div>
+
+        <div>
+
+        <!-- 彈出檢視視窗 -->
+        <template id="form-template-view">
+            <!-- 檢視視窗 -->
+            <div id="view-window-bg">
+
+                <div id="flow-content">
+                    <ul id="ul-flow-step" class="layui-timeline">
+                    </ul>
+                </div>
+
+            </div>
+        </template>
+
+        <!-- 自定義模板 -->
+        <script type="text/html" id="barDemo">
+            <a id="btn-step" class="layui-btn layui-btn-xs" lay-event="step" style="width:80px; height:26px; margin-bottom:5px; background-color:#1E9FFF;">簽核歷程</a>
+            <a id="btn-view" class="layui-btn layui-btn-xs" lay-event="view" style="width:80px; height:26px; margin-bottom:5px; background-color:#77b300;">檢視表單</a>
+        </script>
+
+
+        <script>
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+
+                // 警告
+                if (mode == 0) {
+                    btn1.css({ "background-color": "#ff0066", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#ffe6f0", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 檢視
+                if (mode == 3) {
+                    btn1.css({ "background-color": "#009688", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#e6fffc", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 回報
+                if (mode == 4) {
+                    btn1.css({ "background-color": "#FFB800", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#fff8e6", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 離開
+                if(mode == 2) {
+                    btn1.css({"background-color":"#1E9FFF", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#e6f4ff", "border-color": "#555555", "font-size":"18px"});
+                }
+                //未上傳檔案
+                if (mode == 5) {
+                    btn1.css({ "display" : "none" });
+                    btn2.css({ "background-color": "#fff8e6", "border-color": "#555555", "font-size": "18px" });
+                }
+                if (mode == 6) {
+                    btn1.css({  "border-color": "#555555", "font-size": "18px"});
+                    btn2.css({ "background-color": "#fff8e6", "border-color": "#555555", "font-size": "18px" });
+                }
+            }
+
+
+            // 取流程站點
+            async function get_work_flow_step(cls_pam) {
+                let url = "http://{{ DOMAIN_PATH }}/api/v0/db/data/get/flow_step/?class=" + cls_pam;
+                console.log(url);
+                const res = await fetch(url, {
+                    method: 'GET',
+                   headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+
+
+            // 取流程紀錄(依據表單號)
+            async function get_flow_step_log_by_form_no(no_pam) {
+                let url = "http://{{ DOMAIN_PATH }}/api/v0/db/data/form_flow_step/log/all//?form_no=" + no_pam;
+                console.log(url);
+                const res = await fetch(url, {
+                    method: 'GET',
+                   headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+
+
+            // 判斷目前表單最後顯示格
+            async function get_form_current_index(no_pam) {
+                let url = "http://{{ DOMAIN_PATH }}/api/v0/db/data/form_flow_step/log/last/index/?form_no=" + no_pam;
+                console.log(url);
+                const res = await fetch(url, {
+                    method: 'GET',
+                   headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+
+
+            // 畫歷程圖
+            function draw_work_flow_step(mode, obj) {
+                var promise_flow = get_work_flow_step(mode);
+                promise_flow.then( function(response) {
+                    //console.log(response);
+                    var map_log_obj = new Map();
+                    var flow_step_list = response['data'];
+                    flow_step_list.sort(function(a, b) {
+                        var keyA = new Date(a.index)
+                        var keyB = new Date(b.index);
+                        if (keyA < keyB) return -1;
+                        if (keyA > keyB) return 1;
+                        return 0;
+                    });
+                    //console.log('--------預設排序--------');
+                    //console.log(flow_step_list);
+                    var promise_index = get_form_current_index(obj.data.form_no);
+                    promise_index.then( function(resIndex) {
+                        console.log('--------resIndex--------');
+                        console.log(resIndex);
+                        var line_height = (170*(resIndex['current_index']-1));
+                        //console.log(line_height);
+                        // 取狀態紀錄
+                        var promise_flow_log = get_flow_step_log_by_form_no(obj.data.form_no);
+                        promise_flow_log.then( function(reslog) {
+                            var code_list = [];
+                            for(var j=0; j<reslog.length; j++) {
+                                code_list.push(reslog[j].fs_code);
+                                map_log_obj.set(reslog[j].fs_code, reslog[j]);
+                            }
+                            //console.log(code_list);
+                            var tmp_line     = '<div class="line-icon" style="width:6px;height:'+line_height+'px;position:absolute;left:18px;top:16px;background-color:#990000;""></div>';
+                            var strFlowHtml = '';
+                            for(var i=0; i<flow_step_list.length; i++) {
+                                const targetElement = flow_step_list[i]['code'];
+                                var tmp_datetime = "--";
+                                var tmp_status   = "--";
+                                var tmp_member   = "--";
+                                var tmp_link_btn = "";
+                                var tmp_icon     = '<i id="icon-' + (i+1) + '" class="layui-icon layui-timeline-axis" style="display: inline-block;width: 20px;height: 20px;background-color:#999999;border-radius: 50%;text-align: center;line-height: 20px;color: #999999;">&#xe63f;</i>';
+                                if (code_list.includes(targetElement)) {
+                                    console.log("陣列包含目標元素。");
+                                    var tmpobj = map_log_obj.get(targetElement);
+                                    tmp_datetime = tmpobj.inserted_at;
+                                    tmp_status   = tmpobj.status;
+                                    tmp_member   = tmpobj.user;
+                                    tmp_icon     = '<i id="icon-' + (i+1) + '" class="layui-icon layui-timeline-axis line-div" style="display: inline-block;width: 20px;height: 20px;background-color:#990000;border-radius: 50%;text-align: center;line-height: 20px;color: #990000;">&#xe63f;</i>';
+                                } else {
+                                    console.log("陣列不包含目標元素。");
+                                    if ((i+1) == resIndex['current_index']) {
+                                        tmp_icon     = '<i id="icon-' + (i+1) + '" class="layui-icon layui-timeline-axis" style="display: inline-block;width: 20px;height: 20px;background-color:#990000;border-radius: 50%;text-align: center;line-height: 20px;color: #990000;">&#xe63f;</i>';
+                                        tmp_link_btn = '<a href="'+ resIndex['link'] +'">連結</a>';
+                                    }
+                                }
+                                strFlowHtml += '<li class="layui-timeline-item">';
+                                strFlowHtml += tmp_icon;
+                                strFlowHtml += '<div class="layui-timeline-content layui-text">';
+                                strFlowHtml += '<h3 class="layui-timeline-title">' + flow_step_list[i]['cname'] + tmp_link_btn + '</h3><p><ul>';
+                                strFlowHtml += '<li>日期時間:' + tmp_datetime + '</li>';
+                                strFlowHtml += '<li>簽核狀態:' + tmp_status + '</li>';
+                                strFlowHtml += '<li>簽核人員:' + tmp_member + '</li>';
+                                strFlowHtml += '</ul></p></div></li>';
+                            }
+                            //console.log(strFlowHtml);
+                            strFlowHtml += tmp_line;
+                            document.getElementById("ul-flow-step").innerHTML = strFlowHtml;
+                        });
+                    });
+                });
+            }
+
+
+
+            layui.use(['form', 'layer', 'jquery', 'table'], function () {
+                var layer    = layui.layer;
+                var laypage  = layui.laypage;
+                var table    = layui.table;
+                var $        = layui.jquery;
+                var form     = layui.form;
+                var data_url = '';
+                //console.log( '{{ IS_LEADER }}' );
+                // 三種角色(PM/RD主管/RD人員)
+                // PM-僅看到自己提出之評估單與新開案單
+                // RD主管/Jolin/Purin/Micky可看所有(點擊)->指派   ->簽核
+                // RD人員僅看到自己提出之表單
+                if ( ('{{ IS_LEADER }}').toLowerCase() === "true" ) {
+                    //data_url = 'http://{{ DOMAIN_PATH }}/api/v0/db/data/form_list/all/?organize=硬體設計部'
+                    data_url = 'http://{{ DOMAIN_PATH }}/api/v0/db/data/form_list/by/leader/?user={{ USER_CNAME }}'
+                }else {
+                    data_url = 'http://{{ DOMAIN_PATH }}/api/v0/db/data/form_list/all/?user={{ USER_CNAME }}'
+                }
+                //console.log(data_url);
+
+                $.ajax({
+                    url: data_url,
+                    type: "GET",
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        //取檔案成功!
+                        console.log("取檔案成功");
+                        console.log(response);
+
+                        response.sort(function(a, b) {
+                            var keyA = new Date(a.inserted_at),
+                                keyB = new Date(b.inserted_at);
+                            // Compare the 2 dates
+                            if (keyA < keyB) return -1;
+                            if (keyA > keyB) return 1;
+                            return 0;
+                        });
+                        response.reverse();
+                        console.log(response);
+
+
+                        var tableIns = table.render({
+                            elem: '#demo',
+                            height: 600,
+                            //url: response,
+                            data: response,
+                            title: '',
+                            page: true,
+                            even: true,
+                            limit: 10,
+                            limits: [10, 20, 50, 100, 500, 1000],
+                            skin: 'row',
+                            size: '30px',
+                            //toolbar: 'default',
+                            toolbar: '#toolbarDemo',
+                            defaultToolbar: ['filter', 'exports', 'print'
+                            //{ title: '提示', layEvent: 'LAYTABLE_TIPS',icon: 'layui-icon-tips'}  //自定工具欄圖標 - 提示
+                            ],
+                            totalRow: true,
+                            cols: [[
+        
+                                //{type:  'checkbox',       fixed: 'left'},
+                                { field: 'uuid',         title: '識別碼',   width: 300, sort: true, fixed: 'left', hide: true },
+                                { field: 'form_no',      title: '表單代號', width: 180, sort: true, hide: false },
+                                { field: 'project_name', title: '專案名稱', width: 220, sort: true, hide: false },
+                                { field: 'project_type', title: '表單類型', width: 120, sort: true },
+                                { field: 'bu',           title: 'BU',      width: 60,  sort: true },
+                                { field: 'product_name', title: '產品名稱', width: 220, sort: true },
+                                { field: 'apply_date',   title: '申請日期', width: 150, sort: true, hide: false },
+                                { field: 'member_cname', title: '申請人',   width: 150, sort: true, hide: true  },
+                                { field: 'status',       title: '簽核狀態', width: 100, sort: true, hide: false },
+        
+                                //{field: 'project_reason', title: '原因',        width: 200, sort: true, hide: true},
+                                //{field: 'memo',           title: '備註',        width: 200, hide: true },
+                                { field: 'action', title: '操作', width: 220, align: 'center', toolbar: '#barDemo', fixed: 'right' }
+                                //{fixed: 'right', width: 320, align:'center', toolbar: '#barDemo'}
+                            ]],
+                            done: function (res, curr, count) {
+                                //console.log(count);
+                                //layer.msg('目前page:'+ curr.toString() );
+                                //window.refresh();
+                                var trArr = $(".layui-table-body.layui-table-main tr");
+                                //console.log('-----trArr-----');
+                                //console.log(trArr);
+                                //console.log(trArr.length);
+                                for (var i = 0; i < trArr.length; i++) {
+                                    console.log(trArr);
+                                }
+                                $.each(trArr, function (index, value) {
+                                    console.log(value.outerHTML);
+                                });
+                            },
+                            text: {
+                                none: '目前暫無數據'
+                            }
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        layer.msg("檔案取得失敗");
+                    }
+                });
+
+
+                table.on('tool(test)', function (obj) {
+                    var data     = obj.data;  // 当前行数据
+                    var layEvent = obj.event; // 点击的事件名
+                    //console.log(obj.data);
+                    //console.log(obj.data.uuid);
+
+                    if (layEvent === 'step') {
+                        //layer.msg('開啟檢視資料彈出視窗');
+                        var layer_report = layer.open({
+                            type       : 1,
+                            skin       : 'layui-layer-molv', //layui-layer-rim
+                            resize     : false,
+                            shadeClose : false,
+                            shade      : [0.7, '#000'],
+                            closeBtn   : 2,
+                            offset     : 'auto',
+                            anim       : 5,
+                            area       : ['500px', '600px'], //寬高
+                            title      : ['檢視視窗-( ' + obj.data.form_no +' )表單簽核歷程', 'font-size:20px;background-color:#1E9FFF;'],
+                            btn        : ['離開'],
+                            content    : $('#form-template-view').html(),
+                            success: function (layero, index) {
+
+                                addIconforBtn(2);
+
+                                // 判斷屬於哪種分類取form_no 第一個字 (E:評估案 / I:新開案 / L:layout  / P:PCB)
+                                let str = obj.data.form_no;
+                                let firstCharacter = str.charAt(0);
+                                let uppercaseFirstCharacter = firstCharacter.toUpperCase();
+                                console.log('---------------');
+                                console.log(uppercaseFirstCharacter);
+
+                                switch(uppercaseFirstCharacter) {
+                                    case "E": // 評估案
+                                        draw_work_flow_step("new_technology", obj);
+                                        break;
+
+                                    case "I": // 新開案
+                                        draw_work_flow_step("new_project", obj);
+                                        break;
+
+                                    case "D": // RD內部開案
+                                        draw_work_flow_step("internal_project", obj);
+                                        break;
+
+                                    case "L": // Layout
+                                        draw_work_flow_step("layout", obj);
+                                        break;
+
+                                    case "P": // PCB
+                                        draw_work_flow_step("pcb", obj);
+                                        break;
+                                }
+    
+                            },
+                            exit: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+    
+                    }
+
+                    if (layEvent === 'view') {
+                        // 判斷屬於哪種分類取form_no 第一個字 (E:評估案 / I:新開案 / L:layout  / P:PCB)
+                        let str = obj.data.form_no;
+
+                        let firstCharacter = str.charAt(0);
+                        let uppercaseFirstCharacter = firstCharacter.toUpperCase();
+                        console.log('---------------');
+                        console.log(uppercaseFirstCharacter);
+
+                        switch(uppercaseFirstCharacter) {
+                            case "E": // 評估案
+                                window.open('http://{{ DOMAIN_PATH }}/page/v0/new_technology_display/?project_no='+obj.data.project_no, "_blank");
+                                break;
+
+                            case "I": // 新開案
+                                window.open('http://{{ DOMAIN_PATH }}/page/v0/new_project_display/?project_no='+obj.data.project_no, "_blank");
+                                break;
+
+                            case "D": // RD內部開案
+                                window.open('http://{{ DOMAIN_PATH }}/page/v0/internal_project_display/?project_no='+obj.data.project_no, "_blank");
+                                break;
+
+                            case "L": // Layout
+                                //console.log('http://{{ DOMAIN_PATH }}/page/v0/layout_display/?project_no='+obj.data.project_no+'&form_no='+obj.data.form_no);
+                                window.open('http://{{ DOMAIN_PATH }}/page/v0/layout_display/?project_no='+obj.data.project_no+'&form_no='+obj.data.form_no, "_blank");
+                                break;
+
+                            case "P": // PCB
+                                //console.log('http://{{ DOMAIN_PATH }}/page/v0/pcb_display/?project_no='+obj.data.project_no+'&form_no='+obj.data.form_no);
+                                window.open('http://{{ DOMAIN_PATH }}/page/v0/pcb_display/?project_no='+obj.data.project_no+'&form_no='+obj.data.form_no, "_blank");
+                                break;
+                        }
+
+                    }
+    
+                });
+
+            });
+
+        </script>
+
+    </body>
+
+</html>

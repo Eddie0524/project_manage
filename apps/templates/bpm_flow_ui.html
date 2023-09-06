@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html">
+        <meta charset="UTF-8" />
+        <title></title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/bpm_flow.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/diagram-js.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/bpmn-embedded.css') }}" />
+        
+        <script src="{{ url_for('static', filename='/js/jquery-3.5.1.js') }}"></script>
+        <script src="{{ url_for('static', filename='./layui.js')          }}"></script>
+    </head>
+
+    <body>
+
+        <button id="btn-open" >開啟bpmn檔</button>
+        <button id="btn-save" >儲存bpmn檔</button>
+        <button id="btn-clear">清除</button>
+        <button id="btn-add-size">放大</button>
+        <button id="btn-sub-size">縮小</button>
+        <div id="canvas"></div>
+
+        <!-- 彈出開啟檔案視窗 -->
+        <template id="form-template-open">
+            <div id="open-window-bg">
+                <div id="open-tab-lab-file">請選擇一個 bpmn 檔案開啟</div>
+                <div id="open-tab-txt-file">
+                    <select id="open-tab-sel-file"></select>
+                </div>
+            </div>
+        </template>
+
+        <!-- 彈出儲存檔案視窗 -->
+        <template id="form-template-save">
+            <div id="save-window-bg">
+                <div id="save-tab-lab-file">請输入以 .xml 為结尾的檔案名</div>
+                <div id="save-tab-txt-file">
+                    <input type="text" id="save-input-file-name" name="save-input-file-name" />
+                </div>
+            </div>
+        </template>
+
+        <script src="{{ url_for('static', filename='/js/bpm_flow.js') }}"></script>
+
+
+    </body>
+
+</html>

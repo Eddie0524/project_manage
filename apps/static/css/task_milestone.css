@@ -1,0 +1,340 @@
+#root {
+    position:absolute;
+    margin: 0; padding: 0; border: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FAFAFA
+}
+
+
+/*******************************************************/
+/* 內容群組區背景 */
+#div-content-group {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    top:70px; left:300px;
+    background-color: white;/* #12b553;*/
+    width:calc(100% - 300px); height:auto;
+}
+
+#function-bar {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    background-color: rgb(95, 160, 190);
+    width:100%; height:50px;
+}
+
+#id-table-bg {
+    width:800px; height: auto;
+    margin: 0px auto;
+    background-color: rgb(255, 255, 255);
+}
+
+#form-title-text {
+    /*position: absolute;*/
+    width:800px; height: 50px;
+    /*top: 50px; left: 0px;*/
+    margin: 70px auto; padding: 0px; border: 0px;
+    font-size: 24px; 
+    font-weight: bold;  
+    text-align: center;
+    color: #000000;
+}
+
+
+
+
+/*******************************************/
+#id-table-task {
+    width:800px; height: auto;
+    margin: 0px auto;
+    text-align: center;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+#lab-task-bar {
+    width:800px; height: 70px;
+    background-color: rgb(200, 200, 200);
+}
+
+#div-task {
+    width:800px; height: 70px;
+    align-items: center;
+    /*background-color: #e88742;*/
+    display: flex;
+    /*justify-content: space-around;*/
+    justify-content: space-between;
+}
+
+#input-task {
+    width: 480px;
+    height:40px;
+    background: #ffffff;
+    color: #555;
+    margin-left: 5px;;
+    padding-left: 5px;
+}
+#btn-add-task {
+    width: 150px;
+    height:50px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #555;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 6px;
+    color:white;
+    background:#2c87bf;
+}
+#btn-add-task:hover {
+    background-color: rgb(121, 170, 193);
+}
+
+#btn-save-task {
+    width: 150px;
+    height:50px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #114540;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 6px;
+    color:white;
+    background:#009688;
+}
+#btn-save-task:hover {
+    background-color: #739693;
+}
+
+.list-task-item {
+    width:800px;
+    height:50px;
+    background-color: rgb(250, 250, 250);
+    align-items: center;
+    padding-left: 10px;
+    border: 1px solid rgb(50, 50, 50);
+    border-right: 0px;
+    border-left: 0px;
+    /*float:left;*/
+    display: flex;
+    /*flex-grow:2;*/
+    flex-wrap:nowrap;
+    /*flex-direction:row;*/
+    /*justify-content: space-between;*/
+    /*justify-content: space-evenly;*/
+    /*justify-content: space-around;*/
+    justify-content:end;
+    /*align-self:stretch;*/
+}
+
+.text-task {
+    width:450px;height:40px;
+    margin-top: 10px;
+    font-size: 20px;
+    text-align:left;
+    color:black;
+}
+
+.cls-edit-btn-task {
+    width:150px;
+    height:44px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    margin-right: 5px;
+    margin-left: 10px;
+    /*transition: 0.3s;*/
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #EEEEEE;
+    color:#555;
+}
+
+.cls-delete-btn-task {
+    width:150px;
+    height:44px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right:10px;
+    border: 1px solid black;
+    margin-left: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #EEEEEE;
+    color:#555;
+}
+
+
+
+/*******************************************/
+#id-table-milestone {
+    width:560px; height: auto;
+    margin: 5px auto;
+    text-align: center;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+#lab-milestone-bar {
+    width:560px; height: 70px;
+    background-color: rgb(200, 200, 200);
+}
+
+#div-milestone {
+    width:560px; height: 70px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+#input-milestone {
+    width: 380px;
+    height:40px;
+    background: #ffffff;
+    color: #555;
+    padding-left: 5px;
+}
+#btn-add-milestone {
+    width: 150px;
+    height:50px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 6px;
+    border: 1px solid #555;
+    color:white;
+    background:#2c87bf;
+}
+#btn-add-milestone:hover {
+    background-color: rgb(121, 170, 193);
+}
+
+
+.list-milestone-item {
+    width:560px;
+    height:50px;
+    background-color: rgb(250, 250, 250);
+    align-items: center;
+    padding-left: 10px;
+    border: 1px solid rgb(50, 50, 50);
+    border-right: 0px;
+    border-left: 0px;
+    /*float:left;*/
+    display: flex;
+    /*flex-grow:2;*/
+    flex-wrap:nowrap;
+    /*flex-direction:row;*/
+    /*justify-content: space-between;*/
+    /*justify-content: space-evenly;*/
+    /*justify-content: space-around;*/
+    justify-content:end;
+    /*align-self:stretch;*/
+}
+
+.text-milestone {
+    width:380px;height:40px;
+    margin-top: 10px;
+    font-size: 20px;
+    text-align:left;
+    color:black;
+    /*background-color: rgb(250, 250, 0);*/
+}
+
+/*******************************************/
+.layui-layer-setwin .layui-layer-close {
+    cursor: pointer;
+    color:#ffffff;
+}
+
+
+
+/*******************************************/
+/* 基本欄位 */
+/*
+.c-base {
+    width:500px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 0px solid rgb(255, 255, 255);
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+*/
+
+
+.cls-c1-r1 {
+    width:600px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+
+.cls-c1-r1-h2 {
+    width:600px; height:70px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+
+
+/************************************************/
+/*
+#sortable-list {
+    width: 600px;
+    height:auto;
+}
+.draggable {
+    cursor: move;
+    background-color: lightblue;
+    width: 480px;
+    height:50px;
+    border: 2px solid rgb(0, 0, 0);
+    display:flex;
+    flex-wrap:nowrap;
+    flex-direction:row;
+    justify-content:Space-between;
+    align-items: center;
+}
+.draggable :hover {
+    width:150px;
+    height:40px;
+    background-color: rgb(184, 184, 184);
+}
+
+li {
+    list-style-type: none;
+}
+*/
+/*
+#b1 {
+    width:150px;
+    height:40px;
+    background-color: rgb(163, 29, 29);
+}
+#b2 {
+    width:150px;
+    height:40px;
+    background-color: rgb(222, 173, 27);
+}
+#b3 {
+    width:150px;
+    height:40px;
+    background-color: rgb(65, 210, 36);
+}
+#b4 {
+    width:150px;
+    height:40px;
+    background-color: rgb(13, 114, 137);
+}
+#b5 {
+    width:150px;
+    height:40px;
+    background-color: rgb(93, 22, 200);
+}
+*/

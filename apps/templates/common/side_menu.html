@@ -1,0 +1,210 @@
+<!-- 左側選單列 -->
+<div id="div-side-menu-group">
+    <!-- 垂直選單列 -->
+    <ul id="div-layui-menu" class="layui-nav layui-nav-tree" lay-filter="side-menu">
+
+        <!-- 項目群組0 -->
+        {% if MODE == "project_list" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% elif MODE == "form_list" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% elif MODE == "flow_dashboard" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% else %}
+        <li class="layui-nav-item">
+        {% endif %}
+
+            <a href="javascript:void(0)">資料查詢</a>
+            <dl class="layui-nav-child">
+                {% if MODE=="project_list" %}
+                <dd><a class="site-demo-active">各項專案查詢</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_project_list.project_list_index') }}">各項專案查詢</a></dd>
+                {% endif %}
+
+                {% if MODE=="form_list" %}
+                <dd><a class="site-demo-active">各項申請單據查詢</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_form_list.form_list_index') }}">各項申請單據查詢</a></dd>
+                {% endif %}
+
+                {% if IS_LEADER == True %}
+                    {% if MODE=="flow_dashboard" %}
+                    <dd><a class="site-demo-active">開發歷程追蹤</a></dd>
+                    {% else %}
+                    <dd><a href="{{ url_for('blue_flow_dashboard.flow_dashboard_index') }}">開發歷程追蹤</a></dd>
+                    {% endif %}
+                {% endif %}
+            </dl>
+
+        </li>
+
+
+        <!-- 項目群組1 -->
+        {% if MODE == "new_technology_form" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% elif MODE == "new_project_form" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% elif MODE == "layout_form" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% elif MODE == "pcb_form" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% elif MODE == "internal_project_task" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% else %}
+        <li class="layui-nav-item">
+        {% endif %}
+
+            <a href="javascript:void(0)">申請表單</a>
+            <dl class="layui-nav-child">
+
+                {% if MODE=="new_technology_form" %}
+                <dd><a class="site-demo-active">F001 新產品技術評估申請單</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_new_technology_form.new_technology_form_index') }}">F001 新產品技術評估申請單</a></dd>
+                {% endif %}
+
+                {% if MODE=="new_project_form" %}
+                <dd><a class="site-demo-active">F002 新產品開案申請單</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_new_project_form.new_project_form_index') }}">F002 新產品開案申請單</a></dd>
+                {% endif %}
+
+                {% if GROUP_NO != "pm" %}
+
+                    {% if MODE=="internal_project_form" %}
+                    <dd><a class="site-demo-active">F003 RD內部開案申請單</a></dd>
+                    {% else %}
+                    <dd><a href="{{ url_for('blue_internal_project_form.internal_project_form_index') }}">F003 RD內部開案申請單</a></dd>
+                    {% endif %}
+
+                    {% if MODE=="layout_form" %}
+                    <dd><a class="site-demo-active">F004 Layout申請工程規格聯絡單</a></dd>
+                    {% else %}
+                    <dd><a href="{{ url_for('blue_layout_form.layout_form_index') }}">F004 Layout申請工程規格聯絡單</a></dd>
+                    {% endif %}
+
+                    {% if MODE=="pcb_form" %}
+                    <dd><a class="site-demo-active">F005 PCB打樣申請工程規格聯絡單</a></dd>
+                    {% else %}
+                    <dd><a href="{{ url_for('blue_pcb_form.pcb_form_index') }}">F005 PCB打樣申請工程規格聯絡單</a></dd>
+                    {% endif %}
+
+                {% endif %}
+
+            </dl>
+        </li>
+
+        <!-- 項目群組2 -->
+        {% if MODE=="new_technology_feedback" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% elif MODE == "new_project_feedback" %}
+        <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+        {% else %}
+        <li class="layui-nav-item">
+        {% endif %}
+
+            <a href="javascript:void(0)">回報表單</a>
+            <dl class="layui-nav-child">
+
+                {% if MODE=="new_technology_feedback" %}
+                <dd><a class="site-demo-active">R001 新產品技術評估回報單</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_new_technology_feedback.new_technology_feedback_index') }}">R001 新產品技術評估回報單</a></dd>
+                {% endif %}
+
+                {% if MODE=="new_project_feedback" %}
+                <dd><a class="site-demo-active">R002 新產品開案回報單</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_new_project_feedback.new_project_feedback_index') }}">R002 新產品開案回報單</a></dd>
+                {% endif %}
+
+            </dl>
+        </li> 
+
+        <!-- 項目群組3 -->
+        {% if GROUP_NO != "pm" %}
+
+            {% if IS_LEADER == True %}
+
+                {% if MODE == "bpm_flow" %}
+                <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+                {% elif MODE == "all_kinds_reason" %}
+                <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+                {% elif MODE == "status" %}
+                <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+                {% elif MODE == "milestone" %}
+                <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+                {% elif MODE == "task" %}
+                <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+                {% elif MODE == "attach" %}
+                <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+                {% elif MODE == "feedback_rule" %}
+                <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+                {% elif MODE == "email" %}
+                <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+                {% else %}
+                <li class="layui-nav-item">
+                {% endif %}
+
+                <a href="javascript:void(0)">編輯管理</a>
+                <dl class="layui-nav-child">
+
+                {% if MODE=="status" %}
+                <dd><a class="site-demo-active">Status&nbsp;編輯</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_status.status_index') }}">Status&nbsp;編輯</a></dd>
+                {% endif %}
+
+                {% if MODE=="milestone" %}
+                <dd><a class="site-demo-active">Milestone&nbsp;編輯</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_milestone.milestone_index') }}">Milestone&nbsp;編輯</a></dd>
+                {% endif %}
+
+                {% if MODE=="task" %}
+                <dd><a class="site-demo-active">Task&nbsp;編輯</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_task.task_index') }}">Task&nbsp;編輯</a></dd>
+                {% endif %}
+
+                {% if MODE=="attach" %}
+                <dd><a class="site-demo-active">Attach&nbsp;編輯</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_attach.attach_index') }}">Attach&nbsp;編輯</a></dd>
+                {% endif %}
+
+                {% if MODE=="feedback_rule" %}
+                <dd><a class="site-demo-active">回報內容編輯</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_feedback_rule.feedback_rule_index') }}">回報內容編輯</a></dd>
+                {% endif %}
+
+                {% if MODE=="all_kinds_reason" %}
+                <dd><a class="site-demo-active">各項原因內容編輯</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_all_kinds_reason.all_kinds_reason_index') }}">各項原因內容編輯</a></dd>
+                {% endif %}
+
+                {% if MODE=="email" %}
+                <dd><a class="site-demo-active">各項郵件內容編輯</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_email.email_index') }}">各項郵件內容編輯</a></dd>
+                {% endif %}
+
+                {% if MODE=="bpm_flow" %}
+                <dd><a class="site-demo-active">工作流程編輯</a></dd>
+                {% else %}
+                <dd><a href="{{ url_for('blue_bpm_flow.bpm_flow_index') }}">工作流程編輯</a></dd>
+                {% endif %}
+
+                </dl>
+
+            </li>
+
+            {% endif %}
+
+        {% endif %}
+    </ui>
+
+</div>

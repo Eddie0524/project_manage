@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        {% include 'common/header.html' %}
+        <title>新開案結果單</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/new_project_result.css') }}" />
+
+    </head>
+
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <div id="id-table-bg">
+                <div id="form-title-text"><b>新產品開案結果單</b></div>
+
+                <!-- 傳送過來的表單 -->
+                <!-- 表單 -->
+                <table id="id-table-form">
+
+                    <!-- 表單標題 -->
+                    <thead id="table-head">
+                        <tr>
+                            <th colspan="3" rowspan="1" id="lab-apply-date"  class="cls-c3-r1">申請日期</th>
+                            <th colspan="3" rowspan="1" id="txt-apply-date"  class="cls-c3-r1">{{NEW_PROJECT_MODEL['apply_date']}}</th>
+                            <th colspan="3" rowspan="1" id="lab-project-no"  class="cls-c3-r1">專案代號</th> 
+                            <th colspan="5" rowspan="1" id="txt-project-no"  class="cls-c5-r1">{{NEW_PROJECT_MODEL['project_no']}}</th>
+                            <th colspan="2" rowspan="1" id="lab-form-no"     class="cls-c2-r1">單號</th>
+                            <th colspan="4" rowspan="1" id="txt-form-no"     class="cls-c4-r1">{{NEW_PROJECT_MODEL['form_no']}}</th>
+                        </tr>
+                    </thead>
+
+                    <!-- 表單內容 ☐ ☑ disabled -->
+                    <tbody id="table-body">
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="lab-form-class" class="cls-c3-r1">分類</th>
+                            <th colspan="1"  rowspan="1" id="box-form-io"    class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['bu'] == "IO" %}
+                                <input type="checkbox" id="check-form-io"  name="check-form-io" checked value="IO"  >
+                                {% else %}
+                                <input type="checkbox" id="check-form-io"  name="check-form-io" value="IO" >
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-form-io"    class="cls-c2-r1">I/O</th>
+                            <th colspan="1"  rowspan="1" id="box-form-iot"   class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['bu'] == "IOT" %}
+                                <input type="checkbox" id="check-form-iot"  name="check-form-iot" checked value="IOT"  >
+                                {% else %}
+                                <input type="checkbox" id="check-form-iot"  name="check-form-iot" value="IOT" >
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-form-iot"   class="cls-c2-r1">IoT</th>
+                            <th colspan="1"  rowspan="1" id="box-form-it"    class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['bu'] == "IT" %}
+                                <input type="checkbox" id="check-form-it" name="check-form-it" checked value="IT"  >
+                                {% else %}
+                                <input type="checkbox" id="check-form-it"  name="check-form-it" value="IT" >
+                                {% endif %}
+                            </th>
+                            <th colspan="2" rowspan="1" id="lab-form-it"    class="cls-c10-r1">IT</th>
+                            <th colspan="3"  rowspan="1" id="lab-new-tech-project-no"    class="cls-c3-r1">評估案代號</th>
+                            <th colspan="5"  rowspan="1" id="txt-new-tech-project-no"    class="cls-c4-r1">{{NEW_PROJECT_MODEL['new_tech_project_no']}}
+
+                        </tr>
+
+                         <!-- 產品判別 預估量產日期 -->
+                        <tr>
+                            <th colspan="5"  rowspan="1" id="lab-product-check"  class="cls-c3-r1">產品判別✱</th>
+                            <th colspan="5"  rowspan="1" id="txt-product-check"  class="cls-c2-r1">
+                                <select id="select-product-check">
+                                    <option value="中性">中性</option>
+                                    <option value="OEM/ODM">OEM/ODM</option>
+                                    <option value="SUNIX標準品">SUNIX標準品</option>
+                                </select>
+                            </th>
+                            <th colspan="5"  rowspan="1" id="lab-product-check"  class="cls-c3-r1">預計上市日期</th>
+                            <th colspan="5"  rowspan="1" id="txt-product-check"  class="cls-c2-r1">{{NEW_PROJECT_MODEL['first_product_date']}}
+                               
+                            </th>
+                            
+                        </tr>
+        
+                        <!-- 產品 -->
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="lab-product"         class="cls-c3-r1">產品</th>
+                            <th colspan="3"  rowspan="1" id="lab-product-type-no" class="cls-c3-r1">產品型號✱</th>
+                            <th colspan="14"  rowspan="1" id="txt-product-type-no" class="cls-c9-r1">{{NEW_PROJECT_MODEL['product_no']}}
+                                <!-- <input type="text" id="input-product-type-no" value="{{NEW_PROJECT_MODEL['product_no']}}">-->
+                            </th>
+                          
+                        </tr>
+        
+                        <!-- 產品規格-->
+                        <tr>
+                            <th colspan="3"  rowspan="4" id="title-product-spec"  class="cls-c3-r4">產品規格</th>
+                            <th colspan="3"  rowspan="1" id="lab-product-name"    class="cls-c3-r1">產品名稱✱</th>
+                            <th colspan="14" rowspan="1" id="txt-product-name"    class="cls-c14-r1">{{NEW_PROJECT_MODEL['spec_describe']}}
+                                <!-- <input type="text" id="input-product-name" value="{{NEW_PROJECT_MODEL['spec_describe']}}" disabled > -->
+                            </th>
+                        </tr>
+        
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="title-product-spec"  class="cls-c3-r1">產品規格</th>-->
+                            <th colspan="3"  rowspan="1" id="lab-product-series"  class="cls-c3-r1">產品系列</th>
+                            <th colspan="14" rowspan="1" id="txt-product-series"  class="cls-c14-r1">{{NEW_PROJECT_MODEL['product_series']}}
+                                <!-- <input type="text" id="input-product-series" value="{{NEW_PROJECT_MODEL['product_series']}}"> -->
+                            </th>
+                        </tr>
+        
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="title-product-spec"      class="cls-c3-r1">產品規格</th>-->
+                            <th colspan="3"  rowspan="1" id="lab-product-discription" class="cls-c3-r1">規格說明✱</th>
+                            <th colspan="14" rowspan="1" id="txt-product-discription" class="cls-c14-r1">{{NEW_PROJECT_MODEL['spec_describe']}}
+                                <!-- <input type="text" id="input-product-discription" value="{{NEW_PROJECT_MODEL['spec_describe']}}"> -->
+                            </th>
+                        </tr>
+        
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="title-product-spec"    class="cls-c3-r1">產品規格</th>-->
+                            <th colspan="3"  rowspan="1" id="lab-product-certified" class="cls-c3-r1">認證✱</th>
+                            <th colspan="14" rowspan="1" id="txt-product-certified" class="cls-c14-r1">{{NEW_PROJECT_MODEL['product_certified']}}
+                                <!-- <input type="text" id="input-product-certified" value="{{NEW_PROJECT_MODEL['product_certified']}}"> -->
+                            </th>
+                        </tr>
+        
+                        <!-- 目標市場 -->
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="lab-targeted-market" class="cls-c3-r1">目標市場</th>
+                            <th colspan="17" rowspan="1" id="txt-targeted-market" class="cls-c17-r1">
+                                <textarea id="input-targeted-market" name="input-targeted-market" rows="3" cols="40" required disabled >{{NEW_PROJECT_MODEL['target_markting']}}</textarea>
+                            </th>
+                        </tr>
+        
+                        <!-- 銷售預估 -->
+                        <tr>
+                            <th colspan="3"  rowspan="3" id="title-sales-estimate" class="cls-c3-r3">銷售預估</th>
+                            <th colspan="4"  rowspan="1" id="lab-sale-price"       class="cls-c4-r1">預估銷售價</th>
+                            <th colspan="4"  rowspan="1" id="txt-sale-price"       class="cls-c4-r1">{{NEW_PROJECT_MODEL['estimate_price']}}
+                                <!-- <input type="text" id="input-sale-price" value="{{NEW_PROJECT_MODEL['estimate_price']}}"> -->
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-annual-count" class="cls-c4-r1">預估年銷數量</th>
+                            <th colspan="5"  rowspan="1" id="txt-annual-count" class="cls-c5-r1">{{NEW_PROJECT_MODEL['estimate_pcs']}}
+                                <!-- <input type="text" id="input-annual-count" value="{{NEW_PROJECT_MODEL['estimate_pcs']}}"> -->
+                            </th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-sales-estimate"   class="cls-c3-r1">銷售預估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-annual-performance" class="cls-c4-r1">預估年銷業績</th>
+                            <th colspan="4"  rowspan="1" id="txt-annual-performance" class="cls-c4-r1">{{NEW_PROJECT_MODEL['estimate_sale_performance_year']}}
+                                <!-- <input type="text" id="input-annual-performance" value="{{NEW_PROJECT_MODEL['estimate_sale_performance_year']}}"> -->
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-profit" class="cls-c4-r1">預估毛利率</th>
+                            <th colspan="2"  rowspan="1" id="txt-profit" class="cls-c2-r1">{{NEW_PROJECT_MODEL['estimate_profit_margin']}}
+                                <!-- <input type="text" id="input-profit" value="{{NEW_PROJECT_MODEL['estimate_profit_margin']}}"> -->
+                            </th>
+                            <th colspan="3"  rowspan="1" id="unit-profit" class="cls-c3-r1">%</th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-sales-estimate" class="cls-c3-r1">銷售預估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-is-replace"       class="cls-c4-r1">是否有取代舊有產品</th>
+                            <th colspan="1"  rowspan="1" id="box-replace-none"     class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['replace_product_flag']['replace-none'] == true %}
+                                <input type="checkbox" id="check-replace-none" name="check-replace-none" value="無" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-replace-none" name="check-replace-none" value="無">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-replace-none" class="cls-c1-r1">無</th>
+                            <th colspan="1"  rowspan="1" id="box-replace-yes"  class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['replace_product_flag']['replace-yes'] == true %}
+                                <input type="checkbox" id="check-replace-yes" name="check-replace-yes" value="有" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-replace-yes" name="check-replace-yes" value="有" >
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-replace-yes"     class="cls-c1-r1">有</th>
+                            <th colspan="4"  rowspan="1" id="lab-replace-type-no" class="cls-c4-r1">產品型號為</th>
+                            <th colspan="5"  rowspan="1" id="txt-replace-type-no" class="cls-c5-r1">{{NEW_PROJECT_MODEL['replace_product']}}
+                                <!-- <input type="text" id="input-replace-type-no" value="{{NEW_PROJECT_MODEL['replace_product']}}"> -->
+                            </th>
+                        </tr>
+        
+                        <!-- 專利評估 -->
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="lab-patent-evaluation" class="cls-c3-r1">專利評估</th>
+                            <th colspan="17" rowspan="1" id="txt-patent-evaluation" class="cls-c17-r1">
+                                <textarea id="input-patent-evaluation" name="input-patent-evaluation" rows="3" cols="40" required disabled>{{NEW_PROJECT_MODEL['patent_evaluate']}}</textarea>
+                            </th>
+                        </tr>
+        
+                        <!-- 競爭狀況 -->
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="title-compete"       class="cls-c3-r1">競爭狀況</th>
+                            <th colspan="1"  rowspan="1" id="box-compete" class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['compete_status'] == "yes" %}
+                                <input type="checkbox" id="check-compete" name="check-compete" value="yes" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-compete" name="check-compete" value="yes">
+                                {% endif %}
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-compete" class="cls-c1-r1">有</th>
+                            <th colspan="15" rowspan="1" id="empty-compete" class="cls-c15-r1"></th>
+                        </tr>
+        
+                        <!-- 研發單位評估 -->
+                        <tr>
+                            <th colspan="3"  rowspan="9" id="title-rd-evaluation" class="cls-c3-r9">研發單位評估</th>
+                            <th colspan="4"  rowspan="1" id="lab-ee-develop-time" class="cls-c4-r1">電子開發部</th>
+                            <th colspan="3"  rowspan="1" id="txt-ee-develop-time" class="cls-c3-r1">{{NEW_PROJECT_MODEL['work_hour_ee']}}
+                                <!-- <input type="text" id="input-ee-develop-time" value="{{NEW_PROJECT_MODEL['work_hour_ee']}}"> -->
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-ee-develop-cost" class="cls-c4-r1">所需工時小時,開發成本</th>
+                            <th colspan="3"  rowspan="1" id="txt-ee-develop-cost" class="cls-c3-r1">{{NEW_PROJECT_MODEL['cost_ee']}}
+                                <!-- <input type="text" id="input-ee-develop-cost" value="{{NEW_PROJECT_MODEL['cost_ee']}}"> -->
+                            </th>
+                            <th colspan="3"  rowspan="1" id="unit-ee-develop-cost" class="cls-c3-r1">元</th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"     class="cls-c3-r1">研發單位評估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-ee-develop-schedule" class="cls-c4-r1">預定開發時程</th>
+                            <th colspan="1"  rowspan="1" id="lab-ee-develop-from"     class="cls-c1-r1">自</th>
+                            <th colspan="4"  rowspan="1" id="txt-ee-develop-from"     class="cls-c4-r1">
+                                <input type="date" id="input-ee-develop-from" value="{{NEW_PROJECT_MODEL['start_date_ee']}}">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-ee-develop-to"       class="cls-c1-r1">至</th>
+                            <th colspan="4"  rowspan="1" id="txt-ee-develop-to"       class="cls-c4-r1">
+                                <input type="date" id="input-ee-develop-to" value="{{NEW_PROJECT_MODEL['end_date_ee']}}">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="unit-ee-develop-to"      class="cls-c3-r1">完成</th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"  class="cls-c3-r1">研發單位評估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-mec-develop-time" class="cls-c4-r1">機構開發部</th>
+                            <th colspan="3"  rowspan="1" id="txt-mec-develop-time" class="cls-c3-r1">{{NEW_PROJECT_MODEL['work_hour_me']}}
+                                <!-- <input type="text" id="input-mec-develop-time" value="{{NEW_PROJECT_MODEL['work_hour_me']}}"> -->
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-mec-develop-cost" class="cls-c4-r1">所需工時小時,開發成本</th>
+                            <th colspan="3"  rowspan="1" id="txt-mec-develop-cost" class="cls-c3-r1">{{NEW_PROJECT_MODEL['cost_me']}}
+                                <!-- <input type="text" id="input-mec-develop-cost" value="{{NEW_PROJECT_MODEL['cost_me']}}"> -->
+                            </th>
+                            <th colspan="3"  rowspan="1" id="unit-mec-develop-cost" class="cls-c3-r1">元</th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"      class="cls-c3-r1">研發單位評估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-mec-develop-schedule" class="cls-c4-r1">預定開發時程</th>
+                            <th colspan="1"  rowspan="1" id="lab-mec-develop-from"     class="cls-c1-r1">自</th>
+                            <th colspan="4"  rowspan="1" id="txt-mec-develop-from"     class="cls-c4-r1">
+                                <input type="date" id="input-mec-develop-from" value="{{NEW_PROJECT_MODEL['end_date_me']}}">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-mec-develop-to" class="cls-c1-r1">至</th>
+                            <th colspan="4"  rowspan="1" id="txt-mec-develop-to" class="cls-c4-r1">
+                                <input type="date" id="input-mec-develop-to" value="{{NEW_PROJECT_MODEL['end_date_me']}}">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="unit-mec-develop-to" class="cls-c3-r1">完成</th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"   class="cls-c3-r1">研發單位評估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-soft-develop-time" class="cls-c4-r1">軟體開發部</th>
+                            <th colspan="3"  rowspan="1" id="txt-soft-develop-time" class="cls-c3-r1">{{NEW_PROJECT_MODEL['work_hour_soft']}}
+                                <!-- <input type="text" id="input-soft-develop-time" value="{{NEW_PROJECT_MODEL['work_hour_soft']}}"> -->
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-soft-develop-cost" class="cls-c4-r1">所需工時小時,開發成本</th>
+                            <th colspan="3"  rowspan="1" id="txt-soft-develop-cost" class="cls-c3-r1">{{NEW_PROJECT_MODEL['cost_soft']}}
+                                <!-- <input type="text" id="input-soft-develop-cost" value="{{NEW_PROJECT_MODEL['cost_soft']}}"> -->
+                            </th>
+                            <th colspan="3"  rowspan="1" id="unit-soft-develop-cost" class="cls-c3-r1">元</th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"       class="cls-c3-r1">研發單位評估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-soft-develop-schedule" class="cls-c4-r1">預定開發時程</th>
+                            <th colspan="1"  rowspan="1" id="lab-soft-develop-from"     class="cls-c1-r1">自</th>
+                            <th colspan="4"  rowspan="1" id="txt-soft-develop-from"     class="cls-c3-r1">
+                                <input type="date" id="input-soft-develop-from" value="{{NEW_PROJECT_MODEL['start_date_soft']}}">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-soft-develop-to" class="cls-c1-r1">至</th>
+                            <th colspan="4"  rowspan="1" id="txt-soft-develop-to" class="cls-c4-r1">
+                                <input type="date" id="input-soft-develop-to" value="{{NEW_PROJECT_MODEL['end_date_soft']}}">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="unit-soft-develop-to" class="cls-c1-r1">完成</th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"     class="cls-c3-r1">研發單位評估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-verify-develop-time" class="cls-c4-r1">設計驗證部</th>
+                            <th colspan="3"  rowspan="1" id="txt-verify-develop-time" class="cls-c3-r1">{{NEW_PROJECT_MODEL['work_hour_verify']}}
+                                <!-- <input type="text" id="input-verify-develop-time" value="{{NEW_PROJECT_MODEL['work_hour_verify']}}"> -->
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-verify-develop-cost" class="cls-c4-r1">所需工時小時,開發成本</th>
+                            <th colspan="3"  rowspan="1" id="txt-verify-develop-cost" class="cls-c3-r1">{{NEW_PROJECT_MODEL['cost_verify']}}
+                                <!-- <input type="text" id="input-verify-develop-cost" value="{{NEW_PROJECT_MODEL['cost_verify']}}"> -->
+                            </th>
+                            <th colspan="3"  rowspan="1" id="unit-verify-develop-cost" class="cls-c3-r1">元</th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation"         class="cls-c3-r1">研發單位評估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-verify-develop-schedule" class="cls-c4-r1">預定開發時程</th>
+                            <th colspan="1"  rowspan="1" id="lab-verify-develop-from"     class="cls-c1-r1">自</th>
+                            <th colspan="4"  rowspan="1" id="txt-verify-develop-from"     class="cls-c3-r1">
+                                <input type="date" id="input-verify-develop-from" value="{{NEW_PROJECT_MODEL['start_date_verify']}}">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-verify-develop-to" class="cls-c1-r1">至</th>
+                            <th colspan="4"  rowspan="1" id="txt-verify-develop-to" class="cls-c4-r1">
+                                <input type="date" id="input-verify-develop-to" value="{{NEW_PROJECT_MODEL['end_date_verify']}}">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="unit-verify-develop-to" class="cls-c1-r1">完成</th>
+                        </tr>
+        
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="title-rd-evaluation" class="cls-c3-r1">研發單位評估</th> -->
+                            <th colspan="4"  rowspan="1" id="lab-develop-unit"  class="cls-c4-r1">開發單位</th>
+                            <th colspan="1"  rowspan="1" id="box-unit-taipei"   class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-develop-unit'] == "台北" %}
+                                <input type="checkbox" id="check-unit-taipei" name="check-unit-taipei" value="台北" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-unit-taipei" name="check-unit-taipei" value="台北" >
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-unit-taipei"   class="cls-c2-r1">台北</th>
+                            <th colspan="1"  rowspan="1" id="box-unit-shanghai" class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-develop-unit'] == "上海" %}
+                                <input type="checkbox" id="check-unit-shanghai" name="check-unit-shanghai" value="上海" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-unit-shanghai" name="check-unit-shanghai" value="上海" >
+                                {% endif %}
+                            </th>
+                                <th colspan="2"  rowspan="1" id="lab-unit-shanghai" class="cls-c2-r1">上海</th>
+                                <th colspan="1"  rowspan="1" id="box-unit-kunshan"  class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-develop-unit'] == "昆山" %}
+                                <input type="checkbox" id="check-unit-kunshan" name="check-unit-kunshan" value="昆山" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-unit-kunshan" name="check-unit-kunshan" value="昆山" >
+                                {% endif %}
+                            </th>
+                            <th colspan="6"  rowspan="1" id="lab-unit-kunshan" class="cls-c6-r1">昆山</th>
+                        </tr>
+        
+                        <!-- 生產單位評估 -->
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="title-product-evaluation" class="cls-c3-r1">生產單位評估</th>
+                            <th colspan="4"  rowspan="1" id="lab-product-area"         class="cls-c4-r1">投產地</th>
+                            <th colspan="1"  rowspan="1" id="box-area-xindian" class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-product-area'] == "新店廠" %}
+                                <input type="checkbox" id="check-area-xindian" name="check-area-xindian" value="新店廠" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-area-xindian" name="check-area-xindian" value="新店廠">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-area-xindian" class="cls-c2-r1">新店廠</th>
+                            <th colspan="1"  rowspan="1" id="box-area-kunshan" class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-product-area'] == "昆山廠" %}
+                                <input type="checkbox" id="check-area-kunshan" name="check-area-kunshan" value="昆山廠" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-area-kunshan" name="check-area-kunshan" value="昆山廠">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-area-kunshan" class="cls-c2-r1">昆山廠</th>
+                            <th colspan="1"  rowspan="1" id="box-area-both" class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-product-area'] == "兩地皆投" %}
+                                <input type="checkbox" id="check-area-both" name="check-area-both" value="兩地皆投" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-area-both" name="check-area-both" value="兩地皆投">
+                                {% endif %}
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-area-both" class="cls-c2-r1">兩地皆投</th>
+                            <th colspan="1"  rowspan="1" id="box-area-other" class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-product-area'] == "其他" %}
+                                <input type="checkbox" id="check-area-other" name="check-area-other" value="其他" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-area-other" name="check-area-other" value="其他">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-area-other" class="cls-c3-r1">其他</th>
+                        </tr>
+        
+                        <!-- 業務單位評估 -->
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="title-business-evaluation" class="cls-c3-r1">業務單位評估</th>
+                            <th colspan="4"  rowspan="1" id="lab-test-product"          class="cls-c4-r1">第一批試產數量:</th>
+                            <th colspan="3"  rowspan="1" id="txt-test-product"   class="cls-c3-r1">{{NEW_PROJECT_MODEL['product_count_first']}}
+                                <!-- <input type="text" id="input-test-product" value="{{NEW_PROJECT_MODEL['product_count_first']}}"> -->
+                            </th>
+                            <th colspan="1"  rowspan="1" id="unit-test-product"  class="cls-c1-r1"></th>
+                            <th colspan="9"  rowspan="1" id="empty-test-product" class="cls-c9-r1"></th>
+                        </tr>
+        
+                        <!-- 行銷單位評估 -->
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="title-marketing-evaluation"  class="cls-c3-r1">行銷單位評估</th>
+                            <th colspan="1"  rowspan="1" id="box-old-package" class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-package'] == "沿用舊包裝" %}
+                                <input type="checkbox" id="check-old-package" name="check-old-package" value="沿用舊包裝" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-old-package" name="check-old-package" value="沿用舊包裝">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-old-package" class="cls-c3-r1">沿用舊包裝</th>
+                            <th colspan="1"  rowspan="1" id="box-new-package" class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-package'] == "新設計包裝" %}
+                                <input type="checkbox" id="check-new-package" name="check-new-package" value="新設計包裝" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-new-package" name="check-new-package" value="新設計包裝">
+                                {% endif %}
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-new-package" class="cls-c3-r1">新設計包裝</th>
+                            <th colspan="1"  rowspan="1" id="box-self-package" class="cls-c1-r1">
+                                {% if NEW_PROJECT_MODEL['check-package'] == "OEM產品客戶自有包裝" %}
+                                <input type="checkbox" id="check-self-package" name="check-self-package" value="OEM產品客戶自有包裝" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-self-package" name="check-self-package" value="OEM產品客戶自有包裝">
+                                {% endif %}
+                            </th>
+                            <th colspan="8"  rowspan="1" id="lab-self-package" class="cls-c8-r1">OEM產品客戶自有包裝</th>
+                        </tr>
+
+                        <!-- 檔案複查列表 -->
+                        <tr>
+                            <th colspan="3"   rowspan="1" id="title-attach-file" class="cls-c3-r1">檔案列表</th>
+                            <th colspan="17"  rowspan="1" id="title-attach-file" class="cls-c17-r1"></th>
+                        </tr>
+        
+                        <!-- 簽核欄位 -->
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="lab-manager"    class="cls-c3-r1">總經裡室</th>
+                            <th colspan="3"  rowspan="1" id="txt-manager"    class="cls-c3-r1"></th>
+                            <th colspan="3"  rowspan="1" id="lab-leader"     class="cls-c3-r1">單位主管</th>
+                            <th colspan="3"  rowspan="1" id="txt-leader"     class="cls-c3-r1"></th>
+                            <th colspan="3"  rowspan="1" id="lab-applicant"  class="cls-c3-r1">申請人</th>
+                            <th colspan="5"  rowspan="1" id="txt-applicant"  class="cls-c5-r1">{{USER_CNAME}}</th>
+                        </tr>
+        
+
+                        <th colspan="16" rowspan="1" id="lab-symbol" class="cls-c16-r1">
+                            <div id="txt-symbol">✱ 為必填欄位</div>
+                        </th>
+                        <th colspan="2" rowspan="1" id="lab-agree-button" class="cls-c2-r1">
+                            <button id="btn-agree" class="layui-btn layui-btn-normal" title="同意">
+                                <i class="layui-icon layui-icon-ok"></i>同意
+                            </button>
+                        </th>
+                        <th colspan="2" rowspan="1" id="lab-reject-button" class="cls-c2-r1">
+                            <button id="btn-reject" class="layui-btn layui-btn-danger" title="退回">
+                                <i class="layui-icon layui-icon-close"></i>退回
+                            </button>
+                        </th>
+        
+        
+                        <tr>
+                            <td colspan="1" class="c-base" id="c-1"></td>
+                            <td colspan="1" class="c-base" id="c-2"></td>
+                            <td colspan="1" class="c-base" id="c-3"></td>
+                            <td colspan="1" class="c-base" id="c-4"></td>
+                            <td colspan="1" class="c-base" id="c-5"></td>
+                            <td colspan="1" class="c-base" id="c-6"></td>
+                            <td colspan="1" class="c-base" id="c-7"></td>
+                            <td colspan="1" class="c-base" id="c-8"></td>
+                            <td colspan="1" class="c-base" id="c-9"></td>
+                            <td colspan="1" class="c-base" id="c-10"></td>
+        
+                            <td colspan="1" class="c-base" id="c-11"></td>
+                            <td colspan="1" class="c-base" id="c-12"></td>
+                            <td colspan="1" class="c-base" id="c-13"></td>
+                            <td colspan="1" class="c-base" id="c-14"></td>
+                            <td colspan="1" class="c-base" id="c-15"></td>
+                            <td colspan="1" class="c-base" id="c-16"></td>
+                            <td colspan="1" class="c-base" id="c-17"></td>
+                            <td colspan="1" class="c-base" id="c-18"></td>
+                            <td colspan="1" class="c-base" id="c-19"></td>
+                            <td colspan="1" class="c-base" id="c-20"></td>
+                        </tr>
+        
+                    </tbody>
+        
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <script>
+
+
+
+        </script>
+
+
+    </body>
+
+</html>

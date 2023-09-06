@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        
+        {% include 'common/header.html' %}
+        <title>開發歷程追蹤</title>
+       
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/flow_dashboard.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+        <script src="{{ url_for('static', filename='/js/dom-to-image.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/echarts.min.js')  }}"></script>
+        
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+        <!-- 上方功能區 -->
+        <div id="div-function-bar">
+
+            <div id="lab-product-no"><b>產品型號 : </b></div>
+                <input list="products" name="product" id="product" style="color:black">
+                <datalist id="products">
+                    <option value=""></option>
+                </datalist>
+
+            <!-- 紅色/橘色/黃色/綠色/藍色/紫色-->
+            <div id="lab-product-status"><b>狀態 : </b></div>
+            <div id="circle-status-red"    title="暫停"    ></div>
+            <div id="circle-status-orange" title="審查中"  ></div>
+            <div id="circle-status-yellow" title="待辦中"  ></div>
+            <div id="circle-status-green"  title="進行中"  ></div>
+            <div id="circle-status-blue"   title="已結案"  ></div>
+            <div id="circle-status-Purple" title="指定結案"></div>
+
+            <button id="btn_search" type="button" class="btn btn-primary">查詢</button>
+        </div>
+
+        <!-- 下方主要內容區 -->
+        <div id="div-main-content">
+
+            <!-- 統計圖型(圓餅圖) -->
+            <div id="div-pie-chart-bg">
+
+                <div id="draw-project-txt">
+                    <div id="txt-project-count">86</div>
+                    <div id="lab-project-count">近一年之開發專案總數</div>
+                </div>
+                <div id="draw-pie-graphic"></div>
+            </div>
+
+            <!-- 統計圖型(流程圖) -->
+            <div id="div-flow-chart-bg">
+                <!-- Pre-Work -->
+                <div id="pre-work-bg">
+                    <!-- Pre-Work標題 -->
+                    <div id="lab-pre-work">Pre-Work</div>
+                    <!-- Pre-Work內容 -->
+                    <div id="item-pre-work-bg">
+                        <div id="pre-work-item-1" class="cls-pre-work-item">
+                            <div class="cls-status-blue"></div>
+                            <div class="cls-item-msg">
+                                <div class="cls-lab-item-name">Model Name:</div>
+                                <div class="cls-txt-item-name">USB C to HDMI 2.1 dongle</div>
+                            </div>
+                        </div>
+                        <div id="pre-work-item-2" class="cls-pre-work-item">
+                            <div class="cls-status-purple"></div>
+                            <div class="cls-item-msg">
+                                <div class="cls-lab-item-name">Model Name:</div>
+                                <div class="cls-txt-item-name">Mini PCIe to 2 port isolated CAN card</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 箭頭1-->
+                <img id="img-arrow-1" src="{{ url_for('static', filename='/assets/arrow-right.png') }}" alt="">
+
+                <!-- Hardware Design -->
+                <div id="hardware-design-bg">
+                    <!-- Hardware Design標題 -->
+                    <div id="lab-hardware-design">Hardware Design</div>
+                    <!-- Hardware Design內容 -->
+                    <div id="item-hardware-design-bg">
+                        <div id="pre-work-item-1" class="cls-pre-work-item">
+                            <div class="cls-status-red"></div>
+                            <div class="cls-item-msg">
+                                <div class="cls-lab-item-name">Model Name:</div>
+                                <div class="cls-txt-item-name">USB C to HDMI 2.1 dongle</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 箭頭2-->
+                <img id="img-arrow-2" src="{{ url_for('static', filename='/assets/arrow-right.png') }}" alt="">
+
+                <!-- PCB Verification -->
+                <div id="pcb-verification-bg">
+                    <!-- PCB Verification標題 -->
+                    <div id="lab-pcb-verification">PCB Verification</div>
+                    <!-- PCB Verification內容 -->
+                    <div id="item-pcb-verification-bg">
+                        <div id="pre-work-item-1" class="cls-pre-work-item">
+                            <div class="cls-status-green"></div>
+                            <div class="cls-item-msg">
+                                <div class="cls-lab-item-name">Model Name:</div>
+                                <div class="cls-txt-item-name">IPC-E3308S</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 箭頭3-->
+                <img id="img-arrow-3" src="{{ url_for('static', filename='/assets/arrow-right.png') }}" alt="">
+
+                <!-- Mass Production-->
+                <div id="mass-production-bg">
+                    <!-- Mass Production標題 -->
+                    <div id="lab-mass-production">Mass Production</div>
+                    <!-- Mass Production內容 -->
+                    <div id="item-mass-production-bg">
+                        <div id="pre-work-item-1" class="cls-pre-work-item">
+                            <div class="cls-status-green"></div>
+                            <div class="cls-item-msg">
+                                <div class="cls-lab-item-name">Model Name:</div>
+                                <div class="cls-txt-item-name">IPC-E3308S</div>
+                            </div>
+                        </div>
+                        <div id="pre-work-item-1" class="cls-pre-work-item">
+                            <div class="cls-status-yellow"></div>
+                            <div class="cls-item-msg">
+                                <div class="cls-lab-item-name">Model Name:</div>
+                                <div class="cls-txt-item-name">1PCB-SER6456MVX100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 箭頭4-->
+                <img id="img-arrow-4" src="{{ url_for('static', filename='/assets/arrow-right.png') }}" alt="">
+
+
+                <!-- Technology Transfer -->
+                <div id="technology-transfer-bg">
+                    <!-- Technology Transfer標題 -->
+                    <div id="lab-technology-transfer">Technology Transfer</div>
+                    <!-- Technology Transfer內容 -->
+                    <div id="item-technology-transfer-bg">
+                        <div id="pre-work-item-1" class="cls-pre-work-item">
+                            <div class="cls-status-yellow"></div>
+                            <div class="cls-item-msg">
+                                <div class="cls-lab-item-name">Model Name:</div>
+                                <div class="cls-txt-item-name">IPC-E3308S</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <script>
+            var chartDom = document.getElementById('draw-pie-graphic');
+            var myChart = echarts.init(chartDom, 'dark');
+            var option;
+
+            option = {
+                backgroundColor: '#000000',
+                title: {
+                    text: '專案執行狀態佔比',
+                    subtext: 'Project Status',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: '5%'
+                },
+                series: [
+                    {
+                        name: 'Project Status',
+                        type: 'pie',
+                        radius: ['30%','60%'],
+                        data: [
+                            { value: 10,  name: '暫停',      },
+                            { value: 20,  name: '審查中',    },
+                            { value: 5,   name: '待辦中',    },
+                            { value: 23,  name: '進行中',    },
+                            { value: 2,   name: '已結案',    },
+                            { value: 40,  name: '指定結案',  },
+                        ],
+                        label: {
+                            show: true,
+                            formatter: '{b}: {d}%'
+                        },
+                        itemStyle: {
+                            color: function(params) {
+                                var colors = ['#ff0000', '#ffa500', '#ffff00', '#008000', '#0000ff', '#800080'];
+                                return colors[params.dataIndex % colors.length];
+                            }
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            option && myChart.setOption(option);
+
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        
+        {% include 'common/header.html' %}
+        <title>PCB打樣申請工程規格聯絡單(變更)</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/pcb_edit.css') }}" />
+
+        <script src="{{ url_for('static', filename='/js/dom-to-image.js') }}"></script>
+        
+    </head>
+
+    <body>
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+        
+            <div id="id-table-bg"><div id="form-title-text"><b>PCB打樣申請工程規格聯絡單(修改)</b>
+                <button id="btn-modify" class="layui-btn layui-btn-normal" >
+                    <i class="layui-icon layui-icon-edit"></i>版號變動
+                </button>
+
+                <button id="btn-reset" class="layui-btn layui-btn-danger" >
+                    <i class="layui-icon layui-icon-release"></i>版號復原
+                </button>
+            </div>
+
+            <!-- 表單 -->
+            <table id="id-table-form">
+        
+                <!-- 表單標題 -->
+                <thead id="table-head">
+
+                    <!-- 申請部門  -->
+                       <!-- 申請部門  -->
+                       <tr>
+                        <th colspan="2"  rowspan="1" id="lab-apply-person" class="cls-c2-r1">申請人</th>
+                        <th colspan="2"  rowspan="1" id="txt-apply-person" class="cls-c2-r1">{{PCB_FORM_MODEL['member_cname']}}</th>
+                        <th colspan="2"  rowspan="1" id="lab-apply-dept"   class="cls-c2-r1">申請部門</th>
+                        <th colspan="4"  rowspan="1" id="txt-apply-dept"   class="cls-c4-r1">{{PCB_FORM_MODEL['department']}}
+                        <th colspan="2"  rowspan="1" id="lab-apply-date"   class="cls-c2-r1">申請日期</th>
+                        <th colspan="2"  rowspan="1" id="txt-apply-date"   class="cls-c2-r1">{{PCB_FORM_MODEL['apply_date']}}</th>
+                        <th colspan="2" rowspan="1" id="lab-form-no"      class="cls-c2-r1">表單編號</th>
+                        <th colspan="4" rowspan="1" id="txt-form-no"      class="cls-c4-r1">{{PCB_FORM_MODEL['form_no']}}</th>
+                    </tr>
+                   
+
+                    <!-- 產品型號  專案代號  -->
+                    <tr>
+                        <th colspan="3"  rowspan="1" id="lab-product-no"    class="cls-c3-r1">產品型號</th>
+                        <th colspan="3"  rowspan="1" id="txt-product-no"    class="cls-c3-r1">{{PCB_FORM_MODEL['product_no']}}</th>
+                        <th colspan="3" rowspan="1" id="lab-pcb-name"     class="cls-c3-r1">PCB NAME</th>
+                        <th colspan="4" rowspan="1" id="txt-pcb-name"     class="cls-c4-r1">{{PCB_FORM_MODEL['pcb_name']}}</th>
+                        <th colspan="2" rowspan="1" id="lab-project-no"     class="cls-c2-r1">專案代號</th>
+                        <th colspan="5" rowspan="1" id="txt-project-no"     class="cls-c5-r1">{{PCB_FORM_MODEL['project_no']}}</th>
+                      
+
+
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="lab-final-version" class="cls-c3-r1">版本</th>
+                        <th colspan="3"  rowspan="1" id="txt-final-version" class="cls-c3-r1">{{PCB_FORM_MODEL['version']}}</th> -->
+                        <th colspan="3"  rowspan="1" id="lab-version" class="cls-c2-r1">
+                            <select id="sel-version">
+                                <option value="初版">初版</option>
+                                <!-- <option value="大改版">大改版</option>
+                                <option value="小改版">小改版</option>   -->
+                            </select>
+                        </th>
+                        <th colspan="3"  rowspan="1" id="txt-version"     class="cls-c2-r1"></th>
+                        <th colspan="3"  rowspan="1" id="lab-gerber-name"   class="cls-c3-r1">Gerber Name</th>
+                        <th colspan="4"  rowspan="1" id="txt-gerber-name"   class="cls-c4-r1">
+                            <input type="text" id="input-gerber-name" value={{PCB_FORM_MODEL['gerber_name']}}>
+                        </th>
+                           <th colspan="2" rowspan="1" id="lab-request-date" class="cls-c2-r1">需求日期</th>
+                        <th colspan="5" rowspan="1" id="txt-request-date" class="cls-c5-r1">
+                            <input type="date" id="input-request-date" value={{PCB_FORM_MODEL['apply_date']}}>
+                        </th>
+
+                    </tr>
+        
+                 
+                    
+
+                    <!-- 製作地區  交付地區 交付數量 -->
+                    <tr>                       
+
+                        <th colspan="4"  rowspan="1" id="lab-make-area"   class="cls-c4-r1">製作地區</th>
+                        <th colspan="1"  rowspan="1" id="box-make-taipei" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['place_of_production']['taipei'] == true %}
+                            <input type="checkbox" id="check-make-taipei" name="check-make-taipei" value="taipei" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-make-taipei" name="check-make-taipei" value="taipei">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-make-taipei"  class="cls-c1-r1">台北</th>
+                        <th colspan="1"  rowspan="1" id="box-make-kunshan" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['place_of_production']['kunshan'] == true %}
+                            <input type="checkbox" id="check-make-kunshan" name="check-make-kunshan" value="kunshan" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-make-kunshan" name="check-make-kunshan" value="kunshan">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-make-kunshan" class="cls-c3-r1">昆山</th>
+                        <th colspan="4"  rowspan="1" id="lab-deliver-area"    class="cls-c4-r1">交付地區</th>
+                        <th colspan="1"  rowspan="1" id="box-deliver-taipei"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['place_of_deliver']['taipei'] == true %}
+                            <input type="checkbox" id="check-deliver-taipei" name="check-deliver-taipei" value="taipei" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-deliver-taipei" name="check-deliver-taipei" value="taipei">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-deliver-taipei"  class="cls-c1-r1">台北</th>
+                        <th colspan="1"  rowspan="1" id="box-deliver-kunshan" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['place_of_deliver']['kunshan'] == true %}
+                            <input type="checkbox" id="check-deliver-kunshan" name="check-deliver-kunshan" value="kunshan" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-deliver-kunshan" name="check-deliver-kunshan" value="kunshan">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-deliver-kunshan" class="cls-c3-r1">昆山</th>
+        
+                       
+                    </tr>
+
+                    <tr>
+                                <th colspan="3"  rowspan="1" id="lab-deliver-count"   class="cls-c3-r1">交付數量</th>
+                                <th colspan="2"  rowspan="1" id="txt-deliver-count"   class="cls-c2-r1">
+                                    <input type="text" id="input-delivert-count" value={{ PCB_FORM_MODEL['deliver_count'] }}>
+                                </th>
+                                <th colspan="1"  rowspan="1" id="box-new-product"  class="cls-c1-r1">
+                                    {% if PCB_FORM_MODEL['pcb_type']['new-project'] == true %}
+                                    <input type="checkbox" id="check-new-product" name="check-new-product" value="new-product" checked>
+                                    {% else %}
+                                    <input type="checkbox" id="check-new-product" name="check-new-product" value="new-product">
+                                    {% endif %}
+                                </th>
+                                <th colspan="2"  rowspan="1" id="lab-new-product"  class="cls-c2-r1">新產品打樣</th>
+        
+                                <th colspan="1"  rowspan="1" id="box-old-product"  class="cls-c1-r1">
+                                    {% if PCB_FORM_MODEL['pcb_type']['old-project'] == true %}
+                                    <input type="checkbox" id="check-old-product" name="check-old-product" value="old-product" checked>
+                                    {% else %}
+                                    <input type="checkbox" id="check-old-product" name="check-old-product" value="old-product">
+                                    {% endif %}
+                                </th>
+                                <th colspan="3"  rowspan="1" id="lab-old-product"  class="cls-c3-r1">舊有產品修改</th>
+        
+                                <th colspan="1"  rowspan="1" id="box-other-product"  class="cls-c1-r1">
+                                    {% if PCB_FORM_MODEL['pcb_type']['other-project'] == true %}
+                                    <input type="checkbox" id="check-other-product" name="check-other-product" value="other-product" checked>
+                                    {% else %}
+                                    <input type="checkbox" id="check-other-product" name="check-other-product" value="other-product">
+                                    {% endif %}
+                                </th>
+                                <th colspan="2"  rowspan="1" id="lab-other-product"  class="cls-c2-r1">其他</th>
+        
+                                <th colspan="5" rowspan="1" id="empty-other-product"  class="cls-c5-r1"></th>
+                    </tr>
+
+                </thead>
+
+                <!-- 表單內容 ☐ ☑ -->
+                <tbody id="table-body">
+        
+                    <tr>
+                        <th colspan="3"  rowspan="1" id="lab-wash-board"        class="cls-c3-r1">洗板目的</th>
+                        <th colspan="1"  rowspan="1" id="box-experiment-board"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['purpose_pcb']['experiment-board'] == true %}
+                            <input type="checkbox" id="check-experiment-board" name="check-experiment-board" value="experiment-board" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-experiment-board" name="check-experiment-board" value="experiment-board">
+                            {% endif %}
+                        </th>
+                        <th colspan="4"  rowspan="1" id="lab-experiment-board"  class="cls-c4-r1">實驗板不導入量產</th>
+        
+                        <th colspan="1"  rowspan="1" id="box-future-board"      class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['purpose_pcb']['future-board'] == true %}
+                            <input type="checkbox" id="check-future-board" name="check-future-board" value="future-board" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-future-board" name="check-future-board" value="future-board">
+                            {% endif %}
+                        </th>
+                        <th colspan="6"  rowspan="1" id="lab-future-board"      class="cls-c6-r1">產品開發設計中未來導入量產</th>
+        
+                        <th colspan="1"  rowspan="1" id="box-direct-production" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['purpose_pcb']['direct-production'] == true %}
+                            <input type="checkbox" id="check-direct-production" name="check-direct-production" value="direct-production" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-direct-production" name="check-direct-production" value="direct-production">
+                            {% endif %}
+                        </th>
+                        <th colspan="4"  rowspan="1" id="lab-direct-production" class="cls-c4-r1">直接量產</th>
+                    </tr>
+
+                    <!-- 板材規格 -->
+                    <tr>
+                        <th colspan="3"  rowspan="7" id="lab-plate-spec"    class="cls-c3-r7">板材規格</th>
+                        <th colspan="1"  rowspan="1" id="box-4-layer"       class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_spec']['4-layer'] == true %}
+                            <input type="checkbox" id="check-4-layer" name="check-4-layer" value="4-layer" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-4-layer" name="check-4-layer" value="4-layer">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-4-layer"       class="cls-c3-r1">4 Layer FR-4</th>
+                        <th colspan="1"  rowspan="1" id="box-layer-06-mm"   class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_spec']['0.6mm'] == true %}
+                            <input type="checkbox" id="check-layer-06-mm" name="check-layer-06-mm" value="layer-06-mm" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-layer-06-mm" name="check-layer-06-mm" value="layer-06-mm">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-layer-06-mm"   class="cls-c2-r1">0.6 mm</th>
+                        <th colspan="1"  rowspan="1" id="box-layer-10-mm"   class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_spec']['1.0mm'] == true %}
+                            <input type="checkbox" id="check-layer-10-mm" name="check-layer-10-mm" value="check-layer-10-mm" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-layer-10-mm" name="check-layer-10-mm" value="check-layer-10-mm">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-layer-10-mm"   class="cls-c2-r1">1.0 mm</th>
+                        <th colspan="1"  rowspan="1" id="box-layer-16-mm"   class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_spec']['1.6mm'] == true %}
+                            <input type="checkbox" id="check-layer-16-mm" name="check-layer-16-mm" value="layer-16-mm" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-layer-16-mm" name="check-layer-16-mm" value="layer-16-mm">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-layer-16-mm"   class="cls-c2-r1">1.6 mm</th>
+                        <th colspan="1"  rowspan="1" id="box-layer-11"      class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_spec']['1-1'] == true %}
+                            <input type="checkbox" id="check-layer-11" name="check-layer-11" value="layer-11" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-layer-11" name="check-layer-11" value="layer-11">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-layer-11"      class="cls-c1-r1">1/1 </th>
+                        <th colspan="1"  rowspan="1" id="box-layer-1111"    class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_diff']['1-1-1-1'] == true %}
+                            <input type="checkbox" id="check-layer-1111" name="check-layer-1111" value="layer-1111" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-layer-1111" name="check-layer-1111" value="layer-1111">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-layer-1111"    class="cls-c1-r1">1/1/1/1</th>
+                    </tr>
+
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="lab-plate-spec"   class="cls-c3-r1">板材規格</th> -->
+                        <th colspan="1"  rowspan="1" id="box-other-layer"  class="cls-c1-r1">
+                            <input type="checkbox" id="check-other-layer" name="check-other-layer" value="other-layer">
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-other-layer"  class="cls-c1-r1">其他</th>
+                        <th colspan="3"  rowspan="1" id="txt-other-layer"  class="cls-c3-r1">{{PCB_FORM_MODEL['board_spec']['layer']}}
+                             <input type="text" id="input-other-layer" value=""> 
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-layer-unit"   class="cls-c1-r1">Layer</th>
+                        <th colspan="3"  rowspan="1" id="txt-layer-unit"   class="cls-c3-r1">{{PCB_FORM_MODEL['board_spec']['mm']}}
+                             <input type="text" id="input-layer-unit" value=""> 
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-layer-mm"     class="cls-c1-r1">mm</th>
+                        <th colspan="1"  rowspan="1" id="lab-layer-xxxx"   class="cls-c1-r1">x/x/x/x</th>
+                        <th colspan="6"  rowspan="1" id="empty-layer-xxxx" class="cls-c6-r1"></th>
+                    </tr>
+
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="lab-plate-spec" class="cls-c3-r1">板材規格</th> -->
+                        <th colspan="3"  rowspan="1" id="lab-thickness"       class="cls-c3-r1">板厚誤差+/- : </th>
+                        <th colspan="1"  rowspan="1" id="box-thickness-01-mm" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_diff']['0.1mm'] == true %}
+                            <input type="checkbox" id="check-thickness-01-mm" name="check-thickness-01-mm" value="thickness-01-mm" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-thickness-01-mm" name="check-thickness-01-mm" value="thickness-01-mm">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-thickness-01-mm"       class="cls-c2-r1">0.1mm</th>
+                        <th colspan="1"  rowspan="1" id="box-thickness-5-percenter" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_diff']['5%'] == true %}
+                            <input type="checkbox" id="check-thickness-5-percenter" name="check-thickness-5-percenter" value="thickness-5-percenter" checked>                            
+                            {% else %}
+                            <input type="checkbox" id="check-thickness-5-percenter" name="check-thickness-5-percenter" value="thickness-5-percenter">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-thickness-5-percenter"  class="cls-c1-r1">5%</th>
+                        <th colspan="1"  rowspan="1" id="box-thickness-10-percenter" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_diff']['10%'] == true %}
+                            <input type="checkbox" id="check-thickness-10-percenter" name="check-thickness-10-percenter" value="thickness-10-percenter" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-thickness-10-percenter" name="check-thickness-10-percenter" value="thickness-10-percenter">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-thickness-10-percenter" class="cls-c1-r1">10%</th>
+                        <th colspan="3"  rowspan="1" id="lab-defy"                   class="cls-c3-r1">阻抗誤差+/- : </th>
+                        <th colspan="1"  rowspan="1" id="box-defy-5-percenter"       class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['impedance_diff']['5%'] == true %}
+                            <input type="checkbox" id="check-defy-5-percenter" name="check-defy-5-percenter" value="defy-5-percenter" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-defy-5-percenter" name="check-defy-5-percenter" value="defy-5-percenter">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-defy-5-percenter"       class="cls-c1-r1">5%</th>
+                        <th colspan="1"  rowspan="1" id="box-defy-10-percenter"      class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['impedance_diff']['10%'] == true %}
+                            <input type="checkbox" id="check-defy-10-percenter" name="check-defy-10-percenter" value="defy-10-percenter" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-defy-10-percenter" name="check-defy-10-percenter" value="defy-10-percenter">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-defy-10-percenter"      class="cls-c1-r1">10%</th>
+                    </tr>
+        
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="lab-plate-spec"    class="cls-c3-r1">板材規格</th> -->
+                        <th colspan="1"  rowspan="1" id="box-defy-16-mm"    class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_diff']['1.6mm'] == true %}
+                            <input type="checkbox" id="check-defy-16-mm" name="check-defy-16-mm" value="defy-16-mm" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-defy-16-mm" name="check-defy-16-mm" value="defy-16-mm">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-defy-16-mm"    class="cls-c3-r1">1.6(+0.1/-0.1mm)</th>
+                        <th colspan="1"  rowspan="1" id="box-defy-special"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_diff']['special'] == true %}
+                            <input type="checkbox" id="check-defy-special" name="check-defy-special" value="defy-special" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-defy-special" name="check-defy-special" value="defy-special">
+                            {% endif %}
+                        </th>
+                        <th colspan="5"  rowspan="1" id="lab-defy-special"  class="cls-c5-r1">特殊板厚誤差(+/-0.08mm)</th>
+                        <th colspan="1"  rowspan="1" id="box-defy-gerber"   class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['impedance_diff']['gerber'] == true %}
+                            <input type="checkbox" id="check-defy-gerber" name="check-defy-gerber" value="defy-gerber" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-defy-gerber" name="check-defy-gerber" value="defy-gerber">
+                            {% endif %}
+                        </th>
+                        <th colspan="6"  rowspan="1" id="lab-defy-gerber"   class="cls-c6-r1">依 GERBER</th>
+                    </tr>
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="lab-plate-spec"    class="cls-c3-r1">板材規格</th> -->
+                        <th colspan="1"  rowspan="1" id="box-defy-tg-155f"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['board_diff']['tg-155f'] == true %}
+                            <input type="checkbox" id="check-defy-tg-155f" name="check-defy-tg-155f" value="defy-tg-155f" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-defy-tg-155f" name="check-defy-tg-155f" value="defy-tg-155f">
+                            {% endif %}
+                        </th>
+                        <th colspan="9"  rowspan="1" id="lab-defy-tg-155f"  class="cls-c9-r1">TG-155F</th>
+                        <th colspan="7"  rowspan="1" id="empty-defy"        class="cls-c7-r1"></th>
+                    </tr>
+        
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="lab-plate-spec"       class="cls-c3-r1">板材規格</th> -->
+                        <th colspan="3"  rowspan="1" id="lab-surface"          class="cls-c3-r1">表面處理 : </th>
+                        <th colspan="1"  rowspan="1" id="box-surface-lead"     class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['surface_treatment']['lead'] == true %}
+                            <input type="checkbox" id="check-surface-lead" name="check-surface-lead" value="surface-lead" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-surface-lead" name="check-surface-lead" value="surface-lead">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-surface-lead"     class="cls-c3-r1">無鉛噴錫板</th>
+                        <th colspan="1"  rowspan="1" id="box-surface-chemical" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['surface_treatment']['chemical'] == true %}
+                            <input type="checkbox" id="check-surface-chemical" name="check-surface-chemical" value="surface-chemical" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-surface-chemical" name="check-surface-chemical" value="surface-chemical">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-surface-chemical" class="cls-c3-r1">化學金 CARD</th>
+                        <th colspan="1"  rowspan="1" id="box-surface-other"    class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['surface_treatment']['other'] == true %}
+                            <input type="checkbox" id="check-surface-other" name="check-surface-other" value="surface-other" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-surface-other" name="check-surface-other" value="surface-other">
+                            {% endif %}
+                        </th>
+                        <th colspan="5"  rowspan="1" id="lab-surface-other"    class="cls-c5-r1">其他</th>
+                    </tr>
+
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="lab-plate-spec"  class="cls-c3-r1">板材規格</th> -->
+                        <th colspan="3"  rowspan="1" id="lab-metal"    class="cls-c3-r1">(化金厚度) ( </th>
+                        <th colspan="1"  rowspan="1" id="box-metal-3u" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['enig']['3U"'] == true %}
+                            <input type="checkbox" id="check-metal-3u" name="check-metal-3u" value="metal-3u" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-metal-3u" name="check-metal-3u" value="metal-3u">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-metal-3u"    class="cls-c2-r1">足 3U"</th>
+                        <th colspan="1"  rowspan="1" id="box-metal-5u"    class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['enig']['5U"'] == true %}
+                            <input type="checkbox" id="check-metal-5u" name="check-metal-5u" value="metal-5u" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-metal-5u" name="check-metal-5u" value="metal-5u">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-metal-5u"    class="cls-c1-r1">5U"</th>
+                        <th colspan="1"  rowspan="1" id="box-metal-10u"   class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['enig']['10U"'] == true %}
+                            <input type="checkbox" id="check-metal-10u" name="check-metal-10u" value="metal-10u" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-metal-10u" name="check-metal-10u" value="metal-10u">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-metal-10u"   class="cls-c1-r1">10U"</th>
+                        <th colspan="1"  rowspan="1" id="box-metal-15u"   class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['enig']['15U"'] == true %}
+                            <input type="checkbox" id="check-metal-15u" name="check-metal-15u" value="metal-15u" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-metal-15u" name="check-metal-15u" value="metal-15u">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-metal-15u"   class="cls-c1-r1">15U"</th>
+                        <th colspan="1"  rowspan="1" id="box-metal-30u"   class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['enig']['30U"'] == true %}
+                            <input type="checkbox" id="check-metal-30u" name="check-metal-30u" value="metal-30u" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-metal-30u" name="check-metal-30u" value="metal-30u">
+                            {% endif %}
+                        </th>
+                        <th colspan="4"  rowspan="1" id="lab-metal-30u"   class="cls-c4-r1">30U" ) 英制單位</th>
+                    </tr>
+
+                    <!-- 製程 -->
+                    <tr>
+                        <th colspan="3"  rowspan="1" id="title-process"       class="cls-c3-r1">製程</th>
+                        <th colspan="1"  rowspan="1" id="box-rohs" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['process']['RoHS'] == true %}
+                            <input type="checkbox" id="check-rohs" name="check-rohs" value="rohs" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-rohs" name="check-rohs" value="rohs">
+                            {% endif %}
+                        </th>
+                        <th colspan="2" rowspan="1" id="lab-rohs"  class="cls-c2-r1">RoHS</th>
+                        <th colspan="1"  rowspan="1" id="box-halogen-free" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['process']['HalogenFree'] == true %}
+                            <input type="checkbox" id="check-halogen-free" name="check-halogen-free" value="halogen-free" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-halogen-free" name="check-halogen-free" value="halogen-free">
+                            {% endif %}
+                        </th>
+                        <th colspan="13" rowspan="1" id="lab-halogen-free" class="cls-c13-r1">Halogen Free ( 無齒 ) </th>
+                    </tr>
+        
+                    <!-- 產品要求 -->
+                    <tr>
+                        <th colspan="3"  rowspan="6" id="title-product"       class="cls-c3-r6">產品要求</th>
+                        <th colspan="3"  rowspan="1" id="lab-product-size"    class="cls-c3-r1">成型尺寸圖 : </th>
+                        <th colspan="1"  rowspan="1" id="box-product-none"    class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['dimensional_drawing']['none'] == true %}
+                            <input type="checkbox" id="check-product-none" name="check-product-none" value="product-none" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-product-none" name="check-product-none" value="product-none">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-product-none"    class="cls-c1-r1">無</th>
+                        <th colspan="1"  rowspan="1" id="box-product-spell"   class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['dimensional_drawing']['spell'] == true %}
+                            <input type="checkbox" id="check-product-spell" name="check-product-spell" value="product-spell" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-product-spell" name="check-product-spell" value="product-spell">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-product-spell"   class="cls-c3-r1">依拼版圖製作</th>
+                        <th colspan="1"  rowspan="1" id="box-product-attach" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['dimensional_drawing']['attach'] == true %}
+                            <input type="checkbox" id="check-product-attach" name="check-product-attach" value="product-attach" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-product-attach" name="check-product-attach" value="product-attach">
+                            {% endif %}
+                        </th>
+                        <th colspan="7"  rowspan="1" id="lab-product-attach" class="cls-c7-r1">附於 GERBER 檔案內</th>
+                    </tr>
+        
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="title-product"           class="cls-c3-r1">產品要求</th> -->
+                        <th colspan="3"  rowspan="1" id="lab-solder-color"        class="cls-c3-r1">防焊顏色 : </th>
+                        <th colspan="1"  rowspan="1" id="box-solder-color-golden" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['weld_color']['golden'] == true %}
+                            <input type="checkbox" id="check-solder-color-golden" name="check-solder-color-golden" value="solder-color-golden" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-solder-color-golden" name="check-solder-color-golden" value="solder-color-golden">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-solder-color-golden" class="cls-c2-r1">金黃色:</th>
+                        <th colspan="1"  rowspan="1" id="box-solder-color-blue"   class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['weld_color']['blue'] == true %}
+                            <input type="checkbox" id="check-solder-color-blue" name="check-solder-color-blue" value="solder-color-blue" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-solder-color-blue" name="check-solder-color-blue" value="solder-color-blue">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-solder-color-blue"   class="cls-c2-r1">深藍色</th>
+                        <th colspan="1"  rowspan="1" id="box-solder-color-green"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['weld_color']['green'] == true %}
+                            <input type="checkbox" id="check-solder-color-green" name="check-solder-color-green" value="solder-color-green" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-solder-color-green" name="check-solder-color-green" value="solder-color-green">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-solder-color-green"  class="cls-c2-r1">綠色</th>
+                        <th colspan="1"  rowspan="1" id="box-solder-color-other"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['weld_color']['other'] == true %}
+                            <input type="checkbox" id="check-solder-color-other" name="check-solder-color-other" value="solder-color-other" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-solder-color-other" name="check-solder-color-other" value="solder-color-other">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-solder-color-other"  class="cls-c2-r1">其他</th>
+                        <th colspan="2"  rowspan="1" id="txt-solder-color-other"  class="cls-c2-r1">
+                            <!-- <input type="text" id="input-solder-color-other" value=""> -->
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="title-product"     class="cls-c3-r1">產品要求</th>-->
+                        <th colspan="2"  rowspan="1" id="lab-ulmark"    class="cls-c2-r1">UL MARK:</th>
+                        <th colspan="1"  rowspan="1" id="box-ulmark-c"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['ul_mark']['c'] == true %}
+                            <input type="checkbox" id="check-ulmark-c" name="check-ulmark-c" value="ulmark-c" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-ulmark-c" name="check-ulmark-c" value="ulmark-c">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-ulmark-c"  class="cls-c1-r1">C面</th>
+                        <th colspan="1"  rowspan="1" id="box-ulmark-s"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['ul_mark']['s'] == true %}
+                            <input type="checkbox" id="check-ulmark-s" name="check-ulmark-s" value="ulmark-s" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-ulmark-s" name="check-ulmark-s" value="ulmark-s">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-ulmark-s"  class="cls-c1-r1">S面</th>
+                        <th colspan="1"  rowspan="1" id="box-ulmark-no" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['ul_mark']['no'] == true %}
+                            <input type="checkbox" id="check-ulmark-no" name="check-ulmark-no" value="ulmark-no" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-ulmark-no" name="check-ulmark-no" value="ulmark-no">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-ulmark-no"   class="cls-c1-r1">不加</th>
+                        <th colspan="3"  rowspan="1" id="lab-date-code"   class="cls-c3-r1">Date Code:</th>
+                        <th colspan="1"  rowspan="1" id="box-date-code-c" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['date_code']['c'] == true %}
+                            <input type="checkbox" id="check-date-code-c" name="check-date-code" value="date-code-c" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-date-code-c" name="check-date-code" value="date-code-c">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-date-code-c" class="cls-c1-r1">C面</th>
+                        <th colspan="1"  rowspan="1" id="box-date-code-s" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['date_code']['s'] == true %}
+                            <input type="checkbox" id="check-date-code-s" name="check-date-code-s" value="date-code-s" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-date-code-s" name="check-date-code-s" value="date-code-s">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-date-code-s"  class="cls-c1-r1">S面</th>
+                        <th colspan="1"  rowspan="1" id="box-date-code-no" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['date_code']['no'] == true %}
+                            <input type="checkbox" id="check-date-code-no" name="check-date-code-no" value="date-code-no" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-date-code-no" name="check-date-code-no" value="date-code-no">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-date-code-no" class="cls-c1-r1">不加</th>
+                    </tr>
+        
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="title-product"  class="cls-c3-r1">產品要求</th> -->
+                        <th colspan="2"  rowspan="1" id="lab-word"         class="cls-c2-r1">文&nbsp;&nbsp;&nbsp;&nbsp;字 : </th>
+                        <th colspan="1"  rowspan="1" id="box-single-plane" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['font']['single'] == true %}
+                            <input type="checkbox" id="check-single-plane" name="check-single-plane" value="single-plane" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-single-plane" name="check-single-plane" value="single-plane">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-single-plane" class="cls-c1-r1">單面</th>
+                        <th colspan="1"  rowspan="1" id="box-double-plane" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['font']['double'] == true %}
+                            <input type="checkbox" id="check-double-plane" name="check-double-plane" value="double-plane" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-double-plane" name="check-double-plane" value="double-plane">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-double-plane" class="cls-c1-r1">雙面</th>
+                        <th colspan="2"  rowspan="1" id="empty-word"       class="cls-c2-r1"></th>
+                        <th colspan="2"  rowspan="1" id="lab-color"        class="cls-c2-r1">顏色 : </th>
+                        <th colspan="2"  rowspan="1" id="txt-color"        class="cls-c2-r1">
+                            <input type="text" id="input-color" value={{PCB_FORM_MODEL['font_color']}}>
+                        </th>
+                        <th colspan="5"  rowspan="1" id="empty-color"      class="cls-c5-r1"></th>
+                    </tr>
+        
+                    <tr>
+                        <!--<th colspan="3"  rowspan="1" id="title-product"       class="cls-c3-r1">產品要求</th>-->
+                        <th colspan="2"  rowspan="1" id="lab-golden-finger"   class="cls-c2-r1">金手指導角:</th>
+                        <th colspan="1"  rowspan="1" id="box-angle"       class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['goldfinger_angle'] == true %}
+                            <input type="checkbox" id="check-angle" name="check-angle" value="angle" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-angle" name="check-angle" value="angle">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-angle" class="cls-c3-r1">20度(+/-5度)</th>
+                        <th colspan="11" rowspan="1" id="empty-golden-finger" class="cls-c11-r1"></th>
+                    </tr>
+        
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="title-product"    class="cls-c3-r1">產品要求</th> -->
+                        <th colspan="2"  rowspan="1" id="lab-depth"        class="cls-c2-r1">導角深度:</th>
+                        <th colspan="1"  rowspan="1" id="box-depth-130mm"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['angle_depth']['1.30mm'] == true %}
+                            <input type="checkbox" id="check-depth-130mm" name="check-angle" value="depth-130mm" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-depth-130mm" name="check-angle" value="depth-130mm">
+                            {% endif %}
+                        </th>
+                        <th colspan="5"  rowspan="1" id="lab-depth-130mm"  class="cls-c5-r1">PCIe 1.30mm(+/-0.25mm)</th>
+                        <th colspan="1"  rowspan="1" id="box-depth-180mm"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['angle_depth']['1.80mm'] == true %}
+                            <input type="checkbox" id="check-depth-180mm" name="check-depth-180mm" value="depth-180mm" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-depth-180mm" name="check-depth-180mm" value="depth-180mm">
+                            {% endif %}
+                        </th>
+                        <th colspan="4"  rowspan="1" id="lab-depth-180mm"  class="cls-c4-r1">PCI 1.80mm(+/-0.2mm)</th>
+                        <th colspan="1"  rowspan="1" id="box-depth-025mm"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['angle_depth']['0.25mm'] == true %}
+                            <input type="checkbox" id="check-depth-025mm" name="check-depth-025mm" value="depth-025mm" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-depth-025mm" name="check-depth-025mm" value="depth-025mm">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-depth-025mm"  class="cls-c3-r1">MINI PCIe 0.25mm(max)</th>
+                    </tr>
+        
+                    <!-- (VIA)過孔阻焊方式 -->
+                    <tr>
+                        <th colspan="3"  rowspan="4" id="title-via"           class="cls-c3-r4">(VIA)過孔<br/>阻焊方式</th>
+                        <th colspan="2"  rowspan="1" id="lab-via-normal"      class="cls-c2-r1">一般</th>
+                        <th colspan="1"  rowspan="1" id="box-via-normal-ink"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['via_general']['ink'] == true %}
+                            <input type="checkbox" id="check-via-normal-ink" name="check-via-normal-ink" value="via-normal-ink" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-via-normal-ink" name="check-via-normal-ink" value="via-normal-ink">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-via-normal-ink"  class="cls-c3-r1">過孔蓋油墨</th>
+                        <th colspan="1"  rowspan="1" id="box-via-normal-file" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['via_general']['file'] == true %}
+                            <input type="checkbox" id="check-via-normal-file" name="check-via-normal-file" value="via-normal-file" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-via-normal-file" name="check-via-normal-file" value="via-normal-file">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-via-normal-file" class="cls-c3-r1">按文件設計</th>
+                    </tr>
+        
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="title-via"  class="cls-c3-r1">(VIA)過孔阻焊方式</th> -->
+                        <th colspan="2"  rowspan="2" id="lab-via-bga"     class="cls-c2-r1">BGA</th>
+                        <th colspan="1"  rowspan="1" id="box-via-bga-all" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['via_bga']['all'] == true %}
+                            <input type="checkbox" id="check-via-bga-all" name="check-via-bga-all" value="via-bga-all" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-via-bga-all" name="check-via-bga-all" value="via-bga-all">
+                            {% endif %}
+                        </th>
+                        <th colspan="14" rowspan="1" id="lab-via-bga-all" class="cls-c14-r1">BGA 區域的過孔在頂、底層均覆蓋阻焊油，並塞孔</th>
+                    </tr>
+        
+                    <tr>
+                        <!--<th colspan="3"  rowspan="1" id="title-via"    class="cls-c3-r1">(VIA)過孔阻焊方式</th> -->
+                        <!--<th colspan="2"  rowspan="1" id="lab-via-bga"  class="cls-c2-r1">BGA</th> -->
+                        <th colspan="1"  rowspan="1" id="box-via-bga-bottom" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['via_bga']['bottom'] == true %}
+                            <input type="checkbox" id="check-via-bga-bottom" name="check-via-bga-bottom" value="via-bga-bottom" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-via-bga-bottom" name="check-via-bga-bottom" value="via-bga-bottom">
+                            {% endif %}
+                        </th>
+                        <th colspan="14" rowspan="1" id="lab-via-bga-bottom" class="cls-c14-r1">BGA 區域的過孔在頂層覆蓋阻焊油，底層的阻焊按文件設計製作，並塞孔</th>
+                    </tr>
+        
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="title-via"  class="cls-c3-r1">(VIA)過孔阻焊方式</th> -->
+                        <th colspan="2"  rowspan="1" id="lab-via-special"       class="cls-c2-r1">特殊</th>
+                        <th colspan="1"  rowspan="1" id="box-via-special-blind" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['via_special'] == true %}
+                            <input type="checkbox" id="check-via-special-blind" name="check-via-special-blind" value="via-special-blind" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-via-special-blind" name="check-via-special-blind" value="via-special-blind">
+                            {% endif %}
+                        </th>
+                        <th colspan="14" rowspan="1" id="lab-via-special-blind" class="cls-c14-r1">盲埋孔</th>
+                    </tr>
+        
+                    <!-- 樣品需求 -->
+                    <tr>
+                        <th colspan="3"  rowspan="1" id="title-sample"       class="cls-c3-r1">樣品需求</th>
+                        <th colspan="1"  rowspan="1" id="box-sample-request" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['sample_require']['require'] == true %}
+                            <input type="checkbox" id="check-sample-request" name="check-sample-request" value="sample-request" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-sample-request" name="check-sample-request" value="sample-request">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-sample-request" class="cls-c2-r1">需求數</th>
+                        <th colspan="1"  rowspan="1" id="txt-sample-request" class="cls-c1-r1">
+                            <input type="text" id="input-sample-request"  value={{PCB_FORM_MODEL['pcs']}}>
+                        </th>
+                        <th colspan="1"  rowspan="1" id="unit-sample-request" class="cls-c1-r1">pcs</th>
+                        <th colspan="1"  rowspan="1" id="box-sample-bad"      class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['sample_bad']['bad'] == true %}
+                            <input type="checkbox" id="check-sample-bad" name="check-sample-bad" value="sample-bad" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-sample-bad" name="check-sample-bad" value="sample-bad">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-sample-bad"  class="cls-c2-r1">不良板</th>
+                        <th colspan="1"  rowspan="1" id="txt-sample-bad"  class="cls-c1-r1">
+                            <input type="text" id="input-sample-bad"  value={{PCB_FORM_MODEL['panel']}}>
+                        </th>
+                        <th colspan="1"  rowspan="1" id="unit-sample-bad"    class="cls-c1-r1">panel</th>
+                        <th colspan="1"  rowspan="1" id="lab-sample-vcut"    class="cls-c1-r1">V-Cut</th>
+                        <th colspan="1"  rowspan="1" id="box-sample-vcut-30" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['sample_vcut']['30'] == true %}
+                            <input type="checkbox" id="check-sample-vcut-30" name="check-sample-vcut-30" value="sample-vcut-30" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-sample-vcut-30" name="check-sample-vcut-30" value="sample-vcut-30">
+                            {% endif %}
+                        </th>
+                        <th colspan="1"  rowspan="1" id="lab-sample-vcut-30"  class="cls-c1-r1">30</th>
+                        <th colspan="1"  rowspan="1" id="box-sample-vcut-45"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['sample_vcut']['45'] == true %}
+                            <input type="checkbox" id="check-sample-vcut-45" name="check-sample-vcut-45" value="sample-vcut-45" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-sample-vcut-45" name="check-sample-vcut-45" value="sample-vcut-45">
+                            {% endif %}
+                        </th>
+                        <th colspan="3"  rowspan="1" id="lab-sample-vcut-45"  class="cls-c3-r1">45 度 (殘留厚度 T/3)</th>
+                    </tr>
+                           
+                    <!-- 交貨附件 -->
+                    <tr>                       
+
+                        <th colspan="3"  rowspan="4" id="title-appendix"              class="cls-c3-r4">交貨附件</th>
+                        <th colspan="1"  rowspan="1" id="box-appendix-acknowledgment" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['acknowledgment'] == true %}
+                            <input type="checkbox" id="check-appendix-acknowledgment" name="check-appendix-acknowledgment" value="appendix-acknowledgment" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-appendix-acknowledgment" name="check-appendix-acknowledgment" value="appendix-acknowledgment">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-appendix-acknowledgment" class="cls-c2-r1">承認書</th>
+                        <th colspan="2"  rowspan="1" id="txt-appendix-acknowledgment" class="cls-c2-r1">
+                            <input type="text" id="input-appendix-acknowledgment"  value={{PCB_FORM_MODEL['attach']['acknowledgment-count']}}>
+                        </th>
+                        <th colspan="1"  rowspan="1" id="unit-appendix-acknowledgment" class="cls-c1-r1">份</th>
+                        <th colspan="1"  rowspan="1" id="box-appendix-ul"              class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['ul'] == true %}
+                            <input type="checkbox" id="check-appendix-ul" name="check-appendix-ul" value="appendix-ul" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-appendix-ul" name="check-appendix-ul" value="appendix-ul">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-appendix-ul"  class="cls-c2-r1">UL黃卡</th>
+                        <th colspan="2"  rowspan="1" id="txt-appendix-ul"  class="cls-c2-r1">
+                             <input type="text" id="input-appendix-ul"  value={{PCB_FORM_MODEL['attach']['ul-count']}}>
+                        </th>
+                        <th colspan="1"  rowspan="1" id="unit-appendix-ul" class="cls-c1-r1">份</th>
+                        <th colspan="5"  rowspan="1" id="empty-appendix"   nclass="cls-c5-r1"></th>
+                    </tr>
+
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="title-appendix"       class="cls-c3-r1">交貨附件</th> -->
+                        <th colspan="1"  rowspan="1" id="box-appendix-origin"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['origin'] == true %}
+                            <input type="checkbox" id="check-appendix-origin" name="check-appendix-origin" value="appendix-origin" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-appendix-origin" name="check-appendix-origin" value="appendix-origin">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-appendix-origin" class="cls-c2-r1">原稿底片</th>
+                        <th colspan="2"  rowspan="1" id="txt-appendix-origin" class="cls-c2-r1">
+                            <input type="text" id="input-appendix-origin"  value={{PCB_FORM_MODEL['attach']['origin-count']}}> 
+                        </th>
+                        <th colspan="1"  rowspan="1" id="unit-appendix-origin" class="cls-c1-r1">份</th>
+                        <th colspan="1"  rowspan="1" id="box-appendix-work"    class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['work'] == true %}
+                            <input type="checkbox" id="check-appendix-work" name="check-appendix-work" value="appendix-work" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-appendix-work" name="check-appendix-work" value="appendix-work">
+                            {% endif %}
+                        </th>
+                        <th colspan="2"  rowspan="1" id="lab-appendix-work"  class="cls-c2-r1">工作底片</th>
+                        <th colspan="2"  rowspan="1" id="txt-appendix-work"  class="cls-c2-r1">
+                             <input type="text" id="input-appendix-work"  value={{PCB_FORM_MODEL['attach']['work-count']}}> 
+                        </th>
+                        <th colspan="1"  rowspan="1" id="unit-appendix-work" class="cls-c1-r1">份</th>
+                        <th colspan="5"  rowspan="1" id="empty-work"         class="cls-c5-r1"></th>
+                    </tr>
+        
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="title-appendix"  class="cls-c3-r1">交貨附件</th> -->
+                        <th colspan="1"  rowspan="1" id="box-appendix-origin"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['test-report'] == true %}
+                            <input type="checkbox" id="check-test-report" name="check-test-report" value="test-report" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-test-report" name="check-test-report" value="test-report" >
+                            {% endif %}
+                        </th>
+                        <th colspan="4"  rowspan="1" id="lab-test-report"  class="cls-c4-r1">電測報告</th>
+                        <th colspan="1"  rowspan="1" id="box-resistance-report"  class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['resistance-report'] == true %}
+                            <input type="checkbox" id="check-resistance-report" name="check-resistance-report" value="resistance-report" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-resistance-report" name="check-resistance-report" value="resistance-report">
+                            {% endif %}
+                        </th>
+                        <th colspan="4"  rowspan="1" id="lab-resistance-report"  class="cls-c4-r1">阻抗測試報告</th>
+                        <th colspan="1"  rowspan="1" id="box-inspect-report"     class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['inspect-report'] == true %}
+                            <input type="checkbox" id="check-inspect-report" name="check-inspect-report" value="inspect-report" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-inspect-report" name="check-inspect-report" value="inspect-report">
+                            {% endif %}
+                        </th>
+                        <th colspan="6"  rowspan="1" id="lab-inspect-report"  class="cls-c6-r1">出貨檢驗報告</th>
+                    </tr>
+                           
+                    <tr>
+                        <!-- <th colspan="3"  rowspan="1" id="title-appendix"  class="cls-c3-r1">交貨附件</th> -->
+                        <th colspan="1"  rowspan="1" id="box-finger-report" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['finger-report'] == true %}
+                            <input type="checkbox" id="check-finger-report" name="check-finger-report" value="finger-report" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-finger-report" name="check-finger-report" value="finger-report">
+                            {% endif %}
+                        </th>
+                        <th colspan="4"  rowspan="1" id="lab-finger-report" class="cls-c3-r1">金手指檢測報告</th>
+                        <th colspan="1"  rowspan="1" id="box-pcb-report"    class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['pcb-report'] == true %}
+                            <input type="checkbox" id="check-pcb-report" name="check-pcb-report" value="pcb-report" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-pcb-report" name="check-pcb-report" value="pcb-report">
+                            {% endif %}
+                        </th>
+                        <th colspan="4"  rowspan="1" id="lab-pcb-report" class="cls-c3-r1">PCB版剖面報告</th>
+                        <th colspan="1"  rowspan="1" id="box-open-short" class="cls-c1-r1">
+                            {% if PCB_FORM_MODEL['attach']['open-short'] == true %}
+                            <input type="checkbox" id="check-open-short" name="check-open-short" value="open-short" checked>
+                            {% else %}
+                            <input type="checkbox" id="check-open-short" name="check-open-short" value="open-short">
+                            {% endif %}
+                        </th>
+                        <th colspan="6"  rowspan="1" id="lab-open-short" class="cls-c2-r1">Open/Short測試/治具</th>
+                    </tr>
+
+                    <!-- 供應商 -->
+                    <tr>
+                        <th colspan="6"  rowspan="1" id="lab-vender-callback"     class="cls-c6-r1">供應商回傳PCB回廠日期</th>
+                        <th colspan="3"  rowspan="1" id="txt-vender-callback"     class="cls-c3-r1">
+                            <input type="date" id="date-vender-callback"  value={{PCB_FORM_MODEL['pcb_back_date']}}>
+                        </th>
+                        <!-- <th colspan="3"  rowspan="1" id="txt-vender-callback"     class="cls-c3-r1">{{PCB_FORM_MODEL['pcb_back_date']}}</th> -->
+                        <th colspan="11"  rowspan="1" id="empty-vender-callback" class="cls-c11-r1"></th>
+                    </tr>
+
+                    <!-- 檔案複查列表 -->
+                    <!-- <tr>
+                        <th colspan="3"   rowspan="1" id="title-attach-file" class="cls-c3-r1">檔案列表</th>
+                        <th colspan="17"  rowspan="1" id="title-attach-file" class="cls-c17-r1">
+                            <div id="myUL">
+                            </div>
+                        </th>
+                    </tr> -->
+                    <tr>
+                        <th colspan="3" rowspan="2" id="lab-attach-file"   class="cls-c3-r2">附加檔案✱</th>
+                        
+                        <th colspan="17" rowspan="1" id="empty-submit" class="cls-c17-r1">
+                            <form action="" method=post enctype=multipart/form-data id="upload-form">
+                                <p><input type=file name=file id="btn-file">
+                                <button id="btn-upload" class="layui-btn" lay-event="form-submit" title="上傳檔案">
+                                    <i class="layui-icon layui-icon-upload-drag"></i>上傳檔案
+                                </button>
+                            </form>
+                        </th>
+                        
+                    </tr>
+                    <tr>
+                        <!-- <th colspan="3" rowspan="1" id="lab-attach-file"   class="cls-c3-r1">附加檔案✱</th> -->
+                        <th colspan="17" rowspan="1" id="file-list" class="cls-c17-r1">
+                            <div id="myUL">
+                            </div>
+                        <th>
+                    </tr>
+        
+                    <!-- 簽核欄位 -->
+                    <tr>
+                        
+                        <th colspan="12"  rowspan="1" id="title-product"       class="cls-c12-r1"></th> 
+                        <th colspan="8"  rowspan="1" id="title-product"       class="cls-c8-r1">
+                            <button id="btn-submit" class="layui-btn layui-btn-normal" title="送出資料" >
+                                <i class="layui-icon layui-icon-email" ></i>同意
+                            </button>
+                            <!-- <button id="btn-reject" class="layui-btn layui-btn-danger" title="退回資料">
+                                <i class="layui-icon layui-icon-email"></i>退回
+                            </button> -->
+                        </th>
+                    </tr>
+
+                    <td colspan="1" class="c-base" id="c-1"></td>
+                    <td colspan="1" class="c-base" id="c-2"></td>
+                    <td colspan="1" class="c-base" id="c-3"></td>
+                    <td colspan="1" class="c-base" id="c-4"></td>
+                    <td colspan="1" class="c-base" id="c-5"></td>
+                    <td colspan="1" class="c-base" id="c-6"></td>
+                    <td colspan="1" class="c-base" id="c-7"></td>
+                    <td colspan="1" class="c-base" id="c-8"></td>
+                    <td colspan="1" class="c-base" id="c-9"></td>
+                    <td colspan="1" class="c-base" id="c-10"></td>
+        
+                    <td colspan="1" class="c-base" id="c-11"></td>
+                    <td colspan="1" class="c-base" id="c-12"></td>
+                    <td colspan="1" class="c-base" id="c-13"></td>
+                    <td colspan="1" class="c-base" id="c-14"></td>
+                    <td colspan="1" class="c-base" id="c-15"></td>
+                    <td colspan="1" class="c-base" id="c-16"></td>
+                    <td colspan="1" class="c-base" id="c-17"></td>
+                    <td colspan="1" class="c-base" id="c-18"></td>
+                    <td colspan="1" class="c-base" id="c-19"></td>
+                    <td colspan="1" class="c-base" id="c-20"></td>
+
+                </tbody>
+        
+            </table>
+
+        </div>
+
+        <!--退回填寫原因編輯畫面-->
+        <!-- <template id="taskback-template-edit">
+            <div id="edit-winodow-bg">
+                <div id="edit-window-item-1">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" id="lab-taskback"> {{USER}}，您是否確定要退回指派？ </label>
+                    </div>
+                </div>
+                <div id="edit-window-item-2">
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" id="lab-taskback-reason"> 退回原因: </label>
+                    </div>
+                    <select id="select-taskback-reason" >
+                        <option>評估案/開案規格書資料不明確</option>
+                    </select>
+                </div>
+                <div id="edit-window-item-3">
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" id="lab-taskback-memo"> 說明: </label>
+                        <input type="text" id="input-taskback-memo" value="" >
+                    </div>
+                </div>
+            </div>
+        </template> -->
+
+
+
+        <!-- 彈出指派任務視窗 -->
+        <template id="task-template">
+            <div id="task-window-bg">
+                <table id="task-win-table">
+                    <tbody id="task-table-body">
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-no" class="tab-c2-r1">專案案號</th>
+                            <th colspan="3" rowspan="1" id="txt-project-no" class="tab-c3-r1">{{PCB_FORM_MODEL['project_no']}}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-name" class="tab-c2-r1">產品名稱</th>
+                            <th colspan="3" rowspan="1" id="txt-project-name" class="tab-c3-r1">
+                                {{PCB_FORM_MODEL['product_no']}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-assign" class="tab-c2-r1">指派人員</th>
+                            <th colspan="2" rowspan="1" id="txt-assign" class="tab-c2-r1">
+                                <select id="select-assign">
+                                    <option></option>
+                                </select>
+                            </th>
+                            <th colspan="1" rowspan="1" id="txt-assign" class="tab-c1-r1">
+                                <!--<button id="btn-add" class="layui-btn" title="加入" onclick="newElement();">-->
+                                <button id="btn-add" class="layui-btn" title="加入">
+                                    <i class="layui-icon layui-icon-addition"></i>加入
+                                </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="5" rowspan="1" id="txt-list" class="tab-c5-r1">
+                                <!-- <ul id="myUL"></ul> -->
+                                <div id="member-ul"></div>
+                            </th>
+                        </tr>
+                        <!-- 預估RD 專案開始時間 -->
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-start" class="tab-c2-r1">預計執行開始時間</th>
+                            <th colspan="3" rowspan="1" id="txt-project-start" class="tab-c3-r1">
+                                <input type="date" id="input-project-start" value="">
+                            </th>
+                        </tr>
+                        <!-- 預估RD 專案結束時間 -->
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-end" class="tab-c2-r1">預計執行完畢時間</th>
+                            <th colspan="3" rowspan="1" id="txt-project-end" class="tab-c3-r1">
+                                <input type="date" id="input-project-end" value="">
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+
+    
+
+
+
+
+        <script>
+
+
+
+            var selectNameList = [];
+            $("#txt-apply-date").text( addDate() );
+
+
+            function addDate() {
+                var today = new Date();
+                var nowDD = String(today.getDate()).padStart(2, '0');
+                var nowMM = String(today.getMonth() + 1).padStart(2, '0');
+                var nowYYYY = today.getFullYear();
+                strNowDate = nowYYYY + "-" + nowMM + "-" + nowDD;
+                return strNowDate;
+            }
+
+
+         //生成表單編號
+         async function get_form_code(){
+            let url = "http://{{ DOMAIN_PATH }}/api/v0/db/pcb_form_no/";
+            const res = await fetch(url, {
+                method: 'get',
+                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+            });
+            return await res.json();
+        }
+        let promise_get_form_code = get_form_code();
+        promise_get_form_code.then((response)=> {
+            $("#txt-form-no").text(response);
+        });
+
+       
+        if("{{PCB_FORM_MODEL['product_no']}}" != "")
+        {
+
+              //將專案代號帶入body 取回目前的版本
+              let p1 =  get_pcb_form_product_version();
+              p1.then((response)=> {
+    
+                           
+                    if(response['data'] != null)
+                    {
+                            var major = response['data']['major_version'];
+                            var minor = response['data']['minor_version']
+                            temp_version =   "V" + major + "." + minor;
+                            
+                            console.log(temp_version)
+                            $("#txt-version").text(temp_version) 
+                            const $select_task = document.querySelector('#sel-version');
+                            const $option_task = Array.from($select_task.options);
+                            const option_task = $option_task.find(el => el.text == "大改版");
+                            option_task.selected = true;
+                            
+                            if($('#sel-version').val() == "大改版")
+                            {               
+                                var str =  $("#txt-version").text().replace('V','').split('.');             
+                                let major_version = 0;       
+                                if(str.length == 2)
+                                {
+                                    major_version = parseInt(str[0]) + 1;
+                                } 
+                            
+                                version = "V" + major_version.toString() + "." + str[1];
+                                $("#txt-version").text(version)
+                            } 
+                    } 
+            });       
+            // $("#check-form-it").prop("disabled", true);
+            // $("#check-form-iot").prop("disabled", true);
+            // $("#check-form-io").prop("disabled", true);
+            // var strProjectNo_Options = "";
+            // var strProductNo_Options = "";
+            // var strPCBName_Options = "";
+            // strProjectNo_Options += '<option value="' + "{{PCB_FORM_MODEL['project_no']}}" + '">' + "{{PCB_FORM_MODEL['project_no']}}" + '</option>';
+            // strProductNo_Options += '<option value="' + "{{PCB_FORM_MODEL['product_no']}}" + '">' + "{{PCB_FORM_MODEL['product_no']}}" + '</option>';
+            // strPCBName_Options += '<option value="' + "{{PCB_FORM_MODEL['pcb_name']}}" + '">' + "{{PCB_FORM_MODEL['pcb_name']}}" + '</option>';
+
+            // $("#input-final-version").val("{{PCB_FORM_MODEL['version']}}");          
+            // document.getElementById("sel-project-no").innerHTML =strProjectNo_Options;
+            // document.getElementById("sel-product-no").innerHTML =strProductNo_Options;
+            // document.getElementById("sel-pcb-name").innerHTML = strPCBName_Options;
+
+            // if("{{PCB_FORM_MODEL['bu']}}" == "IT")
+            // {
+            //     $("#check-form-it").prop("checked", true);
+            //     $("#check-form-iot").prop("checked", false);
+            //     $("#check-form-io").prop("checked", false);
+            // }
+            // else if("{{PCB_FORM_MODEL['bu']}}" == "IO")
+            // {
+            //     $("#check-form-io").prop("checked", true)
+            //     $("#check-form-iot").prop("checked", false)
+            //     $("#check-form-it").prop("checked", false)
+            // }
+            // else if("{{PCB_FORM_MODEL['bu']}}" == "IOT")
+            // {
+            //     $("#check-form-iot").prop("checked", true)
+            //     $("#check-form-io").prop("checked", false)
+            //     $("#check-form-it").prop("checked", false)
+            // }
+        }
+        else
+        {
+                let all_layout_lst = new Array();
+                //取得所有專案代號
+                async function get_all_new_project_no() {
+                
+                    url = "http://{{ DOMAIN_PATH }}/api/v0/db/all_layout_form/";
+                    
+                    const res = await fetch(url, {
+                        method: 'get',
+                        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                    });
+                    return await res.json();
+                }
+                let promise_get_all_new_project_no =  get_all_new_project_no();
+                promise_get_all_new_project_no.then((response)=> {
+                    var strProjectNo_Options = "";
+                    var strProductNo_Options = "";
+                    var strPCBName_Options = "";
+                    all_layout_lst = response['data'];
+                    console.log(list);
+                    console.log("EEEEEEEEEEEEEEEEEE");
+                    for(let i = 0 ; i<all_layout_lst.length ; i++)
+                    {
+                        strProjectNo_Options += '<option value="' + all_layout_lst[i]['uuid'] + '">' + all_layout_lst[i]['project_no'] + '</option>';
+                        strProductNo_Options += '<option value="' + all_layout_lst[i]['uuid'] + '">' + all_layout_lst[i]['product_no'] + '</option>';
+                        strPCBName_Options+= '<option value="' + all_layout_lst[i]['uuid'] + '">' + all_layout_lst[i]['pcb_name'] + '</option>';
+                    }
+                console.log(strProjectNo_Options);
+                console.log(strProductNo_Options);
+                document.getElementById("sel-project-no").innerHTML =strProjectNo_Options;
+                document.getElementById("sel-product-no").innerHTML =strProductNo_Options;
+                document.getElementById("sel-pcb-name").innerHTML =strPCBName_Options;
+
+                $('#sel-product-no')[0].selectedIndex = 0;
+                $('#sel-project-no')[0].selectedIndex = 0;
+                let version = all_layout_lst.find(element=>element.uuid == $('#sel-product-no').val()).version;
+                    console.log(version);
+                    //document.getElementById("input-final-version").text = version;
+                    $('#input-final-version').val(version)
+                
+                });
+
+
+
+                //當產品型號改變 其他欄位連動
+                document.querySelector("#sel-product-no").addEventListener("change",(event)=>{                  
+
+                    document.getElementById("sel-project-no").value = $('#sel-product-no').val();
+                    document.getElementById("sel-pcb-name").value = $('#sel-product-no').val();
+                    let version = all_layout_lst.find(element=>element.uuid == $('#sel-product-no').val()).version;
+                    console.log(version);
+                    //document.getElementById("input-final-version").text = version;
+                    $('#input-final-version').val(version)
+                
+                });
+        }
+
+
+                  //選擇版號變動按鈕
+            var button = document.getElementById("btn-modify");
+            button.addEventListener("click",function(){
+
+                var selectElement = document.getElementById("sel-version");                
+                // var valueToRemove = "初版"; 
+                
+                // for (var i = 0; i < selectElement.options.length; i++) {
+                //     if (selectElement.options[i].value === valueToRemove) {                       
+                //         selectElement.remove(i);
+                //         break; 
+                //     }
+                // }
+
+                //清空所有選項
+                selectElement.innerHTML = '';
+
+                // 建新的<option>元素
+                var option1 = document.createElement("option");
+                option1.value = "大改版";
+                option1.text = "大改版";
+
+                var option2 = document.createElement("option");
+                option2.value = "小改版";
+                option2.text = "小改版";
+
+                selectElement.add(option1);
+                selectElement.add(option2);
+
+
+
+                 //將專案代號帶入body 取回目前的版本
+                 let promise_pcb_form_product_version =  get_pcb_form_product_version();
+                 promise_pcb_form_product_version.then((response)=> {
+    
+                           
+                            if(response['data'] != null)
+                            {
+                                    var major = response['data']['major_version'];
+                                    var minor = response['data']['minor_version']
+                                    temp_version =   "V" + major + "." + minor;
+                                 
+                                    //console.log(temp_version)
+                                    $("#txt-version").text(temp_version) 
+                                    const $select_task = document.querySelector('#sel-version');
+                                    const $option_task = Array.from($select_task.options);
+                                    const option_task = $option_task.find(el => el.text == "大改版");
+                                    option_task.selected = true;
+                                    
+                                    if($('#sel-version').val() == "大改版")
+                                    {               
+                                        var str =  $("#txt-version").text().replace('V','').split('.');             
+                                        let major_version = 0;       
+                                        if(str.length == 2)
+                                        {
+                                            major_version = parseInt(str[0]) + 1;
+                                        } 
+                                    
+                                        version = "V" + major_version.toString() + "." + str[1];
+                                        $("#txt-version").text(version)
+                                    }
+                                    
+                            }
+                            else
+                            {
+                                    //$("#txt-version").text("V1.0");
+                                    
+                            }
+                          
+                    });       
+            });
+
+              //選擇版號復原按鈕
+              var button = document.getElementById("btn-reset");
+             button.addEventListener("click",function(){
+
+                var selectElement = document.getElementById("sel-version");
+
+                //清空所有選項
+                selectElement.innerHTML = '';
+
+                // var valueToRemove = "大改版"; 
+                
+                // for (var i = 0; i < selectElement.options.length; i++) {
+                //     if (selectElement.options[i].value === valueToRemove) {
+                //         selectElement.remove(i);
+                //         break; 
+                //     }
+                // }
+                // var valueToRemove = "小改版"; 
+                
+                // for (var i = 0; i < selectElement.options.length; i++) {
+                //     if (selectElement.options[i].value === valueToRemove) {                       
+                //         selectElement.remove(i);
+                //         break; 
+                //     }
+                // }
+
+                // 建新的<option>元素
+                var option1 = document.createElement("option");
+                option1.value = "初版";
+                option1.text = "初版";
+              
+                selectElement.add(option1);
+             
+
+                $("#txt-version").text("{{PCB_FORM_MODEL['version']}}");
+
+
+            });
+            
+
+                document.getElementById("sel-version").onchange = function selectChange()
+                {
+                    //先將初始版本記錄起來
+                
+                    console.log(temp_version)
+                    let version = ''
+
+                    if($('#sel-version').val() == "大改版")
+                    {               
+                        var str = temp_version.replace('V','').split('.');             
+                        let major_version = 0;       
+                        if(str.length == 2)
+                        {
+                        major_version = parseInt(str[0]) + 1;
+                        } 
+                    
+                        version = "V" + major_version.toString() + "." + str[1];
+                    
+                    }
+                    else if($('#sel-version').val() == "小改版")
+                    {
+                        var str = temp_version.replace('V','').split('.');                
+                        let minor_version = 0;       
+                        if(str.length == 2)
+                        {
+                            minor_version = parseInt(str[1]) + 1;
+                        }                      
+                        version = "V" + str[0]  + "." + minor_version.toString();
+                        
+                    }
+                    $("#txt-version").text(version);
+                }
+
+
+        
+
+
+            /////////////////////////////////////////
+            //var myNodelist = document.getElementsByTagName("LI");
+            var myNodelist = document.getElementById("myUL");
+
+            for (var i = 0; i < myNodelist.length; i++) {
+                var span = document.createElement("SPAN");
+                var txt  = document.createTextNode("\u00D7");
+                //var divtag = document.createElement("DIV");
+                //var image = document.createElement('img');
+                //image.src = "http://{{ DOMAIN_PATH }}/static/assets/delete.png";
+                //image.alt = '刪除';
+                //divtag.className = "close";
+                //divtag.id = "close_btn";
+                //image.id = "img-btn";
+                //divtag.appendChild(image);
+                //myNodelist[i].appendChild(divtag);
+                span.className = "close";
+                span.appendChild(txt);
+                myNodelist[i].appendChild(span);
+            }
+            var close = document.getElementsByClassName("close");
+            //var close = document.getElementById("img-btn");
+
+            for (var j = 0; j < close.length; j++) {
+                close[j].onclick = function() {
+                    var div = this.parentElement;
+                    //div.style.display = "none";
+                    div.remove();
+                }
+            }
+            //var list = document.querySelector('ul');
+            var list = document.querySelector('div');
+            var fileNameList = [];
+
+            // 建立新的列表資訊
+            // function newElement(strFileName) {
+            //     //var li = document.createElement("li");
+            //     var li = document.createElement("div");
+            //     li.className = "list-item";
+            //     //var inputValue = document.getElementById("myInput").value;
+            //     //var t = document.createTextNode(inputValue);
+            //     //var inputValue = $("#select-assign").val();
+            //     var inputValue = strFileName;
+
+            //     if ( inputValue != null) {
+            //         var t = document.createTextNode( inputValue);
+            //         //比對字串是否重複
+            //         //var originalString = $("#select-assign").text();
+            //         //var targetString = t;
+            //         console.log(fileNameList);
+            //         if (fileNameList.includes(inputValue)) {
+            //             console.log('目標字串在原始字串中');
+            //             layer.msg('該上傳檔案重複了');
+            //         } else {
+            //             console.log('目標字串不在原始字串中');
+            //             li.appendChild(t);
+
+
+
+            //             document.getElementById("myUL").appendChild(li);
+
+            //             //var item = document.createElement("div");
+            //             //item.className = "item-div";
+            //             //li.appendChild(item);
+                        
+            //             var span   = document.createElement("SPAN");
+            //             var txt    = document.createTextNode("\u00D7");
+            //             //var divtag = document.createElement("DIV");
+            //             //var image = document.createElement('img');
+            //             //image.src = "http://{{ DOMAIN_PATH }}/static/assets/delete.png";
+            //             //image.alt = '刪除';
+            //             //image.id = "img-btn";
+            //             //divtag.className = "close";
+            //             //divtag.id = "close_btn";
+            //             span.appendChild(txt);
+            //             span.className = "close";
+
+            //             li.appendChild(span);
+
+
+            //             for (i = 0; i < close.length; i++) {
+            //                 close[i].onclick = function() {
+            //                     var div = this.parentElement;
+            //                     //div.style.display = "none";
+            //                     div.remove();
+            //                     if (document.getElementById('myUL').getElementsByTagName('div').length < 1) {
+            //                         //var selectElement = document.getElementById('select-assign');
+            //                         //selectElement.selectedIndex = 0; // 將索引設定為預設選項的索引
+            //                         fileNameList = [];
+            //                         $('#btn-submit').addClass("layui-btn-disabled").attr("disabled", true);
+            //                     }
+            //                 }
+            //             }
+            //             fileNameList.push(inputValue);
+            //         }
+            //     }
+            // }
+
+             // 建立新的列表資訊
+            function newElement(strFileName) {
+                        
+                        console.log(strFileName)
+                        console.log(selectNameList)
+                        console.log("SSSSSSSSSSSSSS")
+                        var li = document.createElement("div");
+                        li.className = "list-file-item";
+                        li.id = strFileName;
+                        if(strFileName != null && !selectNameList.includes(strFileName)) {
+                            // 文字
+                            var divobj = document.createElement("div");
+                            divobj.className = "text-filename";
+                            var t = document.createTextNode(strFileName);
+
+                            divobj.appendChild(t);
+                            li.appendChild(divobj);
+                            // 刪除按鈕
+                            var btn3 = document.createElement("button");
+                            btn3.className = "cls-delete-btn-file";
+
+                            var bt3 = document.createTextNode("刪除");
+                            btn3.appendChild(bt3);
+                            li.appendChild(btn3);
+                            btn3.onclick = function() {
+                                var div = this.parentElement;
+                                div.remove();
+                                //console.log(this.parentElement.id);
+                                var itemToRemove = this.parentElement.id;
+                                remove_file(this.parentElement.id).then((response)=>{                                               
+                                                layer.msg(response['msg'])
+                                        });
+                                var index = selectNameList.indexOf(itemToRemove);
+                                if (index !== -1) {
+                                    selectNameList.splice(index, 1);
+                                }
+                            }
+                            document.getElementById("myUL").appendChild(li);
+                            selectNameList.push(strFileName);
+                        }
+
+            }//newElement
+
+            async function remove_file(file_name){
+                    let url = "http://{{ DOMAIN_PATH }}/api/v0/spec/remove/?project_no=" + $("#txt-project-no").val() + "&file_name=" + file_name;
+                    const res = await fetch(url, {
+                            method: 'get',                            
+                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                    });
+                    return await res.json();
+            }//remove_file
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+                // 警告
+                if (mode == 0) {
+                    btn1.css({ "background-color": "#ff0066", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#ffe6f0", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 詢問
+                if (mode == 1) {
+                    btn1.css({ "background-color": "#1E9FFF", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#e6f4ff", "border-color": "#555555", "font-size": "18px" });
+                 }
+            }
+
+
+         
+           
+
+
+
+
+
+            //取得製作地區
+            function get_place_of_production() {
+                let make_zone_obj = new Object();
+                make_zone_obj['taipei']  = document.querySelector("#check-make-taipei"  ).checked;
+                make_zone_obj['kunshan'] = document.querySelector("#check-make-kunshan" ).checked;
+                return make_zone_obj;
+            }
+
+
+            //取得交付地區
+            function get_place_of_deliver() {
+                let deliver_area_obj = new Object();
+                deliver_area_obj['taipei']  = document.querySelector("#check-deliver-taipei"  ).checked;
+                deliver_area_obj['kunshan'] = document.querySelector("#check-deliver-kunshan" ).checked;
+                return deliver_area_obj;
+            }
+
+
+            //取得打樣模式
+            function get_pcb_type() {
+                let pcb_type_obj = new Object();
+                pcb_type_obj['new-project']   = document.querySelector("#check-new-product"  ).checked;
+                pcb_type_obj['old-project']   = document.querySelector("#check-old-product"  ).checked;
+                pcb_type_obj['other-project'] = document.querySelector("#check-other-product").checked;
+                return pcb_type_obj;
+            }
+
+
+            //取得洗版目的
+            function get_wash_board() {
+                let purpose_pcb_obj = new Object();
+                purpose_pcb_obj['experiment-board']  = document.querySelector("#check-experiment-board" ).checked;
+                purpose_pcb_obj['future-board']      = document.querySelector("#check-future-board"     ).checked;
+                purpose_pcb_obj['direct-production'] = document.querySelector("#check-direct-production").checked;
+                return purpose_pcb_obj;
+            }
+
+
+            //取得板材規格
+            function get_board_spec() {
+                let board_spec_obj = new Object();
+                board_spec_obj['4-layer'] = document.querySelector("#check-4-layer"    ).checked;
+                board_spec_obj['0.6mm'  ] = document.querySelector("#check-layer-06-mm").checked;
+                board_spec_obj['1.0mm'  ] = document.querySelector("#check-layer-10-mm").checked;
+                board_spec_obj['1.6mm'  ] = document.querySelector("#check-layer-16-mm").checked;
+                board_spec_obj['1-1'    ] = document.querySelector("#check-layer-11"   ).checked;
+                board_spec_obj['1-1-1-1'] = document.querySelector("#check-layer-1111" ).checked;
+                board_spec_obj['other'  ] = document.querySelector("#check-other-layer").checked;
+                board_spec_obj['layer'  ] = $("#input-other-layer").val();
+                board_spec_obj['mm'     ] = $("#input-layer-unit").val();
+                return board_spec_obj;
+            }
+
+            // 取得板厚誤差
+            function get_board_diff() {
+                let board_diff_obj = new Object();
+                board_diff_obj['0.1mm'  ] = document.querySelector("#check-thickness-01-mm"  ).checked;
+                board_diff_obj['5%'     ] = document.querySelector("#check-defy-5-percenter" ).checked;
+                board_diff_obj['10%'    ] = document.querySelector("#check-defy-10-percenter").checked;
+                board_diff_obj['1.6mm'  ] = document.querySelector("#check-defy-16-mm"       ).checked;
+                board_diff_obj['special'] = document.querySelector("#check-defy-special"     ).checked;
+                board_diff_obj['tg-155f'] = document.querySelector("#check-defy-tg-155f"     ).checked;
+
+                return board_diff_obj;
+            }
+
+
+            // 取得阻抗誤差
+            function get_impedance_diff() {
+
+                let impedance_diff = new Object();
+                impedance_diff['5%'    ] = document.querySelector("#check-defy-5-percenter" ).checked;
+                impedance_diff['10%'   ] = document.querySelector("#check-defy-10-percenter").checked;
+                impedance_diff['gerber'] = document.querySelector("#check-defy-gerber"      ).checked;
+
+                return impedance_diff;
+            }
+
+
+            // 取得表面處理
+            function get_surface_treatment() {
+                let surface_treatment = new Object();
+                surface_treatment['lead'    ] = document.querySelector("#check-surface-lead"    ).checked;
+                surface_treatment['chemical'] = document.querySelector("#check-surface-chemical").checked;
+                surface_treatment['other'   ] = document.querySelector("#check-surface-other"   ).checked;
+
+                return surface_treatment;
+            }
+
+
+            // 取得化金厚度
+            function get_enig() {
+                let enig = new Object();
+                enig['3U"' ] = document.querySelector("#check-metal-3u" ).checked;
+                enig['5U"' ] = document.querySelector("#check-metal-5u" ).checked;
+                enig['10U"'] = document.querySelector("#check-metal-10u").checked;
+                enig['15U"'] = document.querySelector("#check-metal-15u").checked;
+                enig['30U"'] = document.querySelector("#check-metal-30u").checked;
+                return enig;
+            }
+
+
+            // 取得製成
+            function get_process() {
+                let process = new Object();
+                process['RoHS'       ] = document.querySelector("#check-rohs"        ).checked;
+                process['HalogenFree'] = document.querySelector("#check-halogen-free").checked;
+                return process;
+            }
+
+
+            // 取得成型尺寸圖
+            function get_dimensional_drawing() {
+                let dimensional_drawing = new Object();
+                dimensional_drawing['none'  ] = document.querySelector("#check-product-none"  ).checked;
+                dimensional_drawing['spell' ] = document.querySelector("#check-product-spell" ).checked;
+                dimensional_drawing['attach'] = document.querySelector("#check-product-attach").checked;
+
+                return dimensional_drawing;
+            }
+
+
+            // 取得防焊顏色
+            function get_weld_color() {
+
+                let weld_color = new Object();
+                weld_color['golden'] = document.querySelector("#check-solder-color-golden").checked;
+                weld_color['blue'  ] = document.querySelector("#check-solder-color-blue"  ).checked;
+                weld_color['green' ] = document.querySelector("#check-solder-color-green" ).checked;
+                weld_color['other' ] = document.querySelector("#check-solder-color-other" ).checked;
+
+                return weld_color;
+            }
+
+
+            // 取得 UL_MARK
+            function get_ul_mark() {
+                let ul_mark = new Object();
+                ul_mark['c' ] = document.querySelector("#check-ulmark-c" ).checked;
+                ul_mark['s' ] = document.querySelector("#check-ulmark-s" ).checked;
+                ul_mark['no'] = document.querySelector("#check-ulmark-no").checked;
+
+                return ul_mark;
+            }
+
+
+            // 取得date_code
+            function get_date_code() {
+
+                let date_code = new Object();
+                date_code['c' ] = document.querySelector("#check-date-code-c" ).checked;
+                date_code['s' ] = document.querySelector("#check-date-code-s" ).checked;
+                date_code['no'] = document.querySelector("#check-date-code-no").checked;
+
+                return date_code;
+            }
+
+
+            // 取得文字
+            function get_font() {
+
+                let font = new Object();
+                font['single'] = document.querySelector("#check-single-plane").checked;
+                font['double'] = document.querySelector("#check-double-plane").checked;
+
+                return font;
+            }
+
+
+            // 取得導角深度
+            function get_angle_depth() {
+                let angle_depth = new Object();
+                angle_depth['1.30mm'] = document.querySelector("#check-depth-130mm").checked;
+                angle_depth['1.80mm'] = document.querySelector("#check-depth-180mm").checked;
+                angle_depth['0.25mm'] = document.querySelector("#check-depth-025mm").checked;
+
+                return angle_depth;
+            }
+
+
+            // 取得過孔阻焊方式(一般)
+            function get_via_general() {
+                let via_general = new Object();
+                via_general['ink' ] = document.querySelector("#check-via-normal-ink").checked;
+                via_general['file'] = document.querySelector("#check-via-normal-file").checked;
+
+                return via_general;
+            }
+
+
+            // 取得過孔阻焊方式(BGA)
+            function get_via_bga() {
+                let via_bga = new Object();
+                via_bga['all'   ] = document.querySelector("#check-via-bga-all"   ).checked;
+                via_bga['bottom'] = document.querySelector("#check-via-bga-bottom").checked;
+                return via_bga;
+            }
+
+
+            // 取得樣品需求數
+            function get_sample_require() {
+                let sample_require = new Object();
+                sample_require['request'] = document.querySelector("#check-sample-request").checked;
+                sample_require['pcs'    ] = document.querySelector("#input-sample-request").value;
+                return sample_require;
+            }
+
+
+            // 取得樣品不良板
+            function get_sample_bad() {
+                let sample_bad = new Object();
+                sample_bad['bad'  ] = document.querySelector("#check-sample-bad").checked;
+                sample_bad['panel'] = document.querySelector("#input-sample-bad").value;
+                return sample_bad;
+            }
+
+
+            // 取得樣品vcut
+            function get_sample_vcut() {
+                let sample_vcut = new Object();
+                sample_vcut['30'] = document.querySelector("#check-sample-vcut-30").checked;
+                sample_vcut['45'] = document.querySelector("#check-sample-vcut-45").checked;
+
+                return sample_vcut;
+            }
+
+
+            // 取得交貨附件
+            function get_attach() {
+                let get_attach = new Object();
+                get_attach['acknowledgment'      ] = document.querySelector("#check-appendix-acknowledgment").checked;
+                get_attach['acknowledgment-count'] = document.querySelector("#input-appendix-acknowledgment").value;
+                get_attach['ul'                  ] = document.querySelector("#check-appendix-ul"            ).checked;
+                get_attach['ul-xount'            ] = document.querySelector("#input-appendix-ul"            ).value;
+                get_attach['origin'              ] = document.querySelector("#check-appendix-origin"        ).checked;
+                get_attach['origin-count'        ] = document.querySelector("#input-appendix-origin"        ).value;
+                get_attach['work'                ] = document.querySelector("#check-appendix-work"          ).checked;
+                get_attach['work-count'          ] = document.querySelector("#input-appendix-work"          ).value;
+                get_attach['test-report'         ] = document.querySelector("#check-test-report"            ).checked;
+                get_attach['resistance-report'   ] = document.querySelector("#check-resistance-report"      ).checked;
+                get_attach['inspect-report'      ] = document.querySelector("#check-inspect-report"         ).checked;
+                get_attach['finger-report'       ] = document.querySelector("#check-finger-report"          ).checked;
+                get_attach['pcb-report'          ] = document.querySelector("#check-pcb-report"             ).checked;
+                get_attach['open-short'          ] = document.querySelector("#check-open-short"             ).checked;
+                return get_attach;
+            }
+
+
+            layui.use(['form', 'layer', 'jquery', 'table'], function () {
+                var layer = layui.layer;
+                var laypage = layui.laypage;
+                var table = layui.table;
+                var $ = layui.jquery;
+                var form = layui.form;
+            });
+
+
+
+            $("#btn-submit").click(async() => {
+
+
+                 //#region 卡控是否上傳附件
+                 let project_no = $("#txt-project-no").text();
+                let url = "http://{{ DOMAIN_PATH }}/api/v0/db/find/upload_file/?project_no="  + project_no ;
+                // console.log(url)
+                const response = await fetch(url);
+                const res = await response.json();
+                //console.log(res['data'].length)
+
+                if(res['data'].length == 0)
+                {
+                    layer.msg("未上傳附件，請確認");
+                    return;
+                }
+                
+                //#endregion
+
+
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-molv', //layui-layer-rim
+                    resize: true,
+                    shadeClose: false,
+                    shade: [0.7, '#000'],
+                    closeBtn: 2,
+                    offset: 'auto',
+                    anim: 5,
+                    area: ['400px', '280px'],
+                    title: ['詢問', 'font-size:24px;background-color:#1E9FFF;'],
+                    btn: ['確定', '取消'],
+                    content: '<div style="padding: 15px; font-size: 22px; font-weight: bold;">您確定要將表單資料送出嗎？<br><br><div id="view-txt-msg"></div></div>',
+                    success: function (layero, index) {
+                        addIconforBtn(1);
+                    },
+                    yes: function (index, layero) {
+
+                        objParam = {
+                            "bu"                  :"{{PCB_FORM_MODEL['bu']}}",
+                            "project_name"        :"{{PCB_FORM_MODEL['project_name']}}",
+                            "product_name"        :"{{PCB_FORM_MODEL['product_name']}}",
+                            "project_no"          : $('#txt-project-no').text(),               //專案代號
+                            "form_type"           :'pcb申請單',
+                            "form_no"             : $('#txt-form-no').text(),                                       //表單編號
+                            "department"          : $('#txt-apply-dept').text().trimEnd(),                      //申請部門
+                            "pcb_name"            : $('#txt-pcb-name').text(),                                  //PCB名稱
+                            "require_date"        : $('#input-request-date').val(),                             //需求日期
+                            "apply_date"          : $('#txt-apply-date').text(),                                //申請日期                            
+                            "member_cname"        : $('#txt-apply-person').text(),                              //申請者
+                            "product_no"          : $('#txt-product-no ').text(),                //產品型號
+                            "version"             : $('#txt-version').text(),                                    //版本號
+                            "gerber_name"         : $('#input-gerber-name').val(),                              //gerber_name
+                            "place_of_production" : get_place_of_production(),                                  //製作地區
+                            "place_of_deliver"    : get_place_of_deliver(),                                     //交付地區
+                            "deliver_count"       : $('#input-delivert-count').val(),                           //交付數量
+                            "pcb_type"            : get_pcb_type(),                                             //打樣類型(新產品打樣/舊有產品修改/其他)
+                            "purpose_pcb"         : get_wash_board(),                                           //洗板目的
+                            "board_spec"          : get_board_spec(),                                           //板材規格
+                            "board_diff"          : get_board_diff(),                                           //板厚誤差
+                            "impedance_diff"      : get_impedance_diff(),                                       //阻抗誤差
+                            "surface_treatment"   : get_surface_treatment(),                                    //表面處理
+                            "enig"                : get_enig(),                                                 //化金厚度
+                            "process"             : get_process(),                                              //製程
+                            "dimensional_drawing" : get_dimensional_drawing(),                                  //成型尺寸圖
+                            "weld_color"          : get_weld_color(),                                           //防焊顏色
+                            "weld_color_memo"     : $('#input-solder-color-other').val(),                       //防焊顏色其他
+                            "ul_mark"             : get_ul_mark(),                                              //UL_MARK
+                            "date_code"           : get_date_code(),                                            //date_code
+                            "font"                : get_font(),                                                 //文字
+                            "font_color"          : $('#input-color').val(),                                    //文字顏色
+                            "goldfinger_angle"    : document.querySelector("#check-angle").checked,             //金手指導繳
+                            "angle_depth"         : get_angle_depth(),                                          //導角深度
+                            "via_general"         : get_via_general(),                                          //過孔阻焊方式(一般)
+                            "via_bga"             : get_via_bga(),                                              //過孔阻焊方式(BGA)
+                            "via_special"         : document.querySelector("#check-via-special-blind").checked, //過孔阻焊方式(特殊)
+                            "sample_require"      : get_sample_require(),                                       //樣品需求數
+                            "sample_bad"          : get_sample_bad(),                                           //樣品不良板
+                            "sample_vcut"         : get_sample_vcut(),                                          //樣品vcut
+                            "attach"              : get_attach(),                                               //交貨附件
+                            "pcb_back_date"       : $("#date-vender-callback").val(),                           //PCB回廠日期
+                        };
+
+                        mailParam={
+                            "project_no"            : $('#txt-project-no').text(),               //專案代號                          
+                            "pcb_name"              : $('#txt-pcb-name').text(),                  //PCB名稱                         
+                            "product_no"            : $('#txt-product-no').text(),                //產品型號
+                            "form_no"              : $('#txt-form-no').text(),                    //表單編號
+                            "version"               :$('#txt-version').text(),                    //表單編號
+                            "sender"                : "{{ ACCOUNT }}",
+                            "receiver"              : "{{RECEIVER}}",
+                            "cc"                    : "{{RECEIVER}}"
+                        }
+
+                        let p1 = post_pcb_form(objParam);
+                        let p2 = send_pcb_form_mail(mailParam);
+                        let p3 = insert_form_flow(); 
+                        let p4 = post_pcb_form_product_version();
+
+                        Promise.all([p1,p2],p3,p4).then((response)=> {
+                            
+                            layer.close(index);
+                            layer.msg("表單回報完成");
+                            page_to_form_list();
+
+                        });
+
+                    }
+
+                });
+
+            });//btn-submit
+
+            //寫入pcb form
+            async function post_pcb_form(objParam) 
+            {
+                        let url = "http://{{ DOMAIN_PATH }}/api/v0/db/pcb_form/";
+                        let jsonParam = JSON.stringify(objParam);
+                        const res = await fetch(url, {
+                                method: 'post',
+                                body: jsonParam,
+                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        });
+                        return await res.json();
+            }
+
+            //發送pcb form申請mail
+            async function send_pcb_form_mail(objParam) 
+            {
+                        let url = "http://{{ DOMAIN_PATH }}/api/v0/send/pcb_form/";
+                        let jsonParam = JSON.stringify(objParam);
+                        const res = await fetch(url, {
+                                method: 'post',
+                                body: jsonParam,
+                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        });
+                        return await res.json();
+            }
+                        
+
+
+
+             // 按上傳檔按鈕
+            $("#upload-form").submit(function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: "http://{{ DOMAIN_PATH }}/api/v0/spec/upload/?project_no=" + $("#txt-project-no").text().trim(),
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        //檔案上傳成功!
+                        console.log(response);
+                        var responseObject = JSON.parse(response);
+                        var msg = responseObject.msg;
+                        if( responseObject.result == 'ok') {
+                            console.log(msg);
+                            layer.msg(msg);
+                            $('#btn-submit').removeClass("layui-btn-disabled").attr("disabled", false);
+
+                            // 成功上傳檔案處理列表
+                            //alert(responseObject['data']['file_name']);
+                            newElement(responseObject['data']['file_name']);
+
+                        }else {
+                            console.log(msg);
+                            layer.msg(msg);
+                            $('#btn-submit').addClass("layui-btn-disabled").attr("disabled", true);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        layer.msg("上傳失敗(未提供Layout所需檔案)");
+                        $('#btn-submit').addClass("layui-btn-disabled").attr("disabled", true);
+                    }
+                });
+            }); //upload-form
+
+
+                    async function insert_form_flow() {
+                       
+                       let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/form_flow/"
+                       let objParam = {
+                           "form_no"           : $("#txt-form-no").text(),
+                           "project_no"        : $('#sel-project-no option:selected').text(),
+                           "type"              : "pcb",
+                           "fs_code"           : "fspcbg101",
+                           "action"            : "申請",
+                           "status"            : "申請",
+                           "memo"              : "",
+                           "user"              : "{{ USER_CNAME }}"
+                       };
+                       
+                       let jsonParam = JSON.stringify(objParam);
+                      
+                       const res = await fetch(uri, {
+                           method: 'post',
+                           body: jsonParam,
+                           headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                       });
+                       return await res.json();
+                   }
+
+                   function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+
+                    //切畫面至project_list
+                    async function page_to_form_list() {
+                        await sleep(2000);
+                        location.replace('http://{{ DOMAIN_PATH }}/page/v0/form_list/');
+                        //window.location.href = 'http://{{ DOMAIN_PATH }}/page/v0/new_technology_review/';
+                    };
+
+                    
+
+
+                    get_upload_file().then((response)=>
+                    {
+                            console.log(response)
+                            var file_list = response['data'];
+
+                            if(file_list.length != 0)
+                            {
+                                console.log(file_list.length )
+                                for(let i = 0 ; i<file_list.length; i++)
+                                {
+                                    strsplit = file_list[i].split('/')
+                                    item = strsplit[strsplit.length-1];   
+                                    newElement(item);
+                                    
+                                }
+                            }
+                    });
+
+
+
+                    //取得專案已上傳的檔案
+                    async function get_upload_file() {
+
+                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/find/upload_file/?project_no=" + "{{PCB_FORM_MODEL['project_no']}}";                      
+                            const res = await fetch(uri, {
+                            method: 'get',                       
+                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                            });
+                            return await res.json();
+
+                    } //get_upload_file
+
+           
+               
+                async function remove_file(file_name){
+                        let url = "http://{{ DOMAIN_PATH }}/api/v0/spec/remove/?project_no=" + "{{PCB_FORM_MODEL['project_no']}}" + "&file_name=" + file_name;
+                        const res = await fetch(url, {
+                            method: 'get',                            
+                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        });
+                        return await res.json();
+                }//remove_file
+
+
+            //取回目前產品型號版本
+            async function get_pcb_form_product_version()
+            {                                 
+                    //let project_no = "{{PCB_FORM_MODEL['project_no']}}";
+                    //console.log(project_no)
+                    //console.log("6666666666666666")
+                    let url = "http://{{ DOMAIN_PATH }}/api/v0/db/pcb_form_product_version/?project_no="+ "{{PCB_FORM_MODEL['project_no']}}";
+                    console.log(url)
+                    const res = await fetch(url, {
+                                    method: 'get',                                                        
+                                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                    });
+                    return await res.json();
+            }
+
+
+             //更新專案代號對的產品版本
+             async function post_pcb_form_product_version()
+            {
+
+                    //let version = get_version();
+                    let version = $('#txt-version').text()
+                    let version_split = version.replace('V','').split('.');
+                    let major_version ;
+                    let minor_version;
+                    if(version_split.length == 2)
+                    {
+                        major_version = version_split[0];
+                        minor_version = version_split[1];
+                    }
+                    
+                    input_body = {
+                        "project_no"            : $('#txt-project-no').text(),
+                        "major_version"         : major_version,
+                        "minor_version"         : minor_version,                                        
+                    };
+                    console.log(input_body)
+
+                        let url = "http://{{ DOMAIN_PATH }}/api/v0/db/pcb_form_product_version/";
+                        let jsonParam = JSON.stringify(input_body);
+                        console.log(jsonParam);
+                        const res = await fetch(url, {
+                                        method: 'post',
+                                        body: jsonParam,
+                                        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        });
+                        return await res.json();
+                }
+
+
+        </script>
+
+    </body>
+
+</html>

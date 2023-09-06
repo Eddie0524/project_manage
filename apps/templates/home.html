@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>流程管理系統首頁</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/assets/favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/home.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/layui.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/font-awesome.min.css') }}" />
+
+        <script src="{{ url_for('static', filename='./layui.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/jquery-3.5.1.js') }}"></script>
+    </head>
+
+    <body id="root">
+        <!-- 上方主標題欄 -->
+        <div id="div-main-head-bar">
+            <!-- 系統Logo 310x140 -->
+            <img id="img-system-logo" src="{{ url_for('static', filename='/assets/eaziwork_logo.png') }}"></img>
+            <!-- 系統名稱 -->
+            <div id="lab-system-title">三泰工作協助平台</div>
+            <!-- 登入者名稱 -->
+            <div id="txt-login-user">{{ USER }}</div>
+            <!-- 頭像 -->
+            <div id="div-avatar" class="landscape" title="登出系統">
+            <img src='http://{{ DOMAIN_PATH }}/static/{{ PHOTO }}' alt="">
+            </div>
+        </div>
+
+        <!-- 左邊側邊導覽列選單區 -->
+        <div id="div-side-menu-group">
+            <!-- 垂直選單列 -->
+            <ul id="div-layui-menu" class="layui-nav layui-nav-tree" lay-filter="test">
+                <!-- 項目群組1 -->
+                <li id="li-group-item" class="layui-nav-item layui-nav-itemed">
+                    <a>需求單位(PM/行銷/業務)表單管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a class="site-demo-active">新產品技術評估申請單</a></dd>
+                        <dd><a href="{{ url_for('blue_department.department_index') }}">新產品開案申請單</a></dd>
+                    </dl>
+                </li>
+                <!-- 項目群組2 -->
+                <li class="layui-nav-item">
+                    <a href="#">執行單位(RD)表單管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="{{ url_for('blue_department.department_index') }}">Layout申請單</a></dd>
+                        <dd><a href="{{ url_for('blue_department.department_index') }}">PCB打樣申請工程規格聯絡單</a></dd>
+                    </dl>
+                </li>
+                 <!-- 項目群組3 -->
+                 <li class="layui-nav-item">
+                    <a href="#">協辦單位(資材/昆山工程)表單管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="{{ url_for('blue_department.department_index') }}"></a>新產品試產需求備料單</dd>
+                        <dd><a href="{{ url_for('blue_department.department_index') }}">機種技術轉移檢核表</a></dd>
+                    </dl>
+
+                </li>
+
+
+        </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        {% include 'common/header.html' %}
+        <title>Task編輯</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/task.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <div id="id-table-bg">
+                <div id="form-title-text"><b>Task編輯</b></div>
+
+                <!-- 資料編輯內容區 -->
+                <div id="table-data-info">
+                    <!-- 資料表格 -->
+                    <table class="layui-hide" id="demo" lay-filter="test"></table>
+                </div>
+            </div>
+
+        </div>
+
+
+
+         <!-- 彈出新增視窗 -->
+         <template id="form-template-add">
+
+            <div id="add-window-bg">
+
+                <table id="add-win-table">
+
+                    <tbody>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-task-code"   class="cls-c1-r1">
+                                <div id="add-lab-task-code">Task編碼✱</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="add-tab-txt-task-code"   class="cls-c3-r1">
+                                <input type="text" id="add-input-task-code" name="add-input-task-code"></input>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-task-cname"   class="cls-c1-r1">
+                                <div id="add-lab-task-cname">Task中文✱</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="add-tab-txt-task-cname"   class="cls-c3-r1">
+                                <input type="text" id="add-input-task-cname" name="add-input-task-cname"></input>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-task-ename"   class="cls-c1-r1">
+                                <div id="add-lab-task-ename">Task英文✱</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="add-tab-txt-task-ename"   class="cls-c3-r1">
+                                <input type="text" id="add-input-task-ename" name="add-input-task-ename"></input>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-enable"   class="cls-c1-r1">
+                                <div id="add-lab-enable">狀態</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="add-tab-txt-enable"   class="cls-c1-r1">
+                                <select id="add-sel-enable" name="select-enable">
+                                    <option value="false">停用</option>
+                                    <option value="true"  selected="selected">啟用</option>
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-empty"   class="cls-c2-r1"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-memo"   class="cls-c1-r1">
+                                <div id="add-lab-memo">備註</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="add-tab-txt-memo"   class="cls-c3-r1">
+                                <textarea id="add-input-memo" name="add-input-memo" rows="3" cols="40" required></textarea>
+                            </th>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </template>
+
+
+
+        <!-- 彈出編輯視窗 -->
+        <template id="form-template-edit">
+
+            <div id="edit-window-bg">
+
+                <table id="edit-win-table">
+
+                    <tbody>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="edit-tab-lab-task-code"   class="cls-c1-r1">
+                                <div id="edit-lab-task-code">Task編碼✱</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="edit-tab-txt-task-code"   class="cls-c3-r1">
+                                <input type="text" id="edit-input-task-code" name="edit-input-task-code"></input>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="edit-tab-lab-task-cname"   class="cls-c1-r1">
+                                <div id="edit-lab-task-cname">Task中文✱</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="edit-tab-txt-task-cname"   class="cls-c3-r1">
+                                <input type="text" id="edit-input-task-cname" name="edit-input-task-cname"></input>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="edit-tab-lab-task-ename"   class="cls-c1-r1">
+                                <div id="edit-lab-task-ename">Task英文✱</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="edit-tab-txt-task-ename"   class="cls-c3-r1">
+                                <input type="text" id="edit-input-task-ename" name="edit-input-task-ename"></input>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="edit-tab-lab-enable"   class="cls-c1-r1">
+                                <div id="edit-lab-enable">狀態</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="edit-tab-txt-enable"   class="cls-c1-r1">
+                                <select id="edit-sel-enable" name="select-enable">
+                                    <option value="false">停用</option>
+                                    <option value="true"  selected="selected">啟用</option>
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="edit-tab-empty"   class="cls-c2-r1"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="edit-tab-lab-memo"   class="cls-c1-r1">
+                                <div id="edit-lab-memo">備註</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="edit-tab-txt-memo"   class="cls-c3-r1">
+                                <textarea id="edit-input-memo" name="edit-input-memo" rows="3" cols="40" required></textarea>
+                            </th>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </template>
+
+
+        <!-- 功能項按鈕 -->
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button id="btn-add" class="layui-btn layui-btn-normal layui-bg-blue"  lay-event="add-data" title="新增資料">
+                    <i class="layui-icon layui-icon-addition" ></i>新增
+                </button>
+                <button id="btn-edit" class="layui-btn layui-btn-normal layui-bg-orange" lay-event="edit-data"  title="編輯資料">
+                    <i class="layui-icon layui-icon-edit"  ></i>編輯
+                </button>
+                <button id="btn-delete" class="layui-btn layui-btn-normal layui-bg-red"  lay-event="delete-data" title="刪除資料">
+                    <i class="layui-icon layui-icon-delete"></i>刪除
+                </button>
+            </div>
+        </script>
+
+
+
+        <script>
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+                // 警告
+                if(mode == 0) {
+                    btn1.css({"background-color":"#ff0066", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#ffe6f0", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 查詢
+                if(mode == 1) {
+                    btn1.css({"background-color":"#cc99ff", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#f2e6ff", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 新增
+                if(mode == 2) {
+                    btn1.css({"background-color":"#1E9FFF", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#e6f4ff", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 檢視
+                if(mode == 3) {
+                    btn1.css({"background-color":"#009688", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#e6fffc", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 編輯
+                if(mode == 4) {
+                    btn1.css({"background-color":"#FFB800", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#fff8e6", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 刪除
+                if(mode == 5) {
+                    btn1.css({"background-color":"#FF5722", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#ffebe6", "border-color": "#555555", "font-size":"18px"});
+                }
+            }
+
+
+            layui.use( ['form', 'layer', 'jquery', 'table'], function() {
+                var layer   = layui.layer;
+                var laypage = layui.laypage;
+                var table   = layui.table;
+                var $       = layui.jquery;
+                var form    = layui.form;
+
+
+                //讀取 task 資料
+                var data_url = "http://{{ DOMAIN_PATH }}/api/v0/db/data/task/all/";
+                $.ajax({
+                    url: data_url,
+                    type: "GET",
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        //取資料成功!
+                        console.log("取Task資料成功");
+                        console.log(response);
+
+                        table.render({
+                            elem: '#demo',
+                            height: 724,
+                            data: response['data'],
+                            title: 'Task編輯管理',
+                            page: true,
+                            even: true,
+                            limit: 10,
+                            limits: [10, 20, 50, 100, 500, 1000],
+                            skin: 'row',
+                            size: 'lg',
+                            //toolbar: 'default',
+                            toolbar: '#toolbarDemo',
+                            defaultToolbar: ['filter', 'exports', 'print'
+                            //{ title: '提示', layEvent: 'LAYTABLE_TIPS',icon: 'layui-icon-tips'}  //自定工具欄圖標 - 提示
+                            ],
+                            totalRow: true,
+                            cols: [[ 
+                                {type:  'checkbox',     fixed: 'left'},
+                                {field: 'uuid',         title: '識別碼',   width: 300, align:'left',  sort: true, hide: true},
+                                {field: 'task_code',    title: 'Task編碼',   width: 350, align:'left', sort: true, hide: false},
+                                {field: 'task_cname',   title: 'Task中文名', width: 350, align:'left', sort: true, hide: false},
+                                {field: 'task_ename',   title: 'Task英文名', width: 350, align:'left', sort: true, hide: false},
+                                {field: 'enable',       title: '啟用狀態', width: 100, align:'center' },
+                                {field: 'memo',         title: '備註',     width: 200, hide: false },
+                                {field: 'insertAt',     title: '新增時間', width: 135, sort: true, hide: true},
+                                {field: 'updateAt',     title: '更新時間', width: 135, sort: true, hide: true},
+                            ]],
+                            done: function(res, curr, count) {
+                                //console.log(count);
+                                //layer.msg('目前page:'+ curr.toString() );
+                                //window.refresh();
+                            },
+                            text: {
+                                none: '目前暫無數據'
+                            }
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        layer.msg("取Task資料失敗");
+                    }
+                });
+
+
+                //----------------------------------上方功能按鈕事件
+                table.on('toolbar(test)', function(obj) {
+                    var checkStatus = table.checkStatus(obj.config.id);
+
+                    switch(obj.event) {
+                        case 'add-data':
+                            layer.open({
+                                type       : 1,
+                                skin       : 'layui-layer-molv', //layui-layer-rim
+                                resize     : false,
+                                shadeClose : false,
+                                shade      : [0.7, '#000'],
+                                closeBtn   : 2,
+                                offset     : 'auto',
+                                anim       : 5,
+                                area       : ['480px', '500px'], 
+                                title      : ['新增視窗-Task編輯', 'font-size:20px;background-color:#1E9FFF;'],
+                                btn        : ['新增','取消'],
+                                content    : $('#form-template-add').html(),
+                                success: function(layero, index) {
+                                    addIconforBtn(2);
+                                    //layero.find('.layui-layer-content').css('overflow-y', 'visible');
+                                    //layero.find('.layui-layout-body'  ).css('overflow-y', 'auto'   );
+                                },
+                                yes:function (index, layero) {
+
+                                    //layer.msg('開啟新增資料彈出視窗');
+                                    var strTaskCode  = $('#add-input-task-code' ).val();
+                                    var strTaskCName = $('#add-input-task-cname').val();
+                                    var strTaskEName = $('#add-input-task-ename').val();
+                                    var bEnable      = $('#add-sel-enable'        ).val();
+                                    var strMemo      = $('#add-input-memo'        ).val();
+
+                                    // 判斷必填欄位
+                                    if ( strTaskCode == '' || strTaskCName == '' ||strTaskEName == '' ) {
+                                        layer.msg('有必填欄位沒填, 請檢查欄位');
+
+                                    }else {
+
+                                        async function addStatusData() {
+                                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/task/one/";
+                                            let objParam = { 
+                                                "task_code"  : strTaskCode,
+                                                "task_cname" : strTaskCName,
+                                                "task_ename" : strTaskEName,
+                                                "memo"       : strMemo,
+                                                "enable"     : bEnable,
+                                            };
+                                            let jsonParam = JSON.stringify(objParam);
+                                            const res = await fetch(uri, {
+                                                method:'POST',
+                                                body: jsonParam,
+                                                headers: {'Content-Type':'application/json; charset=utf-8'}
+                                            });
+                                            return await res.json();
+                                        }
+
+                                        let promiseAdd = addStatusData();
+                                        promiseAdd.then( (response) => {
+                                            layer.msg(response['msg'])
+                                            console.log(response);
+                                            layer.close(index);
+                                            window.parent.location.reload();
+                                            
+                                        });
+                                    }
+                                }
+                            });
+                            break;
+
+
+                        case 'edit-data':
+                            var data = checkStatus.data;
+
+                            if(data.length === 0) {
+                                layer.msg('請選擇一筆資料');
+                            } else if(data.length > 1){
+                                layer.msg('只能同時编辑一筆資料');
+                            } else {
+                                //layer.msg('開啟編輯資料彈出視窗');
+
+                                layer.open({
+                                    type       : 1,
+                                    skin       : 'layui-layer-molv', //layui-layer-rim
+                                    resize     : false,
+                                    shadeClose : false,
+                                    shade      : [0.7, '#000'],
+                                    closeBtn   : 2,
+                                    offset     : 'auto',
+                                    anim       : 5,
+                                    area       : ['480px', '500px'], //寬高
+                                    title      : ['編輯視窗-Task編輯', 'font-size:20px;background-color:#FFB800;'],
+                                    btn        : ['修改','取消'],
+                                    content    : $('#form-template-edit').html(),
+                                    success: function(layero, index) {
+                                        //console.log(layero);
+                                        addIconforBtn(4);
+
+                                        console.log(checkStatus.data[0]);
+                                        $('#edit-input-task-code' ).val( checkStatus.data[0].task_code  );
+                                        $('#edit-input-task-cname').val( checkStatus.data[0].task_cname );
+                                        $('#edit-input-task-ename').val( checkStatus.data[0].task_ename );
+                                        //$('#edit-sel-enable'      ).val( checkStatus.data[0].enable     );
+                                        //layero.find("#edit-sel-enable"   ).html(checkStatus.data[0].enable);
+
+                                        var strEnableOptions = '';
+                                        if ( (checkStatus.data[0].enable).toString() == 'false' ) {
+                                        strEnableOptions += '<option value="false" selected="selected">停用</option>';
+                                        strEnableOptions += '<option value="true">啟用</option>';
+                                        }else {
+                                        strEnableOptions += '<option value="false">停用</option>';
+                                        strEnableOptions += '<option value="true" selected="selected">啟用</option>';
+                                        }
+                                        document.getElementById("edit-sel-enable").innerHTML = strEnableOptions;
+
+
+                                        $('#edit-input-memo'      ).val( checkStatus.data[0].memo       );
+
+                                    },
+                                    yes:function (index, layero) {
+                                        //alert('修改按钮觸發');
+                                        var strUUID   = checkStatus.data[0].uuid;
+                                        var strTaskCode  = $('#edit-input-task-code' ).val();
+                                        var strTaskCName = $('#edit-input-task-cname').val();
+                                        var strTaskEName = $('#edit-input-task-ename').val();
+                                        var bEnable      = $('#edit-sel-enable'      ).val();
+                                        var strMemo      = $('#edit-input-memo'      ).val();
+
+                                        // 判斷必填欄位
+                                        if ( strTaskCode == '' || strTaskCName == '' || strTaskEName == '' ) {
+                                            layer.msg('有必填欄位沒填, 請檢查欄位');
+
+                                        }else {
+                                        
+                                        
+                                            //if (tempEnable == "0") { bEnable = false; } else { bEnable = true; }
+                                            async function UpdateStatusData() {
+                                                let uri = "http://{{ DOMAIN_PATH }}/api/v0/update/task/";
+                                                let objParam = { 
+                                                    "uuid"       : strUUID,
+                                                    "task_code"  : strTaskCode,
+                                                    "task_cname" : strTaskCName,
+                                                    "task_ename" : strTaskEName,
+                                                    "enable"     : bEnable,
+                                                    "memo"       : strMemo,
+                                                };
+                                                let jsonParam = JSON.stringify(objParam);
+                                                console.log(jsonParam);
+                                                const res = await fetch(uri, {
+                                                    method:'POST',
+                                                    body: jsonParam,
+                                                    headers: { 'Content-Type':'application/json; charset=utf-8' }
+                                                });
+                                                return await res.json();
+                                            }
+                                            let promiseUpdate = UpdateStatusData();
+                                            promiseUpdate.then( (response) => {
+
+                                                if(response['result'] == 'ok') {
+                                                    //console.log(response['data']['msg']);
+                                                    layer.msg(response['msg'])
+                                                    layer.close(index);
+                                                    //table.reload('demo');
+                                                    window.parent.location.reload();
+
+                                                }else if(response['result'] == 'fail') {
+                                                    layer.msg(response['msg'])
+                                                    layer.close(index);
+                                                }
+                                            });
+
+                                        }
+                                        
+                                    }
+                                });
+                            }
+                            break;
+
+                        case 'delete-data':
+                            //layer.msg('開啟刪除資料彈出視窗');
+                            var data = checkStatus.data;
+                            if (data.length === 0) {
+                                layer.msg('請選擇一筆資料');
+                            } else {
+                                layer.open({
+                                    type       : 1,
+                                    skin       : 'layui-layer-molv', //layui-layer-rim
+                                    resize     : true,
+                                    shadeClose : false,
+                                    shade      : [0.7, '#000'],
+                                    closeBtn   : 2,
+                                    offset     : 'auto',
+                                    anim       : 5,
+                                    area       : ['450px', '280px'], 
+                                    title      : ['刪除視窗-Task編輯', 'font-size:20px;background-color:#FF5722;'],
+                                    btn        : ['刪除','取消'],
+                                    content: '<div style="padding: 15px;">你否確定要刪除?<br><br><div id="view-txt-msg"></div></div>',
+    
+                                    success: function(layero, index) {
+                                        addIconforBtn(5);
+                                        console.log(layero, index);
+                                        //layero.find('.layui-layer-content').css('overflow-y', 'visible');
+                                        var strCode = "";
+                                        for (var i=0; i< data.length; i++) {
+                                            strCode += "<li>";
+                                            strCode += "[識別碼] " + checkStatus.data[i].uuid;
+                                            strCode += "</li>";
+                                        }
+                                        layero.find("#view-txt-msg").html(strCode);
+                                    },
+                                    yes:function (index, layero) {
+
+                                        //alert('刪除按钮觸發');
+                                        var removeDataList = [];
+                                        for (var i=0; i< data.length; i++) {
+                                            removeDataList.push(checkStatus.data[i].uuid)
+                                        }
+                                        console.log(removeDataList);
+                                        //layer.close(index);
+
+                                        async function deleteMultReasonData(dataList) {
+                                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/delete/task/multi/";
+                                            let objParam = { uuids: dataList };
+                                            let jsonParam = JSON.stringify(objParam);
+                                            const res = await fetch(uri, {
+                                                method:'delete',
+                                                body:jsonParam,
+                                                headers: {'Content-Type': 'application/json; charset=utf-8'}
+                                            });
+                                            return await res.json();
+                                        }
+                                        let promiseDelete = deleteMultReasonData(removeDataList);
+                                        promiseDelete.then( (response) => {
+                                            if(response['result'] == 'ok') {
+                                                //console.log(response['data']['msg']);
+                                                //layer.msg(response['data']['msg'])
+                                                layer.close(index);
+                                                window.parent.location.reload();
+                                                //table.reload('demo');
+
+                                            }else if(response['result'] == 'fail') {
+                                                layer.msg(response['msg'])
+                                                layer.close(index);
+                                            }
+                                        });
+
+                                    }
+                                });
+                            }
+                            break;
+                        
+                    }
+
+                });
+
+
+
+
+            });
+
+
+
+        </script>
+
+
+    </body>
+
+</html>

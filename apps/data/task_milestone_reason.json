@@ -1,0 +1,461 @@
+[
+    {
+        "type": "ee",
+        "form_type" : "評估單",
+        "task": "Pre-Work",
+        "milestone": [
+            "Spec. Review",
+            "Design Organization",
+            "Pre-BOM Review"
+        ],
+        "apply_reject_reason": [
+            "評估資訊不足",
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [          
+        ],
+        "pause_reason": [
+            "評估案插單",
+            "新開案插單",
+            "人力資源不足",
+            "等待PM確認"
+        ],
+        "end_reason": [
+            "PM通知結案"
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "pm開案單",
+        "task": "Hardware Design",
+        "milestone": [
+            "MCU Design"
+         
+        ],
+        "apply_reject_reason": [
+            "評估資訊不足",
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [          
+        ],
+        "pause_reason": [
+            "評估案插單",
+            "新開案插單",
+            "人力資源不足",
+            "等待PM確認"
+        ],
+        "end_reason": [
+            "PM通知結案"
+        ]
+
+    },
+    {
+        "type": "ee",
+        "form_type" : "pm開案單",
+        "task": "Hardware Design",
+        "milestone": [
+            "Schematic Design"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [ 
+            "不符合CHECKING LIST",
+            "料件選用修正"         
+        ],
+        "pause_reason": [
+            "評估案插單",
+            "新開案插單"
+        ],
+        "end_reason": [
+            "PM通知結案"
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "layout申請單",
+        "task": "Hardware Design",
+        "milestone": [
+            "Layout"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [ 
+            "不符合CHECKING LIST"           
+        ],
+        "pause_reason": [
+            "評估案插單",
+            "新開案插單",
+            "等待機構提供設計圖檔"
+        ],
+        "end_reason": [
+            "PM通知結案"
+            
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "pcb申請單",
+        "task": "PCB Production",
+        "milestone": [
+            "PCB Fabrication"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [ 
+            "零件座標檔修正",
+            "RBOM修正"
+        ],
+        "pause_reason": [
+            "評估案插單",
+            "新開案插單",
+            "等待LAYOUT設計圖檔",
+            "等待FW更新"
+        ],
+        "end_reason": [
+            "PM通知結案"
+            
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "pcb申請單",
+        "task": "PCB Verification",
+        "milestone": [
+            "Final Check List"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [ 
+            "不符合CHECKING LIST"
+           
+        ],
+        "pause_reason": [
+            "等待試產後寄回樣品"
+           
+        ],
+        "end_reason": [
+            "PM通知結案"
+            
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "試產單",
+        "task": "Trial Production",
+        "milestone": [
+            "試產測試"
+         
+        ],
+        "apply_reject_reason": [           
+            "試產失敗"
+          
+        ],
+        "design_reject_reason": [ 
+            "未檢附核准之試產報告",
+            "未檢附核准之試產異常報告"
+           
+        ],
+        "pause_reason": [
+            "等待開模",
+            "準備第二次試產"
+           
+        ],
+        "end_reason": [
+            "試產失敗",
+            "PM通知結案"
+            
+        ]
+    },
+    {
+        "type": "ee",
+        "form_type" : "技轉單",
+        "task": "技轉文件",
+        "milestone": [
+            "RBOM/新零件承認書-電子"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [ 
+            "技轉資料未齊全",
+            "技轉資料不正確"
+           
+        ],
+        "pause_reason": [
+            "等待開模"
+           
+        ],
+        "end_reason": [            
+            "PM通知結案"
+            
+        ]
+    },
+
+
+    {
+        "type": "me",
+        "form_type" : "評估單",
+        "task": "產品造型規劃",
+        "milestone": [
+            "雛型定案"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [ 
+            "設計變更"           
+        ],
+        "pause_reason": [
+            "評估案插單",
+            "新開案插單"
+           
+        ],
+        "end_reason": [            
+            "PM通知結案"
+            
+        ]
+    },
+    {
+        "type": "me",
+        "form_type" : "pm開案單",
+        "task": "產品造型規劃",
+        "milestone": [
+            "雛型定案"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [ 
+            "設計變更"           
+        ],
+        "pause_reason": [
+            "評估案插單",
+            "新開案插單"
+           
+        ],
+        "end_reason": [            
+            "PM通知結案"
+            
+        ]
+    },
+    {
+        "type": "me",
+        "form_type" : "pm開案單",
+        "task": "MOCKUP",
+        "milestone": [
+            "估價、發包、驗收"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [ 
+            "設計錯誤",
+            "不符合模型檢討記錄",
+            "不符合機構設計檢查清單"
+        ],
+        "pause_reason": [
+            "評估案插單",
+            "新開案插單"
+           
+        ],
+        "end_reason": [            
+            "PM通知結案"
+        ]
+    },
+    {
+        "type": "me",
+        "form_type" : "評估單",
+        "task": "MOCKUP",
+        "milestone": [
+            "估價、發包、驗收"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+          
+        ],
+        "design_reject_reason": [ 
+            "設計錯誤",
+            "不符合模型檢討記錄",
+            "不符合機構設計檢查清單"
+        ],
+        "pause_reason": [
+            "評估案插單",
+            "新開案插單"
+           
+        ],
+        "end_reason": [            
+            "PM通知結案"
+        ]
+    },
+    {
+        "type": "me",
+        "form_type" : "pm開案單",
+        "task": "模具開發",
+        "milestone": [
+            "模具估價、開發、修模、驗收"
+         
+        ],
+        "apply_reject_reason": [
+          
+        ],
+        "design_reject_reason": [ 
+            "不符合試模檢討記錄",
+            "不符合機構設計檢查清單"
+        ],
+        "pause_reason": [
+            "設計變更"
+           
+        ],
+        "end_reason": [            
+            "PM通知結案",
+            "費用太高"
+        ]
+    },
+    {
+        "type": "me",
+        "form_type" : "pm開案單",
+        "task": "技轉文件",
+        "milestone": [
+            "SOP/新零件承認書-機構"
+         
+        ],
+        "apply_reject_reason": [
+          
+        ],
+        "design_reject_reason": [ 
+            "技轉資料未齊全",
+            "技轉資料不正確"
+        ],
+        "pause_reason": [
+            "設計變更"
+           
+        ],
+        "end_reason": [
+            "PM通知結案"
+        ]
+    },
+
+
+    {
+        "type": "ld",
+        "form_type" : "內部開案單",
+        "task": "架構規劃",
+        "milestone": [
+            "整體架構、測試方法、規格訂定"
+         
+        ],
+        "apply_reject_reason": [
+            "開案資訊不足",
+            "申請單資訊修正"
+        ],
+        "design_reject_reason": [ 
+            "架構規劃需重新修正"
+            
+        ],
+        "pause_reason": [
+            "新案插單"
+           
+        ],
+        "end_reason": [
+            "公司技術發展方向修正"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "內部開案單",
+        "task": "Prototype",
+        "milestone": [
+            "Schematic Design"
+         
+        ],
+        "apply_reject_reason": [
+            "開案資訊不足",
+            "申請單資訊修正"
+        ],
+        "design_reject_reason": [ 
+            "不符合CHECKING LIST"
+            
+        ],
+        "pause_reason": [
+            "新案插單"
+           
+        ],
+        "end_reason": [
+            "公司技術發展方向修正"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "layout申請單",
+        "task": "Prototype",
+        "milestone": [
+            "Layout"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正"
+        ],
+        "design_reject_reason": [ 
+            "不符合CHECKING LIST"
+            
+        ],
+        "pause_reason": [
+            "新案插單"
+           
+        ],
+        "end_reason": [
+            "公司技術發展方向修正"
+        ]
+    },
+    {
+        "type": "ld",
+        "form_type" : "pcb申請單",
+        "task": "FPGA Test",
+        "milestone": [
+            "訊號完整、溫度測試"
+         
+        ],
+        "apply_reject_reason": [           
+            "申請單資訊修正",
+            "改版"
+        ],
+        "design_reject_reason": [ 
+            "測試報告不完整"
+            
+        ],
+        "pause_reason": [
+            "新案插單"
+           
+        ],
+        "end_reason": [
+            "公司技術發展方向修正"
+        ]
+    }
+
+
+
+   
+]

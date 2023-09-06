@@ -1,0 +1,5 @@
+# 專案暫存檔忽略
+__pycache__/
+models/__pycache__/
+views/__pycache__/
+log/

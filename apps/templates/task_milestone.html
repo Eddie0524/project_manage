@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        {% include 'common/header.html' %}
+        <title>Task / Milestone編輯</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/task_milestone.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='/css/file-check.css') }}" /> -->
+
+    </head>
+
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <div id="id-table-bg">
+                <div id="form-title-text"><b>Task / Milestone 編輯</b></div>
+                <!-- 表單 -->
+                <table id="id-table-task">
+                    <thead id="table-head">
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="lab-task-bar"   class="cls-c1-r1-h2">
+                                <div id="div-task" class="header">
+                                    <input type="text" id="input-task" placeholder="請新增一筆Task...">
+                                    <button id="btn-add-task"  class="add-task-btn">新增Task</button>
+                                    <!--<button id="btn-save-task"  class="save-task-btn">儲存</button>-->
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="table-body">
+                        <tr>
+                            <th colspan="1"  rowspan="1" id="lab-task-items"  class="cls-c1-r1">
+                                <div id="task-ul"></div>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!--退回指派填寫原因編輯畫面-->
+        <template id="mailstone-template-edit">
+            <table id="id-table-milestone">
+                <thead id="table-head">
+                    <tr>
+                        <th colspan="1"  rowspan="1" id="lab-milestone-bar" class="cls-c1-r1-h2">
+                            <div id="div-milestone" class="header">
+                                <input type="text" id="input-milestone" placeholder="請新增一筆Milestone...">
+                                <button id="btn-add-milestone"  class="add-task-btn">新增Milestone</button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr>
+                        <th colspan="1"  rowspan="1" id="lab-milestone-items"  class="cls-c1-r1">
+                            <div id="milestone-ul"></div>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+
+
+
+        <!-- 程式區 -->
+        <script>
+
+            layui.use(['form', 'layer', 'jquery', 'table'], function () {
+                var layer = layui.layer;
+                var laypage = layui.laypage;
+                var table = layui.table;
+                var $ = layui.jquery;
+                var form = layui.form;
+            
+            
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+                // 警告
+                if (mode == 0) {
+                    btn1.css({ "background-color": "#ff0066", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#ffe6f0", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 詢問
+                if (mode == 1) {
+                    btn1.css({ "background-color": "#1E9FFF", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#e6f4ff", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 編輯
+                if (mode == 2) {
+                    btn1.css({ "background-color": "#2f81b9", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#e6f4ff", "border-color": "#555555", "font-size": "18px" });
+                }
+                // #2f81b9
+            }
+
+            var mapMilestone = null;
+            var mapTaskIndex = null;
+            var mapInfo = null;
+
+            
+            var taskNodelist = document.getElementById("task-ul");
+            /*
+            for (var i = 0; i < taskNodelist.length; i++) {
+                var span   = document.createElement("span");
+                var txt  = document.createTextNode("\u00D7");
+                span.className = "close-task";
+                span.appendChild(txt);
+                taskNodelist[i].appendChild(span);
+            }
+            var close1 = document.getElementsByClassName("close-task");
+            for (var j = 0; j < close1.length; j++) {
+                close1[j].onclick = function() {
+                    var div = this.parentElement;
+                    div.remove();
+                }
+            }
+            */
+
+
+            //var taskNameList = [];
+
+            function newTaskElement(strTaskName, index) {
+                var li = document.createElement("div");
+                li.className = "list-task-item";
+                if ( strTaskName != null) {
+                    // 文字
+                    var divobj = document.createElement("div");
+                    divobj.className = "text-task";
+                    var t = document.createTextNode(strTaskName);
+                    divobj.appendChild(t);
+                    li.appendChild(divobj);
+                    // 編輯按鈕
+                    var btn1 = document.createElement("button");
+                    btn1.id = index;
+                    btn1.className = "cls-edit-btn-task";
+                    var bt1 = document.createTextNode("編輯");
+                    btn1.appendChild(bt1);
+                    btn1.onclick = function() {
+                        //alert(btn1.id);
+                        console.log("***********************");
+                        /*
+                        console.log(btn1.id);
+                        console.log(mapTaskIndex);
+                        console.log(mapTaskIndex.get(parseInt(btn1.id)) );
+                        console.log(mapMilestone.get( mapTaskIndex.get(parseInt(btn1.id))) );
+                        //alert(mapMilestone.get( mapTaskIndex.get(parseInt(btn.id))));
+                        processMilestone( mapMilestone.get( mapTaskIndex.get(parseInt(btn1.id))) );
+                        */
+
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-molv', //layui-layer-rim
+                            resize: true,
+                            shadeClose: false,
+                            shade: [0.7, '#000'],
+                            closeBtn: 2,
+                            offset: 'auto',
+                            anim: 5,
+                            area: ['600px', '400px'],
+                            title: ['編輯 Milestone', 'font-size:24px;background-color:#2c87bf;'],
+                            btn: ['儲存', '取消'],
+                            content: $('#mailstone-template-edit').html(),
+                            success: function (layero, index) {
+                                addIconforBtn(2);
+
+                                console.log(btn1.id);
+                                console.log(mapTaskIndex);
+                                console.log(mapTaskIndex.get(parseInt(btn1.id)) );
+
+                                console.log(mapMilestone.get( mapTaskIndex.get(parseInt(btn1.id))) );
+
+                                //alert(mapMilestone.get( mapTaskIndex.get(parseInt(btn.id))));
+                               
+                                processMilestone( mapMilestone.get( mapTaskIndex.get(parseInt(btn1.id))) );
+
+                                $("#btn-add-milestone").click(function () {
+                                    //alert('click add milestone');
+                                    var inputValue = document.getElementById("input-milestone").value;
+                                    if (inputValue == "") {
+                                        layer.msg("請輸入 Milestone ,不能空白!");
+                    
+                                    }else {
+
+                                        layer.confirm('確定要新增 Milestone 嗎？', {
+                                            title: [
+                                                '詢問',
+                                                'font-size:24px;font-weight:bold;color:#ffffff;background-color:#1e9fff;'
+                                            ],
+                                            icon: 0,
+                                            btn: ['確定', '取消'],
+                                            shade: [0.7, '#000'],
+                                            closeBtn: 1, 
+                                            shadeClose: false,
+                                        }, function (index) {
+                                            layer.close(index); 
+                                            newMilestoneElement(inputValue);
+                                            document.getElementById("input-milestone").value = "";
+                                        }, function (index) {
+                                            //layer.close(index);
+                                            // 取消操作
+                                        });
+                                    }
+                                });
+
+                            },
+                            yes: function (index, layero) {
+                                //console.log(">>>>>>>>>>>>>>>>>>>>");
+                                //console.log(mapTaskIndex.get(parseInt(btn1.id)));
+                                var milestoneNodelist = document.getElementById("milestone-ul");
+                                //console.log(milestoneNodelist);
+
+                                var milestoneElements = document.getElementsByClassName('list-milestone-item');
+                                //console.log(milestoneElements);
+                                //console.log(milestoneElements.length);
+                                
+                                var milestoneTexts = [];
+                                for (var i = 0; i < milestoneElements.length; i++) {
+                                    //console.log(milestoneElements[i].children[0].textContent);
+                                    var milestoneText = milestoneElements[i].children[0].textContent;
+                                    milestoneTexts.push(milestoneText);
+                                }
+                                //console.log(milestoneTexts);
+
+                                // 更新某Task 內容
+                                async function update_milestone_by_task() {
+                                    var uri = "http://{{ DOMAIN_PATH }}/api/v0/update/milestone/by/task/";
+                                    var objParam = { 
+                                        "task"      : mapTaskIndex.get(parseInt(btn1.id)),
+                                        "milestone" : milestoneTexts,
+                                    };
+                                    let jsonParam = JSON.stringify(objParam);
+                                    //console.log(jsonParam);
+                                    const res = await fetch(uri, {
+                                        method:'POST',
+                                        body: jsonParam,
+                                        headers: { 'Content-Type' : 'application/json; charset=utf-8' }
+                                    });
+                                    return await res.json();
+                                }
+
+                                var prom_update_milestone = update_milestone_by_task();
+                                prom_update_milestone.then( function(response) {
+                                    //console.log(response);
+                                    layer.msg(response['msg']);
+                                    layer.close(index);
+                                    window.parent.location.reload();
+                                });
+
+                            }
+                        });
+
+                    }
+                    li.appendChild(btn1);
+                    // 刪除按鈕
+                    var btn2 = document.createElement("button");
+                    btn2.id = index;
+                    btn2.className = "cls-delete-btn-task";
+                    var bt2 = document.createTextNode("刪除");
+                    btn2.appendChild(bt2);
+                    li.appendChild(btn2);
+                    btn2.onclick = function() {
+                        //var div = this.parentElement;
+                        //div.remove();
+                        var div = this.parentElement;
+                        layer.confirm('確定要刪除 Task 嗎？', {
+                            title: [
+                                '詢問',
+                                'font-size:24px;font-weight:bold;color:#ffffff;background-color:#1e9fff;'
+                            ],
+                            icon: 0,
+                            shade: [0.7, '#000'],
+                            btn: ['確認', '取消'],
+                            closeBtn: 1,
+                            shadeClose: false,
+                        }, function (index) {
+                            layer.close(index); 
+                            div.remove();
+                            processSaveTaskInfo();
+
+                        }, function (index) {
+                            //layer.close(index);
+                            
+                        });
+                        
+                    }
+                    document.getElementById("task-ul").appendChild(li);
+
+                }
+            }
+
+
+            
+            function newMilestoneElement(strMilestoneName) {
+                var li = document.createElement("div");
+                li.className = "list-milestone-item";
+                if ( strMilestoneName != null) {
+                    // 文字
+                    var divobj = document.createElement("div");
+                    divobj.className = "text-milestone";
+                    var t = document.createTextNode(strMilestoneName);
+                    divobj.appendChild(t);
+                    li.appendChild(divobj);
+                    // 刪除按鈕
+                    var btn3 = document.createElement("button");
+                    btn3.className = "cls-delete-btn-task";
+                    var bt3 = document.createTextNode("刪除");
+                    btn3.appendChild(bt3);
+                    li.appendChild(btn3);
+                    btn3.onclick = function() {
+                        var div = this.parentElement;
+
+                        layer.confirm('確定要刪除 Milestone 嗎？', {
+                            title: [
+                                '詢問',
+                                'font-size:24px;font-weight:bold;color:#ffffff;background-color:#1e9fff;'
+                            ],
+                            icon: 0,
+                            shade: [0.7, '#000'],
+                            btn: ['確認', '取消'],
+                            closeBtn: 1,
+                            shadeClose: false,
+                        }, function (index) {
+                            layer.close(index); 
+                            div.remove();
+
+                        }, function (index) {
+
+                        });
+                    }
+                    document.getElementById("milestone-ul").appendChild(li);
+                }
+            }
+            
+
+            function processMilestone(srcList) {
+                for (var i = 0; i < srcList.length; i++) {
+                    newMilestoneElement(srcList[i]);
+                }
+            }
+
+
+            // 讀取 Task / Milestone 資料
+            $.ajax({
+                url: "http://{{ DOMAIN_PATH }}/api/v0/db/data/task_milestone/by/{{ GROUP_NO }}/",
+                type: "GET",
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    //取檔案成功!
+                    console.log("取檔案成功");
+                    console.log(response);
+
+                    mapMilestone = new Map();
+                    mapTaskIndex = new Map();
+                    mapInfo      = new Map();
+
+                    var task_list = response.data;
+                    console.log(task_list);
+                    console.log(task_list.length);
+                    // 排序
+                    task_list.sort(function(a, b) {
+                        var keyA = new Date(a.index)
+                        var keyB = new Date(b.index);
+                        // Compare the 2 dates
+                        if (keyA < keyB) return -1;
+                        if (keyA > keyB) return 1;
+                        return 0;
+                    });
+                    console.log('--------預設排序--------');
+                    console.log(task_list);
+            
+                    for (var i = 0; i < task_list.length; i++) {
+                        console.log(task_list[i]['task']);
+                        newTaskElement(task_list[i]['task'], i);
+                        var milestoneArray = task_list[i]['milestone'];
+                        console.log(milestoneArray);
+
+                        mapMilestone.set(task_list[i]['task'], milestoneArray);
+                        mapTaskIndex.set(i, task_list[i]['task']);
+
+                        mapInfo.set(task_list[i]['task'], task_list[i] );
+                    }
+                    //console.log(mapTaskIndex);
+                    //console.log(mapMilestone);
+                },
+                error: function (xhr, status, error) {
+                    layer.msg("檔案取得失敗");
+                }
+            });
+
+
+            // 按下新增Task按鈕
+            document.querySelector("#btn-add-task").addEventListener('click', function(ev) {
+
+                var inputValue = document.getElementById("input-task").value;
+                if (inputValue == "") {
+                    layer.msg("請輸入 Task ,不能空白!");
+
+                }else {
+
+                    layer.confirm('確定要新增 Task 嗎？', {
+                        title: [
+                            '詢問',
+                            'font-size:24px;font-weight:bold;color:#ffffff;background-color:#1e9fff;'
+                        ],
+                        icon: 0,
+                        btn: ['確定', '取消'],
+                        shade: [0.7, '#000'],
+                        closeBtn: 1, 
+                        shadeClose: false,
+                    }, function (index) {
+
+                        layer.close(index); 
+
+                        var tempObj = new Object();
+
+                        mapInfo.set( inputValue, tempObj );
+                        mapMilestone.set(inputValue, []);
+
+                        newTaskElement(inputValue,  (document.getElementsByClassName('list-task-item').length).toString());
+                        document.getElementById("input-task").value = "";
+
+                        tempObj['_id'  ] = '';
+                        tempObj['uuid' ] = '';
+                        tempObj['type' ] = '{{ GROUP_NO }}';
+                        tempObj['task' ] = inputValue;
+                        tempObj['index'] = (document.getElementsByClassName('list-task-item').length).toString();
+                        tempObj['milestone'] = [];
+                        tempObj['enable'] = true;
+                        tempObj['inserted_at'] = '';
+                        tempObj['updated_at']  = '';
+
+                        mapTaskIndex.set((document.getElementsByClassName('list-task-item').length-1), inputValue);
+
+                        processSaveTaskInfo();
+                        
+                    }, function (index) {
+                        layer.close(index);
+                        
+                    });
+
+                }
+
+            });
+
+            /*
+            // 按下儲存按鈕(Task)
+            document.querySelector("#btn-save-task").addEventListener('click', function() {
+                processSaveTaskInfo();
+                console.log(taskNodelist);
+                var taskElements = document.getElementsByClassName('list-task-item');
+                //console.log(taskElements);
+                //console.log(taskElements.length);
+                var taskTexts = [];
+                for (var i = 0; i < taskElements.length; i++) {
+                    //console.log(milestoneElements[i].children[0].textContent);
+                    var taskText = taskElements[i].children[0].textContent;
+                    taskTexts.push(taskText);
+                }
+                console.log(taskTexts);
+                var paramList = [];
+                for(var j=0; j< taskTexts.length; j++) {
+                    console.log(taskElements.length);
+                    console.log(mapInfo.size);
+                    var pamitem = mapInfo.get(taskTexts[j]);
+                    console.log(pamitem);
+                    pamitem['index'] = (j+1).toString();
+                    paramList.push(pamitem)
+                }
+                console.log('-----paramList-----');
+                console.log(paramList);
+                // 更新多筆 Task 內容
+                async function update_multi_task() {
+                    var uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/task_milestones/";
+                    var objParam = { 
+                        "items" : paramList,
+                    };
+                    let jsonParam = JSON.stringify(objParam);
+                    //console.log(jsonParam);
+                    const res = await fetch(uri, {
+                        method:'POST',
+                        body: jsonParam,
+                        headers: { 'Content-Type' : 'application/json; charset=utf-8' }
+                    });
+                    return await res.json();
+                }
+                var prom_update_multi_task = update_multi_task();
+                prom_update_multi_task.then( function(response) {
+                    //console.log(response);
+                    layer.msg(response['msg']);
+                    //window.parent.location.reload();
+                });
+            });
+            */
+
+            // 處理儲存Task
+            function processSaveTaskInfo() {
+
+                var taskElements = document.getElementsByClassName('list-task-item');
+                //console.log(taskElements);
+                //console.log(taskElements.length);
+
+                var taskTexts = [];
+                for (var i = 0; i < taskElements.length; i++) {
+                    //console.log(milestoneElements[i].children[0].textContent);
+                    var taskText = taskElements[i].children[0].textContent;
+                    taskTexts.push(taskText);
+                }
+                console.log(taskTexts);
+
+                var paramList = [];
+                for(var j=0; j< taskTexts.length; j++) {
+                    console.log(taskElements.length);
+                    console.log(mapInfo.size);
+                    var pamitem = mapInfo.get(taskTexts[j]);
+                    console.log(pamitem);
+                    pamitem['index'] = (j+1).toString();
+                    paramList.push(pamitem)
+                }
+                console.log('-----paramList-----');
+                console.log(paramList);
+                
+                // 更新多筆 Task 內容
+                async function update_multi_task() {
+                    var uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/task_milestones/";
+                    var objParam = { 
+                        "items" : paramList,
+                    };
+                    let jsonParam = JSON.stringify(objParam);
+                    //console.log(jsonParam);
+                    const res = await fetch(uri, {
+                        method:'POST',
+                        body: jsonParam,
+                        headers: { 'Content-Type' : 'application/json; charset=utf-8' }
+                    });
+                    return await res.json();
+                }
+
+                var prom_update_multi_task = update_multi_task();
+                prom_update_multi_task.then( function(response) {
+                    //console.log(response);
+                    layer.msg(response['msg']);
+                    window.parent.location.reload();
+                });
+            }
+
+        });
+
+        </script>
+
+
+    </body>
+
+</html>

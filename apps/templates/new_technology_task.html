@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        {% include 'common/header.html' %}
+        <title>新產品技術評估指派任務</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/new_technology_task.css') }}" />
+
+        <script src="{{ url_for('static', filename='/js/dom-to-image.js') }}"></script>
+        
+    </head>
+
+    <body>
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <div id="form-title-text">新產品技術評估指派任務</div>
+
+                  <!-- 表單 -->
+                  <table id="id-table-form">
+
+                    <!-- 表單標題 -->
+                    <thead id="table-head">
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-submit-member" class="cls-c2-r1">申請人</th>
+                            <th colspan="2" rowspan="1" id="txt-submit-member" class="cls-c2-r1">{{NEW_TECH_MODEL['member_cname']}}</th>
+                            <th colspan="2" rowspan="1" id="lab-form-date" class="cls-c2-r1">申請日期</th>
+                            <th colspan="2" rowspan="1" id="txt-form-date" class="cls-c2-r1">{{NEW_TECH_MODEL['apply_date']}}</th>
+                            <th colspan="2" rowspan="1" id="lab-form-code" class="cls-c2-r1">單據編號</th> 
+                            <th colspan="4" rowspan="1" id="txt-form-no" class="cls-c4-r1">{{NEW_TECH_MODEL['form_no']}}</th>
+                            <th colspan="2" rowspan="1" id="lab-form-no"   class="cls-c2-r1">評估案代號</th>
+                            <th colspan="4" rowspan="1" id="txt-project-no"   class="cls-c4-r1">{{NEW_TECH_MODEL['project_no']}}</th>
+                        </tr>
+                    </thead>
+
+                <!-- 表單內容 ☐ ☑ -->
+                <tbody id="table-body">
+
+                    <tr>
+                        <th colspan="3" rowspan="9" id="lab-base-explain" class="cls-c3-r9">立案產品 </br> 基本說明</th>
+                        <th colspan="3" rowspan="1" id="lab-BU" class="cls-c3-r1">BU 歸屬✱</th>
+                        <th colspan="1" rowspan="1" id="txt-IT" class="cls-c1-r1">
+                            <input type="checkbox" id="check-IT" name="check-IT" value="IT">
+                        </th>
+                        <th colspan="2" rowspan="1" id="lab-IT" class="cls-c2-r1">IT</th>
+                        <th colspan="1" rowspan="1" id="txt-IO" class="cls-c1-r1">
+                            <input type="checkbox" id="check-IO" name="check-IO" value="IO">
+                        </th>
+                        <th colspan="2" rowspan="1" id="lab-IO" class="cls-c2-r1">IO</th>
+                        <th colspan="1" rowspan="1" id="txt-IOT" class="cls-c1-r1">
+                            <input type="checkbox" id="check-IOT" name="check-IOT" value="IOT">
+                        </th>
+                        <th colspan="2" rowspan="1" id="lab-IOT" class="cls-c2-r1">IOT</th>
+                        <th colspan="5" rowspan="1" id="empty-BU" class="cls-c5-r1"></th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" rowspan="1" id="lab-project-name" class="cls-c3-r1">專案名稱✱</th>
+                        <th colspan="14" rowspan="1" id="txt-project-name" class="cls-c14-r1">{{NEW_TECH_MODEL['project_name']}}                          
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" rowspan="1" id="lab-product-explan" class="cls-c3-r1">產品說明✱</th>
+                        <th colspan="14" rowspan="1" id="txt-product-explan" class="cls-c14-r1">{{NEW_TECH_MODEL['product_describe']}}                   
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" rowspan="1" id="lab-product-application" class="cls-c3-r1">產品應用</th>
+                        <th colspan="14" rowspan="1" id="txt-product-application" class="cls-c14-r1">{{NEW_TECH_MODEL['product_application']}}                         
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" rowspan="1" id="lab-spec" class="cls-c3-r1">規格需求說明✱</th>
+                        <th colspan="14" rowspan="1" id="txt-spec" class="cls-c14-r1">{{NEW_TECH_MODEL['spec_describe']}}                         
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" rowspan="1" id="lab-require" class="cls-c3-r1">顧客要求說明</th>
+                        <th colspan="14" rowspan="1" id="txt-require" class="cls-c14-r1">{{NEW_TECH_MODEL['customer_require']}}                
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" rowspan="1" id="lab-project-finish" class="cls-c3-r1">目標專案完成日</th>
+                        <th colspan="14" rowspan="1" id="txt-project-finish" class="cls-c14-r1">{{NEW_TECH_MODEL['expected_finished_date']}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" rowspan="1" id="lab-target-cost" class="cls-c3-r1">目標成本</th>
+                        <th colspan="14" rowspan="1" id="txt-target-cost" class="cls-c14-r1">{{NEW_TECH_MODEL['cost']}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" rowspan="1" id="lab-due-day" class="cls-c3-r1">評估期限✱</th>
+                        <th colspan="3" rowspan="1" id="txt-due-day" class="cls-c3-r1">{{NEW_TECH_MODEL['estimate_date']}}
+                        </th>
+                        <th colspan="11" rowspan="1" id="lab-day" class="cls-c11-r1">前完成評估</th>
+
+                    </tr>
+
+                     <!-- 上傳檔案 -->
+                     <!-- <tr>
+                        <th colspan="3" rowspan="2" id="lab-attach-file"   class="cls-c3-r2">附加檔案✱</th>
+                        
+                        <th colspan="17" rowspan="1" id="empty-submit" class="cls-c17-r1">
+                            <form action="" method=post enctype=multipart/form-data id="upload-form">
+                                <p><input type=file name=file id="btn-file">
+                                <button id="btn-upload" class="layui-btn" lay-event="form-submit" title="上傳檔案">
+                                    <i class="layui-icon layui-icon-upload-drag"></i>上傳檔案
+                                </button>
+                            </form>
+                        </th>
+                        
+                    </tr> -->
+                    <tr>
+                        <th colspan="3" rowspan="1" id="lab-attach-file"   class="cls-c3-r1">附加檔案</th>
+                         <th colspan="17" rowspan="1" id="file-list" class="cls-c17-r1">
+                             <div id="fileUL">
+                            </div> 
+                        <th>  
+                    </tr> 
+                    
+                    <tr>
+                        <th colspan="16" rowspan="1" id="lab-symbol" class="cls-c16-r1">
+                            <div id="txt-symbol"></div>
+                        </th>
+                        <th colspan="2" rowspan="1" id="lab-submit-button" class="">
+                            <button id="btn-submit" class="layui-btn layui-btn-normal" title="送出資料">
+                                <i class="layui-icon layui-icon-email"></i>指派
+                            </button>
+                        </th>
+                        <th colspan="2" rowspan="1" id="lab-reject-button" class="">
+                            <button id="btn-reject" class="layui-btn layui-btn-danger" title="退回">
+                                <i class="layui-icon layui-icon-close"></i>退回
+                            </button>
+                        </th>
+        
+                    </tr>
+                    
+                    <!--<tr id="help-axis">-->
+                    <td colspan="1" class="c-base" id="c-1"></td>
+                    <td colspan="1" class="c-base" id="c-2"></td>
+                    <td colspan="1" class="c-base" id="c-3"></td>
+                    <td colspan="1" class="c-base" id="c-4"></td>
+                    <td colspan="1" class="c-base" id="c-5"></td>
+                    <td colspan="1" class="c-base" id="c-6"></td>
+                    <td colspan="1" class="c-base" id="c-7"></td>
+                    <td colspan="1" class="c-base" id="c-8"></td>
+                    <td colspan="1" class="c-base" id="c-9"></td>
+                    <td colspan="1" class="c-base" id="c-10"></td>
+
+                    <td colspan="1" class="c-base" id="c-11"></td>
+                    <td colspan="1" class="c-base" id="c-12"></td>
+                    <td colspan="1" class="c-base" id="c-13"></td>
+                    <td colspan="1" class="c-base" id="c-14"></td>
+                    <td colspan="1" class="c-base" id="c-15"></td>
+                    <td colspan="1" class="c-base" id="c-16"></td>
+                    <td colspan="1" class="c-base" id="c-17"></td>
+                    <td colspan="1" class="c-base" id="c-18"></td>
+                    <td colspan="1" class="c-base" id="c-19"></td>
+                    <td colspan="1" class="c-base" id="c-20"></td>
+                    <!--</tr>-->
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+
+        <!--退回指派填寫原因編輯畫面-->
+        <template id="taskback-template-edit">
+            <div id="edit-winodow-bg">
+                <div id="edit-window-item-1">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" id="lab-taskback"> {{USER}}，您是否確定要退回指派？ </label>
+                    </div>
+                </div>
+                <div id="edit-window-item-2">
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" id="lab-taskback-reason"> 退回原因: </label>
+                    </div>
+                    <select id="select-taskback-reason" >
+                        <option>評估資訊不足</option>
+                        <option>申請單資訊修正</option>
+                        <option>修正評估附檔</option>
+                    </select>
+                </div>
+                <!-- <div id="edit-window-item-3">
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" id="lab-taskback-memo"> 說明: </label>
+                        <input type="text" id="input-taskback-memo" value="" >
+                    </div>
+                </div> -->
+            </div>
+        </template>
+         <!-- 彈出指派任務視窗 -->
+         <template id="task-template">
+
+            <div id="task-window-bg">
+
+                <table id="task-win-table">
+
+                    <tbody id="task-table-body">
+                      
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-assign" class="tab-c2-r1">指派人員</th>
+                            <th colspan="2" rowspan="1" id="txt-assign" class="tab-c2-r1">
+                                <select id="select-assign">
+                                    <option></option>
+                                </select>
+                            </th>
+                            <th colspan="1" rowspan="1" id="txt-assign" class="tab-c1-r1">
+                                <!-- <button id="btn-add" class="layui-btn" title="加入" onclick="newElement();"> -->
+                                <button id="btn-add" class="layui-btn" title="加入">
+                                    <i class="layui-icon layui-icon-addition"></i>加入
+                                </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="5" rowspan="1" id="txt-list" class="tab-c5-r1">
+                                <div id="member-ul"></div>
+                                <!--
+                                <ul id="myUL"></ul>
+                                -->
+                            </th>
+                        </tr>
+                        <!-- 預估RD 專案開始時間 -->
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-start" class="tab-c2-r1">預計執行開始時間</th>
+                            <th colspan="3" rowspan="1" id="txt-project-start" class="tab-c3-r1">
+                                <input type="date" id="input-project-start" value="">
+                            </th>
+                        </tr>
+                    
+                        <!-- 預估RD 專案結束時間 -->
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-project-end" class="tab-c2-r1">預計執行完畢時間</th>
+                            <th colspan="3" rowspan="1" id="txt-project-end" class="tab-c3-r1">
+                                <input type="date" id="input-project-end" value="">
+                            </th>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+
+        <!-- 程式區 -->
+        <script>
+
+
+            if("{{NEW_TECH_MODEL['bu']}}" == 'IO') {
+                $('#check-IO').prop('checked',true);
+            } else if("{{NEW_TECH_MODEL['bu']}}" == 'IOT') {
+                $('#check-IOT').prop('checked',true);
+            } else if("{{NEW_TECH_MODEL['bu']}}" == 'IT') {
+                $('#check-IT').prop('checked',true);
+            }
+            var memberMap = new Map();
+            var mailMap = new Map();
+            var groupMap = new Map();
+
+            //將form資料寫入
+            //console.log("{{FORM_NO}}");
+            let tmp_bu = "";
+            var settings = {
+                "url": "http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_form/by/project_no/",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {"Content-Type": "application/json"},
+                "data": JSON.stringify({ "project_no": "{{PROJECT_NO}}"}),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                //console.log(response['data']['msg']['product_describe']);
+                $("#txt-project-no"    ).text("{{ PROJECT_NO }}");
+                $("#txt-project-name"  ).text(response['data']['msg']['project_name']);
+                $("#txt-project-explan").text(response['data']['msg']['product_describe']);
+                $("#txt-plan-start"    ).text(response['data']['msg']['expected_finished_date']);
+                $("#txt-plan-end"      ).text(response['data']['msg']['estimate_date']);
+                tmp_bu = response['data']['msg']['bu']
+
+                $("#txt-project-no"    ).val("{{ PROJECT_NO }}");
+                $("#txt-project-name"  ).val(response['data']['msg']['project_name']);
+                $("#txt-project-explan").val(response['data']['msg']['product_describe']);
+                $("#txt-plan-start"    ).val(response['data']['msg']['expected_finished_date']);
+                $("#txt-plan-end"      ).val(response['data']['msg']['estimate_date']);
+                //layer.close(index);
+            });
+
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+                // 警告
+                if (mode == 0) {
+                    btn1.css({ "background-color": "#ff0066", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#ffe6f0", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 詢問
+                if (mode == 1) {
+                    btn1.css({ "background-color": "#1E9FFF", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#e6f4ff", "border-color": "#555555", "font-size": "18px" });
+                }
+            }
+
+
+
+            layui.use(['form', 'layer', 'jquery', 'table'], function () {
+                var layer = layui.layer;
+                var laypage = layui.laypage;
+                var table = layui.table;
+                var $ = layui.jquery;
+                var form = layui.form;
+
+                // 按下指派
+                $("#btn-submit").click(function () {
+
+
+                    layer.open({
+                        type       : 1,
+                        skin       : 'layui-layer-molv', //layui-layer-rim
+                        resize     : true,
+                        shadeClose : false,
+                        shade      : [0.7, '#000'],
+                        closeBtn   : 2,
+                        offset     : 'auto',
+                        anim       : 5,
+                        area       : ['600px', '500px'],
+                        title      : ['指派任務', 'font-size:24px;background-color:#1E9FFF;'],
+                        btn        : ['指派', '取消'],
+                        content    : $('#task-template').html(),
+                        success: function (layero, index) {
+                            addIconforBtn(1);
+
+
+                            let promiseGetMember = getMemberFun();
+                            promiseGetMember.then((response) => {
+                               
+                                var strPersonOptions = '';
+                                strPersonOptions += '<option disabled selected value="">請選擇一個人員</option>';
+                                for (var i = 0; i < response['data']['msg'].length; i++) {
+    
+                                    memberMap.set(response['data']['msg'][i]['mail'],  response['data']['msg'][i]['cname'] );
+                                    mailMap.set(  response['data']['msg'][i]['cname'], response['data']['msg'][i]['mail'] );
+                                    groupMap.set( response['data']['msg'][i]['cname'], response['data']['msg'][i]['group'] );
+    
+                                    strPersonOptions += '<option value="' + response['data']['msg'][i]['mail'] + '">' + response['data']['msg'][i]['cname'] + '</option>';
+                                    console.log(strPersonOptions)
+                                }
+                                document.getElementById("select-assign").innerHTML = strPersonOptions;
+                            });
+                            console.log(selectNameList);
+
+                            // 按下增加人員按鈕
+                            document.querySelector("#btn-add").addEventListener('click', function(ev) {
+                                var sel_member_name = $("#select-assign").val();
+                                //alert(sel_member_name);
+                                console.log(sel_member_name);
+                                console.log(memberMap.get(sel_member_name));
+
+                                if (selectNameList.includes(memberMap.get(sel_member_name))) {
+                                    console.log('目標字串在原始字串中');
+                                    layer.msg('該名人員重複了');
+                                } else {
+                                    newMemberElement(memberMap.get(sel_member_name));
+                                }
+                            });
+
+                          
+                        },
+                        yes: function (index, layero) {
+
+                                    /////////////////// 取得執行開始及結束時間
+                            var select_startDate = document.getElementById('input-project-start').value;
+                            var select_enddate   = document.getElementById('input-project-end'  ).value;
+                            //console.log(select_startDate)
+                            if(select_startDate.length == 0) {
+                                layer.msg('請選擇預計執行開始時間!');
+                                layer.close();
+                                return;
+                            }
+                            if(select_enddate.length == 0) {
+                                layer.msg('請選擇預計執行結束時間!');
+                                layer.close();
+                                return;
+                            }
+
+
+                            /////////////////// 取得指派人員數量資訊
+                            var selectPersonList = document.getElementById('member-ul');
+                            //var selectListItems  = selectPersonList.getElementsByTagName('li');
+                            var selectListItems = document.getElementsByClassName('list-member-item');
+                            console.log(selectListItems);
+
+                            var memberList = [];
+                            console.log(selectListItems.length);
+
+                            if( selectListItems.length <1) {
+                                layer.msg('無法送出訊息,請選擇一個人員加入名單!');
+                                layer.close();
+                            }
+
+
+
+                            for (var i = 0; i < selectListItems.length; i++) {
+                                var itemValue  = (selectListItems[i].innerText);
+                                var strCName = itemValue.substring(0,3);
+                                console.log('----------------------');
+                                console.log(strCName);
+                                console.log(mailMap.get(strCName));
+                                console.log(groupMap.get(strCName));                               
+                                var memberObj = new Object(); 
+                                memberObj['cName']   = strCName;
+                                memberObj['group']  = groupMap.get(strCName);
+                                memberObj['mail']    = mailMap.get(strCName);
+                                memberObj['callback'] = false;
+                                memberObj['task']= groupMap.get(strCName) == "ee" ? "Pre-Work" : "產品造型規劃";
+                                memberObj['mile_stone']= groupMap.get(strCName) == "ee" ? "Spec. Review" : "需求評估/分析";
+                                memberObj['status'] = "待辦中";
+                                memberObj['actual_date'] = "";
+                                memberObj['reason'] = "";
+                                memberObj['memo'] = "";
+                                memberObj['form_type'] = "評估單";
+                                memberObj['form_no'] = "{{NEW_TECH_MODEL['form_no']}}";
+                                memberObj['expected_start_date'] = $("#input-project-start").val();
+                                memberObj['expected_end_date'] = $("#input-project-end").val();
+                                memberObj['work_days'] = "";
+                                memberList.push(memberObj);
+                             }
+                            console.log(memberList);
+
+
+                            param = {
+                                "project_no"           : $("#txt-project-no").val(),
+                                "project_name"         : $("#txt-project-name").val(),
+                                "bu"                   : tmp_bu,
+                                "member_list"          : memberList,
+                                "expected_start_date"  : $("#input-project-start").val(),
+                                "expected_finish_date" : $("#input-project-end").val(),
+                                "status"               : "待辦中",
+                                "task"                 : "Pre-Work",
+                                "mile_stone"           : "Spec. Review",
+                                "actual_date"          : "",
+                                "task_back_reason"     : "",
+                                "task_back_memo"       : "",
+                            }
+
+
+                            //將task資料寫入
+                            var settings = {
+                                "url": "http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_task/ ",
+                                "method": "POST",
+                                "timeout": 0,
+                                "headers": {"Content-Type": "application/json"},
+                                "data": JSON.stringify(param),
+                            };
+
+                            $.ajax(settings).done(function (response) {
+                                //console.log(response);
+                                layer.close(index);
+
+                            });
+
+
+                            //寫入表單流程紀錄
+                            insert_form_flow(true);
+
+
+                            
+                            // 發給多人
+                            promiseList = [];
+                            for( var m = 0; m < memberList.length; m++ ) {
+                                console.log("發mail");
+                                console.log(memberList[m]['mail']);
+
+                                async function send_assign_mail() {
+                                    let url = "http://{{ DOMAIN_PATH }}/api/v0/send/new_technology_task/";
+                                    let objParam = {
+                                        "project_no"    : $("#txt-project-no").val(),
+                                        "project_name"  : $("#txt-project-name").val(),
+                                        "form_no"       : "{{NEW_TECH_MODEL['form_no']}}",
+                                        "sender"        : "{{ ACCOUNT }}",
+                                        "receiver"      : memberList[m]['mail'],
+                                        "project_start" : $("#input-project-start").val(),
+                                        "project_end"   : $("#input-project-end").val()
+                                    };
+                                    let jsonParam = JSON.stringify(objParam);
+                                    const res = await fetch(url, {
+                                        method: 'POST',
+                                        body: jsonParam,
+                                        headers: { 'Content-Type': 'application/json charset = utf-8' }
+                                    });
+                                    return await res.json();
+                                }
+                               var promise_send_assign_mail = send_assign_mail();
+                                //promiseList.push(promise_send_assign_mail);
+                            }
+
+
+                            let objParam = {
+                                "project_no"            : $("#txt-project-no").val(),
+                                "project_name"          : $("#txt-project-name").val(),
+                                "member_list"           : memberList, 
+                            };
+
+                            let p0 = get_review_record(); 
+                          
+                            p0.then((response)=>
+                            {
+                                console.log(response['data'])
+
+                                //取回new_tech_review資料 若不存在則insert一筆
+                                if(response['data'].length == 0)
+                                {
+                                    
+                                    let p1 = insert_review_record(objParam);
+                                    p1.then((res)=>
+                                    {
+                                        layer.msg("指派作業完成");
+                                        page_to_form_list();
+                                    });
+                                }
+                                else
+                                {
+                                    // console.log("RUN ELSE")
+                                    ////取回new_tech_review資料 若存在則更新memberlist
+                                    let p2 = update_new_tech_review_memberlist(objParam);
+                                    p2.then((res)=>
+                                    {
+                                        console.log(res)
+                                        layer.msg("指派作業完成");
+                                        page_to_form_list();
+                                    });
+                                }
+                            });
+                            }
+                        });
+                    });
+               
+
+
+
+
+
+
+
+
+                        /////////////////// 取得指派人員數量資訊
+                        // var selectPersonList = document.getElementById('myUL');
+                        // var selectListItems  = selectPersonList.getElementsByTagName('li');
+                        // //var personList = [];
+                        // var memberList = [];
+                        // console.log(selectListItems.length);
+
+                        // //未選擇指派人員 則提示
+                        // if( selectListItems.length <1) {
+                        //     layer.msg('無法送出訊息,請選擇一個人員加入名單!');
+                        //     layer.close();
+                        //     return;
+                        // }
+
+                        //  /////////////////// 取得執行開始及結束時間
+                        // var select_startDate = document.getElementById('input-project-start').value;
+                        // var select_enddate  = document.getElementById('input-project-end').value;
+                        // //console.log(select_startDate)
+                        // if(select_startDate.length == 0)
+                        // {
+                        //     layer.msg('請選擇預計執行開始時間!');
+                        //     layer.close();
+                        //     return;
+                        // }
+                        // if(select_enddate.length == 0)
+                        // {
+                        //     layer.msg('請選擇預計執行結束時間!');
+                        //     layer.close();
+                        //     return;
+                        // }
+
+
+
+                //     layer.open({
+                //         type: 1,
+                //         skin: 'layui-layer-molv', //layui-layer-rim
+                //         resize: true,
+                //         shadeClose: false,
+                //         shade: [0.7, '#000'],
+                //         closeBtn: 2,
+                //         offset: 'auto',
+                //         anim: 5,
+                //         area: ['400px', '280px'],
+                //         title: ['詢問', 'font-size:24px;background-color:#1E9FFF;'],
+                //         btn: ['確定', '取消'],
+                //         content: '<div style="padding: 15px; font-size: 22px; font-weight: bold;">您確定要將指派人員資料送出嗎？<br><br><div id="view-txt-msg"></div></div>',
+                //         success: function (layero, index) {
+                //             addIconforBtn(1);
+
+                             
+                //         },
+                //         yes: function (index, layero) {
+
+                //             /////////////////// 取得指派人員數量資訊
+                //             var selectPersonList = document.getElementById('myUL');
+                //             var selectListItems  = selectPersonList.getElementsByTagName('li');
+                //             //var personList = [];
+                //             var memberList = [];
+                //             console.log(selectListItems.length);
+
+                //             if( selectListItems.length <1) {
+                //                 layer.msg('無法送出訊息,請選擇一個人員加入名單!');
+                //                 layer.close();
+                //             }
+
+                //             for (var i = 0; i < selectListItems.length; i++) {
+                //                 var itemValue  = (selectListItems[i].innerText);
+                //                 var strCName = itemValue.substring(0,3);
+                //                 console.log('----------------------');
+                //                 console.log(strCName);
+                //                 console.log(mailMap.get(strCName));
+                //                 console.log(groupMap.get(strCName));                               
+                //                 var memberObj = new Object(); 
+                //                 memberObj['cName']   = strCName;
+                //                 memberObj['group']  = groupMap.get(strCName);
+                //                 memberObj['mail']    = mailMap.get(strCName);
+                //                 memberObj['callback'] = false;
+                //                 memberObj['task']= groupMap.get(strCName) == "ee" ? "Pre-Work" : "產品造型規劃";
+                //                 memberObj['mile_stone']= groupMap.get(strCName) == "ee" ? "Spec. Review" : "需求評估/分析";
+                //                 memberObj['status'] = "待辦中";
+                //                 memberObj['actual_date'] = "";
+                //                 memberObj['reason'] = "";
+                //                 memberObj['memo'] = "";
+                //                 memberObj['form_type'] = "評估單";
+                //                 memberObj['form_no'] = "{{NEW_TECH_MODEL['form_no']}}";
+                //                 memberObj['expected_start_date'] = $("#input-project-start").val();
+                //                 memberObj['expected_end_date'] = $("#input-project-end").val();
+
+                //                 memberList.push(memberObj);
+                //              }
+                //             console.log(memberList);
+
+
+                //             param = {
+                //                 "project_no"           : $("#txt-project-no").val(),
+                //                 "project_name"         : $("#txt-project-name").val(),
+                //                 "bu"                   : tmp_bu,
+                //                 "member_list"          : memberList,
+                //                 "expected_start_date"  : $("#input-project-start").val(),
+                //                 "expected_finish_date" : $("#input-project-end").val(),
+                //                 "status"               : "待辦中",
+                //                 "task"                 : "Pre-Work",
+                //                 "mile_stone"           : "Spec. Review",
+                //                 "actual_date"          : "",
+                //                 "task_back_reason"     : "",
+                //                 "task_back_memo"       : "",
+                //             }
+
+
+                //             //將task資料寫入
+                //             var settings = {
+                //                 "url": "http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_task/ ",
+                //                 "method": "POST",
+                //                 "timeout": 0,
+                //                 "headers": {"Content-Type": "application/json"},
+                //                 "data": JSON.stringify(param),
+                //             };
+
+                //             $.ajax(settings).done(function (response) {
+                //                 //console.log(response);
+                //                 layer.close(index);
+
+                //             });
+
+
+                //             //寫入表單流程紀錄
+                //             insert_form_flow(true);
+
+
+                            
+                //             // 發給多人
+                //             promiseList = [];
+                //             for( var m = 0; m < memberList.length; m++ ) {
+                //                 console.log("發mail");
+                //                 console.log(memberList[m]['mail']);
+
+                //                 async function send_assign_mail() {
+                //                     let url = "http://{{ DOMAIN_PATH }}/api/v0/send/new_technology_task/";
+                //                     let objParam = {
+                //                         "project_no"    : $("#txt-project-no").val(),
+                //                         "project_name"  : $("#txt-project-name").val(),
+                //                         "form_no"       : "{{NEW_TECH_MODEL['form_no']}}",
+                //                         "sender"        : "{{ ACCOUNT }}",
+                //                         "receiver"      : memberList[m]['mail'],
+                //                         "project_start" : $("#input-project-start").val(),
+                //                         "project_end"   : $("#input-project-end").val()
+                //                     };
+                //                     let jsonParam = JSON.stringify(objParam);
+                //                     const res = await fetch(url, {
+                //                         method: 'POST',
+                //                         body: jsonParam,
+                //                         headers: { 'Content-Type': 'application/json charset = utf-8' }
+                //                     });
+                //                     return await res.json();
+                //                 }
+                //                var promise_send_assign_mail = send_assign_mail();
+                //                 //promiseList.push(promise_send_assign_mail);
+                //             }
+
+
+                //             let objParam = {
+                //                 "project_no"            : $("#txt-project-no").val(),
+                //                 "project_name"          : $("#txt-project-name").val(),
+                //                 "member_list"           : memberList, 
+                //             };
+
+                //             let p0 = get_review_record(); 
+                          
+                //             p0.then((response)=>
+                //             {
+                //                 console.log(response['data'])
+
+                //                 //取回new_tech_review資料 若不存在則insert一筆
+                //                 if(response['data'].length == 0)
+                //                 {
+                                    
+                //                     let p1 = insert_review_record(objParam);
+                //                     p1.then((res)=>
+                //                     {
+                //                         layer.msg("指派作業完成");
+                //                         page_to_form_list();
+                //                     });
+                //                 }
+                //                 else
+                //                 {
+                //                     // console.log("RUN ELSE")
+                //                     ////取回new_tech_review資料 若存在則更新memberlist
+                //                     let p2 = update_new_tech_review_memberlist(objParam);
+                //                     p2.then((res)=>
+                //                     {
+                //                         console.log(res)
+                //                         layer.msg("指派作業完成");
+                //                         page_to_form_list();
+                //                     });
+                //                 }
+                //             });
+                //             // Promise.all([p1,promiseList]).then(value => {
+                //             // });
+
+                //         }
+                //     });
+                // });
+
+                function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                }
+
+
+                //按下退回
+                $("#btn-reject").click(function () {
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-molv', //layui-layer-rim
+                        resize: true,
+                        shadeClose: false,
+                        shade: [0.7, '#000'],
+                        closeBtn: 2,
+                        offset: 'auto',
+                        anim: 5,
+                        area: ['600px', '400px'],
+                        title: ['詢問', 'font-size:24px;background-color:#ff0066;'],
+                        btn: ['退回', '取消'],
+                        content: $('#taskback-template-edit').html(),//'<div style="padding: 15px; font-size: 22px; font-weight: bold;">{{ USER }}，您是否確定要退回指派？<br><br><div id="view-txt-msg"></div></div>',
+                        success: function (layero, index) {
+                            addIconforBtn(0);
+                        },
+                        yes: function (index, layero) {
+
+                            param = {
+                                "project_no"              : $("#txt-project-no").val(),
+                                "project_name"         : $("#txt-project-name").val(),
+                                "member_list"         : "",
+                                "expected_start_date"  : $("#input-project-start").val(),
+                                "expected_finish_date" : $("#input-project-end").val(),
+                                "status"               : "待辦中",
+                                "task"                 : "",
+                                "mile_stone"           : "",
+                                "actual_date"          : "",
+                                "back_reason"          : $("#select-taskback-reason").val(),
+                                "back_memo"            : $("#input-taskback-memo").val(),
+                             
+                            }
+
+
+                            //將task退回資料寫入
+                            var settings = {
+                                "url": "http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_task/",
+                                "method": "POST",
+                                "timeout": 0,
+                                "headers": {"Content-Type": "application/json"},
+                                "data": JSON.stringify(param),
+                            };
+
+                            $.ajax(settings).done(function (response) {
+                                //console.log(response);
+                                layer.close(index);
+                            });
+
+
+                            //寫入表單流程紀錄
+                            insert_form_flow(false);
+
+                            //發送退回mail
+                            async function send_back_mail() {
+                                //let uri = "http://{{ DOMAIN_PATH }}/page/v0/logout/";
+                                let uri = "http://{{ DOMAIN_PATH }}/api/v0/send/new_technology_task/back/"
+                                let objParam = {
+                                    "project_no"    : $("#txt-project-no").val(),
+                                    "project_name"  : $("#txt-project-name").val(),
+                                    "form_no"       :"{{NEW_TECH_MODEL['form_no']}}",
+                                    "product_memo"  :$("#txt-project-explan").val(),
+                                    "back_reason"   :$("#select-taskback-reason").val(),
+                                    "back_memo"     :$("#input-taskback-memo").val(),
+                                    "sender"        : "{{ ACCOUNT }}",
+                                    "receiver"      : "{{RECEIVER}}",
+                                    "cc"            : "{{RECEIVER}}",
+                                };
+                                let jsonParam = JSON.stringify(objParam);
+                                console.log(jsonParam)
+                                const res = await fetch(uri, {
+                                    method: 'post',
+                                    body: jsonParam,
+                                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                });
+                                return await res.json();
+                            }
+                            let promisePost = send_back_mail();
+                            promisePost.then((response) => {
+                                console.log(response);
+                                layer.close(index);
+                                page_to_form_list();
+                                
+                            });
+
+                         
+                        }
+                    });
+                });
+
+
+            });
+
+
+            async function getMemberFun() {
+                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/get/member/by_organize/";
+                let objParam = {
+                    organize: "硬體設計部",
+                };
+                //console.log(objParam);
+                let jsonParam = JSON.stringify(objParam);
+                console.log(jsonParam);
+                const res = await fetch(uri, {
+                    method: 'post',
+                    body: jsonParam,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+            // let promiseGetMember = getMemberFun();
+            // promiseGetMember.then((response) => {
+                
+            //     //layer.close(index);
+            //     //table.reload('demo');
+            //     //window.refresh();
+            //     var strPersonOptions = '';
+            //     strPersonOptions += '<option disabled selected value="">請選擇一個人員</option>';
+            //     for (var i = 0; i < response['data']['msg'].length; i++) {
+            //         memberMap.set(response['data']['msg'][i]['mail'],  response['data']['msg'][i]['cname'] );
+            //         mailMap.set(  response['data']['msg'][i]['cname'], response['data']['msg'][i]['mail'] );
+            //         groupMap.set(  response['data']['msg'][i]['cname'],response['data']['msg'][i]['group'] );
+            //         strPersonOptions += '<option value="' + response['data']['msg'][i]['mail'] + '">' + response['data']['msg'][i]['cname'] + '</option>';
+            //     }
+            //     // console.log(mailMap)
+            //      console.log(groupMap)
+            //     document.getElementById("select-assign").innerHTML = strPersonOptions;
+            // });
+
+            /////////////////////////////////////////
+            var myNodelist = document.getElementsByTagName("LI");
+            var i;
+            for (i = 0; i < myNodelist.length; i++) {
+                var span = document.createElement("SPAN");
+                var txt = document.createTextNode("\u00D7");
+                span.className = "close";
+                span.appendChild(txt);
+                myNodelist[i].appendChild(span);
+            }
+
+            var close = document.getElementsByClassName("close");
+            var i;
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function() {
+                    var div = this.parentElement;
+                    //div.style.display = "none";
+                    div.remove();
+                }
+            }
+
+            var list = document.querySelector('ul');
+            var selectNameList = [];
+            function newElement() {
+                var li = document.createElement("li");
+                //var inputValue = document.getElementById("myInput").value;
+                //var t = document.createTextNode(inputValue);
+                var inputValue = $("#select-assign").val();
+                //alert(inputValue);
+                if ( inputValue != null) {
+                    var t = document.createTextNode( memberMap.get(inputValue));
+                    //比對字串是否重複
+                    //var originalString = $("#select-assign").text();
+                    //var targetString = t;
+                    console.log(selectNameList);
+                    if (selectNameList.includes(memberMap.get(inputValue))) {
+                        console.log('目標字串在原始字串中');
+                        layer.msg('該名人員重複了');
+                    } else {
+                        console.log('目標字串不在原始字串中');
+                        li.appendChild(t);
+                        document.getElementById("myUL").appendChild(li);
+                        //document.getElementById("select-assign").value = "";
+                        var span = document.createElement("SPAN");
+                        var txt  = document.createTextNode("\u00D7");
+                        span.className = "close";
+                        span.appendChild(txt);
+                        li.appendChild(span);
+                        for (i = 0; i < close.length; i++) {
+                            close[i].onclick = function() {
+                                var div = this.parentElement;
+                                //div.style.display = "none";
+                                div.remove();
+                                if (document.getElementById('myUL').getElementsByTagName('li').length < 1) {
+                                    var selectElement = document.getElementById('select-assign');
+                                    selectElement.selectedIndex = 0; // 將索引設定為預設選項的索引
+                                    selectNameList = [];
+                                }
+                            }
+                        }
+                        selectNameList.push(memberMap.get(inputValue));
+                    }
+                }
+            }
+
+                    //寫入表單流程紀錄
+                    async function insert_form_flow(status) {
+                       
+                       let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/form_flow/"
+                       let objParam = {
+                           "form_no"           : "{{NEW_TECH_MODEL['form_no']}}",
+                           "project_no"        : "{{NEW_TECH_MODEL['project_no']}}",
+                           "type"              : "new_technology",
+                           "fs_code"           : "fstecg102",
+                           "action"            : "指派",
+                           "status"            : status?"指派":"退回",
+                           "memo"              : status ?  "" :  $("#select-taskback-reason").val(),
+                           "user"              : "{{ USER_CNAME }}"
+                       };
+                     
+                       let jsonParam = JSON.stringify(objParam);
+                      
+                       const res = await fetch(uri, {
+                           method: 'post',
+                           body: jsonParam,
+                           headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                       });
+                       return await res.json();
+                   }
+
+
+                      //顯示已上傳的檔案
+                      function testElement(strFileName) {
+
+                                var li = document.createElement("div");
+                                li.className = "list-file-item";
+                                li.id = strFileName;
+                                if(strFileName != null) {
+                                    // 文字
+                                    var divobj = document.createElement("a");
+                                    divobj.className = "text-filename";
+                                    strsplit = strFileName.split('/')                                            
+                                    //console.log(strsplit[strsplit.length-1])  
+                                    var t = document.createTextNode(strsplit[strsplit.length-1]);                                            
+                                    divobj.href = strFileName;
+                                    divobj.target = "_blank";                                            
+                                    
+                                    divobj.appendChild(t);
+                                    li.appendChild(divobj);
+                                    document.getElementById("fileUL").appendChild(li);
+                                    selectNameList.push(strFileName);
+                                }
+
+                                }//testElement
+
+
+                
+
+
+
+                    //取得專案已上傳的檔案
+                    async function get_upload_file() {
+
+                        let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/find/upload_file/?project_no=" + "{{NEW_TECH_MODEL['project_no']}}";                      
+                        const res = await fetch(uri, {
+                        method: 'get',                       
+                        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        });
+                        return await res.json();
+
+                    } //get_upload_file
+
+                    function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+
+                    //切畫面至project_list
+                    async function page_to_form_list() {
+                                await sleep(1000);
+                                location.replace('http://{{ DOMAIN_PATH }}/page/v0/form_list/');
+                                //window.location.href = 'http://{{ DOMAIN_PATH }}/page/v0/new_technology_review/';
+                    };
+
+
+                      //寫入new_tech_review_memberlist
+                    async function update_new_tech_review_memberlist(objParam) {
+
+                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_tech_review/update_memberlist/";
+                            let jsonParam = JSON.stringify(objParam);
+                            console.log(jsonParam);
+                            const res = await fetch(uri, {
+                                method  : 'post',
+                                body    : jsonParam,
+                                headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                            });
+                            return await res.json();
+
+                    };
+
+
+                    //table記錄一筆
+                    async function insert_review_record(obj) {
+
+                                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_review/";
+                                                          
+                                let objParam = {
+                                        "project_no"            : obj['project_no'],
+                                        "project_name"          : obj['project_name'],
+                                        "member_list"           : obj['member_list'],
+                                        "hw_apporve_flag"       : false,
+                                        "hw_reason"             : "",
+                                        "hw_memo"               : "",
+                                        "project_status"        : "",
+                                        "pm_reason"             : "",
+                                        "pm_memo"               : "" 
+                                };
+                                    
+                        
+                                let jsonParam = JSON.stringify(objParam);
+                                const res = await fetch(uri, {
+                                    method: 'post',
+                                    body: jsonParam,
+                                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                });
+                                return await res.json();
+                    }
+                    
+
+                     
+                    async function get_review_record() {
+
+                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_review/?project_no=" + "{{NEW_TECH_MODEL['project_no']}}";                          
+                            const res = await fetch(uri, {
+                                method: 'get',                                
+                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                            });
+                            return await res.json();
+                    }
+
+                    function newMemberElement(strMemberCName) {
+                var li = document.createElement("div");
+                li.className = "list-member-item";
+                li.id = strMemberCName;
+                if(strMemberCName != null) {
+                    // 文字
+                    var divobj = document.createElement("div");
+                    divobj.className = "text-member";
+                    var t = document.createTextNode(strMemberCName);
+                    //t.id = strMemberCName;
+                    divobj.appendChild(t);
+                    li.appendChild(divobj);
+                    // 刪除按鈕
+                    var btn3 = document.createElement("button");
+                    btn3.className = "cls-delete-btn-member";
+        
+                    var bt3 = document.createTextNode("刪除");
+                    btn3.appendChild(bt3);
+                    li.appendChild(btn3);
+                    btn3.onclick = function() {
+                        var div = this.parentElement;
+                        div.remove();
+                        //console.log(this.parentElement.id);
+                        var itemToRemove = this.parentElement.id;
+                        var index = selectNameList.indexOf(itemToRemove);
+                        if (index !== -1) {
+                            selectNameList.splice(index, 1);
+                        }
+                    }
+                    document.getElementById("member-ul").appendChild(li);
+                    selectNameList.push(strMemberCName);
+                }
+
+            }
+
+                    get_upload_file().then((response)=>
+                    {
+                            console.log(response)
+                            var file_list = response['data'];
+
+                            for(let i = 0 ; i<file_list.length; i++)
+                            {
+                                testElement(file_list[i]);
+                            }
+
+                    });
+
+
+
+                 
+
+
+
+                    
+
+        </script>
+
+    </body>
+
+</html>

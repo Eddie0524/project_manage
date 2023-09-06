@@ -1,0 +1,131 @@
+#root {
+  position:absolute;
+  margin: 0; padding: 0; border: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #FAFAFA
+}
+
+
+/***************************************/
+/*
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+*/
+
+/***************************************/
+/* 內容群組區背景 */
+#div-content-group {
+  position: absolute;
+  margin: 0px auto; padding: 0px; border: 0px;
+  top:70px; left:300px;
+  background-color: white;/* #12b553;*/
+  width:calc(100% - 300px); height:auto;
+}
+
+#canvas {
+  height: 1200px;
+  width: 100%;
+}
+
+#btn-open {
+  margin-top: 10px;
+  margin-left: 25px;
+  width:150px;
+  height:50px;
+  cursor: pointer;
+}
+
+#btn-save {
+  margin-top: 10px;
+  margin-left: 10PX;
+  width:150px;
+  height:50px;
+  cursor: pointer;
+}
+
+#btn-clear {
+  margin-top: 10px;
+  margin-left: 10PX;
+  width:150px;
+  height:50px;
+  cursor: pointer;
+}
+
+#btn-add-size {
+  margin-top: 10px;
+  margin-left: 10PX;
+  width:150px;
+  height:50px;
+  cursor: pointer;
+}
+
+
+#btn-sub-size {
+  margin-top: 10px;
+  margin-left: 10PX;
+  width:150px;
+  height:50px;
+  cursor: pointer;
+}
+
+
+/***********************/
+/* 彈出開啟視窗 */
+#open-window-bg {
+  margin:15px auto; 
+  left:15px; 
+  width:460px; height:auto; 
+  /*background-color:#381111;*/
+  overflow-x: hidden;
+}
+
+#open-tab-lab-file {
+  width:400px; height:30px;
+  margin: 5px auto;
+}
+#open-tab-txt-file {
+  width:400px; height:40px;
+  margin: 5px auto;
+}
+
+#open-tab-sel-file {
+  width:400px; height:40px;
+  text-align:left;
+  padding-left: 5px;
+  border: 1px solid black;
+}
+
+
+/***********************/
+/* 彈出儲存視窗 */
+#save-window-bg {
+  margin:15px auto; 
+  left:15px; 
+  width:460px; height:auto; 
+  /*background-color:#381111;*/
+  overflow-x: hidden;
+}
+
+#save-tab-lab-file {
+  width:400px; height:30px;
+  margin: 5px auto;
+}
+#save-tab-txt-file {
+  width:400px; height:40px;
+  margin: 5px auto;
+}
+
+#save-input-file-name {
+  width:400px; height:40px;
+  text-align:left;
+  padding-left: 5px;
+  border: 1px solid black;
+}

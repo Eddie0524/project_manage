@@ -1,0 +1,1332 @@
+#root {
+    position:absolute;
+    margin: 0; padding: 0; border: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FAFAFA
+}
+
+
+
+/*******************************************/
+/* 內容群組區背景 */
+#div-content-group {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    top:70px; left:300px;
+    background-color: white;/* #12b553;*/
+    width:calc(100% - 300px); height:auto;
+}
+
+
+/**/
+#function-bar {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    background-color: rgb(95, 160, 190);
+    width:100%; height:50px;
+    /*background-color:#0d3295;*/
+}
+
+
+#id-table-bg {
+    width:1000px; height: auto;
+    margin: 0px auto;
+    background-color: rgb(255, 255, 255);
+}
+
+
+/**/
+#form-title-text {
+    /*position: absolute;*/
+    width:500px; height: 50px;
+    /*top: 50px; left: 0px;*/
+    margin: 70px auto; padding: 0px; border: 0px;
+    font-size: 24px; 
+    font-weight: bold;  
+    text-align: center;
+    color: #000000;
+}
+
+
+/**/
+#id-table-form {
+    width:1000px; height: auto;
+    margin: -50px auto;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 20px; font-weight: bold;
+}
+
+
+
+/*********************************/
+#input-pcb-name {
+    border: 0px;
+    text-align: left;
+    width:200px;
+    height:50px;
+}
+
+/*******************************/
+#box-form-io {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-form-io {
+    width:30px;
+    height:30px;
+}
+#lab-form-io {
+    text-align:left;
+    border: 0px;
+}
+
+
+
+#box-form-iot {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-form-iot {
+    width:30px;
+    height:30px;
+}
+#lab-form-iot {
+    text-align:left;
+    border: 0px;
+}
+
+
+#box-form-it {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-form-it {
+    width:30px;
+    height:30px;
+    
+}
+#lab-form-it {
+    text-align:left;
+    border: 0px;
+}
+
+
+
+/********************************/
+
+#sel-project-no {
+    height:50px;
+    border: 0px;
+    width:210px;
+}
+
+#input-apply-dept {
+    height:50px;
+    border: 0px;
+    width:190px;
+    margin-left:5px;
+}
+
+#sel-product-no {
+    height:50px;
+    border: 0px;
+    width:190px;
+    text-align: center;
+}
+
+#sel-version {
+    width:90px;
+    height:40px;
+    border: 1px;
+}
+
+
+/*******************************************/
+#box-new-product {
+    border-left: 0px;
+    border-right: 0px;
+}
+#box-old-product {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-new-product {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#lab-old-product {
+    border-left: 0px;
+    text-align: left;
+}
+#check-new-product {
+    width:30px; height:30px;
+}
+#check-old-product {
+    width:30px; height:30px;
+}
+
+
+
+/*******************************************/
+#form-memo {
+    border: 0px;
+    margin-top: 15px; padding: 10px;
+    max-width: 988px;
+    min-width: 958px;
+    width:988px;
+    max-height: 200px;
+}
+
+
+
+#box-mat-2-layer {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-2-layer {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-2-layer {
+    width:30px; height:30px;
+}
+
+#box-mat-2-layer-06-mm {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-2-layer-06-mm {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-2-layer-06-mm {
+    width:30px; height:30px;
+}
+
+
+#box-mat-2-layer-10-mm {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-2-layer-10-mm {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-2-layer-10-mm {
+    width:30px; height:30px;
+}
+
+#box-mat-2-layer-16-mm {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-2-layer-16-mm {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-2-layer-16-mm {
+    width:30px; height:30px;
+}
+
+#box-mat-2-layer-1-1 {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-2-layer-1-1 {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-2-layer-1-1 {
+    width:30px; height:30px;
+}
+
+#box-mat-2-layer-h-h {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-2-layer-h-h {
+    border-left: 0px;
+    text-align: left;
+}
+#check-mat-2-layer-h-h {
+    width:30px; height:30px;
+}
+
+
+
+
+#box-mat-4-layer {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-4-layer {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-4-layer {
+    width:30px; height:30px;
+}
+
+#box-mat-4-layer-06-mm {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-4-layer-06-mm {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-4-layer-06-mm {
+    width:30px; height:30px;
+}
+
+
+#box-mat-4-layer-10-mm {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-4-layer-10-mm {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-4-layer-10-mm {
+    width:30px; height:30px;
+}
+
+
+
+#box-mat-4-layer-16-mm {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-4-layer-16-mm {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-4-layer-16-mm {
+    width:30px; height:30px;
+}
+
+
+#box-mat-4-layer-1111 {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-4-layer-1111 {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-4-layer-1111 {
+    width:30px; height:30px;
+}
+
+#box-mat-4-layer-h11h {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-4-layer-h11h {
+    border-left: 0px;
+    text-align: left;
+}
+#check-mat-4-layer-h11h {
+    width:30px; height:30px;
+}
+
+
+
+
+#box-mat-6-layer {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-6-layer {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-6-layer {
+    width:30px; height:30px;
+}
+
+
+#box-mat-6-layer-10-mm {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-6-layer-10-mm {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-6-layer-10-mm {
+    width:30px; height:30px;
+}
+
+
+
+#box-mat-6-layer-16-mm {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-6-layer-16-mm {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-6-layer-16-mm {
+    width:30px; height:30px;
+}
+
+
+#box-mat-6-layer-111111 {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-6-layer-111111 {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-mat-6-layer-111111 {
+    width:30px; height:30px;
+}
+
+#box-mat-6-layer-h1111h {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-mat-6-layer-h1111h {
+    border-left: 0px;
+    text-align: left;
+}
+#check-mat-6-layer-h1111h {
+    width:30px; height:30px;
+}
+
+
+#box-mat-other {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-mat-other {
+    width:30px; height:30px;
+}
+#lab-mat-other {
+    border-left: 0px;
+    text-align: left;
+}
+
+
+/******************************************/
+#lab-avert {
+    border-right: 0px;
+}
+#txt-avert {
+    border-left: 0px;
+    border-right: 0px;
+}
+#input-avert {
+    height:50px;
+    border: 0px;
+    width:150px;
+}
+
+#lab-deviation {
+    text-align: right;
+    border-left: 0px;
+    border-right: 0px;
+}
+#unt-avert {
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#box-deviation-5 {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-deviation-5 {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-deviation-5 {
+    width:30px; height:30px;
+}
+
+#box-deviation-10 {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-deviation-10 {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-deviation-10 {
+    width:30px; height:30px;
+}
+
+
+#box-deviation-null {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-deviation-null {
+    border-left: 0px;
+    text-align: left;
+}
+#check-deviation-null {
+    width:30px; height:30px;
+}
+
+#mat-memo {
+    border: 0px;
+    margin-top: 15px;
+    padding-left: 10px;
+    max-width: 848px;
+    min-width: 848px;
+    width:848px;
+    max-height: 150px;
+}
+
+/****************************************/
+#lab-request-pic {
+    border-right: 0px;
+}
+
+
+#box-request-null {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-request-null {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+}
+#check-request-null {
+    width:30px; height:30px;
+}
+
+
+#box-request-file {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-request-file {
+    text-align: left;
+    border-left: 0px;
+}
+#check-request-file {
+    width:30px; height:30px;
+}
+
+/******************************************/
+#lab-request-logo {
+    border-right: 0px;
+}
+
+
+#box-request-ce {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-request-ce {
+    width:30px; height:30px;
+}
+#lab-request-ce {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-request-fcc {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-request-fcc {
+    width:30px; height:30px;
+}
+#lab-request-fcc {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-request-weee {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-request-weee {
+    width:30px; height:30px;
+}
+#lab-request-weee {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-request-bsmi {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-request-bsmi {
+    width:30px; height:30px;
+}
+#lab-request-bsmi {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-request-vcci {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-request-vcci {
+    width:30px; height:30px;
+}
+#lab-request-vcci {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-request-machine {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-request-machine {
+    width:30px; height:30px;
+}
+#lab-request-machine {
+    text-align: left;
+    border-left: 0px;
+}
+
+/******************************/
+#box-request-other {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-request-other {
+    width:30px; height:30px;
+}
+#lab-request-other {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#txt-request-other {
+    border-left: 0px;
+}
+
+#input-request-other {
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    text-align: left;
+    height:40px;
+    width:740px;
+    margin-left: 5px;
+}
+
+/******************************/
+#lab-component {
+    border-right: 0px;
+}
+#lab-word {
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#box-component-single {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-component-single {
+    width:30px; height:30px;
+}
+#lab-component-single{
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#box-component-double {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-component-double
+ {
+    width:30px; height:30px;
+}
+#lab-component-double {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+
+#box-word-single {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-word-single {
+    width:30px; height:30px;
+}
+#lab-word-single {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+
+#box-word-double {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-word-double {
+    width:30px; height:30px;
+}
+#lab-word-double {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#empty-word {
+    border-left: 0px;
+}
+
+/******************************/
+#lab-golden-finger {
+    border-right: 0px;
+}
+
+#box-pci-spec {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-pci-spec {
+    width:30px; height:30px;
+}
+#lab-pci-spec {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+
+
+#box-pci-express {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-pci-express {
+    width:30px; height:30px;
+}
+#lab-pci-express {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+    font-size: 18px;
+}
+
+
+
+#box-same-mec {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-same-mec {
+    width:30px; height:30px;
+}
+#lab-same-mec {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+    font-size: 16px;
+}
+
+
+
+
+
+
+#box-sunix-custom {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-sunix-custom {
+    width:30px; height:30px;
+}
+#lab-sunix-custom {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+
+
+
+#box-same-style {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-same-style {
+    width:30px; height:30px;
+}
+#lab-same-style {
+    text-align: left;
+    border-left: 0px;
+}
+
+
+
+/******************************/
+
+#box-document-tenet {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-document-tenet {
+    width:30px; height:30px;
+}
+#lab-document-tenet {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+
+#box-document-indicate {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-document-indicate {
+    width:30px; height:30px;
+}
+#lab-document-indicate {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-document-spec {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-document-spec {
+    width:30px; height:30px;
+}
+#lab-document-spec {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-document-c {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-document-c {
+    width:30px; height:30px;
+}
+#lab-document-c {
+    text-align: left;
+    border-left: 0px;
+}
+
+
+
+
+#box-document-drawing {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-document-drawing {
+    width:30px; height:30px;
+}
+#lab-document-drawing {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+
+
+#box-document-size {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-document-size {
+    width:30px; height:30px;
+}
+#lab-document-size {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-document-rule {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-document-rule {
+    width:30px; height:30px;
+}
+#lab-document-rule {
+    text-align: left;
+    border-left: 0px;
+}
+
+
+
+/******************************/
+#lab-workt-file-format {
+    border-right: 0px;
+}
+
+#box-gerber-1-board {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-gerber-1-board {
+    width:30px; height:30px;
+}
+#lab-gerber-1-board {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-gerber-2-board {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-gerber-2-board {
+    width:30px; height:30px;
+}
+#lab-gerber-2-board {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-gerber-4-board {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-gerber-4-board {
+    width:30px; height:30px;
+}
+#lab-gerber-4-board {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+
+#box-gerber-same {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-gerber-same {
+    width:30px; height:30px;
+}
+#lab-gerber-same {
+    text-align: left;
+    border-left: 0px;
+}
+
+
+
+#lab-gerber-format {
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#box-gerber-pcb {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-gerber-pcb {
+    width:30px; height:30px;
+}
+#lab-gerber-pcb {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+
+#box-gerber-brd {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-gerber-brd {
+    width:30px; height:30px;
+}
+#lab-gerber-brd {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-gerber-274x {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-gerber-274x {
+    width:30px; height:30px;
+}
+#lab-gerber-274x {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+
+#box-gerber-274d {
+    border-left: 0px;
+    border-right: 0px;
+}
+#check-gerber-274d {
+    width:30px; height:30px;
+}
+#lab-gerber-274d {
+    text-align: left;
+    border-left: 0px;
+}
+
+
+/******************************/
+#input-info-date {
+    width:150px;
+    height:40px;
+}
+#txt-info-date {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-info-date {
+    border-right: 0px;
+}
+#empty-info-date {
+    border-left: 0px;
+}
+
+
+
+#input-gerber-date {
+    width:150px;
+    height:40px;
+}
+#txt-gerber-date {
+    border-left: 0px;
+    border-right: 0px;
+}
+#lab-gerber-date {
+    border-right: 0px;
+}
+#empty-gerber-date {
+    border-left: 0px;
+}
+
+/******************************/
+/* 基本欄位 */
+.c-base {
+    width:50px; height:0px;
+    background-color: rgb(255, 255, 255);
+    border: 0px solid rgb(255, 255, 255);
+    /*border: 0px;*/
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+    
+}
+/* #help-axis {
+    display: none;
+} */
+
+.cls-c1-r1 {
+    width:50px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c2-r1 {
+    width:100px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+
+.cls-c3-r1 {
+    width:150px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c3-r2 {
+    width:150px; height:100px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c3-r5 {
+    width:150px; height:250px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c3-r6 {
+    width:150px; height:300px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c3-r9 {
+    width:150px; height:450px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+
+
+.cls-c4-r1 {
+    width:200px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c5-r1 {
+    width:250px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c6-r1 {
+    width:300px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c7-r1 {
+    width:350px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+.cls-c8-r1 {
+    width:400px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c9-r1 {
+    width:400px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c10-r1 {
+    width:500px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:left; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c11-r1 {
+    width:550px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:left; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c14-r1 {
+    width:700px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:left; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c15-r1 {
+    width:750px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:left; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c16-r1 {
+    width:800px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:left; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c17-r1 {
+    width:850px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:left; 
+    font-size: 18px; font-weight: bold;
+}
+
+.cls-c20-r1 {
+    width:1000px; height:50px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0); 
+    text-align:left; 
+    font-size: 18px; font-weight: bold;
+}
+
+
+.cls-c20-r3 {
+    width:1000px; height:150px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    color: rgb(0, 0, 0); 
+    text-align:left; 
+    font-size: 18px; font-weight: bold;
+}
+
+.list-file-item {
+    width:800px;
+    height:50px;
+    background-color: rgb(250, 250, 250);
+    align-items: center;
+    padding-left: 10px;
+    border: 1px solid rgb(50, 50, 50);
+    border-right: 0px;
+    /*border-left: 0px;*/
+    /*float:left;*/
+    display: flex;
+    /*flex-grow:2;*/
+    flex-wrap:nowrap;
+    /*flex-direction:row;*/
+    /*justify-content: space-between;*/
+    /*justify-content: space-evenly;*/
+    justify-content: space-around;
+    /*justify-content:end;*/
+    /*align-self:stretch;*/
+}
+
+
+.text-filename {
+    width:600px;height:40px;
+    margin-top: 10px;
+    font-size: 20px;
+    text-align:left;
+    color:black;
+    /*background-color: rgb(250, 250, 0);*/
+}
+
+#footer {
+    width:100%;
+    height:200px;
+}
+
+/* 簽核歷程 */
+.cls-c6-r1-h1 {
+    width:300px; height:30px;
+    background-color: rgb(153, 148, 148);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}
+.cls-c6-r1-h2 {
+    width:300px; height:60px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(0, 0, 0); 
+    text-align:center; 
+    font-size: 18px; font-weight: bold;
+}

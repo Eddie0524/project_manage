@@ -1,0 +1,9 @@
+Flask
+Jinja2
+Pillow
+flask_cors
+pymongo
+wheel
+flask_pymongo
+flask_swagger_ui
+apscheduler

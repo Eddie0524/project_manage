@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        
+        {% include 'common/header.html' %}
+        <title>Layout申請工程規格聯絡單</title>
+        
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/layout_form.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/file-check.css') }}" />
+
+        <script src="{{ url_for('static', filename='/js/dom-to-image.js') }}"></script>
+        
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <div id="id-table-bg">
+                <div id="form-title-text"><b>Layout申請工程規格聯絡單</b>                  
+                </div>
+
+                <!-- 表單 -->
+                <table id="id-table-form">
+
+                    <!-- 表單標題 -->
+                    <thead id="table-head">
+
+                        <tr>
+                          
+                            <!-- <th colspan="3"  rowspan="1" id="lab-product-no"  class="cls-c3-r1">產品型號</th>
+                            <th colspan="4"  rowspan="1" id="txt-product-no"  class="cls-c4-r1">
+                                <select id="sel-product-no"></select>
+                            </th>
+                            <th colspan="2" rowspan="1" id="lab-project-no"   class="cls-c3-r1">專案代號</th>
+                            <th colspan="6" rowspan="1" id="txt-project-no"   class="cls-c5-r1">
+                                <select id="sel-project-no"></select>
+                            </th> -->
+
+                            <th colspan="3"  rowspan="1" id="lab-apply-person" class="cls-c3-r1">申請人</th>
+                            <th colspan="2"  rowspan="1" id="txt-apply-person" class="cls-c4-r1">{{USER_CNAME}}</th>
+                            <th colspan="1"  rowspan="1" id="lab-apply-dept"   class="cls-c3-r1">申請部門</th>
+                            <th colspan="3"  rowspan="1" id="txt-apply-dept"   class="cls-c4-r1">
+                                <input type="text" id="input-apply-dept" value={{DEPARTMENT}}>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-apply-date" class="cls-c3-r1">申請日期</th>
+                            <th colspan="3"  rowspan="1" id="txt-apply-date" class="cls-c3-r1"></th>
+                            <th colspan="3" rowspan="1" id="lab-form-no"   class="cls-c3-r1">表單編號</th>
+                            <th colspan="3" rowspan="1" id="txt-form-no"   class="cls-c5-r1"></th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="3"  rowspan="1" id="lab-product-no"  class="cls-c3-r1">產品型號</th>
+                            <th colspan="3"  rowspan="1" id="txt-product-no"  class="cls-c4-r1">
+                                <select id="sel-product-no"></select>
+                            </th>
+                            <th colspan="2" rowspan="1" id="lab-project-no"   class="cls-c3-r1">專案代號</th>
+                            <th colspan="4" rowspan="1" id="txt-project-no"   class="cls-c5-r1">
+                                <select id="sel-project-no"></select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-form-class" class="cls-c3-r1">BU</th>
+
+                            <th colspan="1"  rowspan="1" id="box-form-io"    class="cls-c1-r1">
+                                <input type="checkbox" id="check-form-io" name="check-form-io" value="IO">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-form-io"    class="cls-c2-r1">I/O</th>
+
+                            <th colspan="1"  rowspan="1" id="box-form-iot"   class="cls-c1-r1">
+                                <input type="checkbox" id="check-form-iot" name="check-form-iot" value="IOT">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-form-iot"   class="cls-c2-r1">IoT</th>
+
+                            <th colspan="1"  rowspan="1" id="box-form-it"    class="cls-c1-r1">
+                                <input type="checkbox" id="check-form-it" name="check-form-it" value="IT">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-form-it"    class="cls-c10-r1">IT</th>
+                        </tr>
+
+                    </thead>
+
+                    <!-- 表單內容 ☐ ☑ -->
+                    <tbody id="table-body">
+                      
+
+                        <!-- 產品型號-->
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-product-no"  class="cls-c3-r1">產品型號</th>
+                            <th colspan="4"  rowspan="1" id="txt-product-no"  class="cls-c4-r1">
+                                <select id="sel-product-no"></select>
+                            </th> -->
+                             <th colspan="3" rowspan="1" id="lab-pcb-name"  class="cls-c3-r1">PCB NAME</th>
+                            <th colspan="4" rowspan="1" id="txt-pcb-name"  class="cls-c9-r1">
+                                <input type="text" id="input-pcb-name" value="">
+                            </th>
+                            <!-- <th colspan="1"  rowspan="1" id="lab-final"   class="cls-c1-r1">版本</th> -->
+                            <th colspan="2"  rowspan="1" id="lab-version" class="cls-c2-r1">
+                                <select id="sel-version">
+                                    <option value="初版">初版</option>                                  
+                                </select>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="txt-version"     class="cls-c3-r1"></th>
+
+                            <th colspan="1"  rowspan="1" id="box-new-product" class="cls-c1-r1">
+                                <input type="checkbox" id="check-new-product" name="check-new-product" value="NEW">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-new-product" class="cls-c3-r1">新產品申請</th>
+                            <th colspan="1"  rowspan="1" id="box-old-product" class="cls-c1-r1">
+                                <input type="checkbox" id="check-old-product" name="check-old-product" value="OLD">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-old-product" class="cls-c3-r1">舊有產品修改</th>
+                        </tr>
+
+                        <!-- 文字輸入內容 -->
+                        <tr>
+                            <th colspan="20"  rowspan="1" id="txt-memo"  class="cls-c20-r1">
+                                <textarea id="form-memo" name="txt-memo" rows="3" cols="40" required></textarea>
+                            </th>
+                        </tr>
+
+                        <!-- 板材規格 -->
+                        <tr>
+                            <th colspan="3"  rowspan="6" id="lab-mat-spec"   class="cls-c3-r6">板材規格</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-2-layer" name="check-mat-2-layer" value="2 LayerFR-4">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-mat-2-layer" class="cls-c3-r1">2 Layer FR-4</th>
+
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-06-mm" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-2-layer-06-mm" name="check-mat-2-layer-06-mm" value="0.6mm">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-2-layer-06-mm" class="cls-c2-r1">0.6 mm</th>
+
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-10-mm" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-2-layer-10-mm" name="check-mat-2-layer-10-mm" value="1.0mm">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-2-layer-10-mm" class="cls-c2-r1">1.0 mm</th>
+
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-16-mm" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-2-layer-16-mm" name="check-mat-2-layer-16-mm" value="1.6mm">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-2-layer-16-mm" class="cls-c2-r1">1.6 mm</th>
+
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-1-1" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-2-layer-1-1" name="check-mat-2-layer-1-1" value="1/1">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-mat-2-layer-1-1" class="cls-c1-r1">1/1 </th>
+
+                            <th colspan="1"  rowspan="1" id="box-mat-2-layer-h-h" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-2-layer-h-h" name="check-mat-2-layer-h-h" value="H/H">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-mat-2-layer-h-h" class="cls-c1-r1">H/H </th>
+                        </tr>
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-mat-spec"   class="cls-c3-r1">板材規格</th> -->
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-4-layer" name="check-mat-4-layer-h-h" value="4 LayerFR-4">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-mat-4-layer" class="cls-c3-r1">4 Layer FR-4</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-06-mm" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-4-layer-06-mm" name="check-mat-4-layer-06-mm" value="0.6mm">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-4-layer" class="cls-c2-r1">0.6 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-10-mm" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-4-layer-10-mm" name="check-mat-4-layer-10-mm" value="1.0mm">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-4-layer-10-mm" class="cls-c2-r1">1.0 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-16-mm" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-4-layer-16-mm" name="check-mat-4-layer-16-mm" value="1.6mm">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-4-layer-16-mm" class="cls-c2-r1">1.6 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-1111" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-4-layer-1111" name="check-mat-4-layer-1111" value="1/1/1/1">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-mat-4-layer-1111" class="cls-c1-r1">1/1/1/1</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-4-layer-h11h" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-4-layer-h11h" name="check-mat-4-layer-h11h" value="H/1/1/H">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-mat-4-layer-h11h" class="cls-c1-r1">H/1/1/H </th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-mat-spec"   class="cls-c3-r1">板材規格</th> -->
+
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-6-layer" name="check-mat-6-layer" value="6 LayerFR-4">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-mat-6-layer" class="cls-c3-r1">6 Layer FR-4</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer-10-mm" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-6-layer-10-mm" name="check-mat-6-layer-10-mm" value="1.0mm">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-6-layer-10-mm" class="cls-c2-r1">1.0 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer-16-mm" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-6-layer-16-mm" name="check-mat-6-layer-16-mm" value="1.6mm">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-6-layer-16-mm" class="cls-c2-r1">1.6 mm</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer-111111" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-6-layer-111111" name="check-mat-6-layer-111111" value="1/1/1/1/1/1">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-mat-6-layer-111111" class="cls-c2-r1">1/1/1/1/1/1</th>
+                            <th colspan="1"  rowspan="1" id="box-mat-6-layer-h1111h" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-6-layer-h1111h" name="check-mat-6-layer-h1111h" value="H/1/1/1/1/H">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-mat-6-layer-h1111h" class="cls-c3-r1">H/1/1/1/1/H </th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-mat-spec"   class="cls-c3-r1">板材規格</th> -->
+                            <th colspan="1"  rowspan="1" id="box-mat-other" class="cls-c1-r1">
+                                <input type="checkbox" id="check-mat-other" name="check-mat-other" value="其他(特殊要求)">
+                            </th>
+                            <th colspan="16" rowspan="1" id="lab-mat-other" class="cls-c16-r1">其他(特殊要求)</th>
+                        </tr>
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-mat-spec"  class="cls-c3-r1">板材規格</th> -->
+                            <th colspan="3"  rowspan="1" id="lab-avert"     class="cls-c3-r1">阻抗需求: ( </th>
+                            <th colspan="2"  rowspan="1" id="txt-avert"     class="cls-c2-r1">
+                                <input type="text" id="input-avert" name="input-avert" value="">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="unt-avert"     class="cls-c2-r1"> ) 歐姆</th>
+
+                            <th colspan="3"  rowspan="1" id="lab-deviation" class="cls-c3-r1">誤差+/-</th>
+
+                            <th colspan="1"  rowspan="1" id="box-deviation-5" class="cls-c1-r1">
+                                <input type="checkbox" id="check-deviation-5" name="check-deviation-5" value="5%">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-deviation-5" class="cls-c1-r1">5%</th>
+
+                            <th colspan="1"  rowspan="1" id="box-deviation-10" class="cls-c1-r1">
+                                <input type="checkbox" id="check-deviation-10" name="check-deviation-10" value="10%">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-deviation-10" class="cls-c1-r1">10%</th>
+
+                            <th colspan="1"  rowspan="1" id="box-deviation-null" class="cls-c1-r1">
+                                <input type="checkbox" id="check-deviation-null" name="check-deviation-null" value="無需求">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-deviation-null" class="cls-c2-r1">無需求</th>
+                        </tr>
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-mat-spec"   class="cls-c3-r1">板材規格</th> -->
+                            <th colspan="17"  rowspan="1" id="lab-mat-memo"   class="cls-c17-r1">
+                                <textarea id="mat-memo" name="txt-mat-memo" rows="3" cols="40" required></textarea>
+                            </th>
+                        </tr>
+
+                        <!-- 產品要求 -->
+                        <tr>
+                            <th colspan="3"  rowspan="5" id="lab-product-request"  class="cls-c3-r5">產品要求</th>
+                            <th colspan="3"  rowspan="1" id="lab-request-pic"      class="cls-c3-r1">成型尺寸圖 : </th> 
+                            <th colspan="1"  rowspan="1" id="box-request-null"     class="cls-c1-r1">
+                                <input type="checkbox" id="check-request-null" name="check-request-null" value="無，依A/W製作">
+                            </th>
+                            <th colspan="3" rowspan="1" id="lab-request-null"  class="cls-c3-r1">無,依A/W製作</th>
+                            <th colspan="1" rowspan="1" id="box-request-file"  class="cls-c1-r1">
+                                <input type="checkbox" id="check-request-file" name="check-request-file" value="附於資料檔案內">
+                            </th>
+                            <th colspan="9" rowspan="1" id="lab-request-file"  class="cls-c9-r1">附於資料檔案內</th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-product-request"  class="cls-c3-r1">產品要求</th>-->
+                            <th colspan="3"  rowspan="1" id="lab-request-logo"     class="cls-c3-r1">Logo需求:</th>
+                            <th colspan="1"  rowspan="1" id="box-request-ce"       class="cls-c1-r1">
+                                <input type="checkbox" id="check-request-ce" name="check-request-ce" value="CE">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-request-ce"       class="cls-c1-r1">CE</th>
+
+                            <th colspan="1"  rowspan="1" id="box-request-fcc"      class="cls-c1-r1">
+                                <input type="checkbox" id="check-request-fcc" name="check-request-fcc" value="FCC">
+                            </th>
+                            <th colspan="1" rowspan="1" id="lab-request-fcc"       class="cls-c1-r1">FCC</th>
+
+
+                            <th colspan="1"  rowspan="1" id="box-request-weee"     class="cls-c1-r1">
+                                <input type="checkbox" id="check-request-weee" name="check-request-fcc" value="WEEE">
+                            </th>
+                            <th colspan="1" rowspan="1" id="lab-request-weee"      class="cls-c1-r1">WEEE</th>
+
+                            <th colspan="1"  rowspan="1" id="box-request-bsmi"     class="cls-c1-r1">
+                                <input type="checkbox" id="check-request-bsmi" name="check-request-bsmi" value="BSMI">
+                            </th>
+                            <th colspan="1" rowspan="1" id="lab-request-bsmi"      class="cls-c1-r1">BSMI</th>
+
+                            <th colspan="1"  rowspan="1" id="box-request-vcci"     class="cls-c1-r1">
+                                <input type="checkbox" id="check-request-vcci" name="check-request-vcci" value="VCCI">
+                            </th>
+                            <th colspan="1" rowspan="1" id="lab-request-vcci"      class="cls-c1-r1">VCCI</th>
+
+                            <th colspan="1"  rowspan="1" id="box-request-machine"   class="cls-c1-r1">
+                                <input type="checkbox" id="check-request-machine" name="check-request-machine" value="機種文字及版本">
+
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-request-machine"   class="cls-c3-r1">機種文字及版本</th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-product-request"  class="cls-c3-r1">產品要求</th> -->
+                            <th colspan="1"  rowspan="1" id="box-request-other"       class="cls-c1-r1">
+                                <input type="checkbox" id="check-request-other" name="check-request-other" value="request-other">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-request-other" class="cls-c1-r1">其他:</th>
+                            <th colspan="15"  rowspan="1" id="txt-request-other" class="cls-c15-r1">
+                                <input type="text" id="input-request-other" name="input-request-other" value="">
+                            </th>
+                        </tr>
+
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-product-request"   class="cls-c3-r1">產品要求</th>-->
+
+                            <th colspan="2"  rowspan="1" id="lab-component"         class="cls-c2-r1">零件擺放:</th>
+                            <th colspan="1"  rowspan="1" id="box-component-single"  class="cls-c1-r1">
+                                <input type="checkbox" id="check-component-single" name="check-component-single" value="單面">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-component-single"  class="cls-c1-r1">單面</th>
+
+                            <th colspan="1"  rowspan="1" id="box-component-double"  class="cls-c1-r1">
+                                <input type="checkbox" id="check-component-double" name="check-component-double" value="雙面">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-component-double"  class="cls-c1-r1">雙面</th>
+
+                            <th colspan="3"  rowspan="1" id="lab-word"              class="cls-c3-r1">文    字:</th>
+                            <th colspan="1"  rowspan="1" id="box-word-single"       class="cls-c1-r1">
+                                <input type="checkbox" id="check-word-single" name="check-word-single" value="單面">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-word-single"       class="cls-c1-r1">單面</th>
+
+                            <th colspan="1"  rowspan="1" id="box-word-double"       class="cls-c1-r1">
+                                <input type="checkbox" id="check-word-double" name="check-word-double" value="雙面">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-word-double"       class="cls-c1-r1">雙面</th>
+                            <th colspan="4"  rowspan="1" id="empty-word"            class="cls-c4-r1"></th>
+                        </tr>
+
+                       
+                        <tr>
+                           <!-- <th colspan="3"  rowspan="1" id="lab-product-request" class="cls-c3-r1">產品要求</th> -->
+                            <th colspan="3"  rowspan="1" id="lab-golden-finger"   class="cls-c3-r1">金手指規範:</th>
+                            <th colspan="1"  rowspan="1" id="box-pci-spec"       class="cls-c1-r1">
+                                <input type="checkbox" id="check-pci-spec" name="check-pci-spec" value="PCI規範">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-pci-spec"       class="cls-c1-r1">PCI規範</th>
+
+                            <th colspan="1"  rowspan="1" id="box-pci-express" class="cls-c1-r1">
+                                <input type="checkbox" id="check-pci-express" name="check-pci-express" value="PCI-Express規範">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-pci-express" class="cls-c3-r1">PCI-Express規範</th>
+
+                            <th colspan="1"  rowspan="1" id="box-same-mec" class="cls-c1-r1">
+                                <input type="checkbox" id="check-same-mec" name="check-same-mec" value="同機構">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-same-mec"    class="cls-c1-r1">同機構</th>
+
+                            <th colspan="1"  rowspan="1" id="box-sunix-custom" class="cls-c1-r1">
+                                <input type="checkbox" id="check-sunix-custom" name="check-golden-finger-custom" value="sunix自定">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-sunix-custom" class="cls-c2-r1">sunix自定</th>
+
+                            <th colspan="1"  rowspan="1" id="box-same-style" class="cls-c1-r1">
+                                <input type="checkbox" id="check-same-style" name="check-same-style" value="同前版樣式">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-same-style" class="cls-c2-r1">同前版樣式</th>
+                        </tr>
+
+                        
+
+                        <!-- 提供文檔 -->
+                        <tr>
+                            <th colspan="3"  rowspan="2" id="lab-document"       class="cls-c3-r2">提供文檔</th>
+                            <th colspan="1"  rowspan="1" id="box-document-tenet" class="cls-c1-r1">
+                                <input type="checkbox" id="check-document-tenet" name="check-document-tenet" value="原理圖">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-document-tenet" class="cls-c2-r1">原理圖</th>
+                            <th colspan="1"  rowspan="1" id="box-document-indicate" class="cls-c1-r1">
+                                <input type="checkbox" id="check-document-indicate" name="check-document-indicate" value="修改注明文檔">
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-document-indicate" class="cls-c4-r1">修改注明文檔</th>
+                            <th colspan="1"  rowspan="1" id="box-document-spec" class="cls-c1-r1">
+                                <input type="checkbox" id="check-document-spec" name="check-document-spec" value="各 IC Spec">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-document-spec" class="cls-c3-r1">各 IC Spec</th>
+                            <th colspan="1"  rowspan="1" id="box-document-c" class="cls-c1-r1">
+                                <input type="checkbox" id="check-document-c" name="check-document-c" value="C 件擺放圖">
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-document-c" class="cls-c4-r1">C 件擺放圖</th>
+                        </tr>
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-document"       class="cls-c3-r1">提供文檔</th> -->
+                            <th colspan="1"  rowspan="1" id="box-document-drawing" class="cls-c1-r1">
+                                <input type="checkbox" id="check-document-drawing" name="check-document-drawing" value="機構圖">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-document-drawing" class="cls-c2-r1">機構圖</th>
+                            <th colspan="1"  rowspan="1" id="box-document-size" class="cls-c1-r1">
+                                <input type="checkbox" id="check-document-size" name="check-document-size" value="各元件的封裝尺寸">
+                            </th>
+                            <th colspan="4"  rowspan="1" id="lab-document-size" class="cls-c4-r1">各元件的封裝尺寸</th>
+                            <th colspan="1"  rowspan="1" id="box-document-rule" class="cls-c1-r1">
+                                <input type="checkbox" id="check-document-rule" name="check-document-rule" value="線規則文檔">
+                            </th>
+                            <th colspan="8"  rowspan="1" id="lab-document-rule" class="cls-c8-r1">線規則文檔</th>
+                        </tr>
+
+                        <!-- Gerber需求-->
+                        <tr>
+                            <th colspan="3"  rowspan="2" id="lab-gerber-request"   class="cls-c3-r2">Gerber需求</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-1-board" class="cls-c1-r1">
+                                <input type="checkbox" id="check-gerber-1-board" name="check-gerber-1-board" value="單板">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-gerber-1-board" class="cls-c2-r1">單板</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-2-board" class="cls-c1-r1">
+                                <input type="checkbox" id="check-gerber-2-board" name="check-gerber-2-board" value="2連板">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-gerber-2-board" class="cls-c2-r1">2連板</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-4-board" class="cls-c1-r1">
+                                <input type="checkbox" id="check-gerber-4-board" name="check-gerber-4-board" value="4連板">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-gerber-4-board" class="cls-c2-r1">4連板</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-same" class="cls-c1-r1">
+                                <input type="checkbox" id="check-gerber-same" name="check-gerber-same" value="同機構">
+                            </th>
+                            <th colspan="7"  rowspan="1" id="lab-gerber-same" class="cls-c7-r1">同機構</th>
+                        </tr>
+
+
+                        <tr>
+                            <!-- <th colspan="3"  rowspan="1" id="lab-gerber-request"    class="cls-c3-r1">Gerber需求</th> -->
+                            <th colspan="3"  rowspan="1" id="lab-workt-file-format" class="cls-c3-r1">工作檔格式:</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-pcb"        class="cls-c1-r1">
+                                <input type="checkbox" id="check-gerber-pcb" name="check-gerber-pcb" value="gerber-pcb">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-gerber-pcb"        class="cls-c1-r1">*.PCB</th>
+
+                            <th colspan="1"  rowspan="1" id="box-gerber-brd"        class="cls-c1-r1">
+                                <input type="checkbox" id="check-gerber-brd" name="check-gerber-brd" value="gerber-brd">
+                            </th>
+                            <th colspan="2"  rowspan="1" id="lab-gerber-brd"        class="cls-c2-r1">*.BRD</th>
+
+                            <th colspan="3"  rowspan="1" id="lab-gerber-format"     class="cls-c3-r1">Gerber格式:</th>
+                            <th colspan="1"  rowspan="1" id="box-gerber-274x" class="cls-c1-r1">
+                                <input type="checkbox" id="check-gerber-274x" name="check-gerber-274x" value="gerber-274x">
+                            </th>
+                            <th colspan="1"  rowspan="1" id="lab-gerber-274x" class="cls-c1-r1">*.274X</th>
+
+                            <th colspan="1"  rowspan="1" id="box-gerber-274d" class="cls-c1-r1">
+                                <input type="checkbox" id="check-gerber-274d" name="check-gerber-274d" value="gerber-274d">
+                            </th>
+                            <th colspan="3"  rowspan="1" id="lab-gerber-274d" class="cls-c3-r1">*.274D</th>
+                        </tr>
+
+
+                        <tr>
+                            <th colspan="3" rowspan="2" id="lab-attach-file"   class="cls-c3-r2">附加檔案✱</th>
+                            
+                            <th colspan="17" rowspan="1" id="empty-submit" class="cls-c17-r1">
+                                <form action="" method=post enctype=multipart/form-data id="upload-form">
+                                    <p><input type=file name=file id="btn-file">
+                                    <button id="btn-upload" class="layui-btn" lay-event="form-submit" title="上傳檔案">
+                                        <i class="layui-icon layui-icon-upload-drag"></i>上傳檔案
+                                    </button>
+
+                                </form>
+                            </th>
+                            
+                        </tr>
+                        <tr>
+                            <!-- <th colspan="3" rowspan="1" id="lab-attach-file"   class="cls-c3-r1">附加檔案✱</th> -->
+                            <th colspan="17" rowspan="1" id="file-list" class="cls-c17-r1">
+                                <div id="myUL">
+                                </div>
+                            <th>
+                        </tr>
+
+                        <!-- 進度需求 -->
+                        <tr>
+                            <th colspan="3"  rowspan="2" id="lab-request-process" class="cls-c3-r2">進度需求</th>
+                            <th colspan="4"  rowspan="1" id="lab-info-date"       class="cls-c4-r1">提供完整資料的日期:</th>
+                            <th colspan="3"  rowspan="1" id="txt-info-date"       class="cls-c3-r1">
+                                <input type="date" id="input-info-date" value="">
+                            </th>
+                            <th colspan="10"  rowspan="1" id="empty-info-date"    class="cls-c10-r1"></th>
+                        </tr>
+
+                        <tr>
+                            <!--<th colspan="3"  rowspan="1" id="lab-request-process"  class="cls-c3-r1">進度需求</th>-->
+                            <th colspan="4"  rowspan="1" id="lab-gerber-date"      class="cls-c4-r1">GERBER需求的日期:</th>
+                            <th colspan="3"  rowspan="1" id="txt-gerber-date"      class="cls-c3-r1">
+                                <input type="date" id="input-gerber-date" value="">
+                            </th>
+                            <th colspan="10"  rowspan="1" id="empty-gerber-date"   class="cls-c10-r1"></th>
+                        </tr>
+
+                        <!-- 簽核欄位 -->
+                        <tr>
+
+                            <th colspan="17"  rowspan="1" id="title-product" class=""></th>
+                            <!-- <th colspan="3"  rowspan="1" id="title-product" class="cls-c3-r1"></th>
+                            <th colspan="3"  rowspan="1" id="lab-applicant" class="cls-c3-r1">申請人簽核</th>
+                            <th colspan="3"  rowspan="1" id="txt-applicant" class="cls-c3-r1">{{CNAME}}</th> -->
+                            <th colspan="3"  rowspan="1" id="title-product" class="">
+                                <button id="btn-submit" class="layui-btn layui-btn-normal layui-btn-disabled" title="送出資料">
+                                    <i class="layui-icon layui-icon-email"></i>送出
+                                </button>
+                            </th>
+
+                        </tr>
+
+                        <!-- 輔助-->
+                        <tr>
+                            <td colspan="1" class="c-base" id="c-1"></td>
+                            <td colspan="1" class="c-base" id="c-2"></td>
+                            <td colspan="1" class="c-base" id="c-3"></td>
+                            <td colspan="1" class="c-base" id="c-4"></td>
+                            <td colspan="1" class="c-base" id="c-5"></td>
+                            <td colspan="1" class="c-base" id="c-6"></td>
+                            <td colspan="1" class="c-base" id="c-7"></td>
+                            <td colspan="1" class="c-base" id="c-8"></td>
+                            <td colspan="1" class="c-base" id="c-9"></td>
+                            <td colspan="1" class="c-base" id="c-10"></td>
+
+                            <td colspan="1" class="c-base" id="c-11"></td>
+                            <td colspan="1" class="c-base" id="c-12"></td>
+                            <td colspan="1" class="c-base" id="c-13"></td>
+                            <td colspan="1" class="c-base" id="c-14"></td>
+                            <td colspan="1" class="c-base" id="c-15"></td>
+                            <td colspan="1" class="c-base" id="c-16"></td>
+                            <td colspan="1" class="c-base" id="c-17"></td>
+                            <td colspan="1" class="c-base" id="c-18"></td>
+                            <td colspan="1" class="c-base" id="c-19"></td>
+                            <td colspan="1" class="c-base" id="c-20"></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </body>
+
+
+
+    <script>
+
+        // 紀錄初始的版本
+        let temp_version = '';      
+
+        var selectNameList = [];
+        
+
+        $("#txt-apply-date").text(
+            addDate()
+        );
+
+        function addDate() {
+            var today = new Date();
+            var nowDD = String(today.getDate()).padStart(2, '0');
+            var nowMM = String(today.getMonth() + 1).padStart(2, '0');
+            var nowYYYY = today.getFullYear();
+            strNowDate = nowYYYY + "-" + nowMM + "-" + nowDD;
+            return strNowDate;
+        }
+
+
+
+        //生成表單編號
+        async function get_form_code(){
+            let url = "http://{{ DOMAIN_PATH }}/api/v0/db/layout_form_no/";
+            const res = await fetch(url, {
+                method: 'get',
+                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+            });
+            return await res.json();
+        }
+        let promise_get_form_code = get_form_code();
+        promise_get_form_code.then((response)=> {
+            $("#txt-form-no").text(response);
+        });
+
+      
+        // console.log("{{NEW_PROJECT_MODEL['product_no']}}")
+        //若是由mail導頁 僅顯示指定專案代碼的資料
+        if("{{NEW_PROJECT_MODEL['product_no']}}" != "")
+        {
+            $("#check-form-it").prop("disabled", true);
+            $("#check-form-iot").prop("disabled", true);
+            $("#check-form-io").prop("disabled", true);
+
+            var strProjectNo_Options = "";
+            var strProductNo_Options = "";
+            strProjectNo_Options += '<option value="' + "{{NEW_PROJECT_MODEL['project_no']}}" + '">' + "{{NEW_PROJECT_MODEL['project_no']}}" + '</option>';
+            strProductNo_Options += '<option value="' + "{{NEW_PROJECT_MODEL['product_no']}}" + '">' + "{{NEW_PROJECT_MODEL['product_no']}}" + '</option>';
+
+            document.getElementById("sel-project-no").innerHTML =strProjectNo_Options;
+            document.getElementById("sel-product-no").innerHTML =strProductNo_Options;
+        
+            if("{{NEW_PROJECT_MODEL['bu']}}" == 'IT')
+            {
+                $('#check-form-it').attr("checked",true)
+            }
+            else if("{{NEW_PROJECT_MODEL['bu']}}" == 'IOT')
+            {
+                $('#check-form-iot').attr("checked",true)
+            }
+            else if("{{NEW_PROJECT_MODEL['bu']}}" == 'IO')
+            {
+                $('#check-form-io').attr("checked",true)
+            }
+            $("#txt-version").text("V1.0");
+
+              //將專案代號帶入body 取回目前的版本
+            //   let promise_layout_form_product_version =  get_layout_form_product_version();
+            //   promise_layout_form_product_version.then((response)=> {
+                        
+            //             var selectElement = temp_selectElements;      
+            //             if(response['data'] != null)
+            //             {
+                               
+            //                     var major = response['data']['major_version'];
+            //                     var minor = response['data']['minor_version']
+            //                     $("#txt-version").text("V" + major + "." + minor);
+            //             }
+            //             else
+            //             {
+            //                     // 要刪除的選項值
+            //                     var optionValuesToDelete = ["大改版", "小改版"];
+
+
+            //                    // 迴圈處理每個 <select> 元素
+            //                     for (var i = 0; i < selectElement.length; i++) {
+
+
+            //                             var selectElement = selectElements[i];
+
+            //                             // 迴圈處理每個要刪除的選項值
+            //                             for (var j = 0; j < optionValuesToDelete.length; j++) {
+            //                                 var optionToDelete = selectElement.querySelector('option[value="' + optionValuesToDelete[j] + '"]');
+            //                                 if (optionToDelete) {
+            //                                         selectElement.removeChild(optionToDelete);
+            //                                 }
+            //                             }
+            //                     }
+            //                     $("#txt-version").text("V1.0");
+            //             } 
+                       
+            //             temp_version =  $("#txt-version").text();                    
+            //             //get_version();
+            // });       
+        }
+        else
+        {
+
+                    let new_project_lst = new Array();
+                    let p1 =  get_all_new_project_no();
+                    let p2 =  get_project_no_from_layout_form_product_version();
+
+                    Promise.all([p1,p2]).then((response)=> {
+                        var strProjectNo_Options = "";
+                        var strProductNo_Options = "";
+                        console.log(response);
+
+
+                     
+                        let project_no_from_project_form = response[0]['data'];
+                        let project_no_from_layout_version = response[1]['data'].map(function(item) {return item.project_no});
+
+                        var set1 = new Set(project_no_from_project_form);
+                        var set2 = new Set(project_no_from_layout_version);
+
+                        //找出陣列1中未存在於陣列2的資料
+                        var uniqueArray = Array.from(set1).filter(item=>!set2.has(item.project_no));
+
+                        
+                   
+                        new_project_lst = uniqueArray;//response['data'];
+
+                        strProductNo_Options = '<option value="' + '請選擇產品型號' + '">' + '請選擇產品型號' + '</option>';
+                        strProjectNo_Options = '<option value="' + '0' + '">' + '' + '</option>';
+                       
+                        for(let i = 0 ; i<new_project_lst.length ; i++)
+                        {
+                            strProjectNo_Options += '<option value="' + new_project_lst[i]['uuid'] + '">' + new_project_lst[i]['project_no'] + '</option>';
+                            strProductNo_Options += '<option value="' + new_project_lst[i]['uuid'] + '">' + new_project_lst[i]['product_no'] + '</option>';
+                        }
+                        //console.log(strProjectNo_Options);
+                        document.getElementById("sel-project-no").innerHTML =strProjectNo_Options;
+                        document.getElementById("sel-product-no").innerHTML =strProductNo_Options;
+                        $('#sel-product-no')[0].selectedIndex = 0;
+                        $('#sel-project-no')[0].selectedIndex = 0;
+
+                        
+                        // let bu = new_project_lst.find(element=>element.uuid == $('#sel-product-no').val()).bu;
+                        
+                        // switch(bu)
+                        // {
+                        //     case 'IO':
+                        //         $('#check-form-io').attr("checked",true)
+                        //         break;                    
+                        //     case 'IT':
+                        //         $('#check-form-it').attr("checked",true)
+                        //         break;
+
+                        //     case 'IOT':
+                        //         $('#check-form-iot').attr("checked",true)
+                        //         break;
+                        // }
+                        $("#txt-version").text("V1.0");
+
+
+                            
+                    });
+
+                    document.querySelector("#sel-product-no").addEventListener("change",(event)=>{
+                            //$('#sel-project-no')[0].selectedIndex = 1;
+                            $('#check-form-io').attr("checked",false)
+                            $('#check-form-iot').attr("checked",false)
+                            $('#check-form-it').attr("checked",false)
+
+                            document.getElementById("sel-project-no").value = $('#sel-product-no').val();
+                            let bu = new_project_lst.find(element=>element.uuid == $('#sel-product-no').val()).bu;                  
+                            console.log(bu)
+                            switch(bu){
+                                case 'IO':
+                                    $('#check-form-io').attr("checked",true)
+                                    break;                    
+                                case 'IT':
+                                    $('#check-form-it').attr("checked",true)
+                                    break;
+
+                                case 'IOT':
+                                    $('#check-form-iot').attr("checked",true)
+                                    break;
+                            }
+                            $("#txt-version").text("V1.0");
+                              
+                        });
+
+                    document.querySelector("#sel-project-no").addEventListener("change",(event)=>{
+                        //$('#sel-project-no')[0].selectedIndex = 1;
+                        $('#check-form-io').attr("checked",false)
+                        $('#check-form-iot').attr("checked",false)
+                        $('#check-form-it').attr("checked",false)
+
+                        document.getElementById("sel-product-no").value = $('#sel-project-no').val();
+                        let bu = new_project_lst.find(element=>element.uuid == $('#sel-project-no').val()).bu;                  
+                        console.log(bu)
+                        switch(bu){
+                            case 'IO':
+                                $('#check-form-io').attr("checked",true)
+                                break;                    
+                            case 'IT':
+                                $('#check-form-it').attr("checked",true)
+                                break;
+
+                            case 'IOT':
+                                $('#check-form-iot').attr("checked",true)
+                                break;
+                        }
+                        $("#txt-version").text("V1.0");
+                            
+                    });
+     
+        }
+
+
+        
+        // document.getElementById("sel-version").onchange = function selectChange()
+        // {
+        //     //先將初始版本記錄起來
+           
+        //     console.log(temp_version)
+        //     let version = ''
+
+        //     if($('#sel-version').val() == "大改版")
+        //     {               
+        //         var str = temp_version.replace('V','').split('.');             
+        //         let major_version = 0;       
+        //         if(str.length == 2)
+        //         {
+        //            major_version = parseInt(str[0]) + 1;
+        //         } 
+             
+        //         version = "V" + major_version.toString() + "." + str[1];
+              
+        //     }
+        //     else if($('#sel-version').val() == "小改版")
+        //     {
+        //         var str = temp_version.replace('V','').split('.');                
+        //         let minor_version = 0;       
+        //         if(str.length == 2)
+        //         {
+        //             minor_version = parseInt(str[1]) + 1;
+        //         }                      
+        //         version = "V" + str[0]  + "." + minor_version.toString();
+                
+        //     }
+        //     $("#txt-version").text(version);
+        // }
+
+
+        //取回目前產品型號版本
+        async function get_layout_form_product_version()
+        {                                 
+                let project_no = $('#sel-project-no option:selected').text();
+                console.log(project_no)
+                //console.log("6666666666666666")
+                let url = "http://{{ DOMAIN_PATH }}/api/v0/db/layout_form_product_version/?project_no="+ project_no;
+                console.log(url)
+                const res = await fetch(url, {
+                                method: 'get',                                                        
+                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+        }
+        
+
+
+        $("#check-form-it").click(function () {
+            $('#check-form-iot').prop("checked", false)
+            $('#check-form-io' ).prop("checked", false)
+        });
+
+        $("#check-form-iot").click(function () {
+            $('#check-form-it').prop("checked", false)
+            $('#check-form-io').prop("checked", false)
+        });
+
+        $("#check-form-io").click(function () {
+            $('#check-form-iot').prop("checked", false)
+            $('#check-form-it' ).prop("checked", false)
+        });
+
+
+        $('#check-deviation-5').click(function(){
+            $('#check-deviation-10'  ).prop('checked',false);
+            $('#check-deviation-null').prop('checked',false);
+        });
+        $('#check-deviation-10').click(function(){
+            $('#check-deviation-5'   ).prop('checked',false);
+            $('#check-deviation-null').prop('checked',false);
+        });
+        $('#check-deviation-null').click(function(){
+            $('#check-deviation-5' ).prop('checked',false);
+            $('#check-deviation-10').prop('checked',false);
+        });
+
+
+          //取得bu
+        function get_bu() {
+            let res = '';
+            if ($('#check-form-io').is(':checked')) {
+                res = $('#check-form-io').val();
+            }
+            if ($('#check-form-iot').is(':checked')) {
+                res = $('#check-form-iot').val();
+            }
+            if ($('#check-form-it').is(':checked')) {
+                res = $('#check-form-it').val();
+            }
+            return res;
+        }
+
+        $("#check-new-product").click(function () {                   
+                    $("#check-old-product").prop("checked", false);
+        });//check-new-product
+        $("#check-old-product").click(function () {
+                    $("#check-new-product").prop("checked", false);
+        });//check-old-product
+
+
+        //取得表單欄位 新產品申請 or 舊產品修改
+        function get_product_apply() {
+            let product_apply = new Object();
+            product_apply['new_apply'    ] = document.querySelector("#check-new-product").checked;
+            product_apply['origin_modify'] = document.querySelector("#check-old-product").checked;
+            return product_apply;
+        }
+
+
+        //取得表單欄位 2Layer
+        function get_spec_2Layer() {
+            let check_2_layer = new Object();
+            check_2_layer['checked'] = document.querySelector("#check-mat-2-layer"      ).checked;
+            check_2_layer['0.6mm']   = document.querySelector("#check-mat-2-layer-06-mm").checked;
+            check_2_layer['1.0mm']   = document.querySelector("#check-mat-2-layer-10-mm").checked;
+            check_2_layer['1.6mm']   = document.querySelector("#check-mat-2-layer-16-mm").checked;
+            check_2_layer['1-1']     = document.querySelector("#check-mat-2-layer-1-1"  ).checked;
+            check_2_layer['h-h']     = document.querySelector("#check-mat-2-layer-h-h"  ).checked;
+            return check_2_layer;
+        }
+
+
+         //取得表單欄位 4Layer
+        function get_spec_4Layer() {
+            let check_4_layer = new Object();
+            check_4_layer['checked'] = document.querySelector("#check-mat-4-layer"      ).checked;
+            check_4_layer['0.6mm']   = document.querySelector("#check-mat-4-layer-06-mm").checked;
+            check_4_layer['1.0mm']   = document.querySelector("#check-mat-4-layer-10-mm").checked;
+            check_4_layer['1.6mm']   = document.querySelector("#check-mat-4-layer-16-mm").checked;
+            check_4_layer['1-1-1-1'] = document.querySelector("#check-mat-4-layer-1111" ).checked;
+            check_4_layer['h-1-1-h'] = document.querySelector("#check-mat-4-layer-h11h" ).checked;
+            return check_4_layer;
+        }
+
+
+        //取得表單欄位 6Layer
+        function get_spec_6Layer() {
+            let check_6_layer = new Object();
+            check_6_layer['checked']     = document.querySelector("#check-mat-6-layer"       ).checked;
+            check_6_layer['1.0mm']       = document.querySelector("#check-mat-6-layer-10-mm" ).checked;
+            check_6_layer['1.6mm']       = document.querySelector("#check-mat-6-layer-16-mm" ).checked;
+            check_6_layer['1-1-1-1-1-1'] = document.querySelector("#check-mat-6-layer-111111").checked;
+            check_6_layer['h-1-1-1-1-h'] = document.querySelector("#check-mat-6-layer-h1111h").checked;
+            return check_6_layer;
+        }
+
+
+        //取得表單欄位 誤差
+        function get_impedance_diff() {
+            let impedance_diff = new Object();
+            impedance_diff['deviation-5'   ] = document.querySelector("#check-deviation-5"   ).checked;
+            impedance_diff['deviation-10'  ] = document.querySelector("#check-deviation-10"  ).checked;
+            impedance_diff['deviation-null'] = document.querySelector("#check-deviation-null").checked;
+            return impedance_diff;
+        }
+
+
+        //取得表單欄位 成型尺寸圖
+        function get_dimensional_drawing() {
+            let dimensional_drawing = new Object();
+            dimensional_drawing['request-null'] = document.querySelector("#check-request-null" ).checked;
+            dimensional_drawing['request-file'] = document.querySelector("#check-request-file" ).checked;
+            return dimensional_drawing;
+        }
+
+
+        //取得表單欄位 Logo需求
+        function get_logo_require() {
+            let logo_require_obj = new Object();
+            logo_require_obj['request-ce'     ] = document.querySelector("#check-request-ce"     ).checked;
+            logo_require_obj['request-fcc'    ] = document.querySelector("#check-request-fcc"    ).checked;
+            logo_require_obj['request-weee'   ] = document.querySelector("#check-request-weee"   ).checked;
+            logo_require_obj['request-bsmi'   ] = document.querySelector("#check-request-bsmi"   ).checked;
+            logo_require_obj['request-vcci'   ] = document.querySelector("#check-request-vcci"   ).checked;
+            logo_require_obj['request-machine'] = document.querySelector("#check-request-machine").checked;
+            return logo_require_obj;
+        }
+
+
+        //取得表單欄位 logo其他
+        function get_logo_memo() {
+            let logo_memo_obj = new Object();
+            logo_memo_obj['request-other'] = document.querySelector("#check-request-other").checked;
+            logo_memo_obj['memo'] = $('#input-request-other').val();
+            return logo_memo_obj;
+        }
+
+
+        //取得表單欄位 零件擺放
+        function get_component() {
+            let component_obj = new Object();
+            component_obj['single'] = document.querySelector("#check-component-single" ).checked;
+            component_obj['double'] = document.querySelector("#check-component-double" ).checked;
+            return component_obj;
+        }
+
+
+        //取得表單欄位 文字
+        function get_font() {
+            let font_obj = new Object();
+            font_obj['word-single'] = document.querySelector("#check-word-single" ).checked;
+            font_obj['word-double'] = document.querySelector("#check-word-double" ).checked;
+            return font_obj;
+        }
+
+
+        //取得表單欄位 金手指規範
+        function get_goldfinger() {
+            let goldfinger = new Object();
+            goldfinger['pci-spec'    ] = document.querySelector("#check-pci-spec"    ).checked;
+            goldfinger['pci-express' ] = document.querySelector("#check-pci-express" ).checked;
+            goldfinger['same-mec'    ] = document.querySelector("#check-same-mec"    ).checked;
+            goldfinger['sunix-custom'] = document.querySelector("#check-sunix-custom").checked;
+            goldfinger['same-style'  ] = document.querySelector("#check-same-style"  ).checked;
+            return goldfinger;
+        }
+
+
+        //取得表單欄位 提供文檔
+        function get_file() {
+            let document_obj = new Object();
+            document_obj['document-tenet'   ] = document.querySelector("#check-document-tenet"   ).checked;
+            document_obj['document-indicate'] = document.querySelector("#check-document-indicate").checked;
+            document_obj['document-spec'    ] = document.querySelector("#check-document-spec"    ).checked;
+            document_obj['document-c'       ] = document.querySelector("#check-document-c"       ).checked;
+            document_obj['document-drawing' ] = document.querySelector("#check-document-drawing" ).checked;
+            document_obj['document-size'    ] = document.querySelector("#check-document-size"    ).checked;
+            document_obj['document-rule'    ] = document.querySelector("#check-document-rule"    ).checked;
+            return document_obj;
+        }
+
+
+        //取得表單欄位 gerber
+        function get_gerber() {
+            let gerber = new Object();
+            gerber['1-board'] = document.querySelector("#check-gerber-1-board").checked;
+            gerber['2-board'] = document.querySelector("#check-gerber-2-board").checked;
+            gerber['4-board'] = document.querySelector("#check-gerber-4-board").checked;
+            gerber['same'   ] = document.querySelector("#check-gerber-same"   ).checked;
+            return gerber;
+        }
+
+        //取得表單欄位 工作檔格式
+        function get_work_file_format() {
+            let work_file_format = new Object();
+            work_file_format['pcb'] = document.querySelector("#check-gerber-pcb").checked;
+            work_file_format['brd'] = document.querySelector("#check-gerber-brd").checked;
+            return work_file_format;
+        }
+
+
+        //取得表單欄位 gerber格式
+        function get_gerber_format() {
+            let gerber_format = new Object();
+            gerber_format['274x'] = document.querySelector("#check-gerber-274x").checked;
+            gerber_format['274d'] = document.querySelector("#check-gerber-274d").checked;
+            return gerber_format;
+        }
+
+            //取得版本
+            function get_version() {
+            let version = new Object();
+            if($('#sel-version').val() == "大改版")
+            {               
+                var str = $('#txt-version').text().replace('V','').split('.');             
+                let major_version = 0;       
+                if(str.length == 2)
+                {
+                   major_version = parseInt(str[0]) + 1;
+                } 
+                // console.log(major_version);
+                // console.log("888888888888888");             
+                version = "V" + major_version.toString() + "." + str[1];
+                //console.log(version);
+            }
+            else if($('#sel-version').val() == "小改版")
+            {
+                var str = $('#txt-version').text().replace('V','').split('.');                
+                let minor_version = 0;       
+                if(str.length == 2)
+                {
+                    minor_version = parseInt(str[1]) + 1;
+                }                      
+                version = "V" + str[0]  + "." + minor_version.toString();
+                
+            }
+            else 
+            {
+               
+                version = "V1.0" ;
+                
+            }
+            return version;
+        }
+        
+
+
+        /////////////////////////////////////////
+        //var myNodelist = document.getElementsByTagName("LI");
+        var myNodelist = document.getElementById("myUL");
+
+        for (var i = 0; i < myNodelist.length; i++) {
+            var span = document.createElement("SPAN");
+            var txt  = document.createTextNode("\u00D7");
+            //var divtag = document.createElement("DIV");
+            //var image = document.createElement('img');
+            //image.src = "http://{{ DOMAIN_PATH }}/static/assets/delete.png";
+            //image.alt = '刪除';
+            //divtag.className = "close";
+            //divtag.id = "close_btn";
+            //image.id = "img-btn";
+            //divtag.appendChild(image);
+            //myNodelist[i].appendChild(divtag);
+            span.className = "close";
+            span.appendChild(txt);
+            myNodelist[i].appendChild(span);
+        }
+        var close = document.getElementsByClassName("close");
+        //var close = document.getElementById("img-btn");
+
+        for (var j = 0; j < close.length; j++) {
+            close[j].onclick = function() {
+                var div = this.parentElement;
+                //div.style.display = "none";
+                div.remove();
+            }
+        }
+        //var list = document.querySelector('ul');
+        var list = document.querySelector('div');
+        var fileNameList = [];
+
+        // 建立新的列表資訊
+        // function newElement(strFileName) {
+        //     //var li = document.createElement("li");
+        //     var li = document.createElement("div");
+        //     li.className = "list-item";
+        //     //var inputValue = document.getElementById("myInput").value;
+        //     //var t = document.createTextNode(inputValue);
+        //     //var inputValue = $("#select-assign").val();
+        //     var inputValue = strFileName;
+
+        //     if ( inputValue != null) {
+        //         var t = document.createTextNode( inputValue);
+        //         //比對字串是否重複
+        //         //var originalString = $("#select-assign").text();
+        //         //var targetString = t;
+        //         console.log(fileNameList);
+        //         if (fileNameList.includes(inputValue)) {
+        //             console.log('目標字串在原始字串中');
+        //             layer.msg('該上傳檔案重複了');
+        //         } else {
+        //             console.log('目標字串不在原始字串中');
+        //             li.appendChild(t);
+
+
+
+        //             document.getElementById("myUL").appendChild(li);
+
+        //             //var item = document.createElement("div");
+        //             //item.className = "item-div";
+        //             //li.appendChild(item);
+                    
+        //             var span   = document.createElement("SPAN");
+        //             var txt    = document.createTextNode("\u00D7");
+        //             //var divtag = document.createElement("DIV");
+        //             //var image = document.createElement('img');
+        //             //image.src = "http://{{ DOMAIN_PATH }}/static/assets/delete.png";
+        //             //image.alt = '刪除';
+        //             //image.id = "img-btn";
+        //             //divtag.className = "close";
+        //             //divtag.id = "close_btn";
+        //             span.appendChild(txt);
+        //             span.className = "close";
+
+        //             li.appendChild(span);
+
+
+        //             for (i = 0; i < close.length; i++) {
+        //                 close[i].onclick = function() {
+        //                     var div = this.parentElement;
+        //                     //div.style.display = "none";
+        //                     div.remove();
+        //                     if (document.getElementById('myUL').getElementsByTagName('div').length < 1) {
+        //                         //var selectElement = document.getElementById('select-assign');
+        //                         //selectElement.selectedIndex = 0; // 將索引設定為預設選項的索引
+        //                         fileNameList = [];
+        //                         $('#btn-submit').addClass("layui-btn-disabled").attr("disabled", true);
+        //                     }
+        //                 }
+        //             }
+        //             fileNameList.push(inputValue);
+        //         }
+        //     }
+        // }
+
+
+           
+
+
+        // 渲染樣式
+        function addIconforBtn(mode) {
+            var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+            var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+            // 警告
+            if (mode == 0) {
+                btn1.css({ "background-color": "#ff0066", "border-color": "#555555", "font-size": "18px" });
+                btn2.css({ "background-color": "#ffe6f0", "border-color": "#555555", "font-size": "18px" });
+            }
+            // 詢問
+            if (mode == 1) {
+                btn1.css({ "background-color": "#1E9FFF", "border-color": "#555555", "font-size": "18px" });
+                btn2.css({ "background-color": "#e6f4ff", "border-color": "#555555", "font-size": "18px" });
+            }
+        }
+
+        layui.use(['form', 'layer', 'jquery', 'table'], function () {
+            var layer = layui.layer;
+            var laypage = layui.laypage;
+            var table = layui.table;
+            var $ = layui.jquery;
+            var form = layui.form;
+        });
+
+                                                                              
+     
+
+        // 按上傳檔按鈕
+        $("#upload-form").submit(function (event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: "http://{{ DOMAIN_PATH }}/api/v0/spec/upload/?project_no=" + $('#sel-project-no option:selected').text(),
+
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    //檔案上傳成功!
+                    console.log(response);
+                    var responseObject = JSON.parse(response);
+                    var msg = responseObject.msg;
+                    if( responseObject.result == 'ok') {
+                        console.log(msg);
+                        layer.msg(msg);
+                        $('#btn-submit').removeClass("layui-btn-disabled").attr("disabled", false);
+
+                        // 成功上傳檔案處理列表
+                        //alert(responseObject['data']['file_name']);
+                        newElement(responseObject['data']['file_name']);
+
+                    }else {
+                        if($("#txt-project-no").text() == "")
+                        {
+                            layer.msg('未選擇BU，上傳失敗');
+                        }
+                        else
+                        {
+                            layer.msg(msg);  
+                        }
+                        console.log(msg);                       
+                        $('#btn-submit').addClass("layui-btn-disabled").attr("disabled", true);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    if($("#txt-project-no").text() == "")
+                    {
+                            layer.msg('未選擇BU，上傳失敗');
+                    }  
+                    else
+                    {
+                        layer.msg(msg);  
+                    }
+                    console.log(msg);
+                                       
+                    $('#btn-submit').addClass("layui-btn-disabled").attr("disabled", true);
+                }
+            });
+        });
+
+        async function remove_file(file_name){
+                    let url = "http://{{ DOMAIN_PATH }}/api/v0/spec/remove/?project_no=" + $("#sel-project-no option:selected").text() + "&file_name=" + file_name;
+                    const res = await fetch(url, {
+                            method: 'get',                            
+                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                    });
+                    return await res.json();
+        }//remove_file
+
+
+
+        $("#btn-submit").click(async() => {
+
+
+              //#region 卡控是否上傳附件
+              let project_no = $("#txt-project-no").text();
+                let url = "http://{{ DOMAIN_PATH }}/api/v0/db/find/upload_file/?project_no="  + project_no ;
+                // console.log(url)
+                const response = await fetch(url);
+                const res = await response.json();
+                //console.log(res['data'].length)
+
+                if(res['data'].length == 0)
+                {
+                    layer.msg("未上傳附件，請確認");
+                    return;
+                }
+                   
+             //#endregion
+
+
+
+
+            layer.open({
+                        type: 1,
+                        skin: 'layui-layer-molv', //layui-layer-rim
+                        resize: true,
+                        shadeClose: false,
+                        shade: [0.7, '#000'],
+                        closeBtn: 2,
+                        offset: 'auto',
+                        anim: 5,
+                        area: ['400px', '280px'],
+                        title: ['詢問', 'font-size:24px;background-color:#1E9FFF;'],
+                        btn: ['確定', '取消'],
+                        content: '<div style="padding: 15px; font-size: 22px; font-weight: bold;">您確定要將表單資料送出嗎？<br><br><div id="view-txt-msg"></div></div>',
+                        success: function (layero, index) {
+                            addIconforBtn(1);
+                        },
+                        yes: function (index, layero) {
+
+                            objParam = {
+                                        "bu"                  : get_bu(),
+                                        "project_name"        : '',
+                                        "form_type"           :'layout申請單',
+                                        "project_no"          : $('#sel-project-no option:selected').text(),
+                                        "department"          : $('#input-apply-dept').val(),
+                                        "form_no"             : $('#txt-form-no').text(),
+                                        "product_no"          : $('#sel-product-no option:selected').text(),
+                                        "product_name"        : "",
+                                        "pcb_name"            : $('#input-pcb-name').val(),
+                                        "version"             : $('#txt-version').text(),
+                                        "version_mode"        : $('#sel-version').val(),
+                                        "product_apply"       : get_product_apply(),
+                                        "apply_date"          : $('#txt-apply-date').text(),
+                                        "product_describe"    : $('#form-memo').val(),
+                                        "spec_2Layer"         : get_spec_2Layer(),
+                                        "spec_4Layer"         : get_spec_4Layer(),
+                                        "spec_6Layer"         : get_spec_6Layer(),
+                                        "spec_other"          : document.querySelector("#check-mat-other").checked,
+                                        "impedance_require"   : $('#input-avert').val(),
+                                        "impedance_diff"      : get_impedance_diff(),
+                                        "impedance_memo"      : $('#mat-memo').val(),
+                                        "dimensional_drawing" : get_dimensional_drawing(),
+                                        "logo_require"        : get_logo_require(),
+                                        "logo_memo"           : get_logo_memo(),
+                                        "component"           : get_component(),
+                                        "font"                : get_font(),
+                                        "goldfinger"          : get_goldfinger(),
+                                        "file"                : get_file(),
+                                        "gerber"              : get_gerber(),
+                                        "work_file_format"    : get_work_file_format(),
+                                        "gerber_format"       : get_gerber_format(),
+                                        "fulldata_date"       : $('#input-info-date').val(),
+                                        "gerber_date"         : $('#input-gerber-date').val(),
+                                        "member_cname"        : $('#txt-apply-person').text()
+                            };
+
+                            mailParam={
+                            "project_no"            : $('#sel-project-no option:selected').text(),               //專案代號                          
+                            "pcb_name"              : $('#input-pcb-name').val(),                               //PCB名稱                         
+                            "product_no"            : $('#sel-product-no option:selected').text(),                //產品型號
+                            "form_no"               : $('#txt-form-no').text(),                                //表單編號
+                            "version"               : $('#txt-version').text(),
+                            "sender"                : "{{ ACCOUNT }}",
+                            "receiver"              : "{{RECEIVER}}",
+                            "cc"                    : "{{RECEIVER}}"
+                        }
+
+                                        async function post_layout_form()
+                                        {
+                                                let url = "http://{{ DOMAIN_PATH }}/api/v0/db/layout_form/";
+                                                let jsonParam = JSON.stringify(objParam);
+                                                const res = await fetch(url, {
+                                                                method: 'post',
+                                                                body: jsonParam,
+                                                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                                });
+                                                return await res.json();
+                                        
+                                        }
+
+                             //記錄layout_form
+                            let p1 = post_layout_form();
+
+                             //記錄此專案產品版本號
+                            let p2 = post_layout_form_product_version();
+
+                             //記錄此專案產品版本號
+                             let p3 = send_layout_form_mail(mailParam);
+
+                             //記錄表單申請流程
+                             let p4 = insert_form_flow()
+
+                            Promise.all([p1,p2,p3,p4]).then((response)=>{
+                                
+                                layer.msg("表單回報完成");
+                                layer.close(index);
+                                page_to_form_list();
+                            });
+
+                        }
+            });
+
+        });
+                                //更新專案代號對的產品版本
+                                async function post_layout_form_product_version()
+                                {
+
+                                    let version = get_version();
+                                    let version_split = version.replace('V','').split('.');
+                                    let major_version ;
+                                    let minor_version;
+                                    if(version_split.length == 2)
+                                    {
+                                        major_version = version_split[0];
+                                        minor_version = version_split[1];
+                                    }
+                                    
+                                    input_body = {
+                                        "project_no"            : $('#sel-project-no option:selected').text(),
+                                        "major_version"         : major_version,
+                                        "minor_version"         : minor_version,                                        
+                                    };
+                                    console.log(input_body)
+
+                                        let url = "http://{{ DOMAIN_PATH }}/api/v0/db/layout_form_product_version/";
+                                        let jsonParam = JSON.stringify(input_body);
+                                        console.log(jsonParam);
+                                        const res = await fetch(url, {
+                                                        method: 'post',
+                                                        body: jsonParam,
+                                                        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                        });
+                                        return await res.json();
+                                }
+
+                function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                }
+
+                //切畫面至layout_form
+                async function page_to_layout_form() {
+                            await sleep(2000);
+                            location.replace('http://{{ DOMAIN_PATH }}/page/v0/layout_form/');
+                          
+                };
+
+                 //發送layout form申請mail
+                async function send_layout_form_mail(objParam) 
+                {
+                        let url = "http://{{ DOMAIN_PATH }}/api/v0/send/layout_form/";
+                        let jsonParam = JSON.stringify(objParam);
+                        const res = await fetch(url, {
+                                method: 'post',
+                                body: jsonParam,
+                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        });
+                        return await res.json();
+                }
+
+
+                async function insert_form_flow() {
+                       
+                       let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/form_flow/"
+                       let objParam = {
+                           "form_no"           : $("#txt-form-no").text(),
+                           "project_no"        : $('#sel-project-no option:selected').text(),
+                           "type"              : "layout",
+                           "fs_code"           : "fslayg101",
+                           "action"            : "申請",
+                           "status"            : "申請",
+                           "memo"              : "",
+                           "user"              : "{{ USER_CNAME }}"
+                       };
+                       
+                       let jsonParam = JSON.stringify(objParam);
+                      
+                       const res = await fetch(uri, {
+                           method: 'post',
+                           body: jsonParam,
+                           headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                       });
+                       return await res.json();
+                   }
+
+                   function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+
+                    //切畫面至project_list
+                    async function page_to_form_list() {
+                        await sleep(2000);
+                        location.replace('http://{{ DOMAIN_PATH }}/page/v0/form_list/');
+                        //window.location.href = 'http://{{ DOMAIN_PATH }}/page/v0/new_technology_review/';
+                    };
+
+
+                    function newElement(strFileName) {
+
+                            var li = document.createElement("div");
+                            li.className = "list-file-item";
+                            li.id = strFileName;
+                            if(strFileName != null) {
+                                // 文字
+                                var divobj = document.createElement("div");
+                                divobj.className = "text-filename";
+                                var t = document.createTextNode(strFileName);
+                            
+                                divobj.appendChild(t);
+                                li.appendChild(divobj);
+                                // 刪除按鈕
+                                var btn3 = document.createElement("button");
+                                btn3.className = "cls-delete-btn-file";
+
+                                var bt3 = document.createTextNode("刪除");
+                                btn3.appendChild(bt3);
+                                li.appendChild(btn3);
+                                btn3.onclick = function() {
+                                    var div = this.parentElement;
+                                    div.remove();
+                                    //console.log(this.parentElement.id);
+                                    var itemToRemove = this.parentElement.id;
+                                    remove_file(this.parentElement.id).then((response)=>{                                               
+                                                layer.msg(response['msg'])
+                                        });
+                                    var index = selectNameList.indexOf(itemToRemove);
+                                    if (index !== -1) {
+                                        selectNameList.splice(index, 1);
+                                    }
+                                }
+                                document.getElementById("myUL").appendChild(li);
+                                selectNameList.push(strFileName);
+                            }
+
+                    }//newElement
+
+
+
+                        //取得所有專案代號(從table: new_project_form)
+                        async function get_all_new_project_no() {            
+                    
+                                url = "http://{{ DOMAIN_PATH }}/api/v0/db/all_new_project_no/";
+                                
+                                const res = await fetch(url, {
+                                    method: 'get',
+                                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                });
+                                return await res.json();
+                        }
+
+                        //取得所有專案代號(從table: layout_form_product_version)
+                        async function get_project_no_from_layout_form_product_version() {            
+                        
+                        url = "http://{{ DOMAIN_PATH }}/api/v0/db/get/project_no/layout_form_product_version/";
+                        
+                        const res = await fetch(url, {
+                            method: 'get',
+                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        });
+                        return await res.json();
+                    }
+
+
+                   
+
+    </script>
+
+</html>

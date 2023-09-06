@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        {% include 'common/header.html' %}
+        <title>PCB打樣指派任務</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/pcb_task.css') }}" />
+
+        <script src="{{ url_for('static', filename='/js/dom-to-image.js') }}"></script>
+
+    </head>
+
+    <body>
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 內容群組區背景 -->
+    <div id="div-content-group">
+        <!-- 表單標題 -->
+        <div id="function-bar">
+        </div>
+
+        <div id="form-title-text">新產品技術評估指派任務</div>
+
+        <!-- 表單 -->
+        <table id="id-table-form">
+
+            <tbody id="table-body">
+                <tr>
+                    <th colspan="2" rowspan="1" id="lab-project-no" class="cls-c2-r1">專案案號</th>
+                    <th colspan="3" rowspan="1" id="txt-project-no" class="cls-c3-r1"></th>
+                </tr>
+                <tr>
+                    <th colspan="2" rowspan="1" id="lab-project-name" class="cls-c2-r1">專案名稱</th>
+                    <th colspan="3" rowspan="1" id="txt-project-name" class="cls-c3-r1"></th>
+                </tr>
+                <tr>
+                    <th colspan="2" rowspan="1" id="lab-project-explan" class="cls-c2-r1">產品說明</th>
+                    <th colspan="3" rowspan="1" id="txt-project-explan" class="cls-c3-r1"></th>
+                </tr>
+                <!-- <tr>
+                    <th colspan="2" rowspan="1" id="lab-plan-start" class="cls-c2-r1">目標專案完成日</th>
+                    <th colspan="3" rowspan="1" id="txt-plan-start" class="cls-c3-r1"></th>
+                </tr> -->
+                <tr>
+                    <th colspan="2" rowspan="1" id="lab-plan-end" class="cls-c2-r1">評估期限
+
+                    </th>
+                    <th colspan="3" rowspan="1" id="txt-plan-end" class="cls-c3-r1"></th>
+                </tr>
+
+                <tr>
+                    <td colspan="1" class="c-base" id="c-1"></td>
+                    <td colspan="1" class="c-base" id="c-2"></td>
+                    <td colspan="1" class="c-base" id="c-3"></td>
+                    <td colspan="1" class="c-base" id="c-4"></td>
+                    <td colspan="1" class="c-base" id="c-5"></td>
+                </tr>
+
+                <!--指派相關人員 -->
+                <tr>
+                    <th colspan="2" rowspan="1" id="lab-assign" class="cls-c2-r1">指派人員</th>
+                    <th colspan="3" rowspan="1" id="txt-assign" class="cls-c3-r1">
+                        <select id="select-assign">
+                            <option></option>
+                        </select>
+                    </th>
+                </tr>
+
+                <!-- 預估RD 專案開始時間 -->
+                <tr>
+                    <th colspan="2" rowspan="1" id="lab-project-start" class="cls-c2-r1">預計執行開始時間</th>
+                    <th colspan="3" rowspan="1" id="txt-project-start" class="cls-c3-r1">
+                        <input type="date" id="input-project-start" value="">
+                    </th>
+                </tr>
+
+                <!-- 預估RD 專案結束時間 -->
+                <tr>
+                    <th colspan="2" rowspan="1" id="lab-project-end" class="cls-c2-r1">預計執行完畢時間</th>
+                    <th colspan="3" rowspan="1" id="txt-project-end" class="cls-c3-r1">
+                        <input type="date" id="input-project-end" value="">
+                    </th>
+                </tr>
+
+                <th colspan="5" rowspan="1" id="lab-button" class="cls-c5-r1-h2">
+                    <button id="btn-submit" class="layui-btn layui-btn-normal" lay-event="form-submit" title="指派">
+                        <i class="layui-icon layui-icon-release"></i>指派
+                    </button>
+                    <button id="btn-reject" class="layui-btn layui-btn-danger" lay-event="form-submit" title="退回">
+                        <i class="layui-icon layui-icon-return"></i>退回
+                    </button>
+                </th>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+      <!--退回指派填寫原因編輯畫面-->
+      <template id="taskback-template-edit">
+        <div id="edit-winodow-bg">
+            <div id="edit-window-item-1">
+                <div class="layui-inline" >
+                    <label class="layui-form-label" id="lab-taskback"> {{USER}}，您是否確定要退回指派？ </label>
+                </div>  
+            </div>
+
+            <div id="edit-window-item-2">
+                <div class="layui-inline" >
+                    <label class="layui-form-label" id="lab-taskback-reason"> 退回原因: </label>
+                   
+                </div>  
+                <select id="select-taskback-reason" >
+                    <option>評估案/開案規格書資料不明確</option>
+                </select>
+            </div>
+
+            <div id="edit-window-item-3">
+                <div class="layui-inline" >
+                    <label class="layui-form-label" id="lab-taskback-memo"> 說明: </label>
+                    <input type="text" id="input-taskback-memo" value="" >
+                </div>  
+                
+            </div>
+           
+         
+           
+        </div>
+
+    </template>
+
+
+    </body>
+
+</html>

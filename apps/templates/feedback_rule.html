@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        {% include 'common/header.html' %}
+        <title>回報內容編輯</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/feedback_rule.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='/css/file-check.css') }}" /> -->
+
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <div id="id-table-bg">
+                <div id="form-title-text"><b>回報內容編輯</b></div>
+
+                <!-- 資料編輯內容區 -->
+                <div id="table-data-info">
+                    <!-- 資料表格 -->
+                    <table class="layui-hide" id="demo" lay-filter="test"></table>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 彈出新增視窗 -->
+        <template id="form-template-add">
+
+            <div id="add-window-bg">
+
+                <table id="add-win-table">
+
+                    <tbody>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-rule-code"  class="cls-c2-r1">
+                                <div id="add-lab-rule-code">規則編碼✱</div>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-txt-rule-code"   class="cls-c2-r1">
+                                <input type="text" id="add-input-rule-code" name="add-input-rule-code"></input>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-enable"   class="cls-c1-r1">
+                                <div id="add-lab-enable">狀態</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="add-tab-txt-enable"   class="cls-c1-r1">
+                                <select id="add-sel-enable" name="select-enable">
+                                    <option value="false">停用</option>
+                                    <option value="true"  selected="selected">啟用</option>
+                                </select>
+                            </th>
+                            <th colspan="1" rowspan="1" id="add-tab-lab-form-type" class="cls-c1-r1">
+                                <div id="add-lab-form-type">單據✱</div>
+                            </th>
+                            <th colspan="2" rowspan="1" id="add-tab-lab-form-type" class="cls-c2-r1">
+                                <select id="add-sel-form-type" name="add-select-form-type">
+                                    <option disabled selected value="">請選擇表單類型</option>
+                                    <option value="評估單">評估單</option>
+                                    <option value="PM開案單">PM開案單</option>
+                                    <option value="RD開案單">RD開案單</option>
+                                    <option value="LAYOUT申請單">LAYOUT申請單</option>
+                                    <option value="PCB申請單">PCB申請單</option>
+                                    <option value="試產單">試產單</option>
+                                    <option value="技轉單">技轉單</option>
+                                </select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-rule-cname"   class="cls-c2-r1">
+                                <div id="add-lab-rule-cname">規則中文✱</div>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-txt-rule-cname"   class="cls-c2-r1">
+                                <input type="text" id="add-input-rule-cname" name="add-input-rule-cname"></input>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-rule-ename"   class="cls-c2-r1">
+                                <div id="add-lab-rule-ename">規則英文✱</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="add-tab-txt-rule-ename"   class="cls-c3-r1">
+                                <input type="text" id="add-input-rule-ename" name="add-input-rule-ename"></input>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-rule-type"   class="cls-c2-r1">
+                                <div id="add-lab-rule-type">規則分類✱</div>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-rule-type"   class="cls-c2-r1">
+                                <select id="add-sel-rule-type" name="add-sel-rule-type">
+                                    <option disabled selected value="">請選擇規則分類</option>
+                                    <option value="EE">電子</option>
+                                    <option value="ME">機構</option>
+                                    <option value="LD">邏輯設計</option>
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-rule_situation"   class="cls-c2-r1">
+                                <div id="add-lab-rule_situation">規則情境</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="add-tab-lab-rule-situation"   class="cls-c3-r1">
+                                <select id="add-sel-rule-situation" name="add-sel-rule-situation">
+                                    <option disabled selected value="">請選擇規則情境</option>
+                                    <option value="新產品技術評估">新產品技術評估</option>
+                                    <option value="新產品開案">新產品開案</option>
+                                </select>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-rule-description"   class="cls-c2-r1">
+                                <div id="add-lab-rule-description">規則描述</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-rule-description"   class="cls-c7-r1">
+                                <textarea id="add-input-rule-description" name="add-input-rule-description" rows="3" cols="40" required></textarea>
+                            </th>
+                        </tr>
+                        <!-- Task -->
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-task-ename"   class="cls-c2-r1">
+                                <div id="add-lab-task-ename">Task英文名</div>
+                            </th>
+                            <th colspan="4"  rowspan="1" id="add-tab-txt-task-ename"  class="cls-c4-r1">
+                                <select id="add-sel-task-ename" name="add-sel-task-ename">
+                                    {% for task in  TASK_MODEL  %}
+                                    <option value={{ task['task_code']  }} >{{ task['task_ename'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-task-index"   class="cls-c2-r1">
+                                <div id="add-lab-task-index">Task順序號</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-task-index"   class="cls-c1-r1">
+                                <input type="number" id="add-input-task-index" name="add-input-task-index" min="1" max="100" value="1">
+                            </th>
+                        </tr>
+                        <!-- Milestone -->
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-milestone-ename"   class="cls-c2-r1">
+                                <div id="add-lab-milestone-ename">Milestone英文名</div>
+                            </th>
+                            <th colspan="4"  rowspan="1" id="add-tab-txt-milestone-ename"  class="cls-c4-r1">
+                                <select id="add-sel-milestone-ename" name="add-sel-milestone-ename">
+                                    {% for milestone in MILESTONE_MODEL  %}
+                                    <option value={{ milestone['milestone_code']  }} >{{ milestone['milestone_ename'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-milestone-index"   class="cls-c2-r1">
+                                <div id="add-lab-milestone-index">Milestone順序號</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-milestone-index"   class="cls-c1-r1">
+                                <input type="number" id="add-input-milestone-index" name="add-input-milestone-index" min="1" max="100" value="1">
+                            </th>
+                        </tr>
+                        <!-- Status -->
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-status-ename"   class="cls-c2-r1">
+                                <div id="add-lab-status-ename">Status英文名</div>
+                            </th>
+                            <th colspan="4"  rowspan="1" id="add-tab-txt-status-ename"  class="cls-c4-r1">
+                                <select id="add-sel-status-ename" name="add-sel-status-ename">
+                                    {% for status in  STATUS_MODEL  %}
+                                    <option value={{ status['status_code']  }} >{{ status['status_ename'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-status-index"   class="cls-c2-r1">
+                                <div id="add-lab-status-index">Status順序號</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-status-index"   class="cls-c1-r1">
+                                <input type="number" id="add-input-status-index" name="add-input-status-index" min="1" max="100" value="1">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-attach" class="cls-c2-r1">
+                                <div id="edit-lab-attach">附件✱</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-attach" class="cls-c7-r1">
+                                <div id="add-tab-attach-source"></div>
+                                <div id="add-tab-attach-target"></div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-event-node"   class="cls-c2-r1">
+                                <div id="add-lab-event-node">節點事件</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-lab-event-node"   class="cls-c7-r1">
+                                <input type="text" id="add-input-event-node" name="add-input-event-node"></input>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-memo"   class="cls-c2-r1">
+                                <div id="add-lab-memo">備註</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-memo"   class="cls-c7-r1">
+                                <textarea id="add-input-memo" name="add-input-memo" rows="3" cols="40" required></textarea>
+                            </th>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </template>
+
+
+
+        <!-- 彈出編輯視窗 -->
+        <template id="form-template-edit">
+
+            <div id="edit-window-bg">
+
+                <table id="edit-win-table">
+
+                    <tbody>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-rule-code"  class="cls-c2-r1">
+                                <div id="edit-lab-rule-code">規則編碼✱</div>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="edit-tab-txt-rule-code"   class="cls-c2-r1">
+                                <input type="text" id="edit-input-rule-code" name="edit-input-rule-code"></input>
+                            </th>
+
+                            <th colspan="1"  rowspan="1" id="edit-tab-lab-enable"   class="cls-c1-r1">
+                                <div id="edit-lab-enable">狀態</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="edit-tab-txt-enable"   class="cls-c1-r1">
+                                <select id="edit-sel-enable" name="edit-sel-enable">
+                                    <option value="false">停用</option>
+                                    <option value="true"  selected="selected">啟用</option>
+                                </select>
+                            </th>
+                            <th colspan="1" rowspan="1" id="edit-tab-lab-form-type" class="cls-c1-r1">
+                                <div id="edit-lab-form-type">單據✱</div>
+                            </th>
+                            <th colspan="2" rowspan="1" id="edit-tab-lab-form-type" class="cls-c2-r1">
+                                <select id="edit-sel-form-type" name="edit-select-form-type">
+                                    <option disabled selected value="">請選擇表單類型</option>
+                                    <option value="評估單">評估單</option>
+                                    <option value="PM開案單">PM開案單</option>
+                                    <option value="RD開案單">RD開案單</option>
+                                    <option value="LAYOUT申請單">LAYOUT申請單</option>
+                                    <option value="PCB申請單">PCB申請單</option>
+                                    <option value="試產單">試產單</option>
+                                    <option value="技轉單">技轉單</option>
+                                </select>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-rule-cname"   class="cls-c2-r1">
+                                <div id="edit-lab-rule-cname">規則中文✱</div>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="edit-tab-txt-rule-cname"   class="cls-c2-r1">
+                                <input type="text" id="edit-input-rule-cname" name="edit-input-rule-cname"></input>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-rule-ename"   class="cls-c2-r1">
+                                <div id="edit-lab-rule-ename">規則英文✱</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="edit-tab-txt-rule-ename"   class="cls-c3-r1">
+                                <input type="text" id="edit-input-rule-ename" name="edit-input-rule-ename"></input>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-rule-type"   class="cls-c2-r1">
+                                <div id="edit-lab-rule-type">規則分類✱</div>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-rule-type"   class="cls-c2-r1">
+                                <select id="edit-sel-rule-type" name="edit-sel-rule-type">
+                                    <option disabled selected value="">請選擇規則分類</option>
+                                    <option value="EE">電子</option>
+                                    <option value="ME">機構</option>
+                                    <option value="LD">邏輯設計</option>
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-rule_situation"   class="cls-c2-r1">
+                                <div id="edit-lab-rule_situation">規則情境</div>
+                            </th>
+                            <th colspan="3"  rowspan="1" id="edit-tab-lab-rule-situation"   class="cls-c3-r1">
+                                <select id="edit-sel-rule-situation" name="edit-sel-rule-situation">
+                                    <option disabled selected value="">請選擇規則情境</option>
+                                    <option value="新產品技術評估">新產品技術評估</option>
+                                    <option value="新產品開案">新產品開案</option>
+                                </select>
+                            </th>
+                            
+                        </tr>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-rule-description"   class="cls-c2-r1">
+                                <div id="edit-lab-rule-description">規則描述</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="edit-tab-txt-rule-description"   class="cls-c7-r1">
+                                <textarea id="edit-input-rule-description" name="edit-input-rule-description" rows="3" cols="40" required></textarea>
+                            </th>
+                        </tr>
+                        <!-- Task -->
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-task-ename"   class="cls-c2-r1">
+                                <div id="edit-lab-task-ename">Task英文名</div>
+                            </th>
+                            <th colspan="4"  rowspan="1" id="edit-tab-txt-task-ename"  class="cls-c4-r1">
+                                <select id="edit-sel-task-ename" name="edit-sel-task-ename">
+                                    {% for task in  TASK_MODEL  %}
+                                    <option value={{ task['task_code']  }} >{{ task['task_ename'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-task-index"   class="cls-c2-r1">
+                                <div id="edit-lab-task-index">Task順序號</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="edit-tab-lab-task-index"   class="cls-c1-r1">
+                                <input type="number" id="edit-input-task-index" name="edit-input-task-index" min="1" max="100" value="1">
+                            </th>
+                        </tr>
+                        <!-- Milestone -->
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-milestone-ename"   class="cls-c2-r1">
+                                <div id="edit-lab-milestone-ename">Milestone英文名</div>
+                            </th>
+                            <th colspan="4"  rowspan="1" id="edit-tab-txt-milestone-ename"  class="cls-c4-r1">
+                                <select id="edit-sel-milestone-ename" name="edit-sel-milestone-ename">
+                                    {% for milestone in MILESTONE_MODEL  %}
+                                    <option value={{ milestone['milestone_code']  }} >{{ milestone['milestone_ename'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-milestone-index"   class="cls-c2-r1">
+                                <div id="edit-lab-milestone-index">Milestone順序號</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="edit-tab-lab-milestone-index"   class="cls-c1-r1">
+                                <input type="number" id="edit-input-milestone-index" name="edit-input-milestone-index" min="1" max="100" value="1">
+                            </th>
+                        </tr>
+                        <!-- Status -->
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-status-ename"   class="cls-c2-r1">
+                                <div id="edit-lab-status-ename">Status英文名</div>
+                            </th>
+                            <th colspan="4"  rowspan="1" id="edit-tab-txt-status-ename"  class="cls-c4-r1">
+                                <select id="edit-sel-status-ename" name="edit-sel-status-ename">
+                                    {% for status in  STATUS_MODEL  %}
+                                    <option value={{ status['status_code']  }} >{{ status['status_ename'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-status-index"   class="cls-c2-r1">
+                                <div id="edit-lab-status-index">Status順序號</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="edit-tab-lab-status-index"   class="cls-c1-r1">
+                                <input type="number" id="edit-input-status-index" name="edit-input-status-index" min="1" max="100" value="1">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-attach" class="cls-c2-r1">
+                                <div id="edit-lab-attach">附件✱</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="edit-tab-txt-attach" class="cls-c7-r1">
+                                <div id="edit-tab-attach-source"></div>
+                                <div id="edit-tab-attach-target"></div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-event-node"   class="cls-c2-r1">
+                                <div id="edit-lab-event-node">節點事件</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="edit-tab-lab-event-node"   class="cls-c7-r1">
+                                <input type="text" id="edit-input-event-node" name="edit-input-event-node"></input>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="edit-tab-lab-memo"   class="cls-c2-r1">
+                                <div id="edit-lab-memo">備註</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="edit-tab-txt-memo"   class="cls-c7-r1">
+                                <textarea id="edit-input-memo" name="edit-input-memo" rows="3" cols="40" required></textarea>
+                            </th>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </template>
+
+        <!-- 功能項按鈕 -->
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button id="btn-add" class="layui-btn layui-btn-normal layui-bg-blue"  lay-event="add-data" title="新增資料">
+                    <i class="layui-icon layui-icon-addition" ></i>新增
+                </button>
+                <button id="btn-edit" class="layui-btn layui-btn-normal layui-bg-orange" lay-event="edit-data"  title="編輯資料">
+                    <i class="layui-icon layui-icon-edit"  ></i>編輯
+                </button>
+                <button id="btn-delete" class="layui-btn layui-btn-normal layui-bg-red"  lay-event="delete-data" title="刪除資料">
+                    <i class="layui-icon layui-icon-delete"></i>刪除
+                </button>
+            </div>
+        </script>
+
+
+        <script>
+
+            // 設定map
+            //console.log( "{{ TASK_MODEL }}" );
+
+
+            //------------------------------------
+            async function get_task_info() {
+                var uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/task/all/";
+                const res = await fetch(uri, {
+                    method:'GET',
+                    headers: { 'Content-Type' : 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+            //-------------------------------------
+            async function get_milestone_info() {
+                var uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/milestone/all/";
+                const res = await fetch(uri, {
+                    method:'GET',
+                    headers: { 'Content-Type' : 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+            //-------------------------------------------
+            async function get_status_info() {
+                var uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/status/all/";
+                const res = await fetch(uri, {
+                    method:'GET',
+                    headers: { 'Content-Type' : 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+
+            // 取得附件來源
+            async function getAttachInfoFun() {
+                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/attach/all/";
+                //console.log(objParam);
+                //let jsonParam = JSON.stringify(objParam);
+                //console.log(jsonParam);
+                const res = await fetch(uri, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }
+
+            let promiseGetTask      = get_task_info();
+            let promiseGetMilestone = get_milestone_info();
+            let promiseGetStatus    = get_status_info();
+
+            var task_map_by_ename      = new Map();
+            var milestone_map_by_ename = new Map();
+            var status_map_by_ename    = new Map();
+
+            // 資料全部取得
+            Promise.all([promiseGetTask, promiseGetMilestone, promiseGetStatus]).then(values => {
+                //console.log(values);
+
+                // task
+                var task_obj_array = values[0]['data'];
+                task_obj_array.forEach(element => {
+                    //console.log(element);
+                    task_map_by_ename.set(element['task_code'], element );
+                });
+
+                // milestone
+                var milestone_obj_array = values[1]['data'];
+                milestone_obj_array.forEach(element => {
+                    //console.log(element);
+                    milestone_map_by_ename.set(element['milestone_code'], element );
+                });
+
+                // status
+                var status_obj_array = values[2]['data'];
+                status_obj_array.forEach(element => {
+                    //console.log(element);
+                    status_map_by_ename.set(element['status_code'], element );
+                });
+
+            });
+
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+                // 警告
+                if(mode == 0) {
+                    btn1.css({"background-color":"#ff0066", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#ffe6f0", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 查詢
+                if(mode == 1) {
+                    btn1.css({"background-color":"#cc99ff", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#f2e6ff", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 新增
+                if(mode == 2) {
+                    btn1.css({"background-color":"#1E9FFF", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#e6f4ff", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 檢視
+                if(mode == 3) {
+                    btn1.css({"background-color":"#009688", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#e6fffc", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 編輯
+                if(mode == 4) {
+                    btn1.css({"background-color":"#FFB800", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#fff8e6", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 刪除
+                if(mode == 5) {
+                    btn1.css({"background-color":"#FF5722", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#ffebe6", "border-color": "#555555", "font-size":"18px"});
+                }
+            }
+
+            layui.use( ['form', 'layer', 'jquery', 'table', 'transfer'], function() {
+                var layer    = layui.layer;
+                var laypage  = layui.laypage;
+                var table    = layui.table;
+                var $        = layui.jquery;
+                var form     = layui.form;
+                var transfer = layui.transfer;
+
+
+                //讀取 milestone 資料
+                var data_url = "http://{{ DOMAIN_PATH }}/api/v0/db/data/feedback_rule/all/";
+                $.ajax({
+                    url: data_url,
+                    type: "GET",
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        //取資料成功!
+                        //console.log("取Feedback_rule資料成功");
+                        //console.log(response);
+
+                        table.render({
+                            elem: '#demo',
+                            height: 724,
+                            data: response['data'],
+                            title: '回報內容編輯管理',
+                            page: true,
+                            even: true,
+                            limit: 10,
+                            limits: [10, 20, 50, 100, 500, 1000],
+                            skin: 'row',
+                            size: 'lg',
+                            //toolbar: 'default',
+                            toolbar: '#toolbarDemo',
+                            defaultToolbar: ['filter', 'exports', 'print'
+                            //{ title: '提示', layEvent: 'LAYTABLE_TIPS',icon: 'layui-icon-tips'}  //自定工具欄圖標 - 提示
+                            ],
+                            totalRow: true,
+                            cols: [[ 
+                                {type:  'checkbox',         fixed: 'left' },
+                                {field: 'uuid',             title: '識別碼',          width: 300, align: 'left', sort: true, hide: true},
+                                {field: 'rule_code',        title: '規則編碼',        width: 200, align: 'left', sort: true, hide: false},
+                                {field: 'rule_cname',       title: '規則中文名',      width: 200, align: 'left', sort: true, hide: false},
+                                {field: 'rule_ename',       title: '規則英文名',      width: 200, align: 'left', sort: true, hide: false},
+                                {field: 'form_type',        title: '單據',            width:150,  align: 'left', sort: true, hide:false},
+                                {field: 'rule_description', title: '規則描述',        width: 200, align: 'left', sort: false,hide: true},
+                                {field: 'rule_type',        title: '規則分類',        width: 200, align: 'left', sort: true, hide: false},   // ME EE LD
+                                {field: 'rule_situation',   title: '規則情境',         width: 200, align: 'left', sort: false, hide: true},   // 情境
+                                {field: 'task_code',        title: 'Task編碼',        width: 250, align: 'left', sort: true, hide: false},
+                                {field: 'task_cname',       title: 'Task中文名',      width: 250, align: 'left', sort: true, hide: false},
+                                {field: 'task_ename',       title: 'Task英文名',      width: 250, align: 'left', sort: true, hide: false},
+                                {field: 'task_index',       title: 'Task順序號',      width: 100, align: 'left', sort: true, hide: false},
+                                {field: 'milestone_code',   title: 'Milestone編碼',   width: 250, align: 'left', sort: true, hide: false},
+                                {field: 'milestone_cname',  title: 'Milestone中文名', width: 250, align: 'left', sort: true, hide: false},
+                                {field: 'milestone_ename',  title: 'Milestone英文名', width: 250, align: 'left', sort: true, hide: false},
+                                {field: 'milestone_index',  title: 'Milestone順序號', width: 100, align: 'left', sort: true, hide: false},
+                                {field: 'status_code',      title: 'Status編碼',      width: 250, align: 'left', sort: true, hide: false},
+                                {field: 'status_cname',     title: 'Status中文名',    width: 250, align: 'left', sort: true, hide: false},
+                                {field: 'status_ename',     title: 'Status英文名',    width: 250, align: 'left', sort: true, hide: false},
+                                {field: 'status_index',     title: 'Status順序號',    width: 100, align: 'left', sort: true, hide: false},
+                                {field: 'event_node',       title: '節點事件',        width: 200, align: 'left', sort: true, hide: true },
+                                {field: 'enable',           title: '啟用狀態',        width: 100, align:'center' },
+                                {field: 'memo',             title: '備註',            width: 200, hide: false },
+                                {field: 'insertAt',         title: '新增時間',        width: 135, sort: true, hide: true},
+                                {field: 'updateAt',         title: '更新時間',        width: 135, sort: true, hide: true},
+                            ]],
+                            done: function(res, curr, count) {
+                                //console.log(count);
+                                //layer.msg('目前page:'+ curr.toString() );
+                                //window.refresh();
+                            },
+                            text: {
+                                none: '目前暫無數據'
+                            }
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        layer.msg("取Feddback_rule資料失敗");
+                    }
+                });
+
+
+                //----------------------------------上方功能按鈕事件
+                table.on('toolbar(test)', function(obj) {
+                    var checkStatus = table.checkStatus(obj.config.id);
+                    var tab1 = null;
+
+                    switch(obj.event) {
+                        case 'add-data':
+                            layer.open({
+                                type       : 1,
+                                skin       : 'layui-layer-molv', //layui-layer-rim
+                                resize     : false,
+                                shadeClose : false,
+                                shade      : [0.7, '#000'],
+                                closeBtn   : 2,
+                                offset     : 'auto',
+                                anim       : 5,
+                                area       : ['980px', '800px'], 
+                                title      : ['新增視窗-回報內容編輯', 'font-size:20px;background-color:#1E9FFF;'],
+                                btn        : ['新增','取消'],
+                                content    : $('#form-template-add').html(),
+                                success: function(layero, index) {
+                                    addIconforBtn(2);
+                                    //layero.find('.layui-layer-content').css('overflow-y', 'visible');
+                                    //layero.find('.layui-layout-body'  ).css('overflow-y', 'auto'   );
+
+                                    // 取得附件來源
+                                    var promiseGetAttach = getAttachInfoFun();
+                                    promiseGetAttach.then((response) => {
+                                        //console.log(response);
+                                        
+                                        //console.log(response['data']);
+                                        //console.log(response['data'].length);
+                                        
+                                        var dataList = [];
+                                        for(var i=0; i<response['data'].length; i++ ) {
+                                            var obj = new Object();
+                                            console.log(response['data'][i]['attach_cname']);
+                                            obj.value = response['data'][i]['attach_cname'];
+                                            obj.title = response['data'][i]['attach_cname'];
+                                            dataList.push(obj);
+                                        }
+                                        //console.log(dataList);
+                                        
+                                        var cols = [
+                                            {type: 'checkbox', fixed: 'left'},
+                                            {field: 'title',   title: '附件', width:200, sort: true},
+                                            {field: 'value',   title: '附件'}
+                                        ]
+
+                                        var tabConfig = {'page':true, 'limit': 5,'limits':[5,10,50,100]}
+                                        tab1 = transfer.render({
+                                            elem: "#add-tab-attach-source", 
+                                            cols: cols, 
+                                            data: dataList,
+                                            width: 300,
+                                            height: 200,
+                                            title:["來源", "目標"],
+                                            tabConfig: tabConfig 
+                                        });
+                                        
+                                    });
+
+
+                                },
+                                yes:function (index, layero) {
+
+                                    // 取得目標複選框內的值
+                                    var targetValues = tab1.getData('add-tab-attach-target');
+                                    //console.log(targetValues);
+
+                                    var listAttach = [];
+                                    if(targetValues.length > 0) {
+                                        for(var i=0; i<targetValues.length; i++) { 
+                                            //console.log(targetValues[i]['value']);
+                                            listAttach.push(targetValues[i]['value']);
+                                        }
+                                    }
+                                    //console.log(listAttach);
+
+                                    //<div id="add-tab-attach-source"></div>
+                                    //<div id="add-tab-attach-target"></div>
+                                    //console.log(task_map_by_ename);
+                                    //console.log(milestone_map_by_ename);
+                                    //console.log(status_map_by_ename);
+                                    //layer.msg('開啟新增資料彈出視窗');
+
+                                    var strRuleCode         = $("#add-input-rule-code"         ).val();
+                                    var strRuleCName        = $("#add-input-rule-cname"        ).val();
+                                    var strRuleEName        = $("#add-input-rule-ename"        ).val();
+
+                                    var strFormType         = $("#add-sel-form-type"           ).val();
+
+                                    var strRuleType         = $("#add-sel-rule-type"           ).val();
+                                    var strRuleSituation    = $("#add-sel-rule-situation"      ).val();
+                                    var strRuleDescriptions = $("#add-input-rule-description"  ).val();
+
+                                    var strTaskCode         = $('#add-sel-task-ename').val();
+                                    var temp_task_obj       = task_map_by_ename.get(strTaskCode);
+                                    var strTaskCName        = temp_task_obj['task_cname'];
+                                    var strTaskEName        = temp_task_obj['task_ename'];
+                                    var strTaskUUID         = temp_task_obj['uuid'];
+                                    var strTaskIndex        = $("#add-input-task-index").val();
+
+                                    var strMilestoneCode    = $('#add-sel-milestone-ename').val();
+                                    var temp_milestone_obj  = milestone_map_by_ename.get(strMilestoneCode);
+                                    var strMilestoneCName   = temp_milestone_obj['milestone_cname'];
+                                    var strMilestoneEName   = temp_milestone_obj['milestone_ename'];
+                                    var strMilestoneUUID    = temp_milestone_obj['uuid'];
+                                    var strMilestoneIndex   = $("#add-input-milestone-index").val();
+
+                                    var strStatusCode       = $('#add-sel-status-ename').val();
+                                    var temp_status_obj     = status_map_by_ename.get(strStatusCode);
+                                    var strStatusCName      = temp_status_obj['status_cname'];
+                                    var strStatusEName      = temp_status_obj['status_ename'];
+                                    var strStatusUUID       = temp_status_obj['uuid'];
+                                    var strStatusIndex      = $("#add-input-status-index").val();
+
+                                    var bEnable             = $("#add-sel-enable"        ).val();
+                                    var strMemo             = $("#add-input-memo"        ).val();
+                                    var strEventNode        = $("#add-input-event-node"  ).val();
+
+                                    // 判斷必填欄位
+                                    if ( strRuleCode == '' || strRuleCName == '' ||strRuleEName == '' ) {
+                                        layer.msg('有必填欄位沒填, 請檢查欄位');
+
+                                    }else {
+
+                                        async function addRuleData() {
+                                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/feedback_rule/one/";
+                                            let objParam = { 
+                                                "rule_code":        strRuleCode,
+                                                "rule_cname":       strRuleCName,
+                                                "rule_ename":       strRuleEName,
+                                                "rule_description": strRuleDescriptions,
+                                                "rule_type":        strRuleType,
+                                                "rule_situation":   strRuleSituation,
+                                                "form_type":        strFormType,
+                                                "task_uuid":        strTaskUUID,
+                                                "task_code":        strTaskCode,
+                                                "task_cname":       strTaskCName,
+                                                "task_ename":       strTaskEName,
+                                                "task_index":       strTaskIndex,
+                                                "milestone_uuid":   strMilestoneUUID,
+                                                "milestone_code":   strMilestoneCode,
+                                                "milestone_cname":  strMilestoneCName,
+                                                "milestone_ename":  strMilestoneEName,
+                                                "milestone_index":  strMilestoneIndex,
+                                                "status_uuid":      strStatusUUID,
+                                                "status_code":      strStatusCode,
+                                                "status_cname":     strStatusCName,
+                                                "status_ename":     strStatusEName,
+                                                "status_index":     strStatusIndex,
+                                                "event_node":       strEventNode,
+                                                "attach_list":      listAttach,
+                                                "memo":             strMemo,
+                                                "enable":           bEnable,
+                                            };
+                                            let jsonParam = JSON.stringify(objParam);
+                                            console.log(jsonParam);
+                                            const res = await fetch(uri, {
+                                                method:'POST',
+                                                body: jsonParam,
+                                                headers: {'Content-Type':'application/json; charset=utf-8'}
+                                            });
+                                            return await res.json();
+                                        }
+
+                                        let promiseAdd = addRuleData();
+                                        promiseAdd.then( (response) => {
+                                            layer.msg(response['msg'])
+                                            console.log(response);
+
+                                            layer.close(index);
+                                            window.parent.location.reload();
+                                        });
+                                    }
+                                }
+                            });
+                            break;
+
+                        case 'edit-data':
+                            var data = checkStatus.data;
+                            var tab2 = null;
+
+                            if(data.length === 0) {
+                                layer.msg('請選擇一筆資料');
+                            } else if(data.length > 1){
+                                layer.msg('只能同時编辑一筆資料');
+                            } else {
+                                //layer.msg('開啟編輯資料彈出視窗');
+
+                                layer.open({
+                                    type       : 1,
+                                    skin       : 'layui-layer-molv', //layui-layer-rim
+                                    resize     : false,
+                                    shadeClose : false,
+                                    shade      : [0.7, '#000'],
+                                    closeBtn   : 2,
+                                    offset     : 'auto',
+                                    anim       : 5,
+                                    area       : ['980px', '800px'], //寬高
+                                    title      : ['編輯視窗-回報內容編輯', 'font-size:20px;background-color:#FFB800;'],
+                                    btn        : ['修改','取消'],
+                                    content    : $('#form-template-edit').html(),
+                                    success: function(layero, index) {
+                                        //console.log(layero);
+                                        addIconforBtn(4);
+
+                                        // 取得附件來源
+                                        var promiseGetAttach = getAttachInfoFun();
+                                        promiseGetAttach.then((response) => {
+                                            //console.log(response);
+                                            //console.log(response['data']);
+                                            //console.log(response['data'].length);
+
+                                            //取得來源值
+                                            var sourceValueList = [];
+                                            for(var i=0; i<response['data'].length; i++) {
+                                                sourceValueList.push(response['data'][i]['attach_cname'])
+                                            }
+                                            console.log("-------sourceValueList-------");
+                                            console.log(sourceValueList);
+
+                                            //取回已有目標值
+                                            var targetValueList = checkStatus.data[0].attach_list;
+                                            console.log("-------targetValueList-------");
+                                            console.log(targetValueList);
+
+                                            // 過濾篩選
+                                            //let filteredArray = sourceValueList.filter(item => !targetValueList.includes(item));
+
+                                            var sourceData = sourceValueList.map(function(item) {
+                                                return {
+                                                    value: item,
+                                                    title: item
+                                                };
+                                            });
+                                            console.log("-------sourceData-------");
+                                            console.log(sourceData);
+                                            
+                                            var targetData = targetValueList.map(function(item) {
+                                                return {
+                                                    value: item,
+                                                    title: item
+                                                };
+                                            });
+                                            console.log("-------targetData-------");
+                                            console.log(targetData);
+
+                                            var transferInstance = layui.transfer;
+                                            var cols = [
+                                                {type: 'checkbox', fixed: 'left'},
+                                                {field: 'title',   title: '附件', width:200, sort: true},
+                                                {field: 'value',   title: '附件'}
+                                            ]
+
+                                            var tabConfig = {'page':true, 'limit': 5,'limits':[5,10,50,100]}
+                                            var sourceElem = $("#edit-tab-attach-source");
+                                            
+                                            tab2 = transferInstance.render({
+                                                elem: sourceElem,
+                                                data: sourceData, 
+                                                value: targetValueList,
+                                                cols: cols,
+                                                width: 300,
+                                                height: 200,
+                                                title:["來源","目標"],
+                                                checktabConfig: tabConfig,
+                                                onchange: function(data, index) {
+                                                    console.log(data);
+                                                    console.log(index); // 0代表 右至左  , 1 代表左至右
+                                                }
+                                            });
+
+                                        
+                                        });
+
+
+                                        console.log(checkStatus.data[0]);
+                                        $("#edit-input-rule-code"       ).val(checkStatus.data[0].rule_code       );
+                                        $("#edit-input-rule-cname"      ).val(checkStatus.data[0].rule_cname      );
+                                        $("#edit-input-rule-ename"      ).val(checkStatus.data[0].rule_ename      );
+
+                                        $("#edit-sel-form-type"         ).val(checkStatus.data[0].form_type       );
+
+                                        $("#edit-sel-rule-type"         ).val(checkStatus.data[0].rule_type       );
+                                        $("#edit-sel-rule-situation"    ).val(checkStatus.data[0].rule_situation  );
+                                        $("#edit-input-rule-description").val(checkStatus.data[0].rule_description);
+
+                                        $('#edit-sel-task-ename'        ).val(checkStatus.data[0].task_code       );
+                                        $("#edit-input-task-index"      ).val(checkStatus.data[0].task_index      );
+                                        $('#edit-sel-milestone-ename'   ).val(checkStatus.data[0].milestone_code  );
+                                        $("#edit-input-milestone-index" ).val(checkStatus.data[0].milestone_index );
+                                        $('#edit-sel-status-ename'      ).val(checkStatus.data[0].status_code     );
+                                        $("#edit-input-status-index"    ).val(checkStatus.data[0].status_index    );
+
+                                        $("#add-input-event-node"       ).val(checkStatus.data[0].event_node      );
+                                        //$('#edit-sel-enable'            ).val(checkStatus.data[0].enable          );
+
+                                        var strEnableOptions = '';
+                                        if ( (checkStatus.data[0].enable).toString() == 'false' ) {
+                                        strEnableOptions += '<option value="false" selected="selected">停用</option>';
+                                        strEnableOptions += '<option value="true">啟用</option>';
+                                        }else {
+                                        strEnableOptions += '<option value="false">停用</option>';
+                                        strEnableOptions += '<option value="true" selected="selected">啟用</option>';
+                                        }
+                                        document.getElementById("edit-sel-enable").innerHTML = strEnableOptions;
+
+                                        $('#edit-input-memo'            ).val(checkStatus.data[0].memo            );
+
+                                    },
+                                    yes:function (index, layero) {
+                                        //alert('修改按钮觸發');
+
+                                        // 取得目標複選框內的值
+                                        var targetValues2 = tab2.getData('edit-tab-attach-target');
+                                        console.log(targetValues2);
+
+                                        var listAttach = [];
+                                        if(targetValues2.length > 0) {
+                                            for(var i=0; i<targetValues2.length; i++) { 
+                                                console.log(targetValues2[i]['value']);
+                                                listAttach.push(targetValues2[i]['value']);
+                                            }
+                                        }
+                                        console.log(listAttach);
+
+
+                                        var strUUID   = checkStatus.data[0].uuid;
+
+                                        var strRuleCode         = $("#edit-input-rule-code"       ).val();
+                                        var strRuleCName        = $("#edit-input-rule-cname"      ).val();
+                                        var strRuleEName        = $("#edit-input-rule-ename"      ).val();
+
+                                        var strFormType         = $("#edit-sel-form-type"         ).val();
+
+                                        var strRuleType         = $("#edit-sel-rule-type"         ).val();
+                                        var strRuleSituation    = $("#edit-sel-rule-situation"    ).val();
+                                        var strRuleDescriptions = $("#edit-input-rule-description").val();
+
+                                        var strTaskCode         = $('#edit-sel-task-ename').val();
+                                        var temp_task_obj       = task_map_by_ename.get(strTaskCode);
+                                        var strTaskCName        = temp_task_obj['task_cname'];
+                                        var strTaskEName        = temp_task_obj['task_ename'];
+                                        var strTaskUUID         = temp_task_obj['uuid'];
+                                        var strTaskIndex        = $("#edit-input-task-index").val();
+
+                                        var strMilestoneCode    = $('#edit-sel-milestone-ename').val();
+                                        var temp_milestone_obj  = milestone_map_by_ename.get(strMilestoneCode);
+                                        var strMilestoneCName   = temp_milestone_obj['milestone_cname'];
+                                        var strMilestoneEName   = temp_milestone_obj['milestone_ename'];
+                                        var strMilestoneUUID    = temp_milestone_obj['uuid'];
+                                        var strMilestoneIndex   = $("#edit-input-milestone-index").val();
+
+                                        var strStatusCode       = $('#edit-sel-status-ename').val();
+                                        var temp_status_obj     = status_map_by_ename.get(strStatusCode);
+                                        var strStatusCName      = temp_status_obj['status_cname'];
+                                        var strStatusEName      = temp_status_obj['status_ename'];
+                                        var strStatusUUID       = temp_status_obj['uuid'];
+                                        var strStatusIndex      = $("#edit-input-status-index").val();
+
+                                        var bEnable           = $("#edit-sel-enable"          ).val();
+                                        var strMemo           = $("#edit-input-memo"          ).val();
+                                        var strEventNode      = $("#edit-input-event-node"    ).val();
+
+                                        // 判斷必填欄位
+                                        if ( strRuleCode == '' || strRuleCName == '' || strRuleEName == '' ) {
+                                            layer.msg('有必填欄位沒填, 請檢查欄位');
+
+                                        }else {
+                                        
+                                        
+                                            //if (tempEnable == "0") { bEnable = false; } else { bEnable = true; }
+                                            async function UpdateStatusData() {
+                                                let uri = "http://{{ DOMAIN_PATH }}/api/v0/update/feedback_rule/";
+                                                let objParam = { 
+                                                    "uuid":             strUUID,
+                                                    "rule_code":        strRuleCode,
+                                                    "rule_cname":       strRuleCName,
+                                                    "rule_ename":       strRuleEName,
+                                                    "rule_description": strRuleDescriptions,
+                                                    "rule_type":        strRuleType,
+                                                    "form_type":        strFormType,
+                                                    "rule_situation":   strRuleSituation,
+                                                    "task_uuid":        strTaskUUID,
+                                                    "task_code":        strTaskCode,
+                                                    "task_cname":       strTaskCName,
+                                                    "task_ename":       strTaskEName,
+                                                    "task_index":       strTaskIndex,
+                                                    "milestone_uuid":   strMilestoneUUID,
+                                                    "milestone_code":   strMilestoneCode,
+                                                    "milestone_cname":  strMilestoneCName,
+                                                    "milestone_ename":  strMilestoneEName,
+                                                    "milestone_index":  strMilestoneIndex,
+                                                    "status_uuid":      strStatusUUID,
+                                                    "status_code":      strStatusCode,
+                                                    "status_cname":     strStatusCName,
+                                                    "status_ename":     strStatusEName,
+                                                    "status_index":     strStatusIndex,
+                                                    "attach_list":      listAttach,
+                                                    "event_node":       strEventNode,
+                                                    "enable":           bEnable,
+                                                    "memo":             strMemo,
+                                                };
+                                                let jsonParam = JSON.stringify(objParam);
+                                                console.log(jsonParam);
+                                                const res = await fetch(uri, {
+                                                    method:'POST',
+                                                    body: jsonParam,
+                                                    headers: { 'Content-Type':'application/json; charset=utf-8' }
+                                                });
+                                                return await res.json();
+                                            }
+                                            let promiseUpdate = UpdateStatusData();
+                                            promiseUpdate.then( (response) => {
+
+                                                if(response['result'] == 'ok') {
+                                                    //console.log(response['data']['msg']);
+                                                    layer.msg(response['msg'])
+                                                    layer.close(index);
+                                                    //table.reload('demo');
+                                                    window.parent.location.reload();
+
+                                                }else if(response['result'] == 'fail') {
+                                                    layer.msg(response['msg'])
+                                                    layer.close(index);
+                                                    
+                                                }
+                                            });
+
+                                        }
+                                        
+                                    }
+                                });
+                            }
+                            break;
+                        
+
+                        case 'delete-data':
+                            //layer.msg('開啟刪除資料彈出視窗');
+                            var data = checkStatus.data;
+                            if (data.length === 0) {
+                                layer.msg('請選擇一筆資料');
+                            } else {
+                                layer.open({
+                                    type       : 1,
+                                    skin       : 'layui-layer-molv', //layui-layer-rim
+                                    resize     : true,
+                                    shadeClose : false,
+                                    shade      : [0.7, '#000'],
+                                    closeBtn   : 2,
+                                    offset     : 'auto',
+                                    anim       : 5,
+                                    area       : ['450px', '280px'], 
+                                    title      : ['刪除視窗-回報內容編輯', 'font-size:20px;background-color:#FF5722;'],
+                                    btn        : ['刪除','取消'],
+                                    content: '<div style="padding: 15px;">你否確定要刪除?<br><br><div id="view-txt-msg"></div></div>',
+    
+                                    success: function(layero, index) {
+                                        addIconforBtn(5);
+                                        console.log(layero, index);
+                                        //layero.find('.layui-layer-content').css('overflow-y', 'visible');
+                                        var strCode = "";
+                                        for (var i=0; i< data.length; i++) {
+                                            strCode += "<li>";
+                                            strCode += "[識別碼] " + checkStatus.data[i].uuid;
+                                            strCode += "</li>";
+                                        }
+                                        layero.find("#view-txt-msg").html(strCode);
+                                    },
+                                    yes:function (index, layero) {
+
+                                        //alert('刪除按钮觸發');
+                                        var removeDataList = [];
+                                        for (var i=0; i< data.length; i++) {
+                                            removeDataList.push(checkStatus.data[i].uuid)
+                                        }
+                                        console.log(removeDataList);
+                                        //layer.close(index);
+
+                                        async function deleteMultRuleData(dataList) {
+                                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/delete/feedback_rule/multi/";
+                                            let objParam = { uuids: dataList };
+                                            let jsonParam = JSON.stringify(objParam);
+                                            const res = await fetch(uri, {
+                                                method:'delete',
+                                                body:jsonParam,
+                                                headers: {'Content-Type': 'application/json; charset=utf-8'}
+                                            });
+                                            return await res.json();
+                                        }
+                                        let promiseDelete = deleteMultRuleData(removeDataList);
+                                        promiseDelete.then( (response) => {
+                                            if(response['result'] == 'ok') {
+                                                //console.log(response['data']['msg']);
+                                                //layer.msg(response['data']['msg'])
+                                                layer.close(index);
+                                                window.parent.location.reload();
+                                                //table.reload('demo');
+
+                                            }else if(response['result'] == 'fail') {
+                                                layer.msg(response['msg'])
+                                                layer.close(index);
+                                            }
+                                        });
+
+                                    }
+                                });
+                            }
+                            break;
+                        
+                    }
+
+                });
+
+
+
+
+
+            });
+
+            
+
+        </script>
+
+
+    </body>
+
+
+</html>

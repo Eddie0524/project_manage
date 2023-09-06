@@ -1,0 +1,194 @@
+body {
+    background-repeat: no-repeat;
+    background-color: whitesmoke;
+    background-size: 100%;
+    height: 100%;
+}
+
+/* 輸入介面背景 */
+#div-form-bg {
+    margin:120px auto; padding:0px;
+    border:4px;
+    border-radius:12px; border-style:solid;
+    border-color:rgb(220, 220, 220);
+    background-color: rgba(10,10,10, 0.7);
+    width:374px; height:500px; 
+}
+
+/* 登入表單 */
+.layui-form {
+    width: 320px !important;
+    margin: auto !important;
+    margin-top: 10px !important;
+}
+
+/* 表單各項目區 */
+.layui-form-item {
+	margin-top: 20px !important;
+}
+/* 表單各項輸入框 */
+.layui-input {
+    height: 44px !important;
+    line-height: 44px !important;
+    padding-left: 15px !important;
+    border-radius: 3px !important;
+    font-size: medium;
+}
+
+/********** 表單標題區 **********/
+.logo {
+    width: 300px !important;
+    height:60px !important;
+    margin-top: 8px !important;
+    /*margin-bottom: -5px !important;*/
+    /*margin-left: 20px !important;*/
+    top:0px; left:0px;
+}
+.title {
+    position: absolute !important;
+    font-size: 30px !important;
+    font-weight: 550 !important;
+    margin-left: -135px !important;
+    color: #BBBBBB !important;
+    display: inline-block !important;
+    height: 60px !important;
+    line-height: 60px !important;
+    margin-top: 10px !important;
+}
+.desc {
+    width: 100% !important;
+    text-align: center !important;
+    color: #BBBBBB !important;
+    height: 60px !important;
+    line-height: 60px !important;
+}
+
+/********** 表單帳號區 **********/
+#img-account {
+    width: 40px !important;
+    margin-top: 10px !important;
+    margin-bottom: -12px !important;
+    margin-left: 20px !important;
+    margin-right:20px !important;
+}
+
+/********** 表單密碼區 **********/
+#img-password {
+    width: 40px !important;
+    margin-top: 10px !important;
+    margin-bottom: -12px !important;
+    margin-left: 20px !important;
+    margin-right:20px !important;
+}
+
+/********** 表單記住區 **********/
+#box-forget {
+    width: 26px;
+    height: 26px;
+    margin-left: 14px;
+    margin-top: 5px;
+}
+#lab-forget {
+    width: 100px !important;
+    text-align: center !important;
+    color: #BBBBBB !important;
+    height: 30px !important;
+    margin-left: 40px;
+    margin-top: -28px;
+}
+.layui-form-checked[lay-skin=primary] i {
+    border-color: #5FB878 !important;
+    background-color: #5FB878 !important;
+    color: #fff !important;
+}
+
+/********** 標單送出按鈕區 **********/
+.layui-form button {
+    width: 100% !important;
+    height: 44px !important;
+    margin: 10px auto !important;
+    line-height: 44px !important;
+    font-size: medium !important;
+    color: #BBBBBB !important;
+    background-color: #0066cc !important;
+    border-color: gray;
+    font-weight: 550 !important;
+}
+
+
+/************************************/
+#exampleModalLabel {
+	font-size: 24px !important;
+	font-weight: 550 !important;
+	color: #6D6D6D !important;
+}
+#txt-message {
+	font-size: 20px !important;
+	font-weight: 550 !important;
+	color: #6D6D6D !important;
+}
+
+
+/********** 版權聲明 **********/
+footer {
+    /*flex: 0 0 auto;*/
+    position: absolute;
+    background-color: rgba(245, 245, 245, 0.8);
+    width:100%; height:80px;
+    bottom: 0px;
+}
+
+#txt-copyright {
+    color: #a5a5a5 !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    display: inline-block !important;
+    text-align:center;
+    width:100%;
+    height: 30px;
+    margin-bottom: -30px;
+}
+
+/****************************************/
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 300px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+  
+/* Modal Content */
+.modal-content {
+    background-color: rgba(20,20,20,0.9);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 10%;
+    color: gray;
+    font-size: 20px;
+    font-weight: 300;
+}
+  
+/* The Close Button */
+.close {
+    color: #888;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    top:20px;
+}
+  
+.close:hover,
+.close:focus {
+    color: #ff0202;
+    text-decoration: none;
+    cursor: pointer;
+}

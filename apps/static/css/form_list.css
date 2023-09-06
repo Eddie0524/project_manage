@@ -1,0 +1,195 @@
+#root {
+    position:absolute;
+    margin: 0; padding: 0; border: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FAFAFA
+}
+
+
+/*******************************************/
+/* 內容群組區背景 */
+#div-content-group {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    top:70px; left:300px;
+    /*background-color:  #12b553;*/
+    width:calc(100% - 300px); height:auto;
+    
+}
+
+
+/**/
+#function-bar {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    /*background-color: #009688;*/
+    background-color:rgb(95, 160, 190);
+    width:100%; height:50px;
+    /*background-color:#0d3295;*/
+}
+
+#form-title-text {
+    /*position: absolute;*/
+    width:500px; height: 30px;
+    /*top: 50px; left: 0px;*/
+    margin: 0px auto; padding: 0px; border: 0px;
+    font-size: 24px; 
+    font-weight: bold;  
+    text-align: center;
+    color: #000000;
+}
+
+
+/**********************************/
+/* 資料編輯內容區 */
+#table-data-info {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    top: 50px; left:0px;
+    background-color: #FAFAFA;
+    width:100%; height: auto;
+}
+
+.layui-none {
+    visibility: hidden;
+}
+
+.layui-laypage .layui-laypage-btn {
+    color: #FAFAFA;
+    background-color: rgb(95, 160, 190) !important; 
+}
+
+
+
+/* 分页组件页数按钮的默认颜色 */
+.layui-laypage a {
+    color: #666; /* 设置默认按钮文字颜色 */
+    background-color: #f2f2f2; /* 设置默认按钮背景颜色 */
+  }
+  
+  /* 分页组件页数按钮的激活状态（当前页）的颜色 */
+.layui-laypage .layui-laypage-em {
+    background-color: rgb(95, 160, 190) !important; /* 设置激活状态按钮背景颜色 */
+    color: #fff; /* 设置激活状态按钮文字颜色 */
+}
+
+
+/*****************************/
+#flow-content {
+    width: 460px;
+    height: auto;
+    margin: 15px auto;
+}
+
+/*
+.layui-timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 3px; 
+    width: 3px; 
+    height: 100%; 
+    background-color: #999999; 
+}
+*/
+
+/*
+.line-icon {
+    width: 6px;
+    height: 170px;
+    position: absolute;
+    left:1px; top:0px;
+    background-color: #990000;
+}
+*/
+
+
+
+/* 设置 .layui-timeline-axis 的宽度和颜色 */
+.layui-timeline .layui-timeline-axis {
+    width: 20px; /* 调整宽度以匹配图标 */
+    color: #990000; /* 设置颜色与图标一致 */
+}
+/* 设置 .layui-timeline-axis 前面的线条样式 */
+.layui-timeline .layui-timeline-item::before {
+    content: ""; /* 添加一个空内容用于绘制线条 */
+    position: absolute;
+    left: 1%; /* 使线条居中 */
+    top: 0;
+    bottom: 0;
+    width: 5px; /* 设置线条宽度 */
+    height: 100%; 
+    background-color: #999999; /* 设置线条颜色与图标一致 */
+    transform: translateX(-50%); /* 将线条左移以使其与图标居中 */
+}
+
+
+/*
+#icon-1 {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #999999;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    color: #999999; 
+}
+
+#icon-2 {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #999999; 
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    color: #999999; 
+}
+
+#icon-3 {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #999999; 
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    color: #999999;
+}
+
+#icon-4 {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #999999;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    color: #999999; 
+}
+
+#icon-5 {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #999999; 
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    color: #999999; 
+}
+
+#icon-6 {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #999999; 
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    color: #999999; 
+}
+*/
+

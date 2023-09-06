@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        
+        {% include 'common/header.html' %}
+        <title>新產品技術評估進度回報單</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/new_technology_feedback.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <!-- 資料編輯內容區 -->
+            <div id="table-data-info">
+                <div id="form-title-text">
+                    <b>新產品技術評估回報單</b>
+                </div>
+                <!-- 資料表格 -->
+                <table class="layui-hide" id="demo" lay-filter="test"></table>
+            </div>
+
+        </div>
+
+
+        <!-- 彈出回報視窗 -->
+        <template id="form-template-edit">
+            <!-- 回報視窗 -->
+            <div id="edit-window-bg">
+                <div id="edit-window-item-1">
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-lab-project-no">評估案代號 : </label></div>
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-txt-project-no"></lable></div>
+                </div>
+                <div class="window-empty-item"></div>
+                <div id="edit-window-item-2">
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-lab-project-name">評估案名稱 : </label></div>
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-txt-project-name"></lable></div>
+                </div>
+                <div class="window-empty-item"></div>
+                <div id="edit-window-item-3">
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-lab-expect-start">評估案預期開始 : </label></div>
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-txt-expect-start"></lable></div>
+                </div>
+                <div class="window-empty-item"></div>
+                <div id="edit-window-item-4">
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-lab-expect-end">評估案預期結束 : </label></div>
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-txt-expect-end"></lable></div>
+                </div>
+                <div class="window-empty-item"></div>
+                <div id="edit-window-item-5">
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-lab-project-task">評估案Task : </label></div>
+                    <select id="edit-txt-task" name="select-status" style="text-align:left; width:330px; height:40px;">
+                        <option value="0">Pre-Work</option>
+                        <!-- <option value="1">Hardware Design</option>
+                        <option value="2">PCB Verification</option>
+                        <option value="3">Mass Production</option> -->
+                    </select>
+                    <i class="layui-icon layui-icon-edit"></i>
+                </div>
+                <div class="window-empty-item"></div>
+                <div id="edit-window-item-6">
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-lab-project-milestone">評估案Milestone : </label></div>
+                    <select id="edit-txt-milestone" name="select-status" style="text-align:left; width:330px; height:40px;">
+                        <option value="0-1">Spec. Review</option>
+                        <option value="0-2">Design Organization</option>
+                        <option value="0-3">Pre-BOM Review</option>
+                        <!-- 
+                        <option value="1-1">Schematic Design</option>
+                        <option value="1-2">Layout</option>
+                        <option value="1-3">PCB Fabrication</option>
+                        <option value="1-4">PCB Assembly</option>
+                        <option value="2-1">HW Verif</option>
+                        <option value="2-2">Function Verfication</option>
+                        <option value="2-3">EMI TEST</option>
+                        <option value="2-4">ESD TEST</option>
+                        <option value="2-5">Conduction Test</option>
+                        <option value="2-6">Hi-POT Test</option>
+                        <option value="2-7">Surge Test</option>
+                        <option value="3-1">RBOM</option>
+                        <option value="2-7">Pilot Run</option>
+                        -->
+                    </select>
+                    <i class="layui-icon layui-icon-edit"></i>
+                </div>
+                <div class="window-empty-item"></div>
+                <div id="edit-window-item-7">
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-lab-project-status">評估案Status : </label></div>
+                    <select id="edit-txt-status" name="select-status" style="text-align:left; width:330px; height:40px;">
+                       <option value="待辦中">待辦中</option>
+                        <option value="進行中">進行中</option>                      
+                        <option value="暫停">暫停</option>
+                        <option value="指定結案">指定結案</option>
+                        <option value="已完成">已完成</option>
+                    </select>
+                    <i class="layui-icon layui-icon-edit"></i>
+                </div>
+                <div class="window-empty-item"></div>
+                <div id="edit-window-item-8">
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-lab-project-reason">評估案延宕原因 : </label></div>
+                    <select id="edit-txt-reason" name="select-status" style="text-align:left; width:330px; height:40px;">
+                        <!-- <option value="評估案插單">評估案插單</option>
+                        <option value="新開案插單">新開案插單</option>
+                        <option value="人力資源不足">人力資源不足</option>
+                        <option value="等待PM確認">等待PM確認</option>
+                        <option value="PM通知結案">PM通知結案</option> -->
+                    </select>
+                    <i class="layui-icon layui-icon-edit"></i>
+                </div>
+                <div class="window-empty-item"></div>
+                <div id="edit-window-item-9">
+                    <div class="layui-inline"><label class="layui-form-label" id="edit-lab-project-memo">評估案延宕說明 : </label>
+                        <input type="text" id="edit-txt-memo" value="" >
+                    </div>
+                </div>
+            </div>
+        </template>
+
+
+        <!--詢問是否填寫評估案結果單-->
+        <template id="review-template-edit">
+            <div id="edit-winodow-bg">
+                <div id="edit-window-item-1">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" id="lab-work-days"> 預估工作天數: </label>
+                        <input type="text" id="input-work-days" value="">
+                        <!-- <label class="layui-form-label" id="lab-days"> 工作天 </label> -->
+                    </div>
+                </div>
+                <div id="edit-window-item-2">
+                    <div class="layui-inline" >
+                        <label class="layui-form-label" id="lab-work-days"> 檔案上傳: </label>
+                        <form action="" method=post enctype=multipart/form-data id="upload-form-dialog">
+                            <p><input type=file name=file id="btn-file">
+                            <button id="btn-upload" class="layui-btn layui-btn-primary" lay-event="form-submit" title="上傳檔案">
+                                <i class="layui-icon layui-icon-upload-drag"></i>上傳檔案
+                            </button>
+                            <th colspan="5" rowspan="1" id="file-list" class="cls-c17-r1">
+                                <div id="myUL">
+                                </div>
+                            <th>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+
+
+        <!-- 自定義模板 -->
+        <script type="text/html" id="barDemo">
+            <a id="btn-edit" class="layui-btn layui-btn-xs" lay-event="edit" style="width:80px; height:26px; margin-bottom:5px; background-color:#FFB800;">回報</a>
+        </script>
+
+
+      
+
+        <script>
+
+                var selectNameList = []
+            //取回task milestone
+            async function get_task_milestone() {
+
+                        let url = "";
+                        //若部門別為空 則帶入ee
+                        if("{{GROUP_NO}}" == "")
+                        {
+                                url = "http://{{ DOMAIN_PATH }}/api/v0/db/data/task_milestone/?type=" + "ee";;
+                        }
+                        else
+                        {
+                                url = "http://{{ DOMAIN_PATH }}/api/v0/db/data/task_milestone/?type=" + "{{GROUP_NO}}";
+                        }   
+                        const res = await fetch(url, {
+                                method: 'get',                                       
+                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        });
+                        return await res.json();
+            }
+
+
+
+            //取得目前時間
+            function get_curr_date(){
+                var today = new Date();
+                var nowDD = String(today.getDate()).padStart(2, '0');
+                var nowMM = String(today.getMonth() + 1).padStart(2, '0');
+                var nowYYYY = today.getFullYear();
+
+                var nowhh = String(today.getHours()).padStart(2, '0');
+                var nowmm = String(today.getMinutes()).padStart(2, '0');
+                var nowss = today.getSeconds();              
+
+                strNowDate = nowYYYY + "-" + nowMM + "-" + nowDD + " " + nowhh + ":" + nowmm + ":" + nowss;
+                return strNowDate;
+            }
+
+            console.log('{{GROUP_NO}}');
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+
+                // 警告
+                if (mode == 0) {
+                    btn1.css({ "background-color": "#ff0066", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#ffe6f0", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 檢視
+                if (mode == 3) {
+                    btn1.css({ "background-color": "#009688", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#e6fffc", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 回報
+                if (mode == 4) {
+                    btn1.css({ "background-color": "#FFB800", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#fff8e6", "border-color": "#555555", "font-size": "18px" });
+                }
+                //未上傳檔案
+                if (mode == 5) {
+                    btn1.css({ "display" : "none" });
+                    btn2.css({ "background-color": "#fff8e6", "border-color": "#555555", "font-size": "18px" });
+                }
+                if (mode == 6) {
+                    btn1.css({  "border-color": "#555555", "font-size": "18px"});
+                    btn2.css({ "background-color": "#fff8e6", "border-color": "#555555", "font-size": "18px" });
+                }
+            }
+
+
+            layui.use(['form', 'layer', 'jquery', 'table'], function () {
+                var layer = layui.layer;
+                var laypage = layui.laypage;
+                var table = layui.table;
+                var $ = layui.jquery;
+                var form = layui.form;
+
+
+              
+
+                var tableIns = table.render({
+                    elem: '#demo',
+                    height: 600,
+                    //url            : 'http://{{ DOMAIN_PATH }}/static/lib/data_new_technology_feedback.json',
+                    url: 'http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_forms/by/member/?user={{ USER_CNAME }}',
+                    //data           : dataList,
+                    title: '新產品技術評估回報單',
+                    page: true,
+                    even: true,
+                    limit: 10,
+                    limits: [10, 20, 50, 100, 500, 1000],
+                    skin: 'row',
+                    size: '30px',
+                    //toolbar: 'default',
+                    toolbar: '#toolbarDemo',
+                    defaultToolbar: ['filter', 'exports', 'print'
+                    //{ title: '提示', layEvent: 'LAYTABLE_TIPS',icon: 'layui-icon-tips'}  //自定工具欄圖標 - 提示
+                    ],
+                    totalRow: true,
+                    cols: [[ 
+                        { field: 'uuid', title: '識別碼', width: 300, sort: true, fixed: 'left', hide: true },
+                        { field: 'project_no', title: '評估案代號', width: 250, sort: true },
+                        { field: 'project_name', title: '評估案名稱', width: 200, sort: true },
+                        {field: 'bu', title: 'BU',     width: 100, sort: true},
+                        { field: 'expected_start_date', title: '評估案預期開始', width: 130, sort: true },
+                        { field: 'expected_finish_date', title: '評估案預期結束', width: 130, sort: true },
+                        {field: 'task', title: '評估案task',     width: 150, sort: true},
+                        {field: 'mile_stone',   title: '評估案milestone', width: 150, sort: true},
+                        { field: 'status', title: '評估案狀態', width: 130, sort: true, hide: false },
+                        //{field: 'project_reason', title: '原因',        width: 200, sort: true, hide: true},
+                        //{field: 'memo',           title: '備註',        width: 200, hide: true },
+                        { field: 'action', title: '操作', width: 120, align: 'center', toolbar: '#barDemo', fixed: 'right' }
+                        //{fixed: 'right', width: 320, align:'center', toolbar: '#barDemo'}
+                    ]],
+                    done: function (res, curr, count) {
+                       
+                        cols: [[
+                            { field: 'project_no', title: '評估案代號', width: 250, sort: true },
+                        ]]
+                        //layer.msg('目前page:'+ curr.toString() );
+                        //window.refresh();
+                        // var trArr = $(".layui-table-body.layui-table-main tr");
+                        // console.log('-----trArr-----');
+                        // console.log(trArr);
+                        // console.log(trArr.length);
+                        // for (var i = 0; i < trArr.length; i++) {
+                        //     console.log(trArr);
+                        // }
+
+                        // $.each(trArr, function (index, value) {
+                        //     console.log(value.outerHTML);
+                        // });
+
+                    },
+                    text: {
+                        none: '目前暫無數據'
+                    }
+                });
+
+
+                table.on('tool(test)', function (obj) {
+                    var data = obj.data;      // 当前行数据
+                    var layEvent = obj.event; // 点击的事件名
+                    //console.log(obj.data)
+
+                      //所有回報單上的Task-Milestone回報為「已完成」、「指定結案」、「審查中」不能進行回報
+                    var member_list = obj.data['member_list'];
+                    var member_data = member_list.find(elem=>elem.cName == "{{USER_CNAME}}");
+                    if(member_data['status'] == "已完成" || member_data['status'] == "指定結案" || member_data['status'] == "審查中")
+                    {
+                        layer.msg("專案" + member_data['status'] + "無法進行回報")
+                        return;
+                    }
+                    
+              
+                    if (layEvent === 'edit') {
+                        //layer.msg('開啟編輯資料彈出視窗');
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-molv', //layui-layer-rim
+                            resize: false,
+                            shadeClose: false,
+                            shade: [0.7, '#000'],
+                            closeBtn: 2,
+                            offset: 'auto',
+                            anim: 5,
+                            area: ['600px', '600px'], //寬高
+                            title: ['回報視窗-新產品技術評估回報', 'font-size:20px;background-color:#FFB800;'],
+                            btn: ['回報', '取消'],
+                            content: $('#form-template-edit').html(),
+                            success: function (layero, index) {
+                                addIconforBtn(4);
+
+
+                                let member_data = obj.data['member_list'];
+                                console.log(member_data)
+                                // console.log(member_data[0]['form_type'])
+                                // console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPP")
+
+                                let input_body = {
+                                    "form_type"             : member_data[0]['form_type'],
+                                    "type"                  : "{{GROUP_NO}}",
+                                };
+
+
+                              
+
+                               
+
+                                 //取回task 及 milestone 資料放入下拉選單
+                                let p1 = get_task_milestone_by_param(input_body);
+                                p1.then((response) => {
+                                let data = response['data'];                               
+                                data.sort((a,b) => a.index - b.index);  //將response作排序(對index)
+                              
+                                var str_task_Options = '';
+                                var str_milestone_index = new Array();
+                               
+                                for (var i = 0; i < data.length; i++) {
+                                        
+
+                                        str_task_Options += '<option value="' + (i+1)+ '">' + data[i]['task']+ '</option>';
+                                        var str = String(data[i]['milestone']);
+                                        var str_split =  str.split(',');
+                                        //console.log(str_split);
+
+                                     
+                                        for(var j = 0 ; j<str_split.length ; j++)
+                                        {
+                                            str_milestone_index[i+1] += '<option value="' + (i+1) + '">' + str_split[j] + '</option>';                                            
+
+                                            //console.log(str_milestone_index[i+1])
+                                            //console.log("****************************")                                           
+                                        }
+
+                                        
+                                }   //for迴圈                             
+                                document.getElementById("edit-txt-task").innerHTML = str_task_Options;
+                                document.getElementById("edit-txt-milestone").innerHTML = str_milestone_index[1];
+
+                               
+
+                                //當task選擇改變時，更新milestone內容
+                                document.getElementById("edit-txt-task").onchange = function selectChange()
+                                {       
+                                    let select_index = $("#edit-txt-task option:selected").val();
+                                    //console.log(select_index);
+                                    document.getElementById("edit-txt-milestone").innerHTML =  str_milestone_index[select_index];                 
+                                   
+                                };
+
+                                 //當milestone選擇改變時，更新status內容
+                                 document.getElementById("edit-txt-milestone").onchange = function selectChange()
+                                {       
+                                    let select_text = $("#edit-txt-milestone option:selected").text();
+                                    //console.log(select_text);
+                                    
+                                    
+                                    if(select_text == "雛型定案" || select_text == "估價、發包、驗收" )
+                                    {
+                                              // 取得 <select> 元素
+                                                var selectElement = document.getElementById('edit-txt-status');
+
+                                                for (var i = 0; i < selectElement.options.length; i++) {
+                                                   
+                                                    if (selectElement.options[i].value == "已完成") {
+                                                        
+                                                            selectElement.options[i].value  = '審查中';                                                
+                                                            selectElement.options[i].text  = '審查中';  
+                                                            break; 
+                                                        }
+                                                }
+                                    }
+                                    else
+                                    {
+                                                 // 取得 <select> 元素
+                                                    var selectElement = document.getElementById('edit-txt-status');
+
+                                                    for (var i = 0; i < selectElement.options.length; i++) {
+                                                    
+                                                        if (selectElement.options[i].value == "審查中") {
+                                                            
+                                                                selectElement.options[i].value  = '已完成';                                                
+                                                                selectElement.options[i].text  = '已完成';  
+                                                                break; 
+                                                            }
+                                                    }
+                                    }
+                                };
+                               
+                                //回報頁面task 及 milestone帶入上一次回報的狀態
+                                var task_opts = document.getElementById("edit-txt-task").getElementsByTagName("option"); 
+                               
+                                for(let i = 0; i< task_opts.length ; i++)
+                                {
+                                    
+                                    if(task_opts[i].text == obj.data['task'])
+                                    {
+                                        
+                                        task_opts[i].selected = true;
+                                        document.getElementById("edit-txt-milestone").innerHTML = str_milestone_index[i+1];
+                                       
+                                        var milestone_opts = document.getElementById("edit-txt-milestone").getElementsByTagName("option");
+                                        console.log(milestone_opts);
+                                       
+
+                                        for(let j = 1;j<milestone_opts.length ; j++)
+                                        {
+                                           
+                                            if(milestone_opts[j].text == obj.data['mile_stone'])
+                                            {
+                                                milestone_opts[j].selected = true;
+                                             
+                                                        if(milestone_opts[j].text == "雛型定案" || milestone_opts[j].text == "估價、發包、驗收" )
+                                                        {
+
+                                                                // 取得 <select> 元素
+                                                                    var selectElement = document.getElementById('edit-txt-status');
+
+                                                                    for (var k = 0; i < selectElement.options.length; k++) {
+                                                                    
+                                                                        if (selectElement.options[k].text == "已完成") {
+                                                                            
+                                                                                selectElement.options[k].value  = '審查中';                                                
+                                                                                selectElement.options[k].text  = '審查中';  
+                                                                                break; 
+                                                                            }
+                                                                    }
+                                                        }
+                                                        else
+                                                        {
+                                                                    // 取得 <select> 元素
+                                                                        var selectElement = document.getElementById('edit-txt-status');
+
+                                                                        for (var k = 0; k < selectElement.options.length; k++) {
+                                                                            
+                                                                            if (selectElement.options[k].text == "審查中") {
+                                                                                
+                                                                                    selectElement.options[k].value  = '已完成';                                                
+                                                                                    selectElement.options[k].text  = '已完成';  
+                                                                                    break; 
+                                                                                }
+                                                                        }
+                                                        }
+                                                break;
+                                            }
+                                        }
+                                        break;                                       
+                                    }
+                                    
+                                }
+
+
+                                let member_data= obj.data['member_list']                                
+                                let user_data = member_data.find((obj)=>obj.cName == "{{USER_CNAME}}");
+
+                               
+
+                                //#region  將下拉選單選到上次回報的選項
+                                const $select_task = document.querySelector('#edit-txt-task');                              
+                                const $option_task = Array.from($select_task.options);
+                                const option_task = $option_task.find(el => el.text == user_data['task']);
+                                if (option_task != undefined) {
+                                    option_task.selected = true;
+                                }
+                                
+
+                                const $select_mile_stone = document.querySelector('#edit-txt-milestone');
+                                const $option_mile_stone = Array.from($select_mile_stone.options);
+                                const option_mile_stone = $option_mile_stone.find(el => el.text == user_data['mile_stone']);
+                                if (option_mile_stone != undefined) {
+                                    option_mile_stone.selected = true;
+                                }
+                                
+                               
+
+                                const $select_status = document.querySelector('#edit-txt-status');
+                                const $option_status = Array.from($select_status.options);                               
+                                const option_status = $option_status.find(el => el.text == user_data['status']);
+                                // console.log( user_data['status'])
+                                // console.log( option_status)
+                                // console.log("UIIIIIIIIIIIIIIIIIIII")
+                                if (option_status != undefined) {
+                                    option_status.selected = true;
+                                }
+                                //#endregion
+                                
+                                $("#edit-txt-reason").val(user_data['reason']);
+                                $("#edit-txt-memo").val(user_data['memo']);
+
+
+                                addIconforBtn(4);
+                                layero.find('.layui-layer-content').css('overflow-y', 'visible');
+                                layero.find('.layui-layout-body').css('overflow-y', 'auto');
+                           
+                                //顯示於回報視窗(專案代號、產品型號、預計開始時間、預計結束時間)
+                                $('#edit-txt-project-no').text(obj.data['project_no']);
+                                $('#edit-txt-project-name').text(obj.data['project_name'])
+                                $('#edit-txt-expect-start').text(obj.data['expected_start_date']);
+                                $('#edit-txt-expect-end').text(obj.data['expected_finish_date']);                              
+                              
+
+
+                                if(obj.data['status'] == "暫停" || obj.data['status'] == "指定結案"){
+                                    $("#edit-window-item-8").css('display', 'block');
+                                    $("#edit-window-item-9").css('display', 'block');                                   
+                                } else {
+                                    $("#edit-window-item-8").css('display', 'none');
+                                    $("#edit-window-item-9").css('display', 'none');
+                                }
+
+
+                                // 單選到 暫停與指定結案 的選項需顯示回報原因
+                                $('#edit-txt-status').on('change', function () {
+                                    var selectedValue = $(this).val();
+                                    console.log(selectedValue)
+
+
+                                     //取回暫停及指結原因
+                                    let p2 = get_task_milestone_reason(input_body);
+                                    p2.then((response)=>{
+
+                                                    
+                                                    let data = response['data'];
+                                                    let select_task = $("#edit-txt-task option:selected").text();
+                                                    let select_milestone = $("#edit-txt-milestone option:selected").text();                                                   
+
+                                                    //先找到目前選擇的task 
+                                                    var obj = data.find(elem=>elem.task == select_task && elem.milestone.includes(select_milestone))
+                                                    var str_pause_Options = '';
+
+                                                if(selectedValue == "暫停")
+                                                {
+                                                            for (var i = 0; i < obj['pause_reason'].length; i++) {
+                                                                console.log(obj['pause_reason'][i])                                        
+                                                                str_pause_Options += '<option value="' + obj['pause_reason'][i]+ '">' + obj['pause_reason'][i]+ '</option>';
+                                                        }
+                                                        document.getElementById("edit-txt-reason").innerHTML =  str_pause_Options; 
+                                                }
+                                                else if(selectedValue == "指定結案")
+                                                {
+                                                    for (var i = 0; i < obj['end_reason'].length; i++) {
+                                                                console.log(obj['end_reason'][i])                                        
+                                                                str_pause_Options += '<option value="' + obj['end_reason'][i]+ '">' + obj['end_reason'][i]+ '</option>';
+                                                    }
+                                                        document.getElementById("edit-txt-reason").innerHTML =  str_pause_Options;  
+                                                }  
+                                   
+                                    });
+                                        // 取得 select 元素
+                                        var selectElement = document.getElementById("edit-txt-reason");
+                                        console.log(selectElement)
+                                        // 設定第二個選項 (索引 1) 為預設選項
+                                        selectElement.selectedIndex = 1;
+
+                                    if (selectedValue == "暫停" || selectedValue == "指定結案") {
+                                        $("#edit-window-item-8").css('display', 'block');
+                                        $("#edit-window-item-9").css('display', 'block');
+                                    } else {
+                                        $("#edit-window-item-8").css('display', 'none');
+                                        $("#edit-window-item-9").css('display', 'none');
+                                    }
+                                }); 
+
+                            });
+                            },
+                            yes: function (index, layero) {
+                                //alert('修改按钮觸發');
+                                let selectedValue = $("#edit-txt-status option:selected").text();
+                                let reason = "";
+                                let memo="";
+                                if (selectedValue == "暫停" || selectedValue == "指定結案") {
+                                    reason = $("#edit-txt-reason option:selected").text();
+                                    memo   = $("#edit-txt-memo").val();
+                                    if(reason  == "" ) {
+                                        layer.msg("未填寫原因，請確認");
+                                        return;
+                                    }
+                                }
+
+                                console.log(selectedValue)
+                                for(let i = 0; i<obj.data['member_list'].length;i++)
+                                {
+                                    if(obj.data['member_list'][i]['cName'] == "{{USER_CNAME}}")
+                                    {
+                                        obj.data['member_list'][i]['task'] =  $("#edit-txt-task option:selected").text();
+                                        obj.data['member_list'][i]['mile_stone'] =  $("#edit-txt-milestone option:selected").text();
+                                        obj.data['member_list'][i]['status'] =   $("#edit-txt-status option:selected").text();
+                                        obj.data['member_list'][i]['reason'] =   (selectedValue != "暫停" && selectedValue != "指定結案") ? "" : $("#edit-txt-reason option:selected").text();
+                                        obj.data['member_list'][i]['memo'] =    (selectedValue != "暫停" && selectedValue != "指定結案")? "" : $("#edit-txt-memo").val();
+                                        obj.data['member_list'][i]['actual_date'] =   get_curr_date(); 
+                                    }                                                                       
+                                }  
+                               
+                                
+                                let Param = {
+                                        "project_no"           : $("#edit-txt-project-no").text(),
+                                        "project_name"        : $("#edit-txt-project-name").text(),
+                                        "bu"                  : obj.data['bu'],
+                                        "member_list"         : obj.data['member_list'],
+                                        "expected_start_date" : $("#edit-txt-expect-start").text(),
+                                        "expected_finish_date": $("#edit-txt-expect-end").text(),
+                                        "status"              : $("#edit-txt-status option:selected").text(),
+                                        "task"                : $("#edit-txt-task option:selected").text(),
+                                        "mile_stone"          : $("#edit-txt-milestone option:selected").text(),
+                                        "reason"              : reason,
+                                        "memo"                : memo
+                                    };
+
+                             
+                               // let promise_feedback_record = post_task_feedback_record();
+
+
+                                //promise_feedback_record.then((response) => {
+
+                                  
+                                        var member_list = new Array();
+                                        //if (response['result'] == 'ok') {
+                                        if (selectedValue == "已完成") {
+
+                                            layer.open({
+                                                type      : 1,
+                                                skin      : 'layui-layer-molv', //layui-layer-rim
+                                                resize    : true,
+                                                shadeClose: false,
+                                                shade     : [0.7, '#000'],
+                                                closeBtn  : 2,
+                                                offset    : 'auto',
+                                                anim      : 5,
+                                                area      : ['600px', '400px'],
+                                                title     : ['您準備要填寫評估案結果單了嗎?', 'font-size:20px;background-color:#1E9FFF;'],
+                                                btn       : ['確定', '取消'],
+                                                content   : $('#review-template-edit').html(),//'<div style="padding: 15px; font-size: 22px; font-weight: bold;">{{ USER }}，您準備要填寫評估案結果單了嗎?<br><br><div id="view-txt-msg"></div></div>',
+                                                success   : function (layero, index) {
+                                                     
+                                                    addIconforBtn(1);
+                                                    layero.find('.layui-layer-btn0').css('visibility', 'hidden');
+                                                    // 按上傳檔按鈕
+                                                    $("#upload-form-dialog").submit(function (event) {
+                                                        event.preventDefault();
+                                                        var formData = new FormData(this);
+
+                                                        $.ajax({
+                                                            url: "http://{{ DOMAIN_PATH }}/api/v0/spec/upload/?project_no=" + obj.data['project_no'],
+                                                            type: "POST",
+                                                            data: formData,
+                                                            processData: false,
+                                                            contentType: false,
+                                                            success: function (response) {
+                                                                //檔案上傳成功!
+                                                                console.log(response); 
+                                                                var responseObject = JSON.parse(response);
+                                                                var msg = responseObject.msg;
+                                                                if( responseObject.result == 'ok') {
+                                                                    console.log(msg);
+                                                                    layer.msg(msg);
+                                                                    layero.find('.layui-layer-btn0').css('visibility', 'visible');
+                                                                    newElement(responseObject['data']['file_name'],obj.data['project_no'])
+                                                                }else {
+                                                                    console.log(msg);
+                                                                    layer.msg(msg);
+                                                                    //$('#btn-submit').addClass("layui-btn-disabled").attr("disabled", true);
+                                                                }
+                                                            },
+                                                            error: function (xhr, status, error) {
+                                                                layer.msg("上傳失敗(未提供評估案/開案規格書)");
+                                                                $('#btn-submit').addClass("layui-btn-disabled").attr("disabled", true);
+                                                            }
+                                                        });
+                                                    });
+                                                    
+                                                    //將評估單回報狀態取回(是否已回報評估天數)
+                                                    async function get_review_record(){
+                                                        let url = "http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_review/?project_no=" +  obj.data['project_no']; 
+                                                        console.log(url)                                                       
+                                                        const res = await fetch(url, {
+                                                            method: 'get',                                                            
+                                                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                                        });
+                                                        return await res.json();
+                                                    }
+                                                    let promise_get_review_record = get_review_record();
+                                                    promise_get_review_record.then((response)=>{                                                        
+                                                      
+                                                        if (response['result'] == 'ok')
+                                                        {
+                                                            if(response['data'] != null)
+                                                            {
+                                                                member_list = response.data['member_list'];
+                                                                for(let i = 0; i<member_list.length;i++)
+                                                                {
+                                                                        if(member_list[i]['cName'] == "{{USER_CNAME}}")
+                                                                        {
+                                                                                member_list[i]['work_days'] =  $('#input-work-days').val();
+                                                                                member_list[i]['callback'] =  true;
+                                                                                
+                                                                        }
+                                                                } 
+                                                            }
+                                                        }
+                                                        
+                                                    });
+                                                },
+                                                yes: function (index, layero) {
+                                                    
+                                                    let promise_feedback_record = post_task_feedback_record(Param);
+                                                    promise_feedback_record.then((response)=>
+                                                    {
+                                                         console.log(response)
+                                                         tableIns.reload();
+                                                    });
+
+                                                    if(member_list.length == 0)
+                                                    {
+                                                        member_list = obj.data['member_list'];
+                                                    }
+                                                        
+                                                    for(let i = 0; i<member_list.length;i++)
+                                                    {
+                                                            if(member_list[i]['cName'] == "{{USER_CNAME}}")
+                                                            {                                                                  
+                                                                    member_list[i]['work_days'] =  $('#input-work-days').val();
+                                                                    member_list[i]['callback'] =  true;
+                                                                    member_list[i]['status'] =  '已完成';
+                                                            }
+                                                            
+                                                    }
+
+                                                    let objParam = {                   
+                                                            "project_no"            : Param['project_no'],
+                                                            "project_name"          : Param['project_name'],
+                                                            "member_list"           : member_list, 
+                                                    };
+
+                                                    console.log(objParam)
+                                                   
+                                                    let p1 = update_new_tech_review_memberlist(objParam);
+                                                    p1.then((response)=>
+                                                    {
+                                                        console.log(response)
+                                                        console.log("PPPPPPPPPPPPPPPPPP")
+                                                        if (response['result'] == 'ok') {
+
+                                                                let promise_check_review_status = check_review_status();
+                                                                promise_check_review_status.then((res) => {
+                                                                        if (res['result'] == 'ok') {
+
+                                                                            if(res['data'])
+                                                                            {
+                                                                                send_review_mail();
+                                                                            }
+                                                                            layer.close(index);
+                                                                        
+                                                                        }
+                                                                });
+                                                            }
+                                                    });
+
+                                                    //table記錄一筆
+                                                    // async function insert_review_record() {
+                                                    //     let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_review/";
+                                                    //     let objParam = "";
+                                                        
+                                                    //     if(member_list.length == 0)
+                                                    //     {
+                                                    //         member_list = obj.data['member_list'];
+                                                    //     }
+                                                        
+                                                    //     for(let i = 0; i<member_list.length;i++)
+                                                    //     {
+                                                    //             if(member_list[i]['cName'] == "{{USER_CNAME}}")
+                                                    //             {
+                                                    //                  member_list[i]['work_days'] =  $('#input-work-days').val();
+                                                    //                  member_list[i]['callback'] =  true;
+                                                    //             }
+                                                               
+                                                    //     }                                                        
+                                                        
+                                                    //     objParam = {
+                                                    //             "project_no"            : obj.data['project_no'],
+                                                    //             "project_name"          : obj.data['project_name'],
+                                                    //             "member_list"           : member_list,
+                                                    //             "hw_apporve_flag"       : false,
+                                                    //             "hw_reason"             : "",
+                                                    //             "hw_memo"               : "",
+                                                    //             "project_status"        : "",
+                                                    //             "pm_reason"             : "",
+                                                    //             "pm_memo"               : ""
+                                                    //             //"appendix_path": request.json.get('appendix_path'),
+                                                    //     };
+                                                         
+                                              
+                                                    //     let jsonParam = JSON.stringify(objParam);                                                       
+                                                    //     const res = await fetch(uri, {
+                                                    //         method: 'post',
+                                                    //         body: jsonParam,
+                                                    //         headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                                    //     });
+                                                    //     return await res.json();
+                                                    // }
+                                                    // let promisePost = insert_review_record();
+                                                    // promisePost.then((response) => {
+                                                    //     console.log(response);
+
+                                                    //     //layer.close(index);
+                                                    //     if (response['result'] == 'ok') {
+
+                                                    //         let promise_check_review_status = check_review_status();
+                                                    //         promise_check_review_status.then((res) => {
+                                                    //                 if (res['result'] == 'ok') {
+
+                                                    //                     if(res['data'])
+                                                    //                     {
+                                                    //                         send_review_mail();
+                                                    //                     }
+                                                    //                     layer.close(index);
+                                                                       
+                                                    //                 }
+                                                    //         });
+                                                    //     }
+                                                    // });
+                                                },
+                                                btn2: function (index, layero)
+                                                {                                                  
+                                                    tableIns.reload();
+                                                }
+                                            });
+                                           
+                                        }
+                                        else 
+                                        {
+                                            let promise_feedback_record = post_task_feedback_record(Param);
+                                            promise_feedback_record.then((reponse)=>
+                                            {
+                                                layer.close(index);
+                                                tableIns.reload();
+                                  
+                                            });
+                                           
+                                    }
+                                    layer.close(index);
+                                //});
+
+                               
+
+                                async function check_review_status() {
+                                    let project_no = $("#edit-txt-project-no").text();
+                                    console.log(project_no);
+                                
+                                    let uri = `http://{{ DOMAIN_PATH }}/api/v0/db/check_review_status/?project_no=${obj.data['project_no']}`;
+                                    console.log(uri);
+                                    const res = await fetch(uri, {
+                                        method: 'get',
+                                        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                    });
+                                    return await res.json();
+                                } 
+                               
+
+                                // async function review_page() {
+                                //     //await sleep(500);
+                                //     let project_no = $("#edit-txt-project-no").text();
+                                //     let project_name = $("#edit-txt-project-name").text();
+                                //     console.log(project_name);
+                                //     window.location.href = `http://{{ DOMAIN_PATH }}/page/v0/new_technology_review/?project_no=${obj.data['project_no']}`;
+                                // }
+
+                                //當被指派的人員皆完成回報 則發送mail通知主管
+                                async function send_review_mail() {
+                                    let url = "http://{{ DOMAIN_PATH }}/api/v0/send/new_technology_review/";
+                                    let objParam = {
+                                        "project_no"    : obj.data['project_no'],
+                                        "project_name"  : obj.data['project_name'],
+                                        "form_no"       : "",
+                                        "sender"        : "{{ ACCOUNT }}",
+                                        "receiver"      : "{{RECEIVER}}",
+                                        "project_start" : obj.data['expected_start_date'],
+                                        "project_end"   : obj.data['expected_end_date']
+                                    };
+                                    let jsonParam = JSON.stringify(objParam);
+                                    const res = await fetch(url, {
+                                        method: 'POST',
+                                        body: jsonParam,
+                                        headers: { 'Content-Type': 'application/json charset = utf-8' }
+                                    });
+                                    return await res.json();
+                                }
+                                // var promise_send_assign_mail = send_assign_mail();
+                                // promiseList.push(promise_send_assign_mail);
+
+                                function sleep(ms) {
+                                    return new Promise(resolve => setTimeout(resolve, ms));
+                                }
+
+                            }
+
+                        });
+                    }
+                });
+            });
+
+
+                    //取task milestone
+                    async function get_task_milestone_by_param(objParam) {
+
+                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/find/task_milestone/"
+
+                            let jsonParam = JSON.stringify(objParam);
+                            console.log(jsonParam)
+                            const res = await fetch(uri, {
+                                    method: 'post',
+                                    body: jsonParam,
+                                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                            });
+                            return await res.json();
+                    }
+
+                     //取task milestone_reason
+                     async function get_task_milestone_reason(objParam) {
+
+                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/find/task_milestone_reason/"
+
+                            let jsonParam = JSON.stringify(objParam);
+                            console.log(jsonParam)
+                            const res = await fetch(uri, {
+                                    method: 'post',
+                                    body: jsonParam,
+                                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                            });
+                            return await res.json();
+                    }
+
+
+                       //新增欄位
+                    function newElement(strFileName,project_no) {
+
+                                var li = document.createElement("div");
+                                li.className = "list-file-item";
+                                li.id = strFileName;
+                                if(strFileName != null) {
+                                    // 文字
+                                    var divobj = document.createElement("div");
+                                    divobj.className = "text-filename";
+                                    var t = document.createTextNode(strFileName);
+
+                                    divobj.appendChild(t);
+                                    li.appendChild(divobj);
+                                    // 刪除按鈕
+                                    var btn3 = document.createElement("button");
+                                    btn3.className = "cls-delete-btn-file";
+
+                                    var bt3 = document.createTextNode("刪除");
+                                    btn3.appendChild(bt3);
+                                    li.appendChild(btn3);
+                                    btn3.onclick = function() {
+                                        var div = this.parentElement;
+                                        console.log(this.parentElement)
+                                        div.remove();
+                                        remove_file(this.parentElement.id,project_no).then((response)=>{                                               
+                                            layer.msg(response['msg'])
+                                        });
+                                    
+                                        var itemToRemove = this.parentElement.id;
+                                        var index = selectNameList.indexOf(itemToRemove);
+                                        if (index !== -1) {
+                                            selectNameList.splice(index, 1);
+                                        }
+                                    }
+                                    document.getElementById("myUL").appendChild(li);
+                                    selectNameList.push(strFileName);
+                                }
+
+                    }//newElement
+
+
+                            //移除已上傳的檔案
+                            async function remove_file(file_name,project_no){
+                                            let url = "http://{{ DOMAIN_PATH }}/api/v0/spec/remove/?project_no=" + project_no + "&file_name=" + file_name;                                           
+                                            const res = await fetch(url, {
+                                                    method: 'get',                            
+                                                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                            });
+                                            return await res.json();
+                            } //remove_file
+
+
+                            //更新new_tech_review_memberlist
+                            async function update_new_tech_review_memberlist(objParam) {
+
+                                    let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/new_tech_review/update_memberlist/";
+                                    let jsonParam = JSON.stringify(objParam);
+                                    console.log(jsonParam);
+                                    const res = await fetch(uri, {
+                                        method  : 'post',
+                                        body    : jsonParam,
+                                        headers : { 'Content-Type': 'application/json; charset=utf-8' }
+                                    });
+                                    return await res.json();
+
+                            };
+
+                               //寫入task 回報紀錄
+                               async function post_task_feedback_record(objParam) {
+                                    let url = "http://{{ DOMAIN_PATH }}/api/v0/db/new_technology_task/";
+                                   
+                                    let jsonParam = JSON.stringify(objParam);
+                                    const res = await fetch(url, {
+                                        method : 'POST',
+                                        body   : jsonParam,
+                                        headers: { 'Content-Type': 'application/json charset = utf-8' }
+                                    });
+                                    return await res.json();
+                                }
+
+
+
+        </script>
+
+    </body>
+
+</html>

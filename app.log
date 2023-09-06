@@ -1,0 +1,4 @@
+2023-06-07 14:46:38,591 - INFO - logout_fun - 127.0.0.1 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 - eddie.hsieh@sunix.com成功登出系統
+2023-06-07 14:46:44,469 - INFO - login_fun - 127.0.0.1 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 - lumark@sunix.com(一般)登入成功
+2023-06-07 14:47:11,325 - INFO - logout_fun - 127.0.0.1 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 - lumark@sunix.com成功登出系統
+2023-06-07 17:49:41,965 - INFO - login_fun - 127.0.0.1 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 - eddie.hsieh@sunix.com(一般)登入成功

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include 'common/header.html' %}
+        <title>新產品技術評估申請單(檢視)</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/new_technology_display.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+        <script src="{{ url_for('static', filename='/js/dom-to-image.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/bootstrap.js') }}"></script>
+
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+            <!-- 表單標題 -->
+            <div id="function-bar"></div>
+        
+            <div id="id-table-bg">
+
+                <div id="form-title-text"><b>新產品技術評估申請單(檢視)</b></div>
+
+                <!-- 表單 -->
+                <table id="id-table-form">
+        
+                    <!-- 表單標題 -->
+                    <thead id="table-head">
+                        <tr>
+                            <td colspan="1" class="c-base" id="c-1"></td>
+                            <td colspan="1" class="c-base" id="c-2"></td>
+                            <td colspan="1" class="c-base" id="c-3"></td>
+                            <td colspan="1" class="c-base" id="c-4"></td>
+                            <td colspan="1" class="c-base" id="c-5"></td>
+                            <td colspan="1" class="c-base" id="c-6"></td>
+                            <td colspan="1" class="c-base" id="c-7"></td>
+                            <td colspan="1" class="c-base" id="c-8"></td>
+                            <td colspan="1" class="c-base" id="c-9"></td>
+                            <td colspan="1" class="c-base" id="c-10"></td>
+
+                            <td colspan="1" class="c-base" id="c-11"></td>
+                            <td colspan="1" class="c-base" id="c-12"></td>
+                            <td colspan="1" class="c-base" id="c-13"></td>
+                            <td colspan="1" class="c-base" id="c-14"></td>
+                            <td colspan="1" class="c-base" id="c-15"></td>
+                            <td colspan="1" class="c-base" id="c-16"></td>
+                            <td colspan="1" class="c-base" id="c-17"></td>
+                            <td colspan="1" class="c-base" id="c-18"></td>
+                            <td colspan="1" class="c-base" id="c-19"></td>
+                            <td colspan="1" class="c-base" id="c-20"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="1" id="lab-submit-member" class="cls-c2-r1">申請人</th>
+                            <th colspan="2" rowspan="1" id="txt-submit-member" class="cls-c2-r1">{{NEW_TECH_MODEL['member_cname']}}</th>
+                            <th colspan="2" rowspan="1" id="lab-form-date"     class="cls-c2-r1">申請日期</th>
+                            <th colspan="3" rowspan="1" id="txt-form-date"     class="cls-c3-r1">{{NEW_TECH_MODEL['apply_date']}}</th>
+                            <th colspan="2" rowspan="1" id="lab-form-code"     class="cls-c2-r1">單據編號</th> 
+                            <th colspan="3" rowspan="1" id="txt-form-no"       class="cls-c3-r1">{{NEW_TECH_MODEL['form_no']}}</th>
+                            <th colspan="2" rowspan="1" id="lab-form-no"       class="cls-c2-r1">評估案代號</th>
+                            <th colspan="4" rowspan="1" id="txt-project-no"    class="cls-c4-r1">{{NEW_TECH_MODEL['project_no']}}</th>
+                        </tr>
+                    </thead>
+        
+                    <!-- 表單內容 ☐ ☑ -->
+                    <tbody id="table-body">
+                        <tr>
+                            <th colspan="4" rowspan="9" id="lab-base-explain" class="cls-c4-r9">立案產品 </br> 基本說明</th>
+                            <th colspan="4" rowspan="1" id="lab-BU"           class="cls-c4-r1">BU 歸屬✱</th>
+                            <th colspan="1" rowspan="1" id="txt-IT"           class="cls-c1-r1">
+                                {% if NEW_TECH_MODEL['bu'] == "IT" %}
+                                <input type="checkbox" id="check-IT" name="check-IT" value="IT" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-IT" name="check-IT" value="IT">
+                                {% endif %}
+                            </th>
+                            <th colspan="2" rowspan="1" id="lab-IT"           class="cls-c2-r1">IT</th>
+                            <th colspan="1" rowspan="1" id="txt-IO"           class="cls-c1-r1">
+                                {% if NEW_TECH_MODEL['bu'] == "IO" %}
+                                <input type="checkbox" id="check-IO" name="check-IO" value="IO" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-IO" name="check-IO" value="IO">
+                                {% endif %}
+                            </th>
+                            <th colspan="2" rowspan="1" id="lab-IO"           class="cls-c2-r1">IO</th>
+                            <th colspan="1" rowspan="1" id="txt-IOT"          class="cls-c1-r1">
+                                {% if NEW_TECH_MODEL['bu'] == "IOT" %}
+                                <input type="checkbox" id="check-IOT" name="check-IOT" value="IOT" checked>
+                                {% else %}
+                                <input type="checkbox" id="check-IOT" name="check-IOT" value="IOT">
+                                {% endif %}
+                            </th>
+                            <th colspan="2" rowspan="1" id="lab-IOT"          class="cls-c2-r1">IOT</th>
+                            <th colspan="3" rowspan="1" id="empty-BU"         class="cls-c3-r1"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"  rowspan="1" id="lab-project-name" class="cls-c4-r1">專案名稱✱</th>
+                            <th colspan="12" rowspan="1" id="txt-project-name" class="cls-c12-r1">{{NEW_TECH_MODEL['project_name']}}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"  rowspan="1" id="lab-product-explan" class="cls-c4-r1">產品說明✱</th>
+                            <th colspan="12" rowspan="1" id="txt-product-explan" class="cls-c12-r1">{{NEW_TECH_MODEL['product_describe']}}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"  rowspan="1" id="lab-product-application" class="cls-c4-r1">產品應用</th>
+                            <th colspan="12" rowspan="1" id="txt-product-application" class="cls-c12-r1">{{NEW_TECH_MODEL['product_application']}}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"  rowspan="1" id="lab-spec" class="cls-c4-r1">規格需求說明✱</th>
+                            <th colspan="12" rowspan="1" id="txt-spec" class="cls-c12-r1">{{NEW_TECH_MODEL['spec_describe']}}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"  rowspan="1" id="lab-require" class="cls-c4-r1">顧客要求說明</th>
+                            <th colspan="12" rowspan="1" id="txt-require" class="cls-c12-r1">{{NEW_TECH_MODEL['customer_require']}}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"  rowspan="1" id="lab-project-finish" class="cls-c4-r1">目標專案完成日</th>
+                            <th colspan="12" rowspan="1" id="txt-project-finish" class="cls-c12-r1">{{NEW_TECH_MODEL['expected_finished_date']}}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"  rowspan="1" id="lab-target-cost" class="cls-c4-r1">目標成本</th>
+                            <th colspan="12" rowspan="1" id="txt-target-cost" class="cls-c12-r1">{{NEW_TECH_MODEL['cost']}}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"  rowspan="1" id="lab-due-day"     class="cls-c4-r1">評估期限✱</th>
+                            <th colspan="3"  rowspan="1" id="txt-due-day"     class="cls-c3-r1">{{NEW_TECH_MODEL['estimate_date']}}</th>
+                            <th colspan="9"  rowspan="1" id="lab-day"         class="cls-c9-r1">前完成評估</th>
+                        </tr>
+                        <!-- 上傳檔案列表 -->
+                        <tr>
+                            <th colspan="4"  rowspan="1" id="lab-attach-file" class="cls-c4-r1">附加檔案✱</th>
+                            <th colspan="16" rowspan="1" id="empty-submit"    class="cls-c16-r1">
+                                <div id="myUL"></div>
+                            </th>
+                           
+                        </tr>
+
+                    </tbody>
+        
+                </table>
+                <br/>
+                <div id="footer"></div>
+        
+            </div>
+
+        </div>
+
+
+        <script>
+
+            var selectNameList = []
+
+            //取得專案已上傳的檔案
+            async function get_upload_file() {
+                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/find/upload_file/?project_no=" + "{{NEW_TECH_MODEL['project_no']}}";
+                const res = await fetch(uri, {
+                    method: 'get',
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            } //get_upload_file
+
+
+            //顯示已上傳的檔案
+            function testElement(strFileName) {
+                var li = document.createElement("div");
+                li.className = "list-file-item";
+                li.id = strFileName;
+                if(strFileName != null) {
+                    // 文字
+                    var divobj = document.createElement("a");
+                    divobj.className = "text-filename";
+                    strsplit = strFileName.split('/')
+                    //console.log(strsplit[strsplit.length-1])  
+                    var t = document.createTextNode(strsplit[strsplit.length-1]);
+                    divobj.href = strFileName;
+                    //divobj.target = "_blank";
+                    divobj.appendChild(t);
+                    li.appendChild(divobj);
+                    document.getElementById("myUL").appendChild(li);
+                    selectNameList.push(strFileName);
+                }
+            }//testElement
+
+            async function get_form_flow() {
+                let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/form_flow/?form_no={{NEW_TECH_MODEL['form_no']}}";
+                const res = await fetch(uri, {
+                    method: 'get',
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                });
+                return await res.json();
+            }  //get_form_flow
+
+
+            //簽核流程title
+            function generate_table_row() {
+                var table_body = document.getElementById('table-body');
+                var table_row  = document.createElement('tr');
+                // 表頭的內容（表頭列名）
+                var headers = [
+                    {name :'簽核人員', colSpan : 6},
+                    {name :'簽核時間', colSpan : 6},
+                    {name :'簽核意見', colSpan : 8} 
+                ];
+                // 動態生成表頭（th）元素並加入到表頭行
+                for (var i = 0; i < headers.length; i++) {
+                    var th = document.createElement('th');
+                    th.textContent = headers[i].name;
+                    th.setAttribute('colspan', headers[i].colSpan);
+                    th.className = "cls-c6-r1-h2";  
+                    table_row.appendChild(th);
+                }
+                table_body.appendChild(table_row);
+            } //generate_table_row
+
+            //簽核流程資料
+            function generate_sign_data_row() {
+                var table_body = document.getElementById('table-body');
+                Promise.all([get_form_flow()]).then((response)=> {
+                    console.log(response)
+                    if(response[0]['result'] == 'ok') {
+                        for(let i = 0 ; i<response[0]['data'].length ; i++) {
+                                var tr = document.createElement('tr');
+                                var th = document.createElement('th');
+                                context = [
+                                    {'key': response[0]['data'][i]['user'] , colSpan : 6},
+                                    {'key': response[0]['data'][i]['inserted_at'], colSpan : 6},
+                                    {'key': response[0]['data'][i]['status'] + " : " + response[0]['data'][i]['memo'], colSpan : 8}
+                                ]
+                            // 動態生成表頭（th）元素並加入到表頭行
+                            for (var j = 0; j < context.length; j++) {
+                                var th = document.createElement('th');
+                                th.textContent = context[j].key;
+                                th.setAttribute('colspan', context[j].colSpan) ;
+                                th.className = "cls-c6-r1-h1-"+j;
+                                tr.appendChild(th);
+                            }
+                            table_body.appendChild(tr);
+                        }
+                    }
+                });
+            } //generate_sign_data_row
+
+            generate_table_row();
+            generate_sign_data_row();
+
+            get_upload_file().then((response)=> {
+                console.log(response);
+                var file_list = response['data'];
+                for(let i = 0 ; i<file_list.length; i++) {
+                    testElement(file_list[i]);
+                }
+            });
+
+
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,264 @@
+#root {
+    position:absolute;
+    margin: 0; padding: 0; border: 0;
+    width: 100%;
+    height: 90%;
+    background-color: #FAFAFA
+}
+
+
+/*******************************************/
+/* 左邊側邊導覽列選單區 */
+#div-side-menu-group {
+    position: absolute;
+    margin: 0px; padding: 0px; border: 0px;
+    width: 300px; height: 100%;
+    top: 70px; left: 0px;
+    background-color: #393D49;
+}
+#div-layui-menu {
+    width: 100%; height: auto;
+    
+}
+#li-group-item {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* 選單分隔線 */
+.nav-item-line {
+    position:absolute;
+    width:100%; height:2px;
+    top:0px; left:0px;
+    background-color:rgb(165, 165, 165);
+}
+
+/*
+a:hover {
+    background-color: #009688;
+}
+*/
+.site-demo-active {
+    background-color: #009688;
+}
+
+
+
+
+
+
+/*******************************************/
+/* 內容群組區背景 */
+#div-content-group {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    top:70px; left:300px;
+    background-color:  #12b553;
+    width:calc(100% - 300px); height:auto;
+    
+}
+
+
+/**/
+#function-bar {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    background-color: #009688;
+    width:100%; height:50px;
+    /*background-color:#0d3295;*/
+}
+
+#form-title-text {
+    /*position: absolute;*/
+    width:500px; height: 30px;
+    /*top: 50px; left: 0px;*/
+    margin: 0px auto; padding: 0px; border: 0px;
+    font-size: 24px; 
+    font-weight: bold;  
+    text-align: center;
+    color: #000000;
+}
+
+
+/**********************************/
+/* 資料編輯內容區 */
+#table-data-info {
+    position: absolute;
+    margin: 0px auto; padding: 0px; border: 0px;
+    top: 50px; left:0px;
+    background-color: #FAFAFA;
+    width:100%; height: auto;
+}
+
+.layui-none {
+    visibility: hidden;
+}
+
+.layui-laypage-btn {
+    color: #FAFAFA;
+}
+
+
+
+/*************************************/
+/* 彈出視窗 */
+/*基本空格*/
+.window-empty-item {
+    width:550px; height:10px;
+}
+
+
+#lab-work-days {
+    width:130px;
+    top: 10px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+#lab-days {
+    width:150px;
+    top: 10px;      
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+
+#edit-lab-project-no {
+    width:155px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+#edit-txt-project-no {
+    width:350px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+
+
+#edit-lab-project-name {
+    width:155px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+#edit-txt-project-name {
+    width:350px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+
+
+#edit-lab-expect-start {
+    width:155px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+#edit-txt-expect-start {
+    width:350px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold;
+}
+
+
+#edit-lab-expect-end {
+    width:155px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+#edit-txt-expect-end {
+    width:350px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold;
+}
+
+
+
+
+#edit-lab-project-task {
+    width:165px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+
+#edit-lab-project-milestone {
+    width:165px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+
+#edit-lab-project-status {
+    width:165px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+
+
+#edit-lab-project-reason {
+    width:165px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+
+
+#edit-lab-project-memo {
+    width:165px;
+    text-align: left;
+    font-size: 20px; 
+    font-weight: bold; 
+}
+
+#input-lab-project-memo {
+    position: absolute;
+    width:400px; 
+    height:30px;
+    border:1px; 
+    font-size: 18px; 
+    font-weight: bold;    
+    border-bottom-style:solid;
+    border-top-style: none;
+    border-left-style:none;
+    border-right-style:none;
+    text-align:left; 
+    
+}
+
+
+
+#edit-window-item-8 {
+    display : none;
+}
+#edit-window-item-9 {
+    display : none;
+}
+
+#input-work-days {
+    position: absolute;
+    width:96px; 
+    height:30px;
+    border:1px; 
+    font-size: 20px;
+    border-bottom-style:solid;
+    border-top-style: none;
+    border-left-style:none;
+    border-right-style:none;
+    text-align:center;
+    top:10px;
+    }
+
+
+#btn-upload {
+    width: 120px; height:40px;
+    background-color: #009688;
+    color:white
+}

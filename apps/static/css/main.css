@@ -1,0 +1,106 @@
+
+/********************************/
+/* 上方主標題欄 */
+#div-main-head-bar {
+    position: fixed;
+    background: linear-gradient(#010102, #25325b);
+    width: 100%;
+    height: 70px;
+    top: 0px;
+    left:0px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    padding-top: 4px;
+    z-index: 999999;
+}
+
+/* 系統Logo */
+#img-system-logo {
+    position: absolute;
+    width: 153px;
+    height: 60px;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+}
+
+/* 系統名稱 */
+#lab-system-title {
+    position: absolute;
+    width: 240px;
+    height: 50px;
+    top: 20px;
+    left: 160px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: right;
+    color: #e6e6e6;
+}
+
+/* 登入者名稱 */
+#txt-login-user {
+    position: absolute;
+    width: 300px;
+    height: 50px;
+    top: 30px;
+    right: 90px;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font-size: 18px; 
+    font-weight: bold;
+    text-align: right;
+    color: #e6e6e6;
+}
+
+/* 使用者頭像 */
+.image-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.image-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 1.0);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.image-container:hover .overlay {
+    opacity: 1;
+}
+
+#landscape {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+#landscape>img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0%;
+    left: 0%;
+}
+
+/*******************************/

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        {% include 'common/header.html' %}
+        <title>單據列表</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/email.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <!-- 資料編輯內容區 -->
+            <div id="table-data-info">
+                <div id="form-title-text">
+                    <b>各項郵件編輯</b>
+                </div>
+                <!-- 資料表格 -->
+                <table class="layui-hide" id="demo" lay-filter="test"></table>
+            </div>
+
+        <div>
+
+
+        <!-- 彈出新增視窗 -->
+        <template id="form-template-add">
+            <div id="add-window-bg">
+                <table id="add-win-table">
+                    <tbody>
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-email-code"  class="cls-c2-r1">
+                                <div id="add-lab-email-code">郵件編碼</div>
+                            </th>
+                            <th colspan="4"  rowspan="1" id="add-tab-txt-email-code"   class="cls-c4-r1">
+                                <input type="text" id="add-input-email-code" name="add-input-email-code"></input>
+                            </th>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-email-type"   class="cls-c2-r1">
+                                <div id="add-lab-email-type">郵件分類</div>
+                            </th>
+                            <th colspan="1"  rowspan="1" id="add-tab-lab-email-type"   class="cls-c1-r1">
+                                <select id="add-sel-email-type" name="add-sel-email-type">
+                                    <option value="通知" selected="selected">通知</option>
+                                    <option value="提醒">提醒</option>
+                                </select>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-email-cname"   class="cls-c2-r1">
+                                <div id="add-lab-email-cname">郵件中文名✱</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-email-cname"   class="cls-c7-r1">
+                                <input type="text" id="add-input-email-cname" name="add-input-email-cname"></input>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-email-ename"   class="cls-c2-r1">
+                                <div id="add-lab-email-ename">郵件英文名✱</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-email-ename"   class="cls-c7-r1">
+                                <input type="text" id="add-input-email-ename" name="add-input-email-ename"></input>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-email-main-title"   class="cls-c2-r1">
+                                <div id="add-lab-email-main-title">郵件主旨✱</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-email-main-title"   class="cls-c7-r1">
+                                <input type="text" id="add-input-email-main-title" name="add-input-email-main-title"></input>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-email-sub-title"   class="cls-c2-r1">
+                                <div id="add-lab-email-sub-title">郵件副標✱</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-email-sub-title"   class="cls-c7-r1">
+                                <input type="text" id="add-input-email-sub-title" name="add-input-email-sub-title"></input>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-email-reciver" class="cls-c2-r1">
+                                <div id="add-lab-email-reciver">收件者✱</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-email-reciver" class="cls-c7-r1">
+                                <div id="add-tab-reciver-source-email"></div>
+                                <div id="add-tab-reciver-target-email"></div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-email-cc" class="cls-c2-r1">
+                                <div id="add-lab-email-cc">副本✱</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-email-cc" class="cls-c7-r1">
+                                <div id="add-tab-cc-source-email"></div>
+                                <div id="add-tab-cc-target-email"></div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-email-sender" class="cls-c2-r1">
+                                <div id="add-lab-email-sender">寄件人</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-email-sender" class="cls-c7-r1">
+                                <select id="add-tab-sel-sender">
+                                </select>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-content-label" class="cls-c2-r1">
+                                <div id="add-lab-content-label">內文標題</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-content-label"   class="cls-c7-r1">
+                                <input type="text" id="add-input-content-label" name="add-input-content-label"></input>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-content-text" class="cls-c2-r1">
+                                <div id="add-lab-content-text">內文內容</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-content-text" class="cls-c7-r1">
+                                <input type="text" id="add-input-content-text" name="add-input-content-text"></input>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-page-link" class="cls-c2-r1">
+                                <div id="add-lab-page-link">頁面連結</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-page-link" class="cls-c7-r1">
+                                <input type="text" id="add-input-page-link" name="add-input-page-link"></input>
+                            </th>
+                        </tr>
+
+
+                        <tr>
+                            <th colspan="2"  rowspan="1" id="add-tab-lab-file-link" class="cls-c2-r1">
+                                <div id="add-lab-file-link">檔案連結</div>
+                            </th>
+                            <th colspan="7"  rowspan="1" id="add-tab-txt-file-link" class="cls-c7-r1">
+                                <input type="text" id="add-input-file-link" name="add-input-file-link"></input>
+                            </th>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+
+
+        <!-- 彈出編輯視窗 -->
+        <template id="form-template-edit">
+            <div id="edit-window-bg">
+                <table id="edit-win-table">
+                    <tbody>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+
+
+
+        <!-- 功能項按鈕 -->
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button id="btn-add" class="layui-btn layui-btn-normal layui-bg-blue"  lay-event="add-data" title="新增資料">
+                    <i class="layui-icon layui-icon-addition" ></i>新增
+                </button>
+                <button id="btn-edit" class="layui-btn layui-btn-normal layui-bg-orange" lay-event="edit-data"  title="編輯資料">
+                    <i class="layui-icon layui-icon-edit"  ></i>編輯
+                </button>
+                <button id="btn-delete" class="layui-btn layui-btn-normal layui-bg-red"  lay-event="delete-data" title="刪除資料">
+                    <i class="layui-icon layui-icon-delete"></i>刪除
+                </button>
+            </div>
+        </script>
+
+
+        <script>
+
+
+
+
+
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+                // 警告
+                if(mode == 0) {
+                    btn1.css({"background-color":"#ff0066", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#ffe6f0", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 查詢
+                if(mode == 1) {
+                    btn1.css({"background-color":"#cc99ff", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#f2e6ff", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 新增
+                if(mode == 2) {
+                    btn1.css({"background-color":"#1E9FFF", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#e6f4ff", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 檢視
+                if(mode == 3) {
+                    btn1.css({"background-color":"#009688", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#e6fffc", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 編輯
+                if(mode == 4) {
+                    btn1.css({"background-color":"#FFB800", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#fff8e6", "border-color": "#555555", "font-size":"18px"});
+                }
+                // 刪除
+                if(mode == 5) {
+                    btn1.css({"background-color":"#FF5722", "border-color": "#555555", "font-size":"18px"});
+                    btn2.css({"background-color":"#ffebe6", "border-color": "#555555", "font-size":"18px"});
+                }
+            }
+
+
+            layui.use( ['form', 'layer', 'jquery', 'table', 'transfer'], function() {
+                var layer    = layui.layer;
+                var laypage  = layui.laypage;
+                var table    = layui.table;
+                var $        = layui.jquery;
+                var form     = layui.form;
+                var transfer = layui.transfer;
+
+                //讀取 milestone 資料
+                var data_url = "http://{{ DOMAIN_PATH }}/api/v0/db/data/email/all/";
+                $.ajax({
+                    url: data_url,
+                    type: "GET",
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        //取資料成功!
+                        console.log("取 email 資料成功");
+                        console.log(response);
+
+                        table.render({
+                            elem: '#demo',
+                            height: 724,
+                            data: response['data'],
+                            title: '郵件內容編輯管理',
+                            page: true,
+                            even: true,
+                            limit: 10,
+                            limits: [10, 20, 50, 100, 500, 1000],
+                            skin: 'row',
+                            size: 'lg',
+                            //toolbar: 'default',
+                            toolbar: '#toolbarDemo',
+                            defaultToolbar: ['filter', 'exports', 'print'
+                            //{ title: '提示', layEvent: 'LAYTABLE_TIPS',icon: 'layui-icon-tips'}  //自定工具欄圖標 - 提示
+                            ],
+                            totalRow: true,
+                            cols: [[ 
+                                {type:  'checkbox',   fixed: 'left' },
+                                {field: 'uuid',       title: '識別碼',     width: 300, align: 'left', sort: true, hide: true},
+                                {field: 'code',       title: '郵件編碼',   width: 200, align: 'left', sort: true, hide: false},
+                                {field: 'cname',      title: '郵件中文名', width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'ename',      title: '郵件英文名', width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'type',       title: '郵件分類',   width: 200, align: 'left', sort: true, hide: false},   //通知/提醒
+                                {field: 'main_title', title: '郵件主標題', width: 300, align: 'left', sort: false, hide: true},   // 情境
+                                {field: 'sub_title',  title: '郵件副標題', width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'sender',     title: '發信人',     width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'receiver',   title: '收件人',     width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'cc',         title: '副本收件人', width: 100, align: 'left', sort: true, hide: false},
+                                {field: 'label',      title: '內文標題',   width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'content',    title: '內文內容',   width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'param_list', title: '參數定義',   width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'page_link',  title: '頁面連結',   width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'file_link',  title: '檔案連結',   width: 350, align: 'left', sort: true, hide: false},
+                                {field: 'enable',     title: '啟用狀態',   width: 100, align: 'center' },
+                                {field: 'memo',       title: '備註',       width: 200, align: 'left', hide: false },
+                                {field: 'insertAt',   title: '新增時間',   width: 135, align: 'center', sort: true, hide: true},
+                                {field: 'updateAt',   title: '更新時間',   width: 135, align: 'center', sort: true, hide: true},
+                            ]],
+                            done: function(res, curr, count) {
+                                //console.log(count);
+                                //layer.msg('目前page:'+ curr.toString() );
+                                //window.refresh();
+                            },
+                            text: {
+                                none: '目前暫無數據'
+                            }
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        layer.msg("取 email 資料失敗");
+                    }
+                });
+
+
+                //----------------------------------上方功能按鈕事件
+                table.on('toolbar(test)', function(obj) {
+                    var checkStatus = table.checkStatus(obj.config.id);
+
+                    switch(obj.event) {
+                        case 'add-data':
+                            layer.open({
+                                type       : 1,
+                                skin       : 'layui-layer-molv', //layui-layer-rim
+                                resize     : false,
+                                shadeClose : false,
+                                shade      : [0.7, '#000'],
+                                closeBtn   : 2,
+                                offset     : 'auto',
+                                anim       : 5,
+                                area       : ['980px', '800px'], 
+                                title      : ['新增視窗-郵件內容編輯', 'font-size:20px;background-color:#1E9FFF;'],
+                                btn        : ['新增','取消'],
+                                content    : $('#form-template-add').html(),
+                                success: function(layero, index) {
+                                    addIconforBtn(2);
+
+                                    //layero.find('#add-window-bg').css('overflow-x', 'invisible');
+                                    //layero.find('.layui-layout-body'  ).css('overflow-y', 'auto'   );
+                                    async function getMemberFun() {
+                                        let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/get/member/by_organize/";
+                                        let objParam = {
+                                            organize: "硬體設計部",
+                                        };
+                                        //console.log(objParam);
+                                        let jsonParam = JSON.stringify(objParam);
+                                        console.log(jsonParam);
+                                        const res = await fetch(uri, {
+                                            method: 'post',
+                                            body: jsonParam,
+                                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                                        });
+                                        return await res.json();
+                                    }
+                                    let promiseGetMember = getMemberFun();
+
+                                    promiseGetMember.then((response) => {
+                                        console.log(response);
+                                        
+                                        console.log(response['data']['msg']);
+                                        console.log(response['data']['msg'].length);
+                                        var dataList = [];
+                                        for(var i=0; i<response['data']['msg'].length; i++ ) {
+                                            var obj = new Object();
+                                            console.log(response['data']['msg'][i]['mail']);
+                                            obj.value = response['data']['msg'][i]['mail'];
+                                            obj.title = response['data']['msg'][i]['mail'];
+                                            dataList.push(obj);
+                                        }
+                                        console.log(dataList);
+
+                                        var cols = [
+                                            {type: 'checkbox', fixed: 'left'},
+                                            {field: 'title', title: '郵件', width:200, sort: true},
+                                            {field: 'value', title: '郵件'}
+                                        ]
+                                        var tabConfig = {'page':true, 'limit': 5,'limits':[5,10,50,100]}
+                                        var tb1 = transfer.render({
+                                            elem: "#add-tab-reciver-source-email", 
+                                            cols: cols, 
+                                            data: dataList,
+                                            width:300,
+                                            height:200,
+                                            title:["來源名單", "寄出名單"],
+                                            tabConfig: tabConfig 
+                                        });
+
+                                        var tb2 = transfer.render({
+                                            elem: "#add-tab-cc-source-email", 
+                                            cols: cols, 
+                                            data: dataList,
+                                            width:300,
+                                            height:200,
+                                            title:["來源名單", "寄出名單"],
+                                            tabConfig: tabConfig 
+                                        });
+                                        
+                                        // 寄件人
+                                        var strSenderOptions = '';
+                                        for(var j=0; j<response['data']['msg'].length; j++) {
+                                            var tempValue = response['data']['msg'][j]['mail'];
+                                            var tempText  = response['data']['msg'][j]['mail'];
+                                            strSenderOptions += '<option value="'+tempValue+'">'+tempText+'</option>';
+                                        }
+                                        console.log(strSenderOptions);
+                                        document.getElementById("add-tab-sel-sender").innerHTML = strSenderOptions;
+                                        
+                        
+                                    });
+
+
+                                },
+                                yes:function (index, layero) {
+
+                                    //console.log(task_map_by_ename);
+                                    //console.log(milestone_map_by_ename);
+                                    //console.log(status_map_by_ename);
+                                    //layer.msg('開啟新增資料彈出視窗');
+                                    /*
+                                    var strRuleCode         = $("#add-input-rule-code"         ).val();
+                                    var strRuleCName        = $("#add-input-rule-cname"        ).val();
+                                    var strRuleEName        = $("#add-input-rule-ename"        ).val();
+                                    var strRuleType         = $("#add-sel-rule-type"           ).val();
+                                    var strRuleSituation    = $("#add-sel-rule-situation"      ).val();
+                                    var strRuleDescriptions = $("#add-input-rule-description"  ).val();
+
+                                    var strTaskCode         = $('#add-sel-task-ename').val();
+                                    var temp_task_obj       = task_map_by_ename.get(strTaskCode);
+                                    var strTaskCName        = temp_task_obj['task_cname'];
+                                    var strTaskEName        = temp_task_obj['task_ename'];
+                                    var strTaskUUID         = temp_task_obj['uuid'];
+                                    var strTaskIndex        = $("#add-input-task-index").val();
+
+
+                                    var strMilestoneCode    = $('#add-sel-milestone-ename').val();
+                                    var temp_milestone_obj  = milestone_map_by_ename.get(strMilestoneCode);
+                                    var strMilestoneCName   = temp_milestone_obj['milestone_cname'];
+                                    var strMilestoneEName   = temp_milestone_obj['milestone_ename'];
+                                    var strMilestoneUUID    = temp_milestone_obj['uuid'];
+                                    var strMilestoneIndex   = $("#add-input-milestone-index").val();
+
+                                    var strStatusCode       = $('#add-sel-status-ename').val();
+                                    var temp_status_obj     = status_map_by_ename.get(strStatusCode);
+                                    var strStatusCName      = temp_status_obj['status_cname'];
+                                    var strStatusEName      = temp_status_obj['status_ename'];
+                                    var strStatusUUID       = temp_status_obj['uuid'];
+                                    var strStatusIndex      = $("#add-input-status-index").val();
+
+                                    var bEnable             = $("#add-sel-enable"        ).val();
+                                    var strMemo             = $("#add-input-memo"        ).val();
+                                    var strEventNode        = $("#add-input-event-node"  ).val();
+
+                                    // 判斷必填欄位
+                                    if ( strRuleCode == '' || strRuleCName == '' ||strRuleEName == '' ) {
+                                        layer.msg('有必填欄位沒填, 請檢查欄位');
+
+                                    }else {
+
+                                        async function addStatusData() {
+                                            let uri = "http://{{ DOMAIN_PATH }}/api/v0/db/data/feedback_rule/one/";
+                                            let objParam = { 
+                                                "rule_code"       : strRuleCode,
+                                                "rule_cname"      : strRuleCName,
+                                                "rule_ename"      : strRuleEName,
+                                                "rule_description": strRuleDescriptions,
+                                                "rule_type"       : strRuleType,
+                                                "rule_situation"  : strRuleSituation,
+                                                "task_uuid"       : strTaskUUID,
+                                                "task_code"       : strTaskCode,
+                                                "task_cname"      : strTaskCName,
+                                                "memo"            : strMemo,
+                                                "enable"          : bEnable,
+                                            };
+                                            let jsonParam = JSON.stringify(objParam);
+                                            console.log(jsonParam);
+                                            const res = await fetch(uri, {
+                                                method:'POST',
+                                                body: jsonParam,
+                                                headers: {'Content-Type':'application/json; charset=utf-8'}
+                                            });
+                                            return await res.json();
+
+                                        }
+
+                                        //let promiseAdd = addStatusData();
+                                        //promiseAdd.then( (response) => {
+                                        //    layer.msg(response['msg'])
+                                        //    console.log(response);
+                                        //    layer.close(index);
+                                        //    window.parent.location.reload();
+                                            
+                                        //});
+                                        
+                                    }
+                                    */
+                                }
+                            });
+                            break;
+
+
+                    }
+
+                });
+
+            });
+
+
+        </script>
+
+
+
+
+    </body>
+
+</html>

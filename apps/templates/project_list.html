@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        {% include 'common/header.html' %}
+        <title>專案列表</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/project_list.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/side_menu.css') }}" />
+
+    </head>
+
+    <body id="root">
+
+        <!-- 上方主標題欄 -->
+        {% include 'common/title_bar.html' %}
+
+
+        <!-- 左邊側邊導覽列選單區 -->
+        {% include 'common/side_menu.html' %}
+
+        
+        <!-- 內容群組區背景 -->
+        <div id="div-content-group">
+            <!-- 表單標題 -->
+            <div id="function-bar">
+            </div>
+
+            <!-- 資料編輯內容區 -->
+            <div id="table-data-info">
+                <div id="form-title-text">
+                    <b>專案列表</b>
+                </div>
+                <!-- 資料表格 -->
+                <table class="layui-hide" id="demo" lay-filter="test"></table>
+            </div>
+
+        <div>
+
+
+        <script>
+
+            console.log('{{GROUP_NO}}');
+            console.log('----------------------');
+            console.log('{{IS_LEADER}}');
+
+
+            // 渲染樣式
+            function addIconforBtn(mode) {
+                var btn1 = $(".layui-layer-btn .layui-layer-btn0");
+                var btn2 = $(".layui-layer-btn .layui-layer-btn1");
+
+                // 警告
+                if (mode == 0) {
+                    btn1.css({ "background-color": "#ff0066", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#ffe6f0", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 檢視
+                if (mode == 3) {
+                    btn1.css({ "background-color": "#009688", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#e6fffc", "border-color": "#555555", "font-size": "18px" });
+                }
+                // 回報
+                if (mode == 4) {
+                    btn1.css({ "background-color": "#FFB800", "border-color": "#555555", "font-size": "18px" });
+                    btn2.css({ "background-color": "#fff8e6", "border-color": "#555555", "font-size": "18px" });
+                }
+                //未上傳檔案
+                if (mode == 5) {
+                    btn1.css({ "display" : "none" });
+                    btn2.css({ "background-color": "#fff8e6", "border-color": "#555555", "font-size": "18px" });
+                }
+                if (mode == 6) {
+                    btn1.css({  "border-color": "#555555", "font-size": "18px"});
+                    btn2.css({ "background-color": "#fff8e6", "border-color": "#555555", "font-size": "18px" });
+                }
+            }
+
+
+            layui.use(['form', 'layer', 'jquery', 'table'], function () {
+                var layer   = layui.layer;
+                var laypage = layui.laypage;
+                var table   = layui.table;
+                var $       = layui.jquery;
+                var form    = layui.form;
+
+                var data_url = '';
+                //console.log( '{{ IS_LEADER }}' );
+                if ( ('{{ IS_LEADER }}').toLowerCase() === "true" ) {
+                    data_url = 'http://{{ DOMAIN_PATH }}/api/v0/db/data/project_list/all/?organize=硬體設計部'
+                }else {
+                    data_url = 'http://{{ DOMAIN_PATH }}/api/v0/db/data/project_list/?user={{ USER_CNAME }}'
+                }
+                //console.log(data_url);
+
+                $.ajax({
+                    url: data_url,
+                    type: "GET",
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        //取檔案成功!
+                        console.log("取檔案成功");
+                        console.log(response);
+
+                        response['data'].sort(function(a, b) {
+                            var keyA = new Date(a.inserted_at),
+                                keyB = new Date(b.inserted_at);
+                            // Compare the 2 dates
+                            if (keyA < keyB) return -1;
+                            if (keyA > keyB) return 1;
+                            return 0;
+                        });
+                        response['data'].reverse();
+                        console.log(response['data']);
+
+                        var tableIns = table.render({
+                            elem: '#demo',
+                            height: 600,
+                            //url: response,
+                            data: response['data'],
+                            title: '',
+                            page: true,
+                            even: true,
+                            limit: 10,
+                            limits: [10, 20, 50, 100, 500, 1000],
+                            skin: 'row',
+                            size: '30px',
+                            //toolbar: 'default',
+                            toolbar: '#toolbarDemo',
+                            defaultToolbar: ['filter', 'exports', 'print'
+                            //{ title: '提示', layEvent: 'LAYTABLE_TIPS',icon: 'layui-icon-tips'}  //自定工具欄圖標 - 提示
+                            ],
+                            totalRow: true,
+                            cols: [[
+        
+                                //{type:  'checkbox',       fixed: 'left'},
+                                { field: 'uuid',                title: '識別碼',     width: 280, sort: true, fixed: 'left', hide: true },
+                                { field: 'form_no',             title: '表單代號',   width: 220, sort: true, hide: true },
+                                { field: 'project_no',          title: '專案代號',   width: 220, sort: true },
+                                { field: 'project_name',        title: '專案名稱',   width: 220, sort: true },
+                                { field: 'spec_describe',       title: '專案內容說明',  width: 220, sort: true },
+                                { field: 'project_type',        title: '專案型態',   width: 120, sort: true },
+                                //{ field: 'product_name',        title: '產品名稱',   width: 220, sort: true },
+                                { field: 'bu',                  title: 'BU',        width: 80,  sort: true },
+                                { field: 'expected_start_date', title: '預期開始',   width: 120, sort: true },
+                                { field: 'expected_finish_date',title: '預期結束',   width: 120, sort: true },
+                                { field: 'task',                title: 'task',      width: 150, sort: true },
+                                { field: 'mile_stone',          title: 'milestone', width: 150, sort: true },
+                                { field: 'status',              title: '狀態',       width: 100, sort: true, hide: false },
+                                { field: 'reason',              title: '原因說明',       width: 100, sort: true, hide: false },
+                                { field: 'apply_date',          title: '申請日期',   width: 150, sort: true, hide: true },
+                                { field: 'member_cname',        title: '專案負責人',     width: 150, sort: true, hide: false  },
+        
+                                //{field: 'project_reason', title: '原因',        width: 200, sort: true, hide: true},
+                                //{field: 'memo',           title: '備註',        width: 200, hide: true },
+                                //{ field: 'action', title: '操作', width: 120, align: 'center', toolbar: '#barDemo', fixed: 'right' }
+                                //{fixed: 'right', width: 320, align:'center', toolbar: '#barDemo'}
+                            ]],
+                            done: function (res, curr, count) {
+                                //console.log(count);
+                                //layer.msg('目前page:'+ curr.toString() );
+                                //window.refresh();
+                                var trArr = $(".layui-table-body.layui-table-main tr");
+                                // console.log('-----trArr-----');
+                                // console.log(trArr);
+                                // console.log(trArr.length);
+                                for (var i = 0; i < trArr.length; i++) {
+                                    console.log(trArr);
+                                }
+        
+                                $.each(trArr, function (index, value) {
+                                    //console.log(value.outerHTML);
+                                });
+        
+                            },
+                            text: {
+                                none: '目前暫無數據'
+                            }
+                        });
+
+
+                    },
+                    error: function (xhr, status, error) {
+                        layer.msg("檔案取得失敗");
+                    }
+                });
+
+
+
+
+            });
+
+
+
+        </script>
+
+        
+    </body>
+
+</html>

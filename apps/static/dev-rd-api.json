@@ -1,0 +1,272 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "description":"Sunix Work Assist Platform 三泰工作協助平台",
+        "version":"1.0.1",
+        "title":"SWAP API 開發文件",
+        "termsOfService":"http://swagger.io/terms/",
+        "contact":{"name": "ESDD Team"},
+        "license":{
+            "name": "©1986-2023 SUNIX Group.All Rights Reserved."
+        }
+    },
+    "host":"127.0.0.1",
+    "basePath":":8888",
+    "tags":[
+        {
+            "name":"系統",
+            "description":"相關資訊"
+        },
+        {
+            "name":"基本設定",
+            "description":"人員/TASK/MILESTONE/狀態..等設定"
+        }
+    ],
+    "schemes":["http"],
+    "paths":{
+        "/":{
+            "get":{
+                "tags":["系統"],
+                "summary":"顯示 API 版本號",
+                "description":"回傳系統目前API的版本號與建立時間",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "schema":{
+                            "type": "object",
+                            "required"  : ["result","data","code"],
+                            "properties": {
+                                "result": {"type":"string","example":"OK"},
+                                "code"  : {"type":"string","example":"00000"},
+                                "data"  : {
+                                    "type": "object",
+                                    "properties": {
+                                        "system"    :{"type":"string", "example":"Sunix Work Assist Platform"},
+                                        "version"   :{"type":"string", "example":"1.0.0.1"},
+                                        "created_at":{"type":"string", "example":"2023-06-01 15:43:33"}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{"description":"Bad Request"},
+                    "404":{"description":"Not Found"},
+                    "500":{"description":"Internal Server Error"}
+                }
+            }
+        },
+        "/api/v0/init/member/":{
+            "post":{
+                "tags":["基本設定"],
+                "summary":"新增一筆人員資料",
+                "description":"",
+                "operationId":"initMember",
+                "consumes":["application/json,application/x-www-form-urlencoded"],
+                "produces":["application/json,application/x-www-form-urlencoded"],
+                "parameters":[
+                    {
+                        "in":"body",
+                        "name":"body",
+                        "description":"",
+                        "required":true,
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "account" :{"type":"string", "example":"max.liu@sunix"},
+                                "password"  :{"type":"string", "example":"1234567890"},
+                                "pretor"    :{"type":"string", "example":"呂昆其"},
+                                "relation"  :{"type":"string", "example":""},
+                                "role"      :{"type":"string", "example":"工程師"},
+                                "organize"  :{"type":"string", "example":"新興智慧發展部"},
+                                "org_no"    :{"type":"string", "example":"A10600"},
+                                "department":{"type":"string", "example":"新興智慧發展部"},
+                                "group_name":{"type":"string", "example":"電子"},
+                                "group_no"  :{"type":"string", "example":"EE"},
+                                "dpt_no"    :{"type":"string", "example":"A10600"},
+                                "region"    :{"type":"string", "example":"HQ"},
+                                "cname"     :{"type":"string", "example":"劉得瑩"},
+                                "ename"     :{"type":"string", "example":"Max"},
+                                "full_name" :{"type":"string", "example":"Max Liu"},
+                                "staff_no"  :{"type":"string", "example":"A677"},
+                                "ext"       :{"type":"string", "example":"3430"},
+                                "sex"       :{"type":"string", "example":"male"},
+                                "avatar"    :{"type":"string", "example":""},
+                                "enable"    :{"type":"boolean", "example":true},
+                                "memo"      :{"type":"string", "example":""}
+                            }
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "schema":{
+                            "type": "object",
+                            "required"  : ["result","code","msg","data"],
+                            "properties": {
+                                "result": {"type":"string","example":"ok"},
+                                "code"  : {"type":"string","example":""},
+                                "msg"   : {"type":"string","example":"一筆人員資料已成功建立"},
+                                "data"  : {"type":"object","properties":{}}
+                            }
+                        }
+                    },
+                    "400": {"description": "Bad Request"},
+                    "401": {"description": "Unauthorized"},
+                    "404": {"description": "Not Found"},
+                    "405": {"description": "Method Not Allowed"},
+                    "500": {"description": "Internal Server Error"}
+                }
+            }
+        },
+        "/api/v0/get/member/?account=":{
+            "get":{
+                "tags":["基本設定"],
+                "summary":"查詢一筆人員資料",
+                "description":"",
+                "operationId":"getMember",
+                "consumes":["application/json,application/x-www-form-urlencoded"],
+                "produces":["application/json,application/x-www-form-urlencoded"],
+                "parameters":[
+                    {
+                        "in":"query",
+                        "name":"account",
+                        "description":"使用者帳號",
+                        "required":true,
+                        "type":"string",
+                        "example":"max.liu@sunix.com"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "schema":{
+                            "type": "object",
+                            "required"  : ["result","code","msg","data"],
+                            "properties": {
+                                "result": {"type":"string","example":"ok"},
+                                "code"  : {"type":"string","example":""},
+                                "msg"   : {"type":"string","example":"一筆人員資料查詢成功"},
+                                "data"  : {"type":"object","properties":{
+                                    "_id"        : {"type":"string","example":"646d7d3b7fd0faee37c06ac4"},
+                                    "uuid"       : {"type":"string","example":"a1dfc6ad-c786-4bfe-9a62-8c9c7316d75b"},
+                                    "account"    : {"type":"string","example":"lumark@sunix.com"},
+                                    "password"   : {"type":"string","example":"1234567890"},
+                                    "pretor"     : {"type":"string","example":"蘇吉龍"},
+                                    "relation"   : {"type":"string","example":""},
+                                    "role"       : {"type":"string","example":"資深副總"},
+                                    "organize"   : {"type":"string","example":"新興智慧發展部"},
+                                    "org_no"     : {"type":"string","example":"A10600"},
+                                    "department" : {"type":"string","example":"新興智慧發展部"},
+                                    "dpt_no"     : {"type":"string","example":"A10600"},
+                                    "region"     : {"type":"string","example":"HQ"},
+                                    "cname"      : {"type":"string","example":"呂昆其"},
+                                    "ename"      : {"type":"string","example":"Mark"},
+                                    "full_name"  : {"type":"string","example":"Lucy"},
+                                    "staff_no"   : {"type":"string","example":"A489"},
+                                    "ext"        : {"type":"string","example":"2181"},
+                                    "sex"        : {"type":"string","example":"male"},
+                                    "avatar"     : {"type":"string","example":""},
+                                    "enable"     : {"type":"boolean","example":true},
+                                    "memo"       : {"type":"string","example":""},
+                                    "inserted_at": {"type":"string","example":"2023-06-07T00:42:52.606+00:00"}
+                                }}
+                            }
+                        }
+                    },
+                    "400": {"description": "Bad Request"},
+                    "401": {"description": "Unauthorized"},
+                    "404": {"description": "Not Found"},
+                    "405": {"description": "Method Not Allowed"},
+                    "500": {"description": "Internal Server Error"}
+                }
+            }
+        },
+        "/api/v0/delete/member/":{
+            "delete":{
+                "tags":["基本設定"],
+                "summary":"刪除一筆人員資料",
+                "description":"",
+                "operationId":"deleteMember",
+                "consumes":["application/json,application/x-www-form-urlencoded"],
+                "produces":["application/json,application/x-www-form-urlencoded"],
+                "parameters":[
+                    {
+                        "in":"body",
+                        "name":"body",
+                        "description":"使用者帳號",
+                        "required":true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+								"account": {
+									"type": "string",
+									"example": "max.liu@sunix.com"
+								}
+                            }
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "schema":{
+                            "type": "object",
+                            "required"  : ["result","code","msg","data"],
+                            "properties": {
+                                "result": {"type":"string","example":"ok"},
+                                "code"  : {"type":"string","example":""},
+                                "msg"   : {"type":"string","example":"一筆人員資料已成功刪除"},
+                                "data"  : {"type":"object","properties":{}}
+                            }
+                        }
+                    },
+                    "400": {"description": "Bad Request"},
+                    "401": {"description": "Unauthorized"},
+                    "404": {"description": "Not Found"},
+                    "405": {"description": "Method Not Allowed"},
+                    "500": {"description": "Internal Server Error"}
+                }
+            }
+        },
+        "/api/v0/db/data/task_milestone/":{
+            "post":{
+                "tags":["基本設定"],
+                "summary":"新增一筆人員資料",
+                "description":"",
+                "operationId":"initmilestone",
+                "consumes":["application/json,application/x-www-form-urlencoded"],
+                "produces":["application/json,application/x-www-form-urlencoded"],
+                "parameters":[
+                    {
+                        "in":"body",
+                        "name":"body",
+                        "description":"",
+                        "required":true,
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "index"    :{"type":"string", "example":"2"},
+                                "task"     :{"type":"string", "example":"Hardware Design"},
+                                "milestone":{"type":"array",  "example": ["Schematic Design","Layout","PCB Fabrication","PCB Assembly"]}
+                            }
+                        }
+                        
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok"
+                    },
+                    "400": {"description": "Bad Request"},
+                    "401": {"description": "Unauthorized"},
+                    "404": {"description": "Not Found"},
+                    "405": {"description": "Method Not Allowed"},
+                    "500": {"description": "Internal Server Error"}
+                }
+            }
+        }
+    }
+}
