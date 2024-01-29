@@ -73,7 +73,7 @@ def create_app():
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH'] = 4096 * 1024 * 1024  # 64MB
 
-
+  
     init_blue_main(app)
     init_blue_member(app)
     

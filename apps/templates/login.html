@@ -3,12 +3,23 @@
 
     <head>
         <meta charset="UTF-8" />
-        <title>SWAP 三泰工作協助平台登入</title>
+        <title>專案協作平台登入</title>
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/assets/favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='/css/login.css') }}" />
 
         <script src="{{ url_for('static', filename='./layui.js')          }}"></script>
         <script src="{{ url_for('static', filename='/js/jquery-3.5.1.js') }}"></script>
+
+ 
+<!--        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
+
     </head>
 
     <body id="root" background="{{ url_for('static', filename='/assets/login-background.svg') }}" style="background-size: cover;">
@@ -20,8 +31,8 @@
 
                 <!-- 表單標題區 -->
                 <div class="layui-form-item">
-                    <img class="logo"  src="{{ url_for('static', filename='/assets/Logo.png') }}"/>
-                    <div class="title" id="lab-login-input-title">協助平台</div>
+                    <!-- <img class="logo"  src="{{ url_for('static', filename='/assets/account.png') }}"/>  -->
+                    <div class="title" id="lab-login-input-title">專案協作平台</div>
                     <div class="desc"  id="txt-system-version">version: 1.0.0</div>
                 </div>
 
@@ -42,11 +53,22 @@
                 <div class="layui-form-item">
                     <button id="btn-submit" class="pear-btn pear-btn-success login" lay-submit lay-filter="login">登 入</button>
                 </div>
+                <!-- <div class="container mt-5">
+                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select an item
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {% for item in dropdown_items %}
+                            <a class="dropdown-item" href="#">{{ item }}</a>
+                        {% endfor %}
+                    </div>
+                </div> -->
                 {% else %}
                 <!-- 指定登入送出按鈕區-->
                 <div class="layui-form-item">
                     <button id="btn-submit2" class="pear-btn pear-btn-success login" lay-submit lay-filter="login">登 入</button>
                 </div>
+                
                 {% endif %}
 
             </form>
@@ -301,7 +323,7 @@
 
         <!-- 版權聲明 -->
         <footer>
-            <div id="txt-copyright"><b>©1986-2023 SUNIX Group.All Rights Reserved.</b></div>
+            <!-- <div id="txt-copyright"><b>©1986-2023 SUNIX Group.All Rights Reserved.</b></div> -->
         </footer>
 
     </body>

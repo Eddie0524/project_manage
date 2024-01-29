@@ -1,14 +1,14 @@
 
 
-DOMAIN_PATH = "192.168.1.107:8888"
-SERVER_IP   = "192.168.1.107"
-FILE_PATH = "192.168.1.107"    #"192.168.103.41"   本地端存放檔案IP
-FILE_URL = "192.168.1.107"                 #給外部連結的IP
+DOMAIN_PATH = "localhost:8888"
+SERVER_IP   = "127.0.0.1"
+FILE_PATH = "127.0.0.1"    #"192.168.103.41"   本地端存放檔案IP
+FILE_URL = "127.0.0.1"                 #給外部連結的IP
 
 
 
-MAIL_RECEIVER = "Eddie.Hsieh@sunix.com"
-MAIL_CC = "Eddie.Hsieh@sunix.com"
+MAIL_RECEIVER = "eddy168168@google.com"
+MAIL_CC = "eddy168168@google.com"
 
 MONGODB_PATH = 'mongodb://localhost:27017/mydb' #'mongodb://localhost:27017/sunix'
 

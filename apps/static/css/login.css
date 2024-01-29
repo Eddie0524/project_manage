@@ -45,10 +45,12 @@ body {
     top:0px; left:0px;
 }
 .title {
-    position: absolute !important;
+    /* position: absolute !important; */
+    width: 330px;
+    text-align: center;
     font-size: 30px !important;
     font-weight: 550 !important;
-    margin-left: -135px !important;
+    /* margin-left: 0px !important; */
     color: #BBBBBB !important;
     display: inline-block !important;
     height: 60px !important;
